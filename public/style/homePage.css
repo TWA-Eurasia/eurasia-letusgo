@@ -1,3 +1,74 @@
-body {
-  background-color: #000011;
+.topmenu
+{
+  height: 25px;
+  width: 1280px;
+  background-color: #f2f2f2;
+  display: inline-block;
 }
+.topbutton
+{
+  margin-left: 15px;
+}
+.topleft
+{
+  width: 500px;
+  display: inline-block;
+}
+.topright
+{
+  width: 500px;
+}
+ul.menu
+{
+  margin-top: 0px;
+}
+ul.menu li
+{
+  width: 500px;
+  line-height: 8px;
+  display: inline-block;
+}
+.mylogo
+{
+  margin-top:50px;
+  margin-left: 200px;
+  display: inline-block;
+}
+.ui.input
+{
+  border: 1px #000 solid;
+  border-radius: 5px;
+  width: 525px;
+}
+.search
+{
+  width: 160px;
+  display: inline-block;
+}
+.mylogo img
+{
+  width: 310px;
+}
+.searchcontainer
+{
+  height: 150px;
+  background-color: #fff;
+  line-height: 120px;
+}
+input.topsearch
+{
+  width: 525px;
+}
+.ui.inverted.masthead.segment
+{
+  margin-top: 0px;
+}
+
+.left.menu {
+  display: flex;
+}
+
+.ui.vertical.menu {
+  background: #000;
+}
+
