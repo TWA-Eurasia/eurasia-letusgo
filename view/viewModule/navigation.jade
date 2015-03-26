@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width")
+    block css
+      link(rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.css")
+      link(rel="stylesheet" type="text/css" href="style/homePage.css")
+      script(src="jquery/dist/jquery.js")
+      script(src="semantic-ui/dist/semantic.js")
+    block title
+      title 首页
+  body#home
+    header
+      div.topmenu
+        ul.menu
+          li
+            div.topleft
+            em.
+              Hi，欢迎来到Let Us Go商城
+            a.topbutton(href="#") 请登录
+            a.topbutton(href="#") 免费注册
+          li
+            div.topright
+            a.topbutton(href="#") 我的Let Us Go
+    div.container
+      div.searchcontainer
+        div.mylogo
+          img(src= "image/logo.png")
+        div.search
+          div.ui.fluid.action.input
+            input.topsearch(type="text" placeholder="Search...")
+            button.ui.icon.button
+              i.search.icon
+    div.ui.inverted.masthead.segment
+      div.row
+        div.sixteen.wide.column
+          div.ui.inverted.teal.menu
+            div.left.menu
+              a.ui.item LetUsGo
+              block home
+                a#homeLink.ui.link.item(href="/") 主页
+                i.home.icon
+              block shop
+                a.ui.link.item(href="shop") 商城
+              block management
+                a.ui.link.item(href="shopManagement") 商城管理
+            div.right.menu
+              block cart
+                a.ui.link.item(href="cart") 购物车
+                  i.cart.in.icon
+      block content
