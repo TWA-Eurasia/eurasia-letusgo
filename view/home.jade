@@ -1,0 +1,24 @@
+extends ./viewModule/navigation.jade
+block title
+  title 来此购网上购物商城
+block home
+  a#homeLink.ui.link.item.active(href="/") 主页
+block content
+  div.ui.inverted.masthead.segment
+    div.ui.page.grid
+      div.row
+        div.four.wide.column
+          img.ui.medium.vertical.image(src="image/cat.png")
+        div.twelve.wide.column
+          div.ui.vertical.feature.inverted.warmth.segment
+            div.ui.centered.page.green.grid
+              div.fourteen.wide.column
+                p.
+                  亲们，欢迎光临【LetUsGo】商城。
+                p.
+                  不管晴天雨天，能够见到您的一天，就是明媚的一天。
+                p.
+                  选择来此购，享受购来此。来此购购物商城，您购物最好的选择！
+                p.
+                  么么哒！
+  //include ./viewModule/shopDesc.jade
