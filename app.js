@@ -1,17 +1,11 @@
 var express = require('express');
 var path = require('path');
-//var bodyParser = require('body-parser');
 
 var app = express();
 var mongoose = require('mongoose');
 
 app.set('views', path.join(__dirname, 'view'));
 app.set('view engine', 'jade');
-
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({
-//    extended: false
-//}));
 
 //connect to database
 mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
