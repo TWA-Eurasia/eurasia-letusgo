@@ -12,8 +12,8 @@ var ItemSchema = new Schema({
   imageUrl: String,
   description: String,
   state: {type: String, default: 'new'},
-  mainCategory: {type: Schema.ObjectId, ref: 'MainCategory'},
-  childCategories: [{type: Schema.ObjectId, ref: 'ChildCategory'}],
+  category: {type: Schema.ObjectId, ref: 'Category'},
+  subCategories: [{type: Schema.ObjectId, ref: 'subCategory'}],
   specification: String
 });
 
