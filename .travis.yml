@@ -6,4 +6,5 @@ node_js:
   - 'iojs-v1.0.4'
 before_script:
   - 'npm install -g gulp jspm mocha jshint'
+  - 'jspm config endpoints.github.auth $JSPM_AUTH'
   - 'jspm install'
