@@ -73,7 +73,7 @@ input.topsearch
 {
   margin-top: 0px;
 }
-.ui.item.category
+.ui.vertical.menu
 {
   width: 180px;
   background-color: darkred;
