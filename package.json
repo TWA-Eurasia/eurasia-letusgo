@@ -2,7 +2,7 @@
   "name": "eurasia-letusgo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "home.js",
   "scripts": {
     "test": "mocha ./test/**",
     "start": "nodemon ./bin/www"
