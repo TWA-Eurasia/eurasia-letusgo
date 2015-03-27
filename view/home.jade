@@ -39,21 +39,10 @@ html(lang="en")
       //        i.search.icon
       div.ui.inverted.masthead.segment
         div(class="row")
-          div(class="sixteen wide column")
-            div(class="ui inverted teal menu")
-              div(class="left menu")
-                a(class="ui item category") 商品服务分类
-                  div.ui.item.category
-                    a.cates 居家美品
-                    a.cates 美食之旅
-                    a.cates 潮流服饰
-                a(class="ui item") LetUsGo
-                  i.home.icon
-                a#homeLink(class="ui link active item" href="/") 主页
-                a(class="ui link item" href="shop") 商城
-                a(class="ui link item" href="shopManagement") 商城管理
-              div(class="right menu")
-                a(class="ui link item" href="./views/cart.html") 购物车
+          div.ui.vertical.menu
+            a.item 商品服务分类
+            - each category in categories
+              a.item #{category.name}
         div(class="ui page grid")
           div(class="row")
             div(class="four wide column")
