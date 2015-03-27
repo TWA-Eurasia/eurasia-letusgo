@@ -1,0 +1,25 @@
+
+block title
+  title= pageName
+block cart
+  a.ui.link.active.item(href="cart") 购物车
+    i.cart.in.icon
+block content
+    .ui.masthead
+    .ui.grid.centered
+      h1 购物车列表
+      .thirteen.wide.column
+        table.ui.large.table
+          thead
+            tr
+            th.four.wide 名称
+            th.three.wide 单位
+            th.three.wide 价格
+            th.three.wide 数量
+          tbody.center
+            - each cartItem in cartItems
+              tr
+                td #{cartItem.item.name}
+                td #{cartItem.item.unit}
+                td #{cartItem.item.price}元
+                td #{cartItem.number}
