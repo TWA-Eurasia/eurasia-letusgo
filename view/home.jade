@@ -7,8 +7,7 @@ html(lang="en")
     meta(name="viewport" content="width=device-width")
     link(rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.css")
     link(rel="stylesheet" type="text/css" href="style/homepage.css")
-    script(src="jquery/dist/jquery.js")
-    script(src="semantic-ui/dist/semantic.js")
+    script(src="js/require.js" data-main="js/homePage")
   body#home
     header
       div.topmenu
@@ -42,7 +41,7 @@ html(lang="en")
           div.ui.vertical.menu
             a.item 商品服务分类
             - each category in categories
-              a.item #{category.name}
+              a.item.ui.top #{category.name}
         div(class="ui page grid")
           div(class="row")
             div(class="four wide column")
