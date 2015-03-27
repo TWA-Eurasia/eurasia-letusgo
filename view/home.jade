@@ -1,24 +1,65 @@
-extends ./viewModule/navigation.jade
-block title
-  title 来此购网上购物商城
-block home
-  a#homeLink.ui.link.item(href="/") 主页
-block content
-  div.ui.inverted.masthead.segment
-    div.ui.page.grid
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width")
+    link(rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.css")
+    link(rel="stylesheet" type="text/css" href="style/homePage.css")
+    script(src="jquery/dist/jquery.js")
+    script(src="semantic-ui/dist/semantic.js")
+    title Let Us Go商城
+  body#home
+    header
+      div.topmenu
+        ul.menu
+          li
+            div.topleft
+            em.
+              Hi，欢迎来到Let Us Go商城
+            a.topbutton(href="#") 请登录
+            a.topbutton(href="#") 免费注册
+          li
+            div.topright
+            a.topbutton(href="#") 我的Let Us Go
+    div.container
+      div.searchcontainer
+        div.mylogo
+          img(src= "image/logo.png")
+        div.search
+          div.ui.fluid.action.input
+            input.topsearch(type="text" placeholder="Search...")
+            button.ui.icon.button
+              i.search.icon
+    div.ui.inverted.masthead.segment
       div.row
-        div.four.wide.column
-          img.ui.medium.vertical.image(src="image/cat.png")
         div.twelve.wide.column
-          div.ui.vertical.feature.inverted.warmth.segment
-            div.ui.centered.page.green.grid
-              div.fourteen.wide.column
-                p.
-                  亲们，欢迎光临【LetUsGo】商城。
-                p.
-                  不管晴天雨天，能够见到您的一天，就是明媚的一天。
-                p.
-                  选择来此购，享受购来此。来此购购物商城，您购物最好的选择！
-                p.
-                  么么哒！
+          div.ui.inverted.teal.menu
+            div.left.menu
+              div.ui.vertical.menu
+                a.item 商品服务分类
+                - each mainCategory in mainCategories
+                  a.item #{mainCategory.name}
+              a.ui.item LetUsGo
+              a#homeLink.ui.link.item(href="/") 主页
+                i.home.icon
+            div.right.menu
+              block cart
+                a.ui.link.item(href="cart") 购物车
+                  i.cart.in.icon
+      div.ui.page.grid
+        div.row
+          div.four.wide.column
+            img.ui.medium.vertical.image(src="image/cat.png")
+          div.twelve.wide.column
+            div.ui.vertical.feature.inverted.warmth.segment
+              div.ui.centered.page.green.grid
+                div.fourteen.wide.column
+                  p.
+                    亲们，欢迎光临【LetUsGo】商城。
+                  p.
+                    不管晴天雨天，能够见到您的一天，就是明媚的一天。
+                  p.
+                    选择来此购，享受购来此。来此购购物商城，您购物最好的选择！
+                  p.
+                    么么哒！
   //include ./viewModule/shopDesc.jade
