@@ -7,6 +7,7 @@ router.get('/', function (req, res, next) {
   MainCategory.find(function (err, data) {
 
     if (err) return next(err);
+    console.log(data);
     data = [
 
       {name: '男装/户外运动'},
