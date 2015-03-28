@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
   //  categories.save();
   //  console.log(categories);
   //});
-
+  
   Category.find(function (err, categories) {
     res.render('home',{categories: categories})
   });
