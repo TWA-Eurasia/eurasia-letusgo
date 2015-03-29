@@ -37,9 +37,8 @@ html(lang="en")
             div.ui.dropdown.item #{category.name}
               i.dropdown.icon
               div.menu
-                a.item Edit Profile
-                a.item Choose Language
-                a.item Account Settings
+                - each subCategory in category.subCategories
+                  a.item #{subCategory.name}
         div.ui.page.grid
           div.row
             div.four.wide.column
