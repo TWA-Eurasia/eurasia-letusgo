@@ -79,6 +79,3 @@ input.topsearch
   background-color: darkred;
   text-align: center;
 }
-.ui.dropdown .menu {
-  display: block;
-}
