@@ -1,5 +1,5 @@
 .idea
-bower_components
 node_modules
 .tmp
 eurasia-letusgo.iml
+jspm_packages
