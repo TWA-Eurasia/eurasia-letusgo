@@ -10,5 +10,12 @@ var CategorySchema = new Schema({
   }]
 });
 
+var Category = mongoose.model('Category', CategorySchema);
 
-module.exports = mongoose.model('Category',CategorySchema);
+Category.createCategory = function (name, ids) {
+  Category.create({name: name, subCategories: ids});
+};
+
+module.exports = Category;
+
+
