@@ -5,9 +5,11 @@ html(lang="en")
     title= name
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width")
-    link(rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.css")
+    link(rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.min.css")
     link(rel="stylesheet" type="text/css" href="style/homepage.css")
-    script(src="js/require.js" data-main="js/homePage")
+    script(src="jquery/dist/jquery.min.js")
+    script(src="semantic-ui/dist/semantic.min.js")
+    //script(src="js/require.js" data-main="js/homePage")
   body#home
     header
       div.topmenu
@@ -29,11 +31,15 @@ html(lang="en")
             button.ui.icon.button
               i.search.icon
       div.ui.inverted.masthead.segment
-        div(class="row")
-          div.ui.vertical.menu
-            a.item 商品服务分类
-            - each category in categories
-              a.item #{category.name}
+        div.ui.secondary.vertical.menu
+          div.ui.dropdown.item 商品服务分类
+          - each category in categories
+            div.ui.dropdown.item #{category.name}
+              i.dropdown.icon
+              div.menu
+                a.item Edit Profile
+                a.item Choose Language
+                a.item Account Settings
         div.ui.page.grid
           div.row
             div.four.wide.column
