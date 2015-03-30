@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Item = require('../../model/item');
 var Category = require('../../model/category');
-var Subcategory = require('../../model/subcategory');
 
 router.get('/', function (req, res) {
 
@@ -37,7 +36,6 @@ function creatItem(res){
     description : '这是个男士上衣',
     specification : '30',
     category: '服装',
-    subCategories: ['男装']
   }, function(err, data){
     console.log(data);
     res.send(data);
