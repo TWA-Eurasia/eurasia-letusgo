@@ -1,8 +1,12 @@
 doctype html
 html
   head
+    link(rel="styleSheet" href="style/home.css")
     script(src="jspm_packages/system.js")
-      script(src="config.js")
-  body
+    script(src="config.js")
     script.
-      System.import('js/pageApp.js')
+      System.import('js/pageApp')
+  body
+    div.pagination
+
+
