@@ -7,7 +7,8 @@ var IndentSchema = new Schema({
 
   itemList: [{
     item: {type: Schema.ObjectId, ref: 'Item'},
-    number: Number
+    number: Number,
+    subtotal: Number
   }],
   date: Date,
   isPaid: {type: Boolean, default: false}
