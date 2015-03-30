@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var IndentSchema = new Schema({
   user: {type: Schema.ObjectId, ref: 'User'},
 
-  items: [{
+  itemList: [{
     item: {type: Schema.ObjectId, ref: 'Item'},
     number: Number
   }],
