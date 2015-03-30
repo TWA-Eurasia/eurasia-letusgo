@@ -12,7 +12,6 @@ router.get('/', function (req, res) {
       _.forEach(data, function (indent) {
         indent.subtotal = indent.item.price * indent.number;
       });
-      //res.send(data);
       res.render('orderList', {Indents: data});
     });
 });
