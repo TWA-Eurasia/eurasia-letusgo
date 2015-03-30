@@ -31,16 +31,16 @@ ul,li{
 }
 
 .pagination li.current {
-  background: green;
+  background: teal;
 
 }
 
 .pagination li.current:hover{
-  background: green;
+  background: teal;
 }
 
 .pagination li:hover {
-  background: green;
+  background: teal;
 }
 
 .pagination li.ellipsis,
