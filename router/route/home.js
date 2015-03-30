@@ -1,17 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
+var _ = require('lodash');
+
 var Category = require('../../model/category.js');
-var Subcategory = require('../../model/subcategory.js');
 
 router.get('/', function (req, res) {
 
   Category.find()
-    .populate('subCategories', 'name', null)
-    .exec(function(err, categories) {
-      res.render('home',{categories: categories});
-    });
+    .populate('parent')
+    .exec(function(err, categories){
 
+      _.forEach(categories, function(category, n){
+
+        if(category.parent){
+          console.log(category.name + 'is a child');
+        }else{
+          console.log(category.name + 'is a parent');
+        }
+    });
+  });
 });
 
 module.exports = router;
