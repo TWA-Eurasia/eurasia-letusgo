@@ -5,14 +5,16 @@ html
     title= name
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width")
-    link(rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.css")
+    link(rel="stylesheet" type="text/css" href="github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
     link(rel="stylesheet" type="text/css" href="style/homepage.css")
-    link(rel="styleSheet" href="style/home.css")
+    link(rel="styleSheet" type="text/css" href="style/home.css")
 
+    //script(src="github/Semantic-UI@1.11.5/dist/semantic.js")
     script(src="jspm_packages/system.js")
     script(src="config.js")
     script.
       System.import('js/homePage')
+    script.
       System.import('js/pageApp')
   body#home
     header
@@ -46,11 +48,11 @@ html
         div.ui.secondary.vertical.menu
           div.ui.dropdown.item 商品服务分类
           - each category in categories
-          div.ui.dropdown.item #{category.name}
-            i.dropdown.icon
-            div.menu
-              - each subCategory in category.subCategories
-              a.item #{subCategory.name}
+            div.ui.dropdown.item #{category.name}
+              i.dropdown.icon
+              div.menu
+                - each subCategory in category.subCategories
+                  a.item #{subCategory.name}
         div(class="ui page grid")
           div(class="row")
             div(class="four wide column")
@@ -67,4 +69,4 @@ html
                       选择来此购，享受购来此。来此购购物商城，您购物最好的选择！
                     p.
                       么么哒！！
-      //div.pagination
+      div.pagination
