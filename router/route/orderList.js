@@ -19,6 +19,12 @@ router.get('/', function (req, res) {
     });
 });
 
+this.totalMoney = function (itemList) {
+  var totalMoney = 0;
+  _.forEach(itemList, function (item) {
+    totalMoney += item.number * item.item.price;
+  })
+};
 router.post('/', function (req, res) {
 
   Indent.create({
