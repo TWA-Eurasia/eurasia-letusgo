@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
 $(document).ready(function () {
-
+  initPage();
 
   $('i.minus').on('click',function () {
 
@@ -28,5 +28,13 @@ $(document).ready(function () {
     }
   });
 
+  function initPage(){
+    $.get('api/item', function (item) {
+
+      $('#itemName').text(item.name);
+      $('#itemPrice').text('￥' + item.price);
+      $('#itemSpecification').text(item.specification);
+    });
+  }
 
 });
