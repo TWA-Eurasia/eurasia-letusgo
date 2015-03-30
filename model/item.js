@@ -13,7 +13,6 @@ var ItemSchema = new Schema({
   description: String,
   state: {type: String, default: 'new'},
   category: {type: Schema.ObjectId, ref: 'Category'},
-  subCategories: [{type: Schema.ObjectId, ref: 'subCategory'}],
   specification: String
 });
 
