@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+  head
+    - var name = '商品详情页'
+    title=name
+    meta(charset="utf-8")
+    meta(name="viewport" content = "width=device-width")
+    
+    script(src="jspm_packages/system.js")
+    script(src="config.js")
+  body
+    .ui.centered.segment
+      .ui.grid.centered
+        .sixteen.wide.column
+          .ui.large.breadcrumb
+            a.section 主类
+            i.right.chevron.icon.ider
+            a.section 分类
+            i.right.chevron.icon.ider
+            .active.section 商品名称
+
+        .ui.grid.nine.wide.column.centered
+          .ten.wide.column
+            img.ui.vertical.image(src='image/11.jpg')
+
+          .six.wide.column
+            .itemName
+              h3 男士短袖
+            .summary-price
+              span.dt 价格
+              span.price ￥30.00
+            .type
+              text 规格
+            .number
+              .ui.input.focus
+                input(id = 'number')
+
+
+        .ui.grid.centered
+          .nine.wide.column 详细信息
