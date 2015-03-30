@@ -75,9 +75,20 @@ input.topsearch
 }
 .ui.vertical.menu
 {
-  width: 180px;
-  background-color: darkred;
+  margin-left: 50px;
+  /*width: 180px;*/
+  background-color: black;
+  color: #ffffff;
   text-align: center;
+}
+.ui.dropdown.item
+{
+  color: #fff;
+}
+.ui.dropdown.item.categoryTitle
+{
+  font-size: 15px;
+  background: #C30000;
 }
 .ui.dropdown.item:hover .menu
 {
