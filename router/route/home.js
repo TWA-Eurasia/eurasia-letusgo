@@ -7,8 +7,8 @@ var Subcategory = require('../../model/subcategory.js');
 
 router.get('/', function (req, res, next) {
 
-  //var ids = ['5517a250964677899617dcba','5517a25a964677899617dcbb'];
-  //Category.createCategory('家居建材', ids);
+  //var ids = ['55190d34964677899617dcbf','55190d44964677899617dcc0','55190d68964677899617dcc1','55190d94964677899617dcc2'];
+  //Category.createCategory('零食/进口食品/酒', ids);
   Category.find()
     .populate('subCategories', 'name', null)
     .exec(function(err, categories) {

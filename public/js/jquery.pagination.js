@@ -17,7 +17,7 @@ Pagination.prototype.render = function() {
   var ulContainer = $('<ul />');
 
   $('<li />')
-    .text('< Previous Page')
+    .text('< 上一页')
     .on('click', function() {
       if(that.currentPage > 1) {
         that.emit(--that.currentPage);
@@ -27,7 +27,7 @@ Pagination.prototype.render = function() {
   this.renderMiddle(ulContainer);
 
   $('<li />')
-    .text('Next Page >')
+    .text('下一页 >')
     .on('click', function() {
       if(that.currentPage < that.options.pageCount) {
         that.emit(++that.currentPage);
