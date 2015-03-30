@@ -4,5 +4,5 @@ module.exports = function (app) {
 
     app.use('/api/item', require('./route/item'));
 
-    app.use('/shoppingList', require('./route/shoppingList'));
+    app.use('/orderList', require('./route/orderList'));
 };
