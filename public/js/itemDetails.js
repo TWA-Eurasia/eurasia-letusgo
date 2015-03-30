@@ -37,6 +37,7 @@ $(document).ready(function () {
       $('#itemSpecification').text(item.specification);
       $('#itemDescription').text(item.description);
       $('#itemImage').attr('src', item.imageUrl);
+      $('#itemLeftNum').text(item.leftNumber);
     });
   }
 
