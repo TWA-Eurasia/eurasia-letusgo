@@ -1,7 +1,6 @@
 var $ = require('jquery');
 
 $(document).ready(function () {
-<<<<<<< HEAD
   initPage();
 
   $('i.minus').on('click',function () {
@@ -41,11 +40,4 @@ $(document).ready(function () {
     });
   }
 
-=======
-
-  $('i.minus').on('click',function () {
-    
-    $('#numberInput').val($('#numberInput').val() -1);
-  });
->>>>>>> fae739b008b46ed68c3feb36ac8e3d402afcf464
 });
