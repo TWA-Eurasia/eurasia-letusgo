@@ -1,3 +1,5 @@
+'use strict';
+
 var $ = require('jquery');
 
 function Pagination (jqContainer, options){
@@ -34,7 +36,7 @@ Pagination.prototype.render = function() {
     .appendTo(ulContainer);
 
   ulContainer.appendTo(this.jqContainer);
-}
+};
 
 Pagination.prototype.renderMiddle = function(ulContainer) {
   var range = this.getRange();
@@ -55,12 +57,12 @@ Pagination.prototype.renderMiddle = function(ulContainer) {
         }
       }(range[i])).appendTo(ulContainer);
   }
-}
+};
 
 Pagination.prototype.emit = function(n) {
   this.render();
   console.log(this.getRange());
-}
+};
 
 Pagination.prototype.getRange = function() {
   var rangeCount = this.options.visiblePageCount - 3;
@@ -90,18 +92,18 @@ Pagination.prototype.getRange = function() {
   result.push(this.options.pageCount);
 
   return result;
-}
+};
 
 var defaultConfig = {
   pageCount: 10,
   currentPage: 1,
   visiblePageCount: 7
-}
+};
 
 $.fn.pagination = function(config) {
   var options = $.extend(defaultConfig, config);
   console.log(options);
   return new Pagination($(this), options);
-}
+};
 
 module.exports = $;
