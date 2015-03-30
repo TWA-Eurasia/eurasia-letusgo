@@ -37,6 +37,9 @@ html(lang="en")
                   td.four.wide.column.centered 单价
                   td#itemPrice
                 tr
+                  td 单位
+                  td#itemUnit
+                tr
                   td 规格
                   td#itemSpecification
                 tr
@@ -46,7 +49,9 @@ html(lang="en")
                     .three.wide.column
                       input(type="text" value=1 id="numberInput")
                     i.add.square.icon
-
+                tr
+                  td 库存
+                  td#itemLeftNum
             button.ui.primary.button
               i.cart.in.icon
               span 添加到购物车
