@@ -21,9 +21,10 @@ $(document).ready(function () {
 
   $('#numberInput').on('mouseout', function () {
 
-    var numberInput = parseInt($('#numberInput').val());
+    var numberInput = $('#numberInput').val();
 
-    if(isNaN(numberInput)) {
+    var reg = /^[0-9]*$/;
+    if(!reg.exec(numberInput)){
       $('#numberInput').val(1);
     }
   });
@@ -37,7 +38,7 @@ $(document).ready(function () {
       $('#itemSpecification').text(item.specification);
       $('#itemDescription').text(item.description);
       $('#itemImage').attr('src', item.imageUrl);
-      $('#itemLeftNum').text(item.leftNumber);
+      $('#itemLeftNum').text(item.leftNumber + ' ' + item.unit);
     });
   }
 
