@@ -33,28 +33,30 @@ html
                   i.cart.in.icon
     block content
     .ui.grid.centered
-      .eight.wide.column.centered
+      .ten.wide.column.centered
         h1 商品清单
       .ten.wide.centered.column
         table.ui.large.table
           thead
             tr
             th.two.wide 名称
+            th.two.wide 单价
             th.two.wide 单位
-            th.two.wide 价格
             th.two.wide 数量
             th.two.wide 小计
 
           tbody.center
-          //-each item in items
-                     //tr
-                     //  td #{item.name}
-                     //  td #{item.unit}
-                     //  td #{item.price}元
-                     //  td
+          -each indent in Indents
+                     tr
+                       td #{indent.item.name}
+                       td #{indent.item.price} 元
+                       td #{indent.item.unit}
+                       td #{indent.number}
+                       td 22
 
-a.ui.red.right.floated.right.labeled.icon.button#pay 结算
-        i.right.arrow.icon
+        a.ui.red.right.floated.right.labeled.icon.button#pay 结算
+          i.right.arrow.icon
+
     div.small.modal
       div.ui.dimmer.modals.page.transition.hidden(style={display: none})
         div.ui.small.test.modal.scrolling.transition.hidden(style={top: 1083})
