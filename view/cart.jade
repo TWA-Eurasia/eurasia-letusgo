@@ -1,25 +1,27 @@
+extends ./navBar.jade
 
-block title
-  title= pageName
-block cart
-  a.ui.link.active.item(href="cart") 购物车
-    i.cart.in.icon
 block content
     .ui.masthead
     .ui.grid.centered
       h1 购物车列表
       .thirteen.wide.column
-        table.ui.large.table
-          thead
-            tr
-            th.four.wide 名称
-            th.three.wide 单位
-            th.three.wide 价格
-            th.three.wide 数量
-          tbody.center
-            - each cartItem in cartItems
-              tr
-                td #{cartItem.item.name}
-                td #{cartItem.item.unit}
-                td #{cartItem.item.price}元
-                td #{cartItem.number}
+        div(class="ui five column doubling ui grid")
+            div(class="column") 图片
+            div(class="column") 名称
+            div(class="column") 价格
+            div(class="column") 数量
+            div(class="column") 小计
+            div(class="column") 删除
+
+        - each cartItem in cartItems
+          div(class="ui five column doubling ui grid")
+            div(class="column")
+              img.image(src="image/kele.jpg" style="width:100px;height:100px;")
+            div(class="column") #{cartItem.item.name}
+            div(class="column") #{cartItem.item.price}元
+            div(class="column") #{cartItem.number}#{cartItem.item.unit}
+            div(class="column") #{cartItem.subtotal}
+            div(class="column")
+
+
+
