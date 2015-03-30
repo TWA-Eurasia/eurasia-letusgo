@@ -69,29 +69,34 @@ input.topsearch
 {
   width: 525px;
 }
-.ui.inverted.masthead.segment
-{
-  margin-top: 0px;
+.ui.grid {
+  margin: 0;
 }
 .ui.vertical.menu
 {
-  margin-left: 50px;
-  /*width: 180px;*/
-  background-color: black;
+  margin-left: 30px;
+  width: 80%;
+  background-color: #161616;
   color: #ffffff;
   text-align: center;
 }
+
 .ui.dropdown.item
 {
   color: #fff;
 }
-.ui.dropdown.item.categoryTitle
+.ui.dropdown.item#categoryTitle
 {
+  margin: 0;
   font-size: 15px;
   background: #C30000;
+}
+.ui.dropdown.item:hover {
+  background: darkred;
 }
 .ui.dropdown.item:hover .menu
 {
   display: block;
+  background: rgba(255, 255, 255, 0.5);
 }
 

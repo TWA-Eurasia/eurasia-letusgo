@@ -15,7 +15,7 @@ ul,li{
 .pagination li{
   display: inline-block;
   padding: 0.5em 0;
-  background: #71b7e5;
+  background: #2EA69C;
   color: #FFF;
   cursor: default;
   border-radius: 3px;
@@ -31,16 +31,16 @@ ul,li{
 }
 
 .pagination li.current {
-  background: #408DC1;
+  background: green;
 
 }
 
 .pagination li.current:hover{
-  background: #408DC1;
+  background: green;
 }
 
 .pagination li:hover {
-  background: #60A0D2;
+  background: green;
 }
 
 .pagination li.ellipsis,
