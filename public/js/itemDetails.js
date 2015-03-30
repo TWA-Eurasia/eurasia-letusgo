@@ -33,6 +33,7 @@ $(document).ready(function () {
 
       $('#itemName').text(item.name);
       $('#itemPrice').text('￥' + item.price);
+      $('#itemUnit').text(item.unit);
       $('#itemSpecification').text(item.specification);
       $('#itemDescription').text(item.description);
       $('#itemImage').attr('src', item.imageUrl);
