@@ -8,9 +8,12 @@ html(lang="en")
 
     link(rel="stylesheet" type ="text/css" href="github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
 
-    script(src="github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.js")
     script(src="jspm_packages/system.js")
     script(src="config.js")
+    script.
+      System.import('js/itemDetails')
+    script(src="github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.js")
+
   body
     .ui.centered.segment
       .ui.grid.centered
@@ -39,14 +42,10 @@ html(lang="en")
                 tr
                   td 数量
                   td
-                    .ui.grid.five.wide.column
-                      .two.wide.column
-                        i.add.square.icon.centered
-                      .five.wide.column
-                        .ui.mini.icon.input
-                          input(type="text")
-                      .two.wide.column
-                        i.minus.square.icon.centered
+                    i.minus.square.icon
+                    .three.wide.column
+                      input(type="text" value=1 id="numberInput")
+                    i.add.square.icon
 
             button.ui.primary.button
               i.cart.in.icon
