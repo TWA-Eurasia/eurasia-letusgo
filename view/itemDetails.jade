@@ -5,7 +5,7 @@ html(lang="en")
     title=name
     meta(charset="utf-8")
     meta(name="viewport" content = "width=device-width")
-    
+
     script(src="jspm_packages/system.js")
     script(src="config.js")
   body
@@ -21,20 +21,33 @@ html(lang="en")
 
         .ui.grid.nine.wide.column.centered
           .ten.wide.column
-            img.ui.vertical.image(src='image/11.jpg')
+            img.ui.vertical.big.bordered.rounded.centered.image(src='image/11.jpg')
 
           .six.wide.column
-            .itemName
-              h3 男士短袖
-            .summary-price
-              span.dt 价格
-              span.price ￥30.00
-            .type
-              text 规格
-            .number
-              .ui.input.focus
-                input(id = 'number')
+            h2.ui.floated.header.orange.backge 男士短袖
+            table.ui.definition.table
+              tbody
+                tr
+                  td.four.wide.column.centered 单价
+                  td ￥30
+                tr
+                  td 规格
+                  td 数据库中导出
+                tr
+                  td 数量
+                  td
+                    .ui.grid.five.wide.column
+                      .two.wide.column
+                        i.add.square.icon.centered
+                      .five.wide.column
+                        .ui.mini.icon.input
+                          input(type="text")
+                      .two.wide.column
+                        i.minus.square.icon.centered
 
-
+            button.ui.primary.button
+              i.cart.in.icon
+              span 添加到购物车
+              i.right.chevron.icon
         .ui.grid.centered
           .nine.wide.column 详细信息
