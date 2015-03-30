@@ -7,9 +7,10 @@ html(lang="en")
     meta(name="viewport" content="width=device-width")
     link(rel="stylesheet" type="text/css" href="semantic-ui/dist/semantic.min.css")
     link(rel="stylesheet" type="text/css" href="style/homePage.css")
-    script(src="jquery/dist/jquery.min.js")
-    script(src="semantic-ui/dist/semantic.min.js")
-    //script(src="js/require.js" data-main="js/homePage")
+    script(src="jspm_packages/system.js")
+    script(src="config.js")
+    script.
+      System.import('js/homePage')
   body#home
     header
       div.topmenu

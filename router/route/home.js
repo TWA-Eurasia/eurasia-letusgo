@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
   //var ids = ['5517a250964677899617dcba','5517a25a964677899617dcbb'];
   //Category.createCategory('家居建材', ids);
   Category.find()
-    .populate('subCategories', 'name superCategory', null)
+    .populate('subCategories', 'name', null)
     .exec(function(err, categories) {
       //console.log(categories);
       res.render('home',{categories: categories});
