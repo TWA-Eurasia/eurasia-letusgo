@@ -32,7 +32,7 @@ html
                 a.ui.link.item(href="cart") 购物车
                   i.cart.in.icon
     block content
-    .ui.grid.centered
+    .ui.grid
       .ten.wide.column.centered
         h1 商品清单
       .ten.wide.centered.column
@@ -54,6 +54,10 @@ html
                        td #{indent.number}
                        td #{indent.subtotal} 元
 
+
+        h2(align="right") 总计：
+          span(style='color:red') #{amount}
+          span 元
         a.ui.red.right.floated.right.labeled.icon.button#pay 支付
           i.right.arrow.icon
 
