@@ -4,11 +4,14 @@ var Schema = mongoose.Schema;
 
 var CategorySchema = new Schema({
   name: String,
-  subCategories: [{
+  parent:{
     type: Schema.ObjectId,
-    ref: 'SubCategory'
-  }]
+    ref: 'Category'
+  }
 });
 
+var Category = mongoose.model('Category', CategorySchema);
 
-module.exports = mongoose.model('Category',CategorySchema);
+module.exports = Category;
+
+

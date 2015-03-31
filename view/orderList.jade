@@ -1,0 +1,70 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width")
+    block css
+      script(src="jspm_packages/system.js")
+      script(src="config.js")
+      script.
+        System.import('js/modal')
+      link(rel="stylesheet" type="text/css" href="../jspm_packages/github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
+
+    block title
+      title 首页
+  body
+    div.container
+    div.ui.inverted.masthead.segment
+      div.row
+        div.sixteen.wide.column
+          div.ui.inverted.teal.menu
+            div.left.menu
+              a.ui.item LetUsGo
+              block home
+                a#homeLink.ui.link.item(href="/") 主页
+                i.home.icon
+              block shop
+                a.ui.link.item(href="shop") 商城
+              block management
+                a.ui.link.item(href="shopManagement") 商城管理
+            div.right.menu
+              block cart
+                a.ui.link.item(href="cart") 购物车
+                  i.cart.in.icon
+    block content
+    .ui.grid.centered
+      .ten.wide.column.centered
+        h1 商品清单
+      .ten.wide.centered.column
+        table.ui.large.table
+          thead
+            tr
+            th.two.wide 名称
+            th.two.wide 单价
+            th.two.wide 单位
+            th.two.wide 数量
+            th.two.wide 小计
+
+          tbody.center
+          -each indent in Indents
+                     tr
+                       td #{indent.item.name}
+                       td #{indent.item.price} 元
+                       td #{indent.item.unit}
+                       td #{indent.number}
+                       td 22
+
+        a.ui.red.right.floated.right.labeled.icon.button#pay 结算
+          i.right.arrow.icon
+
+    div.small.modal
+      div.ui.dimmer.modals.page.transition.hidden(style={display: none})
+        div.ui.small.test.modal.scrolling.transition.hidden(style={top: 1083})
+          i.close.icon
+          div.header
+          div.content
+            p.ui.center 您确认要支付吗？
+          div.actions
+            div.ui.negative.button.nopay 算了
+            div.ui.positive.right.labeled.icon.button.ispay 支付
+              i.checkmark.icon
