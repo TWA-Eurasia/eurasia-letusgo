@@ -6,6 +6,7 @@ module.exports = function (app) {
 
 
     app.use('/api/item', require('./route/item'));
+    app.use('/api/category', require('./route/category'));
 
     app.use('/orderList', require('./route/orderList'));
 };
