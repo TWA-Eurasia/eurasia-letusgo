@@ -5,6 +5,7 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 
 var Category = require('../../model/category');
+var Item = require('../../model/item');
 
 router.get('/', function (req, res) {
 
@@ -18,7 +19,7 @@ router.get('/', function (req, res) {
 
         if(!category.parent){
 
-          mainCategories.push({name: category.name, subCategories: []});
+          mainCategories.push({_id: category._id, name: category.name, subCategories: []});
         }
 
       });
@@ -28,7 +29,7 @@ router.get('/', function (req, res) {
 
           _.forEach(mainCategories, function (mainCategory) {
             if(category.parent.name === mainCategory.name) {
-              mainCategory.subCategories.push(category.name)
+              mainCategory.subCategories.push(category)
             }
           });
         }
