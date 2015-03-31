@@ -11,6 +11,7 @@ var IndentSchema = new Schema({
     subtotal: Number
   }],
   date: Date,
+  amount: Number,
   isPaid: {type: Boolean, default: false}
 });
 
