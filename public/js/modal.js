@@ -13,3 +13,11 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+
+  $('#ispay').on('click', function () {
+
+
+
+  });
+});
