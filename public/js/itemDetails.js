@@ -1,7 +1,6 @@
 var $ = require('jquery');
 
 $(document).ready(function () {
-  initPage();
 
   $('i.minus').on('click',function () {
 
@@ -28,21 +27,5 @@ $(document).ready(function () {
       $('#numberInput').val(1);
     }
   });
-
-  function initPage(){
-    $.get('api/item', function (item) {
-
-      $('.itemName').text(item.item.name);
-      $('#itemPrice').text(item.item.price + ' 元');
-      $('#itemUnit').text(item.item.unit);
-      $('#itemSpecification').text(item.item.specification);
-      $('#itemDescription').text(item.item.description);
-      $('#itemImage').attr('src', item.item.imageUrl);
-      $('#itemLeftNum').text(item.item.leftNumber + ' ' + item.item.unit);
-      $('#category').text(item.category.parent.name);
-      $('#subcategory').text(item.item.category.name);
-
-    });
-  }
 
 });
