@@ -6,9 +6,12 @@ var Subcategory = require('../../model/subcategory');
 
 router.get('/', function (req, res) {
 
-  Item.findById('5519b68e6f9d2f7701a99bc2', function(err, item){
-    res.send(item);
-  });
+    Item.findById('5519b68e6f9d2f7701a99bc2')
+    .populate('subCategories')
+    .populate('category')
+    .exec(function(err, item){
+      res.send(item);
+    });
 });
 
 function createCategory(){
