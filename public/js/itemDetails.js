@@ -32,13 +32,16 @@ $(document).ready(function () {
   function initPage(){
     $.get('api/item', function (item) {
 
-      $('#itemName').text(item.name);
+      $('.itemName').text(item.name);
       $('#itemPrice').text('￥' + item.price);
       $('#itemUnit').text(item.unit);
       $('#itemSpecification').text(item.specification);
       $('#itemDescription').text(item.description);
       $('#itemImage').attr('src', item.imageUrl);
       $('#itemLeftNum').text(item.leftNumber + ' ' + item.unit);
+      $('#category').text(item.category.name);
+      $('#subcategory').text(item.subCategories[0].name);
+
     });
   }
 
