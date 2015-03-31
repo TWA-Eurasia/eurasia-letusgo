@@ -3,12 +3,13 @@ var router = express.Router();
 var Indent = require('../../model/indent.js');
 var _ = require('lodash');
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
 
   Indent.find()
     .populate('itemList.item')
     .exec(function (err, orderList) {
       var amount = 0;
+      if (err) {return next(err);}
       var data = orderList[0].itemList;
 
       _.forEach(data, function (indent) {
@@ -21,6 +22,13 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
+this.totalMoney = function (itemList) {
+  var totalMoney = 0;
+  _.forEach(itemList, function (item) {
+    totalMoney += item.number * item.item.price;
+  })
+};
+router.post('/', function (req, res, next) {
 
   Indent.create({
     itemList: [{item: "551901cbf6ea4cd89e88c24c", number: 15},
@@ -28,8 +36,8 @@ router.post('/', function (req, res) {
     ],
     date: 2012 - 3 - 15
   }, function (err, indent) {
-
-    res.send(indent);
+      if (err) {return next(err);}
+      res.send(indent);
   });
 });
 
