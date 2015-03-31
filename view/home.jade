@@ -39,12 +39,12 @@ html
         div.four.wide.column
           div.ui.secondary.vertical.menu
             div.ui.dropdown.item#categoryTitle 商品服务分类
-            - each category in categories
-              div.ui.dropdown.item #{category.name}
+            - each mainCategory in mainCategories
+              div.ui.dropdown.item #{mainCategory.name}
                 i.dropdown.icon
                 div.menu
-                  - each subCategory in category.subCategories
-                    a.item #{subCategory.name}
+                  - each subCategory in mainCategory.subCategories
+                    a.item #{subCategory}
         div.twelve.wide.column
           div.ui.four.column.grid(style="padding-left: 0;padding-right: 20px;")
             each a in [1,2,3,4,5,6]
