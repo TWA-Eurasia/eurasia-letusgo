@@ -19,29 +19,30 @@ html(lang="en")
       .ui.grid.centered
         .sixteen.wide.column
           .ui.large.breadcrumb
-            a.section#category
+            a.section #{itemDetails.category.parent.name}
             i.right.chevron.icon.ider
-            a.section#subcategory
+            a.section #{itemDetails.item.category.name}
             i.right.chevron.icon.ider
-            .active.section.itemName
+            .active.section #{itemDetails.item.name}
 
         .ui.grid.nine.wide.column.centered
           .nine.wide.column
-            img.ui.vertical.big.bordered.centered.image#itemImage
+            - var imageUrl = itemDetails.item.imageUrl
+            img.ui.vertical.big.bordered.centered.image(src = imageUrl) 
 
           .seven.wide.column
-            h2.ui.floated.header.orange.backge.itemName
+            h2.ui.floated.header.orange.backge #{itemDetails.item.name}
             table.ui.definition.table
               tbody
                 tr
                   td.four.wide.column.centered 单价
-                  td#itemPrice
+                  td #{itemDetails.item.price}
                 tr
                   td 单位
-                  td#itemUnit
+                  td #{itemDetails.item.unit}
                 tr
                   td 规格
-                  td#itemSpecification
+                  td #{itemDetails.item.specification}
                 tr
                   td 数量
                   td
@@ -50,7 +51,7 @@ html(lang="en")
                     i.add.square.icon
                 tr
                   td 库存
-                  td#itemLeftNum
+                  td #{itemDetails.item.leftNumber}
             button.ui.primary.button
               i.cart.in.icon
               span 添加到购物车
@@ -60,4 +61,4 @@ html(lang="en")
             .ui.message
               .header
                 商品详情：
-              p#itemDescription
+              p #{itemDetails.item.description}
