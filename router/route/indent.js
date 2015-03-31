@@ -8,14 +8,15 @@ router.get('/', function (req, res) {
   Indent.find()
     .populate('itemList.item')
     .exec(function (err, orderList) {
-
+      var amount = 0;
       var data = orderList[0].itemList;
 
       _.forEach(data, function (indent) {
         indent.subtotal = indent.item.price * indent.number;
+        amount += indent.subtotal;
       });
 
-      res.render('orderList', {Indents: data});
+      res.render('indent', {Indents: data});
     });
 });
 

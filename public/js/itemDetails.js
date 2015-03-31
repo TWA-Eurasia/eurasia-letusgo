@@ -1,7 +1,6 @@
 var $ = require('jquery');
 
 $(document).ready(function () {
-  initPage();
 
   $('i.minus').on('click',function () {
 
@@ -21,23 +20,12 @@ $(document).ready(function () {
 
   $('#numberInput').on('mouseout', function () {
 
-    var numberInput = parseInt($('#numberInput').val());
+    var numberInput = $('#numberInput').val();
 
-    if(isNaN(numberInput)) {
+    var reg = /^(0|[1-9][0-9]*)$/;
+    if(!reg.exec(numberInput)){
       $('#numberInput').val(1);
     }
   });
-
-  function initPage(){
-    $.get('api/item', function (item) {
-
-      $('#itemName').text(item.name);
-      $('#itemPrice').text('￥' + item.price);
-      $('#itemUnit').text(item.unit);
-      $('#itemSpecification').text(item.specification);
-      $('#itemDescription').text(item.description);
-      $('#itemImage').attr('src', item.imageUrl);
-    });
-  }
 
 });
