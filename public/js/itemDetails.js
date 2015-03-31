@@ -32,15 +32,15 @@ $(document).ready(function () {
   function initPage(){
     $.get('api/item', function (item) {
 
-      $('.itemName').text(item.name);
-      $('#itemPrice').text(item.price + ' 元');
-      $('#itemUnit').text(item.unit);
-      $('#itemSpecification').text(item.specification);
-      $('#itemDescription').text(item.description);
-      $('#itemImage').attr('src', item.imageUrl);
-      $('#itemLeftNum').text(item.leftNumber + ' ' + item.unit);
-      $('#category').text(item.category.name);
-      $('#subcategory').text(item.subCategories[0].name);
+      $('.itemName').text(item.item.name);
+      $('#itemPrice').text(item.item.price + ' 元');
+      $('#itemUnit').text(item.item.unit);
+      $('#itemSpecification').text(item.item.specification);
+      $('#itemDescription').text(item.item.description);
+      $('#itemImage').attr('src', item.item.imageUrl);
+      $('#itemLeftNum').text(item.item.leftNumber + ' ' + item.item.unit);
+      $('#category').text(item.category.parent.name);
+      $('#subcategory').text(item.item.category.name);
 
     });
   }
