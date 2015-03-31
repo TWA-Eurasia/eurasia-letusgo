@@ -15,7 +15,12 @@ $(document).ready(function () {
 
     var numberInput = parseInt($('#numberInput').val());
 
-    $('#numberInput').val(numberInput + 1);
+    var leftNumber = $('#leftNumber').text();
+
+    if(leftNumber > numberInput){
+
+      $('#numberInput').val(numberInput + 1);
+    }
   });
 
   $('#numberInput').on('mouseout', function () {
@@ -27,13 +32,21 @@ $(document).ready(function () {
       $('#numberInput').val(1);
     }
 
-    var number = parseInt($('#numberInput').val());
-    var leftNumber = $('#leftNumber').text();
-    console.log(leftNumber);
-
-    if(number > leftNumber) {
-      $('#numberInput').val(leftNumber);
+    if(isShorted()){
+      $('#numberInput').val($('#leftNumber').text());
     }
   });
+
+  function isShorted(){
+
+    var inputNumber = parseInt($('#numberInput').val());
+    var leftNumber = $('#leftNumber').text();
+
+    if(inputNumber > leftNumber) {
+      return true;
+    }
+
+    return false;
+  }
 
 });
