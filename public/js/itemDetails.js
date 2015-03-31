@@ -26,6 +26,14 @@ $(document).ready(function () {
     if(!reg.exec(numberInput)){
       $('#numberInput').val(1);
     }
+
+    var number = parseInt($('#numberInput').val());
+    var leftNumber = $('#leftNumber').text();
+    console.log(leftNumber);
+
+    if(number > leftNumber) {
+      $('#numberInput').val(leftNumber);
+    }
   });
 
 });
