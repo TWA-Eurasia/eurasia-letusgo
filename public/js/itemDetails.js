@@ -25,6 +25,8 @@ $(document).ready(function () {
 
   $('#numberInput').on('mouseout', function () {
 
+    $('#inputError').hide();
+
     var numberInput = $('#numberInput').val();
 
     var reg = /^(0|[1-9][0-9]*)$/;
@@ -33,7 +35,7 @@ $(document).ready(function () {
     }
 
     if(isShorted()){
-      $('#numberInput').val($('#leftNumber').text());
+      $('#inputError').show();
     }
   });
 
