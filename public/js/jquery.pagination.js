@@ -47,6 +47,7 @@ Pagination.prototype.renderMiddle = function(ulContainer) {
       .text(function() {
         return range[i] !== -1 ? range[i] : '';
       })
+      .addClass('pageNumber')
       .attr('id', pageId[i])
       .toggleClass('current', range[i] == this.currentPage)
       .toggleClass('ellipsis', range[i] == -1)
