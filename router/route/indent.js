@@ -22,22 +22,23 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-
-  Item.create({
-    name: '可乐',
-    unit: '瓶',
-    price: 5,
-    brand: '可口可乐',
-    leftNumber: '100',
-    imageUrl:''
-
-  });
+  //
+  //Item.create({
+  //  name: '可乐',
+  //  unit: '瓶',
+  //  price: 5,
+  //  brand: '可口可乐',
+  //  leftNumber: '100',
+  //  imageUrl:'image/kele.jpg',
+  //  description: 'kelekele',
+  //  specification: '350ml'
+  //
+  //});
 
   Indent.create({
-    itemList: [{item: "551901cbf6ea4cd89e88c24c", number: 15},
-      {item: "551901cbf6ea4cd89e88c24c", number: 10}
-    ],
-    date: 2012-3-15
+    itemList: [{item: "551abb584357be4b17ca39ea", number: 15},
+                {item: "551abb584357be4b17ca39ea", number: 10}
+               ]
   }, function (err, indent) {
     res.send(indent);
   });
