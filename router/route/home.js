@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 var _ = require('lodash');
+var mongoose = require('mongoose');
 
-var Category = require('../../model/category.js');
+var Category = require('../../model/category');
 
 router.get('/', function (req, res) {
 
@@ -11,15 +12,17 @@ router.get('/', function (req, res) {
     .populate('parent')
     .exec(function(err, categories){
 
-      _.forEach(categories, function(category, n){
+      var mainCategories = [];
+      _.forEach(categories, function(category){
 
-        if(category.parent){
-          console.log(category.name + 'is a child');
-        }else{
-          console.log(category.name + 'is a parent');
+        if(!category.parent){
+          mainCategories.push(category.name);
         }
+      });
+
+      console.log(mainCategories);
+      res.render('home', {mainCategories: mainCategories});
     });
-  });
 });
 
 module.exports = router;
