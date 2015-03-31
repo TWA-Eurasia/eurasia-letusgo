@@ -1,3 +1,12 @@
-/**
- * Created by yfwang on 3/31/15.
- */
+var express = require('express');
+var router = express.Router();
+
+var _ = require('lodash');
+
+router.get('/:pageNumber', function (req, res) {
+
+
+  res.render('index');
+});
+
+module.exports = router;
