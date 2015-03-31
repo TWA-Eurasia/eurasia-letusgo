@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
         indent.subtotal = indent.item.price * indent.number;
       });
 
-      res.render('orderList', {Indents: data});
+      res.render('indent', {Indents: data});
     });
 });
 
