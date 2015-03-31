@@ -7,9 +7,9 @@ $(document).ready(function () {
 
   $('#pay').on('click', function () {
     $('.small.modal')
-      .modal('show')
-    ;
-  })
+      .modal('show');
+
+  });
 });
 
 
