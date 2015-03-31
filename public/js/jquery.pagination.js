@@ -41,11 +41,13 @@ Pagination.prototype.render = function() {
 Pagination.prototype.renderMiddle = function(ulContainer) {
   var range = this.getRange();
   var that = this;
+  var pageId = this.getRange();
   for(var i=0; i<range.length; i++) {
     var liEle = $('<li />')
       .text(function() {
         return range[i] !== -1 ? range[i] : '';
       })
+      .attr('id', pageId[i])
       .toggleClass('current', range[i] == this.currentPage)
       .toggleClass('ellipsis', range[i] == -1)
       .on('click', function(i) {
