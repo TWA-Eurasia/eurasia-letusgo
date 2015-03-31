@@ -23,7 +23,7 @@ $(document).ready(function () {
 
     var numberInput = $('#numberInput').val();
 
-    var reg = /^[0-9]*$/;
+    var reg = /^(0|[1-9][0-9]*)$/;
     if(!reg.exec(numberInput)){
       $('#numberInput').val(1);
     }
@@ -33,7 +33,7 @@ $(document).ready(function () {
     $.get('api/item', function (item) {
 
       $('.itemName').text(item.name);
-      $('#itemPrice').text('￥' + item.price);
+      $('#itemPrice').text(item.price + ' 元');
       $('#itemUnit').text(item.unit);
       $('#itemSpecification').text(item.specification);
       $('#itemDescription').text(item.description);
