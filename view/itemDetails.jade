@@ -35,7 +35,7 @@ html(lang="en")
             table.ui.definition.table
               tbody
                 tr
-                  td.four.wide.column.centered 单价
+                  td.three.wide.column.centered 单价
                   td #{itemDetails.item.price}
                 tr
                   td 单位
@@ -49,6 +49,7 @@ html(lang="en")
                     i.minus.square.icon
                     input(type="text" value=1 id="numberInput" style="text-align:center;width:8; height:30")
                     i.add.square.icon
+                    .ui.negative.message#inputError(style = 'display: none') 您所填写的数量超过库存!
                 tr
                   td 库存
                   td#leftNumber #{itemDetails.item.leftNumber}
