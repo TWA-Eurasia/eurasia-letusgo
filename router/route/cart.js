@@ -14,12 +14,11 @@ router.get('/', function (req, res, next) {
       if (err) {
         return next(err);
       }
-
       _.forEach(cart.cartItems, function (cartItem) {
         cartItem.subtotal = cartItem.item.price * cartItem.number;
-
+        cart.totalAmount += cartItem.subtotal;
       });
-      res.render('cart', {cartItems: cart.cartItems});
+      res.render('cart', {cartItems: cart.cartItems, cart: cart});
     })
 });
 
@@ -57,12 +56,11 @@ router.delete('/:cartItemId', function (req, res) {
       _.remove(cart.cartItems, function (cartItem) {
         return cartItem._id.toString() === cartItemId;
       });
-
       cart.save(function (err) {
         if(err){
           throw err;
         }
-
+        console.log(cart);
         res.send(cart);
 
       });

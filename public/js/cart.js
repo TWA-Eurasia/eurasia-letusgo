@@ -12,9 +12,10 @@ $(document).ready(function () {
       url: 'cart/' + id,
       type: 'DELETE',
       success: function(data) {
-        if(200 == data.status) {
-          $this.closest('div').remove();
-        }
+        console.log(data);
+        //if(200 == data.status) {
+        //  $this.closest('td').remove();
+        //}
       }
     })
   })
