@@ -7,7 +7,7 @@ html
       script(src="jspm_packages/system.js")
       script(src="config.js")
       script.
-        System.import('js/modal')
+        System.import('js/indent')
       link(rel="stylesheet" type="text/css" href="../jspm_packages/github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
 
     block title
@@ -66,7 +66,7 @@ html
             p 您确认要支付吗？
         .actions
           .primary.ui.button.nopay 取消
-          a.ui.positive.right.labeled.icon.button.ispay(href="/success") 支付
+          a.ui.positive.right.labeled.icon.button.ispay(href="/success?amount=#{amount}") 支付
             i.checkmark.icon
 
       //.ui.second.small.coupled.modal.transition.hidden
