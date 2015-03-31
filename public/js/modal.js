@@ -1,39 +1,33 @@
 'use strict';
 var $ = require('jquery');
+var _ = require('lodash');
 require('semantic-ui');
 
 
 $(document).ready(function () {
 
   $('#pay').on('click', function () {
-    //$('.small.modal')
-    //  .modal('show');
-    //$('.small.modal')
-    //  .modal('attach events', '.first.modal .button')
-    //;
-    $('.coupled.modal')
-      .modal({
-        allowMultiple: true
-      })
-    ;
-    //open second modal on button click
-    $('.second.modal')
-      .modal('attach events', '.first.modal .button')
-    ;
-// show first immediately
+
     $('.first.modal')
-      .modal('show')
-    ;
+      .modal('show');
   });
 });
 
-//// initialize all modals
-
 //$(document).ready(function () {
 //
-//  $('#ispay').on('click', function () {
+//  $('.ispay').on('click', function () {
+//    //var itemList = this.id;
+//    //console.log(itemList.toString().toArray());
+//    //_.forEach(itemList, function(aa) {
+//    //  $.ajax({
+//    //    url: '/indent'+aa.item._id,
+//    //    type: 'GET',
+//    //    data: item.number
+//    //  });
+//    //});
 //
-//
+//    $('.second.modal')
+//      .modal('attach events', '.first.modal .button');
 //
 //  });
 //});
