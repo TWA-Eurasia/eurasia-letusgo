@@ -7,4 +7,5 @@ module.exports = function (app) {
     app.use('/api/item', require('./route/item'));
 
     app.use('/indent', require('./route/indent'));
+    app.use('/success', require('./route/success'));
 };
