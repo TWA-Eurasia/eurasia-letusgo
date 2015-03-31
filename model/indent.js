@@ -10,6 +10,7 @@ var IndentSchema = new Schema({
     number: Number,
     subtotal: Number
   }],
+  amount: Number,
   date: Date,
   isPaid: {type: Boolean, default: false}
 });
