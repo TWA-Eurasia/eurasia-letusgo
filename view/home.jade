@@ -40,11 +40,11 @@ html
           div.ui.secondary.vertical.menu
             div.ui.dropdown.item#categoryTitle 商品服务分类
             - each mainCategory in mainCategories
-              div.ui.dropdown.item(id="#{mainCategory._id}") #{mainCategory.name}
+              div.ui.dropdown.item.firstMenu(id="#{mainCategory._id}") #{mainCategory.name}
                 i.dropdown.icon
                 div.menu
                   - each subCategory in mainCategory.subCategories
-                    a.item(id='#{subCategory._id}') #{subCategory.name}
+                    a.item.secondMenu(id='#{subCategory._id}') #{subCategory.name}
         div.twelve.wide.column
           div.ui.four.column.grid(style="padding-left: 0;padding-right: 20px;")
             each a in [1,2,3,4,5,6]
