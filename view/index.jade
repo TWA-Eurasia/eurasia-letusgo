@@ -41,7 +41,7 @@ html
             - each item in items
               div.column
                 div.ui.segment
-                  img.ui.fluid.image(id="#{item._id}" src="../image/"+#{item.imageUrl})
+                  img.ui.fluid.image(id="#{item._id}" src="../#{item.imageUrl}")
                 div.info
                   div.name #{item.name}
                   p.price #{item.price}

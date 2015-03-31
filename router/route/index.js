@@ -11,7 +11,6 @@ router.get('/:pageNumber', function(req, res) {
   var start = (pageNumber - 1) * pageSize;
 
   Item.find().skip(start).limit(pageSize).exec(function (err, items) {
-    if (err) return next(err);
     res.render('index', {items: items});
   });
 });
