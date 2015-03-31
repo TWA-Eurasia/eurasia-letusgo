@@ -13,14 +13,15 @@ router.get('/', function (req, res) {
     .exec(function(err, categories){
 
       var mainCategories = [];
+
       _.forEach(categories, function(category){
 
         if(!category.parent){
-          mainCategories.push(category.name);
+
+          mainCategories.push(category);
         }
       });
 
-      console.log(mainCategories);
       res.render('home', {mainCategories: mainCategories});
     });
 });
