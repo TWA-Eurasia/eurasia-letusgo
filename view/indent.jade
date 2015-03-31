@@ -39,6 +39,7 @@ html
         table.ui.large.table
           thead
             tr
+            th.two.column 图片
             th.two.wide 名称
             th.two.wide 单价
             th.two.wide 单位
@@ -48,6 +49,8 @@ html
           tbody.center
           -each indent in Indents
                      tr
+                       td
+                        img(src="#{indent.item}")
                        td #{indent.item.name}
                        td #{indent.item.price} 元
                        td #{indent.item.unit}

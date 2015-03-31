@@ -23,6 +23,16 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
 
+  Item.create({
+    name: '可乐',
+    unit: '瓶',
+    price: 5,
+    brand: '可口可乐',
+    leftNumber: '100',
+    imageUrl:''
+
+  });
+
   Indent.create({
     itemList: [{item: "551901cbf6ea4cd89e88c24c", number: 15},
       {item: "551901cbf6ea4cd89e88c24c", number: 10}
