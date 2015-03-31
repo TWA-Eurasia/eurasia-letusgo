@@ -7,7 +7,7 @@ var Item = require('../../model/item.js');
 
 router.get('/', function (req, res, next) {
   var itemId = req.id;
-  //itemId = "dgadf";
+  itemId = "55190e101da25d03fd84daae";
   Cart.findById(itemId)
     .populate('cartItems.item')
     .exec(function (err, cart) {
@@ -15,8 +15,8 @@ router.get('/', function (req, res, next) {
 
       _.forEach(cart.cartItems, function (cartItem) {
         cartItem.subtotal = cartItem.item.price * cartItem.number;
-      });
 
+      });
       res.render('cart', {cartItems: cart.cartItems});
     })
 });
@@ -33,5 +33,15 @@ router.post('/', function (req, res, next) {
       res.send(cart);
     })
   });
+});
+
+router.delete('/:id', function(req,res) {
+  var id = req.params.id;
+  console.log(Cart);
+  //var query = Cart.cartItems.remove({ _id: id });
+  //query.exec();
+
+  console.log(id);
+  res.send(id);
 });
 module.exports = router;

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Item = require('../../model/item');
 var Category = require('../../model/category');
-var Subcategory = require('../../model/subcategory');
 
 router.get('/', function (req, res) {
 
