@@ -4,7 +4,7 @@ block content
   .ui.masthead
   .ui.grid.centered
     h1 购物车列表
-    .ten.wide.column
+    .nine.wide.column
       table.ui.large.table
         thead
           th.two.wide 图片
@@ -17,13 +17,13 @@ block content
           - each cartItem in cartItems
             tr
               td
-                image.ui.fluid.image(src="image/kele.jpg" style="height=20%,weight=20%")
+                image.ui.fluid.image(src="#{cartItem.item.imageUrl}" style="height=20%,weight=20%")
               td #{cartItem.item.name}
               td #{cartItem.item.price}元
               td #{cartItem.number} #{cartItem.item.unit}
               td #{cartItem.subtotal}元
               td(id ="#{cartItem._id}")
-                div.ui.red.button 删除
+                div.ui.red.button.delete_cartItem 删除
        a.ui.teal.right.floated.right.labeled.icon.button 结算
         i.right.arrow.icon
 
