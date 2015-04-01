@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
+var date = new Date();
 
 var IndentSchema = new Schema({
   user: {type: Schema.ObjectId, ref: 'User'},
@@ -11,7 +12,7 @@ var IndentSchema = new Schema({
     subtotal: Number
   }],
   amount: Number,
-  date: Date,
+  date: {type: Date,default: date.toLocaleDateString("zh-cn")},
   isPaid: {type: Boolean, default: false}
 });
 
