@@ -6,9 +6,9 @@ var Cart = require('../../model/cart.js');
 var Item = require('../../model/item.js');
 
 router.get('/', function (req, res, next) {
-  var itemId = req.id;
-  itemId = "551a975e42130e253b65f082";
-  Cart.findById(itemId)
+  var cartId = req.id;
+  cartId = "551abc6a1f47599826402314";
+  Cart.findById(cartId)
     .populate('cartItems.item')
     .exec(function (err, cart) {
       if (err) {
@@ -36,7 +36,6 @@ router.post('/', function (req, res, next) {
       var cart = new Cart();
       cart.cartItems.push({item: itemId1, number: 6});
       cart.cartItems.push({item: itemId2, number: 7});
-      cart.cartItems.push({item: itemId1, number: 8});
       cart.save(function (err, cart) {
         res.send(cart);
       })
@@ -46,25 +45,23 @@ router.post('/', function (req, res, next) {
 router.delete('/:cartItemId', function (req, res) {
   var cartItemId = req.params.cartItemId;
   //var cartId = req.body.cartId;
-  var cartId = '551a975e42130e253b65f082';
+  var cartId = '551abc6a1f47599826402314';
 
-  Cart.findById(cartId)
-    .populate('cartItems.item')
-    .exec(function (err, cart) {
+  Cart.findById(cartId, function (err, cart) {
+    if (err) {
+      throw err;
+    }
+    cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
+      return cartItem._id.toString() !== cartItemId;
+    });
+
+    cart.save(function (err, cart) {
       if (err) {
         throw err;
       }
-      _.remove(cart.cartItems, function (cartItem) {
-        return cartItem._id.toString() === cartItemId;
-      });
-      cart.save(function (err) {
-        if(err){
-          throw err;
-        }
-        console.log(cart);
-        res.send(cart);
+      res.send(cart);
 
-      });
     });
+  });
 });
 module.exports = router;

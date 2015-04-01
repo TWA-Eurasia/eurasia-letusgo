@@ -13,9 +13,7 @@ $(document).ready(function () {
       type: 'DELETE',
       success: function(data) {
         console.log(data);
-        //if(200 == data.status) {
-        //  $this.closest('td').remove();
-        //}
+        $.this.closest('td').remove();
       }
     })
   })
