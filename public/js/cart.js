@@ -6,15 +6,14 @@ require('semantic-ui');
 $(document).ready(function () {
 
   $('.delete_cartItem').on('click', function (event) {
-    var id = this.closest('div').id;
+    var id = this.closest('td').id;
     console.log(id);
     $.ajax({
       url: 'cart/' + id,
       type: 'DELETE',
       success: function(data) {
-        if(200 == data.status) {
-          $this.closest('div').remove();
-        }
+        console.log(data);
+        $.this.closest('td').remove();
       }
     })
   })

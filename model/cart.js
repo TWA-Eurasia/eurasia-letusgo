@@ -9,6 +9,7 @@ var CartSchema = new Schema({
     number: Number,
     indented: {type: Boolean, default: false},
     subtotal: {type: Number, default: 0}
-  }]
+  }],
+  totalAmount: {type: Number, default: 0}
 });
 module.exports = mongoose.model('Cart', CartSchema);

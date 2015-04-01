@@ -6,42 +6,61 @@ var Cart = require('../../model/cart.js');
 var Item = require('../../model/item.js');
 
 router.get('/', function (req, res, next) {
-  var itemId = req.id;
-  itemId = "55190e101da25d03fd84daae";
-  Cart.findById(itemId)
+  var cartId = req.id;
+  cartId = "551b63470b4672612a77f804";
+  Cart.findById(cartId)
     .populate('cartItems.item')
     .exec(function (err, cart) {
-      if (err) return next(err);
-
+      if (err) {
+        return next(err);
+      }
       _.forEach(cart.cartItems, function (cartItem) {
         cartItem.subtotal = cartItem.item.price * cartItem.number;
-
+        cart.totalAmount += cartItem.subtotal;
       });
-      res.render('cart', {cartItems: cart.cartItems});
+      res.render('cart', {cartItems: cart.cartItems, cart: cart});
     })
 });
 
 router.post('/', function (req, res, next) {
-  Item.create({name: '可乐', unit: '瓶', price: 3.5, imageUrl: 'image/kele.img'}, function (err, item) {
+  Item.create(
+    {name: '可乐', unit: '瓶', price: 3.5, imageUrl: 'image/kele.jpg'},
+    {name: '雪碧', unit: '瓶', price: 3.5, imageUrl: 'image/xuebi.jpg'},
+    function (err, item1, item2) {
 
-    var itemId = item._id;
+      var itemId1 = item1._id;
+      var itemId2 = item2._id;
 
-    var cart = new Cart();
-    cart.cartItems.push({item: itemId, number: 6});
-    cart.cartItems.push({item: itemId, number: 7});
-    cart.save(function (err, cart) {
-      res.send(cart);
-    })
-  });
+
+      var cart = new Cart();
+      cart.cartItems.push({item: itemId1, number: 6});
+      cart.cartItems.push({item: itemId2, number: 7});
+      cart.save(function (err, cart) {
+        res.send(cart);
+      })
+    });
 });
 
-router.delete('/:id', function(req,res) {
-  var id = req.params.id;
-  console.log(Cart);
-  //var query = Cart.cartItems.remove({ _id: id });
-  //query.exec();
+router.delete('/:cartItemId', function (req, res) {
+  var cartItemId = req.params.cartItemId;
+  //var cartId = req.body.cartId;
+  var cartId = '551b63470b4672612a77f804';
 
-  console.log(id);
-  res.send(id);
+  Cart.findById(cartId, function (err, cart) {
+    if (err) {
+      throw err;
+    }
+    cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
+      return cartItem._id.toString() !== cartItemId;
+    });
+
+    cart.save(function (err, cart) {
+      if (err) {
+        throw err;
+      }
+      res.send(cart);
+
+    });
+  });
 });
 module.exports = router;
