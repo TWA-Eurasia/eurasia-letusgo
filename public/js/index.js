@@ -9,6 +9,7 @@ $(document).ready(function () {
 
   $('.pageNumber').on('click', function() {
     var pageNumber = parseInt(this.id);
+    localStorage.pageCount = pageNumber;
     console.log(pageNumber);
 
     $.ajax({
