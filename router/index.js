@@ -11,4 +11,5 @@ module.exports = function (app) {
 
     app.use('/indent', require('./route/indent'));
     app.use('/success', require('./route/success'));
+
 };

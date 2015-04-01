@@ -5,15 +5,13 @@ var Schema = mongoose.Schema;
 var ItemSchema = new Schema({
   name: String,
   unit: String,
-  brand: String,
   price: Number,
-  leftNumber: Number,
-  saleNumber: {type: Number, default: 0},
-  imageUrl: String,
+  image: String,
   description: String,
-  state: {type: String, default: 'new'},
+  inventory: Number,
   category: {type: Schema.ObjectId, ref: 'Category'},
-  specification: String
+  specification: String,
+  isRecommend: Boolean
 });
 
-module.exports = mongoose.model('Item',ItemSchema);
+module.exports = mongoose.model('Item', ItemSchema);

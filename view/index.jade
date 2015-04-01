@@ -49,9 +49,8 @@ html
             - each item in items
               div.column
                 div.ui.segment
-                  img.ui.fluid.image(id="#{item._id}" src="/#{item.imageUrl}")
+                  img.ui.fluid.image(id="#{item._id}" src="/#{item.image}")
                 div.info
                   div.name #{item.name}
                   p.price #{item.price}
           div.pagination(style="padding-left: 500px;padding-top: 30px;")
-
