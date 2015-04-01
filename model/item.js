@@ -11,7 +11,7 @@ var ItemSchema = new Schema({
   inventory: Number,
   category: {type: Schema.ObjectId, ref: 'Category'},
   specification: String,
-  isRecommend: String
+  isRecommend: Boolean
 });
 
 module.exports = mongoose.model('Item',ItemSchema);
