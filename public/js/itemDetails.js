@@ -1,4 +1,5 @@
 var $ = require('jquery');
+require('semantic-ui');
 
 $(document).ready(function () {
 
@@ -42,7 +43,7 @@ $(document).ready(function () {
 
     var specification = $('#specification').val();
     var price = $('#' + specification).data('price');
-    
+
     $('#itemPrice').text(price);
   });
 
