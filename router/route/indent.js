@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
         amount += indent.subtotal;
       });
 
-      res.render('indent', {Indents: data});
+      res.render('indent', {Indents: data,amount: amount});
     });
 });
 

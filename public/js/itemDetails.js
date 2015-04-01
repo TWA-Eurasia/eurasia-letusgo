@@ -15,17 +15,54 @@ $(document).ready(function () {
 
     var numberInput = parseInt($('#numberInput').val());
 
-    $('#numberInput').val(numberInput + 1);
+    var leftNumber = $('#leftNumber').text();
+
+    if(leftNumber > numberInput){
+
+      $('#numberInput').val(numberInput + 1);
+    }
   });
 
   $('#numberInput').on('mouseout', function () {
 
-    var numberInput = $('#numberInput').val();
+    $('#inputError').hide();
 
-    var reg = /^(0|[1-9][0-9]*)$/;
-    if(!reg.exec(numberInput)){
-      $('#numberInput').val(1);
+    var numberInput = $('#numberInput').val();
+    var number = numberInput.replace(/\b(0+)/gi, '');
+    $('#numberInput').val(number);
+
+    verifyNumber(number);
+
+    if(isShorted()){
+      $('#inputError').show();
     }
   });
+
+  function verifyNumber(number){
+
+    var reg = /^(0|[1-9][0-9]*)$/;
+
+    if(!reg.exec(number)){
+      $('#numberInput').val(1);
+    }
+  }
+
+  function isShorted(){
+
+    var inputNumber = parseInt($('#numberInput').val());
+    var leftNumber = $('#leftNumber').text();
+
+    if(inputNumber > leftNumber) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function setHref() {
+
+    $('#parent').attr('href','#');
+    $('#child').attr('href','#');
+  }
 
 });
