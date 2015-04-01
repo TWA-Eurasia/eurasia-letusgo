@@ -1,7 +1,5 @@
 extends ./navBar.jade
 
-block title
-  //titel 购物车页面
 block css
   script(src="jspm_packages/system.js")
   script(src="config.js")
@@ -13,33 +11,50 @@ block css
 
 block content
   .ui.masthead
-  .ui.grid.centered
-    h1 购物车列表
-    .nine.wide.column
-      table.ui.large.table
-        thead.center
-          th.two.wide 图片
-          th.two.wide 名称
-          th.two.wide 价格
-          th.two.wide 数量
-          th.two.wide 小计
-          th.four.wide
-        tbody.center
-          - each cartItem in cartItems
+    .ui.grid.centered
+      h1.ui.header
+        img(src="image/cart.png")
+        div.content 购物车列表
+      .nine.wide.column
+        table.ui.large.table.center
+          thead.center
+            th.two.wide 图片
+            th.two.wide 名称
+            th.two.wide 价格
+            th.two.wide 数量
+            th.two.wide 小计
+            th.two.wide
+            th.two.wide
+          tbody.center
+            - each cartItem in cartItems
+              tr
+                td
+                  image.ui.fluid.image(src="#{cartItem.item.imageUrl}")
+                td #{cartItem.item.name}
+                td #{cartItem.item.price}元
+                td
+                  i.caret.left.icon
+                  div.ui.mini.input #{cartItem.number}
+                   //(type="text" value=1 style="text-align:center;width:8; height:10")
+                  i.caret.right.icon
+                td #{cartItem.subtotal}元
+                td(id ="#{cartItem._id}")
+                  div.ui.red.button 删除
+                  //div.ui.red.button.delete_cartItem 删除
+                td
+                  input(type="checkbox" name="selectedCartItem")
+                  //div.ui.checkbox
+                    //input(type="checkbox" name="selectedCartItem")
+          tfoot.right
             tr
-              td
-                image.ui.fluid.image(src="#{cartItem.item.imageUrl}" style="height=20%,weight=20%")
-              td #{cartItem.item.name}
-              td #{cartItem.item.price}元
-              td #{cartItem.number} #{cartItem.item.unit}
-              td #{cartItem.subtotal}元
-              td(id ="#{cartItem._id}")
-                div.ui.red.button.delete_cartItem 删除
-        tfoot.full-width
-          th(colspan = '5')
-            div.ui.right.floated 总计：#{cart.totalAmount}
-            //.ui.teal.right.floated.right.labeled 总计：#{cart.totalAmount}
-       a.ui.teal.right.floated.right.labeled.icon.button 结算
-        i.right.arrow.icon
+             th(colspan='7')
+              div.ui.right.floated.small.primary.labeled.header
+                h4.ui.orange.header 总计：#{cart.totalAmount}元
+
+              //th(colspan='6' align="right") 总计：#{cart.totalAmount}元
+              //div(style="margin-right: 0") 总计：#{cart.totalAmount}
+              //.ui.teal.right.floated.right.labeled 总计：#{cart.totalAmount}
+         a.ui.teal.right.floated.right.labeled.icon.button 结算
+          i.right.arrow.icon
 
 

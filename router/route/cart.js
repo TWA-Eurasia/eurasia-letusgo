@@ -7,13 +7,14 @@ var Item = require('../../model/item.js');
 
 router.get('/', function (req, res, next) {
   var itemId = req.id;
-  itemId = "551a42aa1cdb0f1f7beb7d90";
+  itemId = "551a975e42130e253b65f082";
   Cart.findById(itemId)
     .populate('cartItems.item')
     .exec(function (err, cart) {
       if (err) {
         return next(err);
       }
+      //console.log(cart);
       _.forEach(cart.cartItems, function (cartItem) {
         cartItem.subtotal = cartItem.item.price * cartItem.number;
         cart.totalAmount += cartItem.subtotal;
@@ -45,7 +46,7 @@ router.post('/', function (req, res, next) {
 router.delete('/:cartItemId', function (req, res) {
   var cartItemId = req.params.cartItemId;
   //var cartId = req.body.cartId;
-  var cartId = '551a42aa1cdb0f1f7beb7d90';
+  var cartId = '551a975e42130e253b65f082';
 
   Cart.findById(cartId)
     .populate('cartItems.item')
