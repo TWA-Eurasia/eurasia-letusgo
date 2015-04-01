@@ -47,8 +47,18 @@ block content
              th(colspan='7')
               div.ui.right.floated.small.primary.labeled.header
                 h4.ui.orange.header 总计：#{cart.totalAmount}元
-                
+
          a.ui.teal.right.floated.right.labeled.icon.button 结算
           i.right.arrow.icon
+      .ui.first.coupled.small.modal.transition
+        .content
+          .description
+            p 您确认要删除吗？
+        .actions
+          .primary.ui.button.no 不要
+
+          a.ui.positive.right.labeled.icon.button.yes 删除
+            i.checkmark.icon
+
 
 
