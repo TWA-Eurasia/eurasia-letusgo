@@ -35,25 +35,19 @@ block content
                 td
                   i.caret.left.icon
                   div.ui.mini.input #{cartItem.number}
-                   //(type="text" value=1 style="text-align:center;width:8; height:10")
                   i.caret.right.icon
                 td #{cartItem.subtotal}元
                 td(id ="#{cartItem._id}")
-                  div.ui.red.button 删除
-                  //div.ui.red.button.delete_cartItem 删除
+                  div.ui.red.button.delete_cartItem 删除
                 td
                   input(type="checkbox" name="selectedCartItem")
-                  //div.ui.checkbox
-                    //input(type="checkbox" name="selectedCartItem")
+
           tfoot.right
             tr
              th(colspan='7')
               div.ui.right.floated.small.primary.labeled.header
                 h4.ui.orange.header 总计：#{cart.totalAmount}元
-
-              //th(colspan='6' align="right") 总计：#{cart.totalAmount}元
-              //div(style="margin-right: 0") 总计：#{cart.totalAmount}
-              //.ui.teal.right.floated.right.labeled 总计：#{cart.totalAmount}
+                
          a.ui.teal.right.floated.right.labeled.icon.button 结算
           i.right.arrow.icon
 
