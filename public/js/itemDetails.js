@@ -38,6 +38,14 @@ $(document).ready(function () {
     }
   });
 
+  $('#specification').on('change', function () {
+
+    var specification = $('#specification').val();
+    var price = $('#' + specification).data('price');
+    
+    $('#itemPrice').text(price);
+  });
+
   function verifyNumber(number){
 
     var reg = /^(0|[1-9][0-9]*)$/;
