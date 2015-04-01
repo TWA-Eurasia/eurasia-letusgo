@@ -4,8 +4,10 @@ block title
 block css
   script(src="jspm_packages/system.js")
   script(src="config.js")
+
   script.
     System.import('js/itemDetails')
+
 block content
   .ui.centered.segment
     .ui.grid.centered
@@ -19,7 +21,7 @@ block content
 
       .ui.grid.nine.wide.column.centered
         .nine.wide.column
-          - var imageUrl = itemDetails.item.imageUrl
+          - var imageUrl = itemDetails.item.image
           img.ui.vertical.big.bordered.centered.image(src = imageUrl)
 
         .seven.wide.column
@@ -49,7 +51,7 @@ block content
                   .ui.negative.message#inputError(style = 'display: none') 您所填写的数量超过库存!
               tr
                 td 库存
-                td#leftNumber #{itemDetails.item.leftNumber}
+                td#leftNumber #{itemDetails.item.inventory}
           button.ui.primary.button
             i.cart.in.icon
             span 添加到购物车
