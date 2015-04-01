@@ -1,18 +1,11 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
-var date = new Date();
 
 var IndentSchema = new Schema({
   user: {type: Schema.ObjectId, ref: 'User'},
-
-  itemList: [{
-    item: {type: Schema.ObjectId, ref: 'Item'},
-    number: Number,
-    subtotal: Number
-  }],
-  amount: Number,
-  date: {type: Date,default: date.toLocaleDateString("zh-cn")},
+  cartItems: [{type: Schema.ObjectId, ref: 'CartItem'}],
+  createDate: Date,
   isPaid: {type: Boolean, default: false}
 });
 
