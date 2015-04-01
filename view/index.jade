@@ -5,11 +5,11 @@ html
     title= name
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width")
-    link(rel="stylesheet" type="text/css" href="../github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
-    link(rel="stylesheet" type="text/css" href="../style/homepage.css")
-    link(rel="styleSheet" type="text/css" href="../style/home.css")
-    script(src="../jspm_packages/system.js")
-    script(src="../config.js")
+    link(rel="stylesheet" type="text/css" href="/github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
+    link(rel="stylesheet" type="text/css" href="/style/homepage.css")
+    link(rel="styleSheet" type="text/css" href="/style/home.css")
+    script(src="/jspm_packages/system.js")
+    script(src="/config.js")
     script.
       System.import('js/index')
     script.
@@ -28,7 +28,7 @@ html
     div.container
       div.searchcontainer
         div.mylogo
-          img(src= "../image/logo.png")
+          img(src= "/image/logo.png")
         div.search
           div.ui.fluid.action.input
             input.topsearch(type="text" placeholder="Search...")
@@ -41,7 +41,7 @@ html
             - each item in items
               div.column
                 div.ui.segment
-                  img.ui.fluid.image(id="#{item._id}" src="../#{item.imageUrl}")
+                  img.ui.fluid.image(id="#{item._id}" src="/#{item.imageUrl}")
                 div.info
                   div.name #{item.name}
                   p.price #{item.price}
