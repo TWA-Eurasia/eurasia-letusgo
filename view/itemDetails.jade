@@ -34,7 +34,10 @@ block content
                 td #{itemDetails.item.unit}
               tr
                 td 规格
-                td #{itemDetails.item.specification}
+                td
+                  select.ui.dropdown
+                    - each detail in itemDetails.details
+                      option #{detail.specification}
               tr
                 td 数量
                 td
@@ -52,6 +55,5 @@ block content
       .ui.grid.centered
         .nine.wide.column
           .ui.message
-            .header
-              商品详情：
+            .header 商品详情：
             p #{itemDetails.item.description}
