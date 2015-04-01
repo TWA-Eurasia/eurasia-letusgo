@@ -1,0 +1,69 @@
+extends ./navBar.jade
+
+block content
+  .ui.masthead
+  .ui.grid.centered
+    h1 购物车列表
+    .thirteen.wide.column
+      table.ui.large.table
+        thead
+          th.four.wide 图片
+          th.three.wide 名称
+          th.two.wide 价格
+          th.two.wide 数量
+          th.two.wide 小计
+          th.four.wide 删除
+        tbody.center
+          - each cartItem in cartItems
+            tr
+              td image(src="image/kele.jpg" class="ui fluid image")
+              td #{cartItem.item.name}
+              td #{cartItem.item.price}元
+              //td #{cartItem.number}
+              td #{cartItem.number} #{cartItem.item.unit}
+              td #{cartItem.subtotal}元
+              td(id ="#{cartItem._id}")
+                div.ui.green.button 删除
+              //(class="ui green button delete_cartItem" data-id="#{cartItem._id}" id="删除
+       // a.ui.red.right.floated.right.labeled.icon.button(href=#) 结算
+        //i.right.arrow.icon
+
+  ////  .ui.grid.centered
+  //.ui.segment
+  //  .ui.head 购物车列表
+  //    .ui.form
+  //      .ui.table
+  //        .
+  //    .thirteen.wide.column
+  //      div(class="ui six column doubling ui grid")
+  //          div.column 图片
+  //          div.column 名称
+  //          div.column 价格
+  //          div.column 数量
+  //          div.column 小计
+  //          div.column 删除
+  //
+  //      - each cartItem in cartItems
+  //        //div(class="ui six column doubling ui grid")
+  //        div.ui.six.column.grid
+  //          div.column
+  //            div.ui.segment
+  //             img.image(src="image/kele.jpg" class="ui fluid image")
+  //          div.column
+  //            div.ui.segment
+  //              #{cartItem.item.name}
+  //          div.column
+  //            div.ui.segment
+  //              #{cartItem.item.price}
+  //          div.column
+  //            div.ui.segment
+  //              #{cartItem.number} #{cartItem.item.unit}
+  //          div.column
+  //            div.ui.segment
+  //              #{cartItem.subtotal}
+  //          div.column
+  //            div.ui.segment
+  //             v(class="ui green button delete_cartItem" data-id="#{cartItem._id}" id="#{cartItem._id}")  删除 di
+  //
+  //
+  //

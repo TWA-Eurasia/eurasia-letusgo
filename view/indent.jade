@@ -35,10 +35,11 @@ html
     .ui.grid
       .ten.wide.column.centered
         h1 商品清单
-      .ten.wide.centered.column
+      .twelve.wide.centered.column
         table.ui.large.table
           thead
             tr
+            th.two.wide 图片
             th.two.wide 名称
             th.two.wide 单价
             th.two.wide 单位
@@ -48,6 +49,8 @@ html
           tbody.center
           -each indent in Indents
                      tr
+                       td
+                        img(src="#{indent.item.imageUrl}",width='70px',height='70px')
                        td #{indent.item.name}
                        td #{indent.item.price} 元
                        td #{indent.item.unit}
