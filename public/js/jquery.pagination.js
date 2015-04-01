@@ -48,7 +48,6 @@ Pagination.prototype.renderMiddle = function(ulContainer) {
         return range[i] !== -1 ? range[i] : '';
       })
       .addClass('pageNumber')
-      .attr('id', pageId[i])
       .toggleClass('current', range[i] == this.currentPage)
       .toggleClass('ellipsis', range[i] == -1)
       .on('click', function(i) {
@@ -64,7 +63,8 @@ Pagination.prototype.renderMiddle = function(ulContainer) {
 
 Pagination.prototype.emit = function(n) {
   this.render();
-  console.log(this.getRange());
+  this.options.onPageChange(n);
+  //console.log(this.getRange());
 };
 
 Pagination.prototype.getRange = function() {

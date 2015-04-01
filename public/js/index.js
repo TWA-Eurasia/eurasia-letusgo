@@ -11,20 +11,23 @@ $(document).ready(function () {
 
     pageCount: application.index.pageCount,
     currentPage: application.index.currentPage,
-    visiblePageCount: 7
+    visiblePageCount: 7,
+    onPageChange: function(n) {
+      $(location).attr('href', '/index/'+ n);
+    }
   });
 
-  $('.pageNumber').on('click', function() {
-    var pageNumber = parseInt(this.id);
-
-    $.ajax({
-      url: '/index/' + pageNumber,
-      type: 'GET',
-      success: function(result) {
-        $(location).attr('href', '/index/'+ pageNumber);
-      }
-    });
-
-  })
+  //$('.pageNumber').on('click', function() {
+  //  var pageNumber = parseInt(this.id);
+  //
+  //  $.ajax({
+  //    url: '/index/' + pageNumber,
+  //    type: 'GET',
+  //    success: function(result) {
+  //
+  //    }
+  //  });
+  //
+  //})
 
 });
