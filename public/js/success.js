@@ -13,7 +13,6 @@ $('#amount').text(amount);
 
 $(document).ready(function () {
 
-
   function jump(count) {
 
     window.setTimeout(function () {

@@ -13,10 +13,9 @@ $(document).ready(function () {
 
   $('.ispay').on('click', function () {
     $.ajax({
-        url: '/success',
-        type: 'GET'
-      });
-
+      url: '/success',
+      type: 'GET'
+    });
 
   });
 });
