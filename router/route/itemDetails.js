@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var _ = require('lodash');
+
 var Item = require('../../model/item');
 var Category = require('../../model/category');
 
@@ -10,20 +12,35 @@ router.get('/', function(req, res){
   .populate('parent')
   .exec(function(err, category){
 
-      Item.findById('551aac132ef086a169628b75')
+      Item.find({name: '男士短袖'})
       .populate('category')
-      .exec(function (err, item) {
+      .exec(function (err, items) {
 
         var itemDetails = {
-          item: item,
-          category: category
+          item: items[0],
+          category: category,
+          details : getDetails(items)
         };
-        console.log(itemDetails);
+
         res.render('itemDetails', {itemDetails: itemDetails});
       });
     });
 
-  // res.render('itemDetails');
+    function getDetails (items) {
+      var details = [];
+
+      _.forEach(items, function(item){
+
+        var detail = {
+          price: item.price,
+          specification : item.specification
+        };
+        details.push(detail);
+      });
+
+      return details;
+    }
+
 });
 
 module.exports = router;
