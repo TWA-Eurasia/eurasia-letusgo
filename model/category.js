@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var CategorySchema = new Schema({
   name: String,
-  parent:{
+  parent: {
     type: Schema.ObjectId,
     ref: 'Category'
   }

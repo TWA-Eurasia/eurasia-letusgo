@@ -7,4 +7,4 @@ var CartItemSchema = new Schema({
   number: Number
 });
 
-module.exports = mongoose.model('CartItem',CartItemSchema);
+module.exports = mongoose.model('CartItem', CartItemSchema);

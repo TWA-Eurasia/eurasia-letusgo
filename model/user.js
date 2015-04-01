@@ -8,4 +8,4 @@ var UserSchema = new Schema({
     indent: {type: Schema.ObjectId, ref: 'Indent'}
   }]
 });
-module.exports = mongoose.model('User',UserSchema);
+module.exports = mongoose.model('User', UserSchema);

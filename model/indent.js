@@ -9,4 +9,4 @@ var IndentSchema = new Schema({
   isPaid: {type: Boolean, default: false}
 });
 
-module.exports = mongoose.model('Indent',IndentSchema);
+module.exports = mongoose.model('Indent', IndentSchema);

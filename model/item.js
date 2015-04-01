@@ -14,4 +14,4 @@ var ItemSchema = new Schema({
   isRecommend: Boolean
 });
 
-module.exports = mongoose.model('Item',ItemSchema);
+module.exports = mongoose.model('Item', ItemSchema);
