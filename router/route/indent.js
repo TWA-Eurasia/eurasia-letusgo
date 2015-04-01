@@ -22,7 +22,6 @@ router.get('/', function (req, res, next) {
     });
 });
 
-<<<<<<< HEAD
 router.post('/', function (req, res) {
   //
   //Item.create({
@@ -36,10 +35,6 @@ router.post('/', function (req, res) {
   //  specification: '350ml'
   //
   //});
-=======
-router.post('/', function (req, res, next) {
->>>>>>> updateModel
-
   Indent.create({
     itemList: [{item: "551abb584357be4b17ca39ea", number: 15},
                 {item: "551abb584357be4b17ca39ea", number: 10}
