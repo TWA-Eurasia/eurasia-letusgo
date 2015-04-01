@@ -6,13 +6,17 @@ var _ = require('lodash');
 var Item = require('../../model/item');
 var Category = require('../../model/category');
 
-router.get('/', function(req, res){
+router.get('/:id/:name', function(req, res){
 
-  Category.findById('551aa95e2ef086a169628b74')
+  var id = req.params.id;
+  var name = req.params.name;
+  var aa = '551aa95e2ef086a169628b74';
+
+  Category.findById(id)
   .populate('parent')
   .exec(function(err, category){
 
-      Item.find({name: '男士短袖'})
+      Item.find({name: name})
       .populate('category')
       .exec(function (err, items) {
 
@@ -31,11 +35,14 @@ router.get('/', function(req, res){
 
       _.forEach(items, function(item){
 
-        var detail = {
-          price: item.price,
-          specification : item.specification
-        };
-        details.push(detail);
+        if(item.specification !== '') {
+          
+          var detail = {
+            price: item.price,
+            specification : item.specification
+          };
+          details.push(detail);
+        }
       });
 
       return details;
