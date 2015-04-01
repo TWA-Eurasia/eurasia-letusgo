@@ -1,4 +1,5 @@
 var $ = require('jquery');
+require('semantic-ui');
 
 $(document).ready(function () {
 
@@ -36,6 +37,14 @@ $(document).ready(function () {
     if(isShorted()){
       $('#inputError').show();
     }
+  });
+
+  $('#specification').on('change', function () {
+
+    var specification = $('#specification').val();
+    var price = $('#' + specification).data('price');
+
+    $('#itemPrice').text(price);
   });
 
   function verifyNumber(number){

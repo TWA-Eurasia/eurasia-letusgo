@@ -4,7 +4,14 @@ var Item = require('../../model/item');
 
 var _ = require('lodash');
 
-router.get('/:pageNumber', function(req, res) {
+router.get('/', function(req, res) {
+
+  Item.find().skip(0).limit(2).exec(function (err, items) {
+    res.render('index', {items: items});
+  });
+});
+
+router.get('/index/:pageNumber', function(req, res) {
 
   var pageNumber = req.params.pageNumber;
   var pageSize = 2;
@@ -14,6 +21,8 @@ router.get('/:pageNumber', function(req, res) {
     res.render('index', {items: items});
   });
 });
+
+
 
 router.post('/', function(req, res) {
   Item.create({name: 'i', unit: '瓶', price: 3.5, imageUrl: 'image/cat2.png', state: 'recommend'}, function(err, item) {
