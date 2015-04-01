@@ -87,16 +87,19 @@ router.get('/index/:pageNumber', function(req, res) {
   var pageNumber = req.params.pageNumber;
   var pageSize = 2;
   var start = (pageNumber - 1) * pageSize;
-  //console.log(result);
+  var pageCount;
+  Item.find().exec(function(err, items) {
+    pageCount = Math.ceil(items.length / pageSize);
+  });
   Item.find().skip(start).limit(pageSize).exec(function (err, items) {
-    res.render('index', {mainCategories: result.mainCategories, items: items});
+    res.render('index', {mainCategories: result.mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber});
   });
 });
 
 
 
 router.post('/', function(req, res) {
-  Item.create({name: 'a', unit: '瓶', price: 3.5, imageUrl: 'image/cat2.png', state: 'recommend'}, function(err, item) {
+  Item.create({name: '绿茶', unit: '瓶', price: 3.5, image: 'image/cat2.png', isRecommend: true}, function(err, item) {
     res.send(item);
   });
 });

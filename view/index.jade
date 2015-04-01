@@ -8,12 +8,15 @@ html
     link(rel="stylesheet" type="text/css" href="/github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
     link(rel="stylesheet" type="text/css" href="/style/homepage.css")
     link(rel="styleSheet" type="text/css" href="/style/home.css")
+    script(type="text/javascript").
+      var application = application || {};
+      application.index = application.index ||{};
+      application.index.pageCount = #{pageCount};
+      application.index.currentPage = #{currentPage};
     script(src="/jspm_packages/system.js")
     script(src="/config.js")
     script.
-      System.import('js/index')
-    script.
-      System.import('js/pageApp')
+      System.import('js/index');
   body#home
     header
       div.topmenu
