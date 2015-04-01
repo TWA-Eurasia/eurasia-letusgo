@@ -3,6 +3,7 @@ require('semantic-ui');
 
 $(document).ready(function () {
 
+  setHref();
   $('i.minus').on('click',function () {
 
     var numberInput = parseInt($('#numberInput').val());
@@ -70,8 +71,15 @@ $(document).ready(function () {
 
   function setHref() {
 
-    $('#parent').attr('href','#');
-    $('#child').attr('href','#');
-  }
 
+    var href = location.pathname;
+    var array = href.split('/');
+    var childId = array[2];
+
+    $.get('/api/category/' + childId, function(parentId){
+
+      // $('#parent').attr('href','#');
+      // $('#child').attr('href','#');
+    });
+  }
 });
