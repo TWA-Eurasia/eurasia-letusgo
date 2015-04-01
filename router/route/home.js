@@ -37,37 +37,6 @@ router.get('/', function (req, res) {
 
     res.render('home', {mainCategories: mainCategories});
     });
-
-  //var mainCategories = [];
-  //
-  //Category.find()
-  //  .populate('parent')
-  //  .exec(function (err, categories) {
-  //
-  //
-  //    _.forEach(categories, function (category) {
-  //
-  //
-  //      if (!category.parent) {
-  //        var mainCategory = {name: category.name, subCategories: []};
-  //
-  //        Category.find({parent: category._id}, function (err, data) {
-  //            if(err) return handleError(err);
-  //
-  //            if(data.length > 0){
-  //              //console.log(data);
-  //              mainCategory.subCategories = data;
-  //            }
-  //          });
-  //        console.log(mainCategory);
-  //        mainCategories.push(mainCategory);
-  //      }
-  //
-  //    });
-  //  });
-  ////console.log(mainCategories);
-  //
-  //res.render('home', {mainCategories: mainCategories});
 });
 
 module.exports = router;

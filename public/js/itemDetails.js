@@ -1,8 +1,9 @@
 var $ = require('jquery');
+require('semantic-ui');
 
 $(document).ready(function () {
-  initPage();
 
+  setHref();
   $('i.minus').on('click',function () {
 
     var numberInput = parseInt($('#numberInput').val());
@@ -16,28 +17,69 @@ $(document).ready(function () {
 
     var numberInput = parseInt($('#numberInput').val());
 
-    $('#numberInput').val(numberInput + 1);
+    var leftNumber = $('#leftNumber').text();
+
+    if(leftNumber > numberInput){
+
+      $('#numberInput').val(numberInput + 1);
+    }
   });
 
   $('#numberInput').on('mouseout', function () {
 
-    var numberInput = parseInt($('#numberInput').val());
+    $('#inputError').hide();
 
-    if(isNaN(numberInput)) {
-      $('#numberInput').val(1);
+    var numberInput = $('#numberInput').val();
+    var number = numberInput.replace(/\b(0+)/gi, '');
+    $('#numberInput').val(number);
+
+    verifyNumber(number);
+
+    if(isShorted()){
+      $('#inputError').show();
     }
   });
 
-  function initPage(){
-    $.get('api/item', function (item) {
+  $('#specification').on('change', function () {
 
-      $('#itemName').text(item.name);
-      $('#itemPrice').text('￥' + item.price);
-      $('#itemUnit').text(item.unit);
-      $('#itemSpecification').text(item.specification);
-      $('#itemDescription').text(item.description);
-      $('#itemImage').attr('src', item.imageUrl);
-    });
+    var specification = $('#specification').val();
+    var price = $('#' + specification).data('price');
+
+    $('#itemPrice').text(price);
+  });
+
+  function verifyNumber(number){
+
+    var reg = /^(0|[1-9][0-9]*)$/;
+
+    if(!reg.exec(number)){
+      $('#numberInput').val(1);
+    }
   }
 
+  function isShorted(){
+
+    var inputNumber = parseInt($('#numberInput').val());
+    var leftNumber = $('#leftNumber').text();
+
+    if(inputNumber > leftNumber) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function setHref() {
+
+
+    var href = location.pathname;
+    var array = href.split('/');
+    var childId = array[2];
+
+    $.get('/api/category/' + childId, function(parentId){
+
+      // $('#parent').attr('href','#');
+      // $('#child').attr('href','#');
+    });
+  }
 });
