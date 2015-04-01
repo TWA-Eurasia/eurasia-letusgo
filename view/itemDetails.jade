@@ -34,14 +34,18 @@ block content
               tr
                 td 单位
                 td #{itemDetails.item.unit}
-              tr
-                td 规格
-                td
-                  select.ui.dropdown#specification
-                    - each detail in itemDetails.details
-                      -var price = detail.price
-                      -var itemId = detail.specification
-                      option(id = itemId, data-price = price) #{detail.specification}
+
+              - var length = itemDetails.details.length
+              - var isDisplay = (length == 0) ? 'none' : ''
+              - var attributes = {'style': 'display: ' + isDisplay}
+                tr&attributes(attributes)
+                  td 规格
+                  td
+                    select.ui.dropdown#specification
+                      - each detail in itemDetails.details
+                        -var price = detail.price
+                        -var itemId = detail.specification
+                        option(id = itemId, data-price = price) #{detail.specification}
               tr
                 td 数量
                 td
