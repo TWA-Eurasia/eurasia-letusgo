@@ -10,6 +10,15 @@ $(document).ready(function () {
     $('.first.modal')
       .modal('show');
   });
+
+  $('.ispay').on('click', function () {
+    $.ajax({
+        url: '/success',
+        type: 'GET'
+      });
+
+
+  });
 });
 
 //$(document).ready(function () {
