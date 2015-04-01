@@ -3,10 +3,13 @@ html
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width")
-    meta(http-equiv="refresh" content="3;url=/helloWorld")
+    meta(http-equiv="Content-Type")
+    //meta(http-equiv="refresh" content="3;url=/helloWorld")
     block css
       script(src="jspm_packages/system.js")
       script(src="config.js")
+      script.
+        System.import('js/success')
       link(rel="stylesheet" type="text/css" href="../jspm_packages/github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
     block title
       title 首页
@@ -33,7 +36,9 @@ html
     .ui.grid.centered
       .ten.wide.column.centered
         h1 您本次消费
-          span(style="color: red") #{amount}
+          span#amount(style="color: red")
           span 元
-        h1 支付成功，3秒后跳回首页。。。
+        h1 支付成功，
+          span#sec 3
+          span 秒后跳回首页。。。
 

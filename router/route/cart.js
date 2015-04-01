@@ -7,7 +7,7 @@ var Item = require('../../model/item.js');
 
 router.get('/', function (req, res, next) {
   var cartId = req.id;
-  cartId = "551abc6a1f47599826402314";
+  cartId = "551b63470b4672612a77f804";
   Cart.findById(cartId)
     .populate('cartItems.item')
     .exec(function (err, cart) {
@@ -44,7 +44,7 @@ router.post('/', function (req, res, next) {
 router.delete('/:cartItemId', function (req, res) {
   var cartItemId = req.params.cartItemId;
   //var cartId = req.body.cartId;
-  var cartId = '551abc6a1f47599826402314';
+  var cartId = '551b63470b4672612a77f804';
 
   Cart.findById(cartId, function (err, cart) {
     if (err) {
