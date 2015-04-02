@@ -44,7 +44,7 @@ router.get('/:id', function(req, res) {
           details.push(detail);
         }
       });
-      
+
       if (details.length > 0) {
         details[0].isChecked = "checked";
       }
