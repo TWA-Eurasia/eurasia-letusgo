@@ -58,7 +58,9 @@ block content
             tr
              th(colspan='7')
               div.ui.right.floated.small.primary.labeled.header
-                h4.ui.orange.header 总计：#{total}元
+                h4.ui.orange.header 总计：
+                  span#total #{total}
+                  span 元
 
          a.ui.teal.right.floated.right.labeled.icon.button 结算
           i.right.arrow.icon
