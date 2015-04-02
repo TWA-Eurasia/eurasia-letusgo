@@ -20,7 +20,6 @@ $(document).ready(function () {
 
     var inventory = $('#leftNumber').text();
     //console.log(inventory);
-
     if(inventory > numberInput){
 
       $(event.target).closest('td').find('#number').val(numberInput + 1);
@@ -31,7 +30,7 @@ $(document).ready(function () {
 
   $('#number').on('blur', function () {
 
-    $('#inventory').hide();
+    $(event.target).closest('td').find('#inventory').hide();
 
     var numberInput = parseInt($(event.target).closest('td').find('#number').val());
     numberInput = numberInput.toString();
@@ -41,7 +40,7 @@ $(document).ready(function () {
     verifyNumber(number);
 
     if(isShorted()){
-      $('#inventory').show();
+      $(event.target).closest('td').find('#inventory').show();
     }
   });
 
@@ -50,13 +49,13 @@ $(document).ready(function () {
     var reg = /^(0|[1-9][0-9]*)$/;
 
     if(!reg.exec(number)){
-      $('#number').val(1);
+      parseInt($(event.target).closest('td').find('#number').val(1));
     }
   }
 
   function isShorted(){
 
-    var inputNumber = parseInt($('#number').val());
+    var inputNumber = parseInt($(event.target).closest('td').find('#number').val());
     var leftNumber = $('#leftNumber').text();
 
     if(inputNumber > leftNumber) {
