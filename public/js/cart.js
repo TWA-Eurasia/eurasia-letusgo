@@ -18,8 +18,54 @@ $(document).ready(function () {
 
     var numberInput = parseInt($(event.target).closest('td').find('#number').val());
 
-    $(event.target).closest('td').find('#number').val(numberInput + 1);
+    var inventory = $('#leftNumber').text();
+    //console.log(inventory);
+
+    if(inventory > numberInput){
+
+      $(event.target).closest('td').find('#number').val(numberInput + 1);
+    }
+
+
   });
+
+  $('#number').on('blur', function () {
+
+    $('#inventory').hide();
+
+    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
+    numberInput = numberInput.toString();
+    var number = numberInput.replace(/\b(0+)/gi, '');
+    $('#number').val(number);
+
+    verifyNumber(number);
+
+    if(isShorted()){
+      $('#inventory').show();
+    }
+  });
+
+  function verifyNumber(number){
+
+    var reg = /^(0|[1-9][0-9]*)$/;
+
+    if(!reg.exec(number)){
+      $('#number').val(1);
+    }
+  }
+
+  function isShorted(){
+
+    var inputNumber = parseInt($('#number').val());
+    var leftNumber = $('#leftNumber').text();
+
+    if(inputNumber > leftNumber) {
+      return true;
+    }
+
+    return false;
+  }
+
 
   $('.delete_cartItem').on('click', function (event) {
 
