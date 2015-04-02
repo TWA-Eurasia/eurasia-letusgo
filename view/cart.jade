@@ -14,7 +14,7 @@ block content
     .ui.grid.centered
       h1.ui.header
         img(src="image/cart.png")
-        div.content 购物车列表
+        .content 购物车列表
       .ten.wide.column
         table.ui.large.table.center
           thead.center
@@ -35,12 +35,18 @@ block content
                 td #{cartItem.item.name}
                 td #{cartItem.item.price}元
                 td
-                  i.caret.left.icon
-                  input(type="text" value="#{cartItem.number}" id="number" style="text-align:center; width:30%")
-                  i.caret.right.icon
+                  div
+                    i.caret.left.icon
+                    input(type="text" value="#{cartItem.number}" id="number" style="text-align:center; height: 20%; width:30%")
+                    i.caret.right.icon
+                  div.ui.negative.message#inventory(style="display: none;") 最多能购买
+                    span#leftNumber #{cartItem.item.inventory}
+                    span 件
+                 // .ui.negative.message#inventory(style = 'display: none') 库存仅剩#{cartItem.item.inventory}!
+
                 td #{cartItem.getSubtotal()}元
                 td(id ="#{cartItem._id}")
-                  div.ui.red.button.delete_cartItem 删除
+                  .ui.red.button.delete_cartItem 删除
                 td
                   input(type="checkbox" name="selectedCartItem" checked)
 
