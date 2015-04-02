@@ -3,9 +3,9 @@ var $ = require('jquery');
 require('semantic-ui');
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-  $('i.caret.left').on('click',function () {
+  $('i.caret.left').on('click',function() {
 
     var numberInput = parseInt($(event.target).closest('td').find('#number').val());
 
@@ -14,7 +14,7 @@ $(document).ready(function () {
     }
   });
 
-  $('i.caret.right').on('click',function () {
+  $('i.caret.right').on('click',function() {
 
     var numberInput = parseInt($(event.target).closest('td').find('#number').val());
 
@@ -28,7 +28,24 @@ $(document).ready(function () {
 
   });
 
-  $('input').on('blur', function () {
+  $('input').on('change', function() {
+
+    var id = $(event.target).closest('tr').data('id');
+    var num = $(event.target).closest('td').find('#number').val();
+    var price = $(event.target).parents('td').prev().find('#price').text();
+
+    $.ajax({
+      url: 'cart/' + id,
+      type: 'POST' ,
+      data: {number: num,price: price},
+
+      success: function (data) {
+        $('#subtotal').text(data);
+      }
+    })
+  });
+
+  $('input').on('blur', function() {
 
     $(event.target).closest('td').find('#inventory').hide();
 
