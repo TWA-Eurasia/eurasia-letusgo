@@ -40,11 +40,16 @@ block content
                 tr&attributes(attributes)
                   td 规格
                   td
-                    select.ui.dropdown#specification
-                      - each detail in itemDetails.details
-                        -var price = detail.price
-                        -var itemId = detail.specification
-                        option(id = itemId, data-price = price) #{detail.specification}
+                    .ui.form
+                      .inline.fields
+                        - each detail in itemDetails.details
+                          -var price = detail.price
+                          -var itemId = detail.specification
+                          -var isChecked = detail.isChecked
+                            .field
+                              .ui.radio
+                                input.specification(id = itemId, data-price = price, type="radio", name="specification", checked=isChecked)
+                                label #{detail.specification}
               tr
                 td 数量
                 td

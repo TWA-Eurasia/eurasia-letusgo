@@ -39,11 +39,9 @@ $(document).ready(function () {
     }
   });
 
-  $('#specification').on('change', function () {
+  $('input.specification').on('click', function () {
 
-    var specification = $('#specification').val();
-    var price = $('#' + specification).data('price');
-
+    var price = $(this).data('price');
     $('#itemPrice').text(price);
   });
 
