@@ -46,7 +46,7 @@ html
                 i.dropdown.icon
                 div.menu
                   - each subCategory in mainCategory.subCategories
-                    a.item.secondMenu(data-id='#{subCategory._id}') #{subCategory.name}
+                    a.item.secondMenu(data-id="#{subCategory._id}" href="/categoryView/#{subCategory._id}") #{subCategory.name}
         div.twelve.wide.column
           div.ui.four.column.grid(style="padding-left: 0;padding-right: 20px;")
             - each item in items

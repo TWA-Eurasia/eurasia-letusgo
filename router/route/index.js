@@ -30,14 +30,15 @@ router.get('/index/:pageNumber', function(req, res) {
 });
 
 router.post('/', function(req, res) {
+
   Item.create({
-    name: '针织衫',
+    name: '韩版蕾丝衫',
     unit: '件',
-    price: 199,
-    image: 'image/georgette.jpg',
-    description: '这是件针织衫',
+    price: 209,
+    image: 'image/hahh.jpg',
+    description: '这是件韩版蕾丝衫',
     inventory: 100,
-    categroy: '5519881c0042a1db62223b0b',
+    category: '5519881c0042a1db62223b0a',
     specification: 'S',
     isRecommend: true}, function(err, item) {
 
