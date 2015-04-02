@@ -29,11 +29,15 @@ router.post('/:id', function (req, res, next) {
   var cartItemId = req.params.id;
   var num = req.body.number;
   var price = req.body.price;
+  var total = req.body.total;
 
-  CartItem.findById(cartItemId,function(){
+  CartItem.findById(cartItemId,function(err,cartItem){
+    var current = cartItem.number * price;
     CartItem.update({_id: cartItemId},{$set:{number: num}},{upsert:true},function(){
       var subtotal = price * num;
-      res.send(subtotal.toString());
+      total = total - current + subtotal;
+      console.log(total+"___"+subtotal);
+      res.send({subtotal:subtotal.toString(),total:total.toString()});
 
     });
   });
