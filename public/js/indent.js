@@ -1,7 +1,6 @@
 'use strict';
 var $ = require('jquery');
-var _ = require('lodash');
-require('semantic-ui');
+require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 
 $(document).ready(function () {
@@ -10,6 +9,14 @@ $(document).ready(function () {
 
     $('.first.modal')
       .modal('show');
+  });
+
+  $('.ispay').on('click', function () {
+    $.ajax({
+      url: '/success',
+      type: 'GET'
+    });
+
   });
 });
 

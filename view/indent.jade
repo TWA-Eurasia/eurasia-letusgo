@@ -6,9 +6,10 @@ html
     block css
       script(src="jspm_packages/system.js")
       script(src="config.js")
+      link(rel="stylesheet" type="text/css" href="/jspm_packages/github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic.css")
+
       script.
         System.import('js/indent')
-      link(rel="stylesheet" type="text/css" href="../jspm_packages/github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
 
     block title
       title 首页
@@ -47,18 +48,18 @@ html
             th.two.wide 小计
 
           tbody.center
-          -each indent in Indents
-                     tr
-                       td
-                        img(src="#{indent.item.imageUrl}",width='70px',height='70px')
-                       td #{indent.item.name}
-                       td #{indent.item.price} 元
-                       td #{indent.item.unit}
-                       td #{indent.number}
-                       td #{indent.subtotal} 元
+            -each cartItem in cartItems
+               tr
+                 td
+                  img(src="#{cartItem.item.image}",width='70px',height='70px')
+                 td #{cartItem.item.name}
+                 td #{cartItem.item.price} 元
+                 td #{cartItem.item.unit}
+                 td #{cartItem.number}
+                 td #{cartItem.getSubtotal()} 元
 
         h2(align="right") 总计：
-          span(style='color:red') #{amount}
+          span(style='color:red') #{total}
           span 元
         a.ui.red.right.floated.right.labeled.icon.button#pay 支付
           i.right.arrow.icon
@@ -69,8 +70,7 @@ html
             p 您确认要支付吗？
         .actions
           .primary.ui.button.nopay 取消
-
-          a.ui.positive.right.labeled.icon.button.ispay(href="/success?amount=#{amount}") 支付
+          a.ui.positive.right.labeled.icon.button.ispay(href="/success?amount=#{total}") 支付
             i.checkmark.icon
 
       //.ui.second.small.coupled.modal.transition.hidden

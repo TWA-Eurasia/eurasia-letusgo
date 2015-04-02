@@ -1,5 +1,6 @@
 'use strict';
 var $ = require('jquery');
+require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -12,7 +13,6 @@ var amount = getParameterByName('amount');
 $('#amount').text(amount);
 
 $(document).ready(function () {
-
 
   function jump(count) {
 

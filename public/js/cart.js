@@ -1,9 +1,25 @@
 'use strict';
 var $ = require('jquery');
-require('semantic-ui');
+require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 
 $(document).ready(function () {
+
+  $('i.caret.left').on('click',function () {
+
+    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
+
+    if (numberInput !== 1) {
+      $(event.target).closest('td').find('#number').val(numberInput - 1);
+    }
+  });
+
+  $('i.caret.right').on('click',function () {
+
+    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
+
+    $(event.target).closest('td').find('#number').val(numberInput + 1);
+  });
 
   $('.delete_cartItem').on('click', function (event) {
 

@@ -29,16 +29,28 @@ router.get('/index/:pageNumber', function(req, res) {
 
 });
 
+router.get('/categoryView/:id', function(req, res) {
+
+  var id = req.params.id;
+  console.log(id);
+  var pageSize = 2;
+  initCategories({category: id}, 0, pageSize, function(mainCategories, items, pageCount) {
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
+  });
+
+});
+
+
 router.post('/', function(req, res) {
 
   Item.create({
-    name: '韩版蕾丝衫',
+    name: '雪纺衫',
     unit: '件',
-    price: 209,
-    image: 'image/hahh.jpg',
-    description: '这是件韩版蕾丝衫',
+    price: 199,
+    image: 'image/georgette.jpg',
+    description: '这是件雪纺衫',
     inventory: 100,
-    category: '5519881c0042a1db62223b0a',
+    category: '551c9f3f45c1d609c122a60d',
     specification: 'S',
     isRecommend: true}, function(err, item) {
 
@@ -50,6 +62,7 @@ router.post('/', function(req, res) {
 function initItems (query, start, pageSize, callback) {
 
   Item.find(query).exec(function (err, items) {
+    console.log(items);
 
     var newItems = _.take(_.drop(items, start), pageSize);
 
