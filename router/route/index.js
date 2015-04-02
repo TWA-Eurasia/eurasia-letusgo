@@ -9,33 +9,58 @@ var Item = require('../../model/item');
 router.get('/', function(req, res) {
 
   var pageSize = 2;
-  var pageCount;
-  Item.find().exec(function(err, items) {
-    pageCount = Math.ceil(items.length / pageSize);
-    initCategories({}, 0, pageSize, function(mainCategories, items) {
 
-      res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
-    });
+  initCategories({isRecommend: true}, 0, pageSize, function(mainCategories, items, pageCount) {
 
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
+  });
+});
+
+router.get('/index/:pageNumber', function(req, res) {
+
+  var pageNumber = req.params.pageNumber;
+  var pageSize = 2;
+  var start = (pageNumber - 1) * pageSize;
+
+  initCategories({isRecommend: true}, start, pageSize, function(mainCategories, items, pageCount) {
+
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber});
   });
 
-  // initCategories({isRecommend: true}, 0, 2, function(mainCategories, items) {
-  //
-  //   res.render('index', {mainCategories: mainCategories, items: items, pageCount: 10, currentPage: 1});
-  // });
 });
+
+router.post('/', function(req, res) {
+  Item.create({
+    name: '针织衫',
+    unit: '件',
+    price: 199,
+    image: 'image/georgette.jpg',
+    description: '这是件针织衫',
+    inventory: 100,
+    categroy: '5519881c0042a1db62223b0b',
+    specification: 'S',
+    isRecommend: true}, function(err, item) {
+
+      res.send(item);
+  });
+});
+
 
 function initItems (query, start, pageSize, callback) {
 
-  Item.find(query).skip(start).limit(pageSize).exec(function (err, items) {
+  Item.find(query).exec(function (err, items) {
 
-    callback(items);
+    var newItems = _.take(_.drop(items, start), pageSize);
+
+    var pageCount = Math.ceil(items.length / pageSize);
+
+    callback(newItems, pageCount);
   });
 }
 
 function initCategories (query, start, pageSize, callback) {
 
-  initItems(query, start, pageSize, function (items) {
+  initItems(query, start, pageSize, function (items, pageCount) {
 
     Category.find()
       .populate('parent')
@@ -63,33 +88,10 @@ function initCategories (query, start, pageSize, callback) {
             });
           }
         });
-        callback(mainCategories, items);
+        callback(mainCategories, items, pageCount);
       });
   });
 }
 
-router.get('/index/:pageNumber', function(req, res) {
-
-  var pageNumber = req.params.pageNumber;
-  var pageSize = 2;
-  var start = (pageNumber - 1) * pageSize;
-  var pageCount;
-  Item.find().exec(function(err, items) {
-    pageCount = Math.ceil(items.length / pageSize);
-    initCategories({}, start, pageSize, function(mainCategories, items) {
-
-      res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber});
-    });
-
-  });
-});
-
-
-
-router.post('/', function(req, res) {
-  Item.create({name: '我去', unit: '瓶', price: 3.5, image: 'image/cat2.png', isRecommend: true}, function(err, item) {
-    res.send(item);
-  });
-});
 
 module.exports = router;
