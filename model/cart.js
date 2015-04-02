@@ -13,7 +13,6 @@ CartSchema.methods = {
   getTotal: function (cartItems) {
     var totalAmount = 0;
     cartItems.forEach(function (cartItem) {
-      console.log(cartItem.getSubtotal());
       totalAmount += cartItem.getSubtotal();
     });
     return totalAmount;
