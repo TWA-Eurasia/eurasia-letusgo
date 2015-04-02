@@ -15,7 +15,7 @@ block content
       h1.ui.header
         img(src="image/cart.png")
         div.content 购物车列表
-      .nine.wide.column
+      .ten.wide.column
         table.ui.large.table.center
           thead.center
             th.two.wide 图片
@@ -25,6 +25,9 @@ block content
             th.two.wide 小计
             th.two.wide
             th.two.wide
+              input(type="checkbox" name="selectedAllCartItem" checked)
+              span 全选
+            //th.two.wide 全选
           tbody.center
             - each cartItem in cartItems
               tr
@@ -34,13 +37,13 @@ block content
                 td #{cartItem.item.price}元
                 td
                   i.caret.left.icon
-                  div.ui.mini.input #{cartItem.number}
+                  input(type="text" value="#{cartItem.number}" id="number" style="text-align:center; width:30%")
                   i.caret.right.icon
                 td #{cartItem.subtotal}元
                 td(id ="#{cartItem._id}")
                   div.ui.red.button.delete_cartItem 删除
                 td
-                  input(type="checkbox" name="selectedCartItem")
+                  input(type="checkbox" name="selectedCartItem" checked)
 
           tfoot.right
             tr

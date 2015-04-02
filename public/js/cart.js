@@ -5,6 +5,23 @@ require('semantic-ui');
 
 $(document).ready(function () {
 
+  $('i.caret.left').on('click',function () {
+
+    var numberInput = parseInt($('#number').val());
+
+    if (numberInput !== 1) {
+      console.log( $('#number').val());
+      $('#number').val(numberInput - 1);
+    }
+  });
+
+  $('i.caret.right').on('click',function () {
+
+    var numberInput = parseInt($('#number').val());
+
+    $('#number').val(numberInput + 1);
+  });
+
   $('.delete_cartItem').on('click', function (event) {
 
     var delete_cartItem = this;
