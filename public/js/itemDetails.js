@@ -65,18 +65,4 @@ $(document).ready(function() {
 
     return false;
   }
-
-  //   function setHref() {
-  //
-  //
-  //     var href = location.pathname;
-  //     var array = href.split('/');
-  //     var childId = array[2];
-  //
-  //     $.get('/api/category/' + childId, function(parentId){
-  //
-  //       // $('#parent').attr('href','#');
-  //       // $('#child').attr('href','#');
-  //     });
-  //   }
 });
