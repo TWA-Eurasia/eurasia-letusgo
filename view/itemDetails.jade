@@ -21,9 +21,9 @@ block content
 
       .ui.grid.ten.wide.column.centered
         .nine.wide.column
-          .ui.fluid.card(style="height:500px; background:black; align:center")
+          .ui.fluid.card(style="height:400px; background:black; align:center")
             - var imageUrl = itemDetails.item.image
-            img.ui.vertical.bordered.centered.image(src=imageUrl)
+            img.ui.vertical.bordered.centered.image(src=imageUrl onerror="this.src='/image/nopicture.jpg'")
 
         .seven.wide.column
           h2.ui.floated.header.orange.backge #{itemDetails.item.name}
