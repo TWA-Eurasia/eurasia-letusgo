@@ -36,7 +36,6 @@ router.post('/:id', function (req, res, next) {
     CartItem.update({_id: cartItemId},{$set:{number: num}},{upsert:true},function(){
       var subtotal = price * num;
       total = total - current + subtotal;
-      console.log(total+"___"+subtotal);
       res.send({subtotal:subtotal.toString(),total:total.toString()});
 
     });
