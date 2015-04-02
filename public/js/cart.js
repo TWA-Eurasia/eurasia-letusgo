@@ -33,14 +33,16 @@ $(document).ready(function() {
     var id = $(event.target).closest('tr').data('id');
     var num = $(event.target).closest('td').find('#number').val();
     var price = $(event.target).parents('td').prev().find('#price').text();
+    var total = $('#total').text();
 
     $.ajax({
       url: 'cart/' + id,
       type: 'POST' ,
-      data: {number: num,price: price},
+      data: {number: num,price: price,total: total},
 
       success: function (data) {
-        $('#subtotal').text(data);
+        $('#subtotal').text(data.subtotal);
+        $('#total').text(data.total);
       }
     })
   });
