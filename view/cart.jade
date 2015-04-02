@@ -27,19 +27,18 @@ block content
             th.two.wide
               input(type="checkbox" name="selectedAllCartItem" checked)
               span 全选
-            //th.two.wide 全选
           tbody.center
             - each cartItem in cartItems
               tr
                 td
-                  image.ui.fluid.image(src="#{cartItem.item.imageUrl}")
+                  image.ui.fluid.image(src="#{cartItem.item.image}")
                 td #{cartItem.item.name}
                 td #{cartItem.item.price}元
                 td
                   i.caret.left.icon
                   input(type="text" value="#{cartItem.number}" id="number" style="text-align:center; width:30%")
                   i.caret.right.icon
-                td #{cartItem.subtotal}元
+                td #{cartItem.getSubtotal()}元
                 td(id ="#{cartItem._id}")
                   div.ui.red.button.delete_cartItem 删除
                 td
@@ -49,7 +48,7 @@ block content
             tr
              th(colspan='7')
               div.ui.right.floated.small.primary.labeled.header
-                h4.ui.orange.header 总计：#{cart.totalAmount}元
+                h4.ui.orange.header 总计：#{total}元
 
          a.ui.teal.right.floated.right.labeled.icon.button 结算
           i.right.arrow.icon
