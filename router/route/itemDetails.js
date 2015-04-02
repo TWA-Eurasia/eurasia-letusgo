@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var _ = require('lodash');
-
 var Item = require('../../model/item');
 var Category = require('../../model/category');
 
@@ -35,7 +33,8 @@ router.get('/:id', function(req, res) {
 
     function getDetails(items) {
       var details = [];
-      _.forEach(items, function(item) {
+
+      items.forEach(function(item) {
 
         if (item.specification !== '') {
           var detail = {
