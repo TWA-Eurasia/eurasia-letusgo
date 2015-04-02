@@ -28,7 +28,7 @@ $(document).ready(function () {
 
   });
 
-  $('#number').on('blur', function () {
+  $('input').on('blur', function () {
 
     $(event.target).closest('td').find('#inventory').hide();
 
