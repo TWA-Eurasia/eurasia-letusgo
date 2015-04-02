@@ -21,8 +21,9 @@ block content
 
       .ui.grid.ten.wide.column.centered
         .nine.wide.column
-          - var imageUrl = itemDetails.item.image
-          img.ui.vertical.big.bordered.centered.image(src = imageUrl)
+          .ui.fluid.card(style="height:500px; background:black; align:center")
+            - var imageUrl = itemDetails.item.image
+            img.ui.vertical.bordered.centered.image(src=imageUrl)
 
         .seven.wide.column
           h2.ui.floated.header.orange.backge #{itemDetails.item.name}
@@ -62,10 +63,12 @@ block content
                 td
                   span#inventory #{itemDetails.item.inventory}
                   span  #{itemDetails.item.unit}
+
           button.ui.primary.button
             i.cart.in.icon
             span 添加到购物车
             i.right.chevron.icon
+
       .ui.grid.centered
         .ten.wide.column
           .ui.message
