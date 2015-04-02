@@ -16,9 +16,9 @@ $(document).ready(function () {
 
     var numberInput = parseInt($('#numberInput').val());
 
-    var leftNumber = $('#leftNumber').text();
+    var inventory = $('#inventory').text();
 
-    if(leftNumber > numberInput){
+    if(inventory > numberInput){
 
       $('#numberInput').val(numberInput + 1);
     }
@@ -59,9 +59,9 @@ $(document).ready(function () {
   function isShorted(){
 
     var inputNumber = parseInt($('#numberInput').val());
-    var leftNumber = $('#leftNumber').text();
+    var inventory = $('#inventory').text();
 
-    if(inputNumber > leftNumber) {
+    if(inputNumber > inventory) {
       return true;
     }
 

@@ -30,10 +30,9 @@ block content
             tbody
               tr
                 td.five.wide.column 单价
-                td#itemPrice #{itemDetails.item.price}
-              tr
-                td 单位
-                td #{itemDetails.item.unit}
+                td
+                  span#itemPrice #{itemDetails.item.price}
+                  span  元
 
               - var length = itemDetails.details.length
               - var isDisplay = (length == 0) ? 'none' : ''
@@ -55,7 +54,9 @@ block content
                   .ui.negative.message#inputError(style = 'display: none') 您所填写的数量超过库存!
               tr
                 td 库存
-                td#leftNumber #{itemDetails.item.inventory}
+                td
+                  span#inventory #{itemDetails.item.inventory}
+                  span  #{itemDetails.item.unit}
           button.ui.primary.button
             i.cart.in.icon
             span 添加到购物车
