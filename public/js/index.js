@@ -17,19 +17,13 @@ $(document).ready(function () {
     }
   });
 
-  $('.item.secondMenu').on('click', function () {
+  $('.ui.dropdown.item').on('click', function() {
 
-    var id = $('.item.secondMenu').data('id');
-    console.log(id + '++++++++++++++++++++');
-    var parentId = this.closest('.firstMenu').id;
-    console.log(id + parentId);
+    var id = $(this).data('id');
 
-    $.get('/api/category/' + id, {id : id})
-      .success(function (data) {
+    console.log(id);
+    $(location).attr('href', '/mainCategoryView/'+ id);
 
-        console.log(data);
-      })
+    //$.get('/api/category')
   });
-
-
 });
