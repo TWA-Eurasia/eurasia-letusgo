@@ -6,37 +6,41 @@ var _ = require('lodash');
 var Item = require('../../model/item');
 var Category = require('../../model/category');
 
-router.get('/:id', function (req, res) {
+router.get('/:id', function(req, res) {
   var id = req.params.id;
 
-  Item.findById(id, function (err, item) {
+  Item.findById(id, function(err, item) {
 
-    Item.find({name : item.name})
-    .populate('category')
-    .exec(function (err, items) {
+    Item.find({
+        name: item.name
+      })
+      .populate('category')
+      .exec(function(err, items) {
 
-      Category.findById(items[0].category._id)
-      .populate('parent')
-      .exec(function (err, category) {
+        Category.findById(items[0].category._id)
+          .populate('parent')
+          .exec(function(err, category) {
 
-        var itemDetails = {
-          item : items[0],
-          details : getDetails(items),
-          category : category,
-        };
+            var itemDetails = {
+              item: items[0],
+              details: getDetails(items),
+              category: category,
+            };
 
-      res.render('itemDetails', {itemDetails: itemDetails});
+            res.render('itemDetails', {
+              itemDetails: itemDetails
+            });
+          });
       });
-    });
 
-    function getDetails (items) {
+    function getDetails(items) {
       var details = [];
-      _.forEach(items, function(item){
+      _.forEach(items, function(item) {
 
-        if(item.specification !== '') {
+        if (item.specification !== '') {
           var detail = {
             price: item.price,
-            specification : item.specification
+            specification: item.specification
           };
           details.push(detail);
         }
