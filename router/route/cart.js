@@ -31,12 +31,12 @@ router.post('/:id', function (req, res, next) {
   var price = req.body.price;
   var total = req.body.total;
 
-  CartItem.findById(cartItemId,function(err,cartItem){
+  CartItem.findById(cartItemId, function (err, cartItem) {
     var current = cartItem.number * price;
-    CartItem.update({_id: cartItemId},{$set:{number: num}},{upsert:true},function(){
+    CartItem.update({_id: cartItemId}, {$set: {number: num}}, {upsert: true}, function () {
       var subtotal = price * num;
       total = total - current + subtotal;
-      res.send({subtotal:subtotal.toString(),total:total.toString()});
+      res.send({subtotal: subtotal.toString(), total: total.toString()});
 
     });
   });
