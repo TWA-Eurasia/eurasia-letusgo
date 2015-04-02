@@ -6,6 +6,7 @@ var $ = require('./jquery.pagination');
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
+  var path = 'index';
 
   $('.pagination').pagination({
 
@@ -13,17 +14,13 @@ $(document).ready(function () {
     currentPage: application.index.currentPage,
     visiblePageCount: 7,
     onPageChange: function(n) {
-      $(location).attr('href', '/index/'+ n);
+      $(location).attr('href', '/' + path + '/'+ n);
     }
   });
 
-  $('.ui.dropdown.item').on('click', function() {
-
+  $('item.secondMenu').on('click', function() {
     var id = $(this).data('id');
-
-    console.log(id);
-    $(location).attr('href', '/mainCategoryView/'+ id);
-
-    //$.get('/api/category')
-  });
+    path = 'subCategoryView/' + id;
+    console.log(path);
+  })
 });

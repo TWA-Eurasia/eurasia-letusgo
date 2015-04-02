@@ -29,24 +29,7 @@ router.get('/index/:pageNumber', function(req, res) {
 
 });
 
-router.get('/mainCategoryView/:id', function(req, res) {
-
-  var id = req.params.id;
-
-  var pageSize = 2;
-  Category.find({parent: id}, function(err, subcategories) {
-
-    var newItems = [];
-    for (var i = 0; i < subcategories.length; i++) {
-      Item.find({category: subcategories[i]._id}, function (err, items) {
-        newItems.concat(items);
-        console.log(newItems);
-      })
-    }
-  });
-});
-
-router.get('/subCategoryView/:id', function(req, res) {
+router.get('/categoryView/:id', function(req, res) {
 
   var id = req.params.id;
   var pageSize = 2;
