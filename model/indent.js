@@ -20,6 +20,7 @@ indent.getTotal = function(cartItems) {
   cartItems.forEach(function(cartItem) {
     total += CartItem.getSubtotal(cartItem);
   });
+
   return total;
 };
 
