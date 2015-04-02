@@ -14,17 +14,22 @@ router.get('/', function (req, res, next) {
         .populate('item')
         .exec(function (err, cartItems) {
 
-          var total = 0;
-          var subtotals = [];
+          //var total = 0;
+          //var subtotals = [];
+          //
+          //_.forEach(cartItems, function(cartItem) {
+          //  var subtotal = cartItem.item.price * cartItem.number;
+          //  total += subtotal;
+          //
+          //  subtotals.push(subtotal);
+          //});
+          var cartItem = new CartItem();
+          //console.log(cartItem.getSubtotal(cartItems[0]));
 
-          _.forEach(cartItems, function(cartItem) {
-            var subtotal = cartItem.item.price * cartItem.number;
-            total += subtotal;
+          console.log(Indent.getTotal(cartItems)+'----------------------------------------');
+          res.render('indent', {cartItems: cartItems, CartItem: CartItem, Indent: Indent});
 
-            subtotals.push(subtotal);
-          });
-
-          res.render('indent', {cartItems: cartItems, total: total, subtotals: subtotals});
+          //res.render('indent', {cartItems: cartItems, total: total, subtotals: subtotals});
         });
     });
 });
