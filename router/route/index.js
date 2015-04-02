@@ -8,23 +8,23 @@ var Item = require('../../model/item');
 
 router.get('/', function(req, res) {
 
-  initCategories(function(mainCategories, items) {
+  initCategories(0, 2, function(mainCategories, items) {
 
-    res.render('index', {mainCategories: mainCategories, items: items});
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: 10, currentPage: 1});
   });
 });
 
-function initItems (callback) {
+function initItems (start, pageSize, callback) {
 
-  Item.find().skip(0).limit(2).exec(function (err, items) {
+  Item.find().skip(start).limit(pageSize).exec(function (err, items) {
 
     callback(items);
   });
 }
 
-function initCategories (callback) {
+function initCategories (start, pageSize, callback) {
 
-  initItems(function (items) {
+  initItems(start, pageSize, function (items) {
 
     Category.find()
       .populate('parent')
@@ -65,10 +65,15 @@ router.get('/index/:pageNumber', function(req, res) {
   var pageCount;
   Item.find().exec(function(err, items) {
     pageCount = Math.ceil(items.length / pageSize);
+    initCategories(start, pageSize, function(mainCategories, items) {
+
+      res.render('index', {mainCategories: mainCategories, items: items, pageCount: 10, currentPage: 1});
+    });
+
   });
-  Item.find().skip(start).limit(pageSize).exec(function (err, items) {
-    res.render('index', {mainCategories: result.mainCategories, items: items, pageCount: 12, currentPage: pageNumber});
-  });
+  //Item.find().skip(start).limit(pageSize).exec(function (err, items) {
+  //  res.render('index', {mainCategories: result.mainCategories, items: items, pageCount: 12, currentPage: pageNumber});
+  //});
 });
 
 
