@@ -9,10 +9,10 @@ var CartItemSchema = new Schema({
 
 var cartItem = mongoose.model('CartItem',CartItemSchema);
 
-cartItem.getSubtotal = function() {
+cartItem.getSubtotal = function(cartItem) {
 
   var subtotal = 0;
-  subtotal =  this.item.price * this.number;
+  subtotal =  cartItem.item.price * cartItem.number;
 
   return subtotal;
 };
