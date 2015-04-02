@@ -16,7 +16,8 @@ $(document).ready(function () {
 
   $('.item.secondMenu').on('click', function () {
 
-    var id = this.id;
+    var id = $('.item.secondMenu').data('id');
+    console.log(id + '++++++++++++++++++++');
     var parentId = this.closest('.firstMenu').id;
     console.log(id + parentId);
 
@@ -25,7 +26,7 @@ $(document).ready(function () {
 
         console.log(data);
       })
-  })
+  });
 
   $('.pageNumber').on('click', function() {
     var pageNumber = parseInt(this.id);
