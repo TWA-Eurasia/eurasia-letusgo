@@ -11,17 +11,15 @@ var IndentSchema = new Schema({
   isPaid: {type: Boolean, default: false}
 });
 
-var indent = mongoose.model('Indent',IndentSchema);
-
-indent.getTotal = function(cartItems) {
+IndentSchema.methods.getTotal = function(cartItems) {
 
   var total = 0;
 
   cartItems.forEach(function(cartItem) {
-    total += CartItem.getSubtotal(cartItem);
+    total += cartItem.getSubtotal();
   });
 
   return total;
 };
 
-module.exports = indent;
+module.exports = mongoose.model('Indent',IndentSchema);
