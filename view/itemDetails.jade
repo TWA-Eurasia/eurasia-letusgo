@@ -19,7 +19,7 @@ block content
           i.right.chevron.icon.ider
           .active.section #{itemDetails.item.name}
 
-      .ui.grid.nine.wide.column.centered
+      .ui.grid.ten.wide.column.centered
         .nine.wide.column
           - var imageUrl = itemDetails.item.image
           img.ui.vertical.big.bordered.centered.image(src = imageUrl)
@@ -50,7 +50,7 @@ block content
                 td 数量
                 td
                   i.minus.square.icon
-                  input(type="text" value=1 id="numberInput" style="text-align:center; width:20%")
+                  input(type="text" value=1 id="numberInput" style="text-align:center; width:50%")
                   i.add.square.icon
                   .ui.negative.message#inputError(style = 'display: none') 您所填写的数量超过库存!
               tr
@@ -61,7 +61,7 @@ block content
             span 添加到购物车
             i.right.chevron.icon
       .ui.grid.centered
-        .nine.wide.column
+        .ten.wide.column
           .ui.message
             .header 商品详情：
             p #{itemDetails.item.description}
