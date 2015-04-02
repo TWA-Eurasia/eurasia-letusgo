@@ -1,6 +1,5 @@
 'use strict';
 var $ = require('jquery');
-var _ = require('lodash');
 require('semantic-ui');
 
 
@@ -10,6 +9,14 @@ $(document).ready(function () {
 
     $('.first.modal')
       .modal('show');
+  });
+
+  $('.ispay').on('click', function () {
+    $.ajax({
+      url: '/success',
+      type: 'GET'
+    });
+
   });
 });
 
