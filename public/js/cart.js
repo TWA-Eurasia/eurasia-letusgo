@@ -7,19 +7,18 @@ $(document).ready(function () {
 
   $('i.caret.left').on('click',function () {
 
-    var numberInput = parseInt($('#number').val());
+    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
 
     if (numberInput !== 1) {
-      console.log( $('#number').val());
-      $('#number').val(numberInput - 1);
+      $(event.target).closest('td').find('#number').val(numberInput - 1);
     }
   });
 
   $('i.caret.right').on('click',function () {
 
-    var numberInput = parseInt($('#number').val());
+    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
 
-    $('#number').val(numberInput + 1);
+    $(event.target).closest('td').find('#number').val(numberInput + 1);
   });
 
   $('.delete_cartItem').on('click', function (event) {
