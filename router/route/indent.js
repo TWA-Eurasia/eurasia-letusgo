@@ -6,6 +6,7 @@ var CartItem = require('../../model/cartItem.js');
 var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
+
   Indent.findById('551b8d053acc20a82a17e3fd')
     .populate('cartItems')
     .exec(function (err, indent) {
@@ -13,6 +14,7 @@ router.get('/', function (req, res, next) {
       CartItem.find()
         .populate('item')
         .exec(function (err, cartItems) {
+
           var total = indent.getTotal(cartItems);
           res.render('indent', {cartItems: cartItems, total: total});
         });

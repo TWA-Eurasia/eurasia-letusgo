@@ -12,7 +12,6 @@ var IndentSchema = new Schema({
 });
 
 IndentSchema.methods.getTotal = function(cartItems) {
-
   var total = 0;
 
   cartItems.forEach(function(cartItem) {
