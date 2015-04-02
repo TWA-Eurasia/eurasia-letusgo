@@ -21,7 +21,7 @@ router.get('/:id', function(req, res) {
 
             var itemDetails = {
               item: items[0],
-              details: getDetails(items),
+              details: Item.getDetails(items),
               category: category,
             };
 
@@ -30,26 +30,6 @@ router.get('/:id', function(req, res) {
             });
           });
       });
-
-    function getDetails(items) {
-      var details = [];
-
-      items.forEach(function(item) {
-
-        if (item.specification !== '') {
-          var detail = {
-            price: item.price,
-            specification: item.specification
-          };
-          details.push(detail);
-        }
-      });
-
-      if (details.length > 0) {
-        details[0].isChecked = "checked";
-      }
-      return details;
-    }
   });
 });
 
