@@ -8,14 +8,16 @@ var CartSchema = new Schema({
   ]
 });
 
-//CartSchema.methods = {
-//  getTotal: function () {
-//    var totalAmount = 0;
-//    this.cartItems.forEach(function (cartItem) {
-//      totalAmount += cartItem.getSubtotal();
-//    });
-//    return totalAmount;
-//  }
-//}
+CartSchema.methods = {
+
+  getTotal: function (cartItems) {
+    var totalAmount = 0;
+    cartItems.forEach(function (cartItem) {
+      console.log(cartItem.getSubtotal());
+      totalAmount += cartItem.getSubtotal();
+    });
+    return totalAmount;
+  }
+};
 
 module.exports = mongoose.model('Cart', CartSchema);
