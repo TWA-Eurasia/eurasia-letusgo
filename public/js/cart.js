@@ -31,8 +31,8 @@ $(document).ready(function() {
   $('input').on('change', function() {
 
     var id = $(event.target).closest('tr').data('id');
-    var num = $(event.target).closest('td').find('#number').val();
-    var price = $(event.target).parents('td').prev().find('#price').text();
+    var num = $('#number').val();
+    var price = $('#price').text();
     var total = $('#total').text();
 
     $.ajax({
