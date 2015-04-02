@@ -8,23 +8,34 @@ var Item = require('../../model/item');
 
 router.get('/', function(req, res) {
 
-  initCategories(0, 2, function(mainCategories, items) {
+  var pageSize = 2;
+  var pageCount;
+  Item.find().exec(function(err, items) {
+    pageCount = Math.ceil(items.length / pageSize);
+    initCategories({}, 0, pageSize, function(mainCategories, items) {
 
-    res.render('index', {mainCategories: mainCategories, items: items, pageCount: 10, currentPage: 1});
+      res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
+    });
+
   });
+
+  // initCategories({isRecommend: true}, 0, 2, function(mainCategories, items) {
+  //
+  //   res.render('index', {mainCategories: mainCategories, items: items, pageCount: 10, currentPage: 1});
+  // });
 });
 
-function initItems (start, pageSize, callback) {
+function initItems (query, start, pageSize, callback) {
 
-  Item.find().skip(start).limit(pageSize).exec(function (err, items) {
+  Item.find(query).skip(start).limit(pageSize).exec(function (err, items) {
 
     callback(items);
   });
 }
 
-function initCategories (start, pageSize, callback) {
+function initCategories (query, start, pageSize, callback) {
 
-  initItems(start, pageSize, function (items) {
+  initItems(query, start, pageSize, function (items) {
 
     Category.find()
       .populate('parent')
@@ -47,7 +58,7 @@ function initCategories (start, pageSize, callback) {
 
               if (category.parent.name === mainCategory.name) {
 
-                mainCategory.subCategories.push(category)
+                mainCategory.subCategories.push(category);
               }
             });
           }
@@ -65,21 +76,18 @@ router.get('/index/:pageNumber', function(req, res) {
   var pageCount;
   Item.find().exec(function(err, items) {
     pageCount = Math.ceil(items.length / pageSize);
-    initCategories(start, pageSize, function(mainCategories, items) {
+    initCategories({}, start, pageSize, function(mainCategories, items) {
 
-      res.render('index', {mainCategories: mainCategories, items: items, pageCount: 10, currentPage: 1});
+      res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber});
     });
 
   });
-  //Item.find().skip(start).limit(pageSize).exec(function (err, items) {
-  //  res.render('index', {mainCategories: result.mainCategories, items: items, pageCount: 12, currentPage: pageNumber});
-  //});
 });
 
 
 
 router.post('/', function(req, res) {
-  Item.create({name: '绿茶', unit: '瓶', price: 3.5, image: 'image/cat2.png', isRecommend: true}, function(err, item) {
+  Item.create({name: '我去', unit: '瓶', price: 3.5, image: 'image/cat2.png', isRecommend: true}, function(err, item) {
     res.send(item);
   });
 });
