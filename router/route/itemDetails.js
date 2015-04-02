@@ -1,45 +1,45 @@
 var express = require('express');
 var router = express.Router();
 
-var _ = require('lodash');
-
 var Item = require('../../model/item');
 var Category = require('../../model/category');
 
-router.get('/:id/:name', function(req, res){
-
+router.get('/:id', function(req, res) {
   var id = req.params.id;
-  var name = req.params.name;
-  var aa = '551aa95e2ef086a169628b74';
 
-  Category.findById(id)
-  .populate('parent')
-  .exec(function(err, category){
+  Item.findById(id, function(err, item) {
 
-      Item.find({name: name})
+    Item.find({
+        name: item.name
+      })
       .populate('category')
-      .exec(function (err, items) {
+      .exec(function(err, items) {
 
-        var itemDetails = {
-          item: items[0],
-          category: category,
-          details : getDetails(items)
-        };
+        Category.findById(items[0].category._id)
+          .populate('parent')
+          .exec(function(err, category) {
 
-        res.render('itemDetails', {itemDetails: itemDetails});
+            var itemDetails = {
+              item: items[0],
+              details: getDetails(items),
+              category: category,
+            };
+
+            res.render('itemDetails', {
+              itemDetails: itemDetails
+            });
+          });
       });
-    });
 
-    function getDetails (items) {
+    function getDetails(items) {
       var details = [];
 
-      _.forEach(items, function(item){
+      items.forEach(function(item) {
 
-        if(item.specification !== '') {
-          
+        if (item.specification !== '') {
           var detail = {
             price: item.price,
-            specification : item.specification
+            specification: item.specification
           };
           details.push(detail);
         }
@@ -47,7 +47,7 @@ router.get('/:id/:name', function(req, res){
 
       return details;
     }
-
+  });
 });
 
 module.exports = router;
