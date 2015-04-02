@@ -3,9 +3,9 @@ var $ = require('jquery');
 require('semantic-ui');
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-  $('i.caret.left').on('click',function() {
+  $('i.caret.left').on('click', function () {
 
     var numberInput = parseInt($(event.target).closest('td').find('#number').val());
 
@@ -14,13 +14,13 @@ $(document).ready(function() {
     }
   });
 
-  $('i.caret.right').on('click',function() {
+  $('i.caret.right').on('click', function () {
 
     var numberInput = parseInt($(event.target).closest('td').find('#number').val());
 
     var inventory = $('#leftNumber').text();
     //console.log(inventory);
-    if(inventory > numberInput){
+    if (inventory > numberInput) {
 
       $(event.target).closest('td').find('#number').val(numberInput + 1);
     }
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
   });
 
-  $('input').on('change', function() {
+  $('input').on('change', function () {
 
     var id = $(event.target).closest('tr').data('id');
     var num = $('#number').val();
@@ -37,8 +37,8 @@ $(document).ready(function() {
 
     $.ajax({
       url: 'cart/' + id,
-      type: 'POST' ,
-      data: {number: num,price: price,total: total},
+      type: 'POST',
+      data: {number: num, price: price, total: total},
 
       success: function (data) {
         $('#subtotal').text(data.subtotal);
@@ -47,7 +47,7 @@ $(document).ready(function() {
     })
   });
 
-  $('input').on('blur', function() {
+  $('input').on('blur', function () {
 
     $(event.target).closest('td').find('#inventory').hide();
 
@@ -58,26 +58,26 @@ $(document).ready(function() {
 
     verifyNumber(number);
 
-    if(isShorted()){
+    if (isShorted()) {
       $(event.target).closest('td').find('#inventory').show();
     }
   });
 
-  function verifyNumber(number){
+  function verifyNumber(number) {
 
     var reg = /^(0|[1-9][0-9]*)$/;
 
-    if(!reg.exec(number)){
+    if (!reg.exec(number)) {
       parseInt($(event.target).closest('td').find('#number').val(1));
     }
   }
 
-  function isShorted(){
+  function isShorted() {
 
     var inputNumber = parseInt($(event.target).closest('td').find('#number').val());
     var leftNumber = $('#leftNumber').text();
 
-    if(inputNumber > leftNumber) {
+    if (inputNumber > leftNumber) {
       return true;
     }
 
