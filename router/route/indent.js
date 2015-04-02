@@ -6,15 +6,15 @@ var CartItem = require('../../model/cartItem.js');
 var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
-  Indent.find()
+  Indent.findById('551b8d053acc20a82a17e3fd')
     .populate('cartItems')
     .exec(function (err, indent) {
 
       CartItem.find()
         .populate('item')
         .exec(function (err, cartItems) {
-
-          res.render('indent', {cartItems: cartItems, CartItem: CartItem, Indent: Indent});
+          var total = indent.getTotal(cartItems);
+          res.render('indent', {cartItems: cartItems, total: total});
         });
     });
 });
