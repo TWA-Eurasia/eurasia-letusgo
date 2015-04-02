@@ -6,7 +6,7 @@ var Cart = require('../../model/cart.js');
 var Item = require('../../model/item.js');
 var CartItem = require('../../model/cartItem.js');
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
   var cartId = req.id;
   cartId = "551cc282a6b79c584b59bc0f";
 
@@ -24,7 +24,20 @@ router.get('/', function (req, res, next) {
     })
 });
 
-router.post('/', function (req, res, next) {
+router.post('/:id', function (req, res, next) {
+
+  var cartItemId = req.params.id;
+  var num = req.body.number;
+  var price = req.body.price;
+
+  CartItem.findById(cartItemId,function(){
+    CartItem.update({_id: cartItemId},{$set:{number: num}},{upsert:true},function(){
+      var subtotal = price * num;
+      res.send(subtotal.toString());
+
+    });
+  });
+
   //Item.create(
   //  {name: '可乐', unit: '瓶', price: 3.5, image: 'image/kele.jpg', inventory: '100'},
   //  {name: '雪碧', unit: '瓶', price: 4.5, image: 'image/xuebi.jpg', inventory: '100'},
@@ -42,7 +55,7 @@ router.post('/', function (req, res, next) {
   //  }
   //);
 
-  Cart.create({cartItems: ['551cc20e47a654d14a280e9b', '551cc20e47a654d14a280e9c', '551cc20e47a654d14a280e9d', '551cc20e47a654d14a280e9e']});
+  //Cart.create({cartItems: ['551cc20e47a654d14a280e9b', '551cc20e47a654d14a280e9c', '551cc20e47a654d14a280e9d', '551cc20e47a654d14a280e9e']});
 
 });
 
