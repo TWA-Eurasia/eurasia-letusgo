@@ -47,11 +47,6 @@ $(document).ready(function() {
   function isShorted() {
     var inputNumber = parseInt($('#numberInput').val());
     var inventory = $('#inventory').text();
-
-    if (inputNumber > inventory) {
-      return true;
-    } else {
-      return false;
-    }
+    return inputNumber > inventory;
   }
 });
