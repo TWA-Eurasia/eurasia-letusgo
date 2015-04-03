@@ -19,9 +19,8 @@ $(document).ready(function () {
     var numberInput = parseInt($(this).closest('td').find('#number').val());
 
     var inventory = $('#leftNumber').text();
-    //console.log(inventory);
-    if (inventory > numberInput) {
 
+    if (inventory > numberInput) {
       $(this).closest('td').find('#number').val(numberInput + 1);
     }
 
@@ -41,9 +40,7 @@ $(document).ready(function () {
       type: 'POST',
       data: {number: num, price: price, total: total},
 
-
       success: function (data) {
-        //$('#subtotal').text(data.subtotal);
         input.closest('tr').find('#subtotal').text(data.subtotal);
         $('#total').text(data.total);
       }
@@ -56,12 +53,13 @@ $(document).ready(function () {
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
     numberInput = numberInput.toString();
+
     var number = numberInput.replace(/\b(0+)/gi, '');
-    //$('#number').val(number);
+    var input = $(this);
 
     verifyNumber(number);
 
-    if (isShorted()) {
+    if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
     }
   });
@@ -75,9 +73,9 @@ $(document).ready(function () {
     }
   }
 
-  function isShorted() {
+  function isShorted(input) {
 
-    var inputNumber = parseInt($(this).closest('td').find('#number').val());
+    var inputNumber = parseInt(input.closest('td').find('#number').val());
     var leftNumber = $('#leftNumber').text();
 
     if (inputNumber > leftNumber) {
