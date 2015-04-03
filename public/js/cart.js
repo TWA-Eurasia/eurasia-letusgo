@@ -24,6 +24,37 @@ $(document).ready(function () {
     })
   }
 
+  $('#allChecked').on('change', function() {
+
+    var checkboxes = $('input[name="checkedCartItem"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = this.checked;
+    }
+
+  });
+
+  $('.checkedCartItem').on('change', function() {
+
+    var isChecked = $(this).prop('checked');
+    if(!isChecked) {
+      $('#allChecked').prop('checked', false);
+    }
+
+    var isAllChecked = true;
+    var checkboxes = $('input[name="checkedCartItem"]');
+
+    for(var i = 0; i < checkboxes.length; i++) {
+      isAllChecked = checkboxes[i].checked;
+      if(!isAllChecked) {
+        return;
+      }
+    }
+
+    if(isAllChecked) {
+      $('#allChecked').prop('checked', true);
+    }
+  });
+
   $('i.caret.left').on('click', function () {
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
