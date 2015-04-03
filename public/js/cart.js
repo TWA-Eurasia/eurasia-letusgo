@@ -35,6 +35,7 @@ $(document).ready(function () {
     var price = $(this).parents('td').prev().find('#price').text();
     var total = $('#total').text();
     var input = $(this);
+
     $.ajax({
       url: 'cart/' + id,
       type: 'POST',
@@ -49,7 +50,7 @@ $(document).ready(function () {
     })
   });
 
-  $('input').on('change', function () {
+  $('input').on('blur', function () {
 
     $(this).closest('td').find('#inventory').hide();
 
