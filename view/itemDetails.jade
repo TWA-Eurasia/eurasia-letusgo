@@ -19,11 +19,11 @@ block content
           i.right.chevron.icon.ider
           .active.section #{itemDetails.item.name}
 
-      .ui.grid.ten.wide.column.centered
+      .ui.grid.ten.wide.column
         .nine.wide.column
-          .ui.fluid.card(style="height:400px; background:black; align:center")
-            - var imageUrl = itemDetails.item.image
-            img.ui.vertical.bordered.centered.image(src=imageUrl onerror="this.src='/image/nopicture.jpg'")
+          .ui.fluid.card(style="height:400px; background:black;")
+            - var imageUrl = itemDetails.item.image + 'sda'
+            img.ui.image(src=imageUrl onerror="this.src='/image/nopicture.jpg'" style="vertical-align:middle")
 
         .seven.wide.column
           h2.ui.floated.header.orange.backge #{itemDetails.item.name}

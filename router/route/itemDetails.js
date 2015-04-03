@@ -3,7 +3,7 @@ var router = express.Router();
 
 var Item = require('../../model/item');
 var Category = require('../../model/category');
-
+var _ = require('lodash');
 router.get('/:id', function(req, res) {
   var id = req.params.id;
 
@@ -15,12 +15,12 @@ router.get('/:id', function(req, res) {
       .populate('category')
       .exec(function(err, items) {
 
-        Category.findById(items[0].category._id)
+        Category.findById(_.first(items).category._id)
           .populate('parent')
           .exec(function(err, category) {
 
             var itemDetails = {
-              item: items[0],
+              item: _.first(items),
               details: Item.getDetails(items),
               category: category,
             };
