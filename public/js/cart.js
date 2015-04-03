@@ -24,6 +24,15 @@ $(document).ready(function () {
     })
   }
 
+  $('#allSelected').on('change', function() {
+
+    var checkboxes = $('input[name="selectedCartItem"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = this.checked;
+    }
+
+  });
+
   $('i.caret.left').on('click', function () {
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
