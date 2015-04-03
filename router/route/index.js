@@ -8,11 +8,10 @@ var Item = require('../../model/item');
 
 router.get('/', function(req, res) {
 
-  var pageSize = 2;
 
-  initCategories({isRecommend: true}, 0, pageSize, function(mainCategories, items, pageCount) {
+  initCategories({isRecommend: true}, 0, 2, function(mainCategories, items, pageCount) {
 
-    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1, isCategory: false});
   });
 });
 
@@ -24,7 +23,7 @@ router.get('/index/:pageNumber', function(req, res) {
 
   initCategories({isRecommend: true}, start, pageSize, function(mainCategories, items, pageCount) {
 
-    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber});
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber, isCategory: false});
   });
 
 });
@@ -32,10 +31,25 @@ router.get('/index/:pageNumber', function(req, res) {
 router.get('/categoryView/:id', function(req, res) {
 
   var id = req.params.id;
-  console.log(id);
+
+  initCategories({category: id}, 0, 2, function(mainCategories, items, pageCount) {
+
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1, isCategory: true});
+  });
+
+});
+
+router.get('/categoryView/:id/:pageNumber', function (req, res) {
+
+  var id = req.params.id;
+  var pageNumber = req.params.pageNumber;
+
   var pageSize = 2;
-  initCategories({category: id}, 0, pageSize, function(mainCategories, items, pageCount) {
-    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
+  var start = (pageNumber - 1) * pageSize;
+
+  initCategories({category: id}, start, pageSize, function(mainCategories, items, pageCount) {
+
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber, isCategory: true});
   });
 
 });
@@ -50,7 +64,7 @@ router.post('/', function(req, res) {
     image: 'image/georgette.jpg',
     description: '这是件雪纺衫',
     inventory: 100,
-    category: '551c9f3f45c1d609c122a60d',
+    category: '5519881c0042a1db62223b09',
     specification: 'S',
     isRecommend: true}, function(err, item) {
 
@@ -62,10 +76,8 @@ router.post('/', function(req, res) {
 function initItems (query, start, pageSize, callback) {
 
   Item.find(query).exec(function (err, items) {
-    console.log(items);
 
     var newItems = _.take(_.drop(items, start), pageSize);
-
     var pageCount = Math.ceil(items.length / pageSize);
 
     callback(newItems, pageCount);
