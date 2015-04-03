@@ -7,15 +7,19 @@ require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
-  $('.pagination').pagination({
+  if(application.index.pageCount > 1) {
+    var visiblePageCount = 7;
 
-    pageCount: application.index.pageCount,
-    currentPage: application.index.currentPage,
-    visiblePageCount: 7,
-    onPageChange: function(n) {
-      $(location).attr('href', '/index/'+ n);
-    }
-  });
+    $('.pagination').pagination({
+      pageCount: application.index.pageCount,
+      currentPage: application.index.currentPage,
+      visiblePageCount: visiblePageCount,
+      onPageChange: function(n) {
+        $(location).attr('href', '/index/'+ n);
+      }
+    });
+  }
+
 
   $('.item.secondMenu').on('click', function () {
 

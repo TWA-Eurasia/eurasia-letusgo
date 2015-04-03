@@ -54,3 +54,8 @@ ul,li{
   content: "...";
   color: #000;
 }
+
+.pagination li.previous:hover,
+.pagination li.next:hover {
+  background: #2EA69C;
+}
