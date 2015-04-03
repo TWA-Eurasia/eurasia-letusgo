@@ -28,20 +28,22 @@ $(document).ready(function () {
 
   });
 
-  $('input').on('change', function () {
+  $('input').on('keyup', function () {
 
     var id = $(event.target).closest('tr').data('id');
     var num = $('#number').val();
     var price = $('#price').text();
     var total = $('#total').text();
-
+    var input = $(this);
     $.ajax({
       url: 'cart/' + id,
       type: 'POST',
       data: {number: num, price: price, total: total},
 
+
       success: function (data) {
-        $('#subtotal').text(data.subtotal);
+        //$('#subtotal').text(data.subtotal);
+        input.closest('tr').find('#subtotal').text(data.subtotal);
         $('#total').text(data.total);
       }
     })
@@ -54,7 +56,7 @@ $(document).ready(function () {
     var numberInput = parseInt($(event.target).closest('td').find('#number').val());
     numberInput = numberInput.toString();
     var number = numberInput.replace(/\b(0+)/gi, '');
-    $('#number').val(number);
+    //$('#number').val(number);
 
     verifyNumber(number);
 
