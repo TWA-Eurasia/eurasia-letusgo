@@ -7,22 +7,22 @@ $(document).ready(function () {
 
   $('i.caret.left').on('click', function () {
 
-    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
+    var numberInput = parseInt($(this).closest('td').find('#number').val());
 
     if (numberInput !== 1) {
-      $(event.target).closest('td').find('#number').val(numberInput - 1);
+      $(this).closest('td').find('#number').val(numberInput - 1);
     }
   });
 
   $('i.caret.right').on('click', function () {
 
-    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
+    var numberInput = parseInt($(this).closest('td').find('#number').val());
 
     var inventory = $('#leftNumber').text();
     //console.log(inventory);
     if (inventory > numberInput) {
 
-      $(event.target).closest('td').find('#number').val(numberInput + 1);
+      $(this).closest('td').find('#number').val(numberInput + 1);
     }
 
 
@@ -30,9 +30,9 @@ $(document).ready(function () {
 
   $('input').on('keyup', function () {
 
-    var id = $(event.target).closest('tr').data('id');
-    var num = $('#number').val();
-    var price = $('#price').text();
+    var id = $(this).closest('tr').data('id');
+    var num = $(this).closest('td').find('#number').val();
+    var price = $(this).parents('td').prev().find('#price').text();
     var total = $('#total').text();
     var input = $(this);
     $.ajax({
@@ -49,11 +49,11 @@ $(document).ready(function () {
     })
   });
 
-  $('input').on('blur', function () {
+  $('input').on('change', function () {
 
-    $(event.target).closest('td').find('#inventory').hide();
+    $(this).closest('td').find('#inventory').hide();
 
-    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
+    var numberInput = parseInt($(this).closest('td').find('#number').val());
     numberInput = numberInput.toString();
     var number = numberInput.replace(/\b(0+)/gi, '');
     //$('#number').val(number);
@@ -61,7 +61,7 @@ $(document).ready(function () {
     verifyNumber(number);
 
     if (isShorted()) {
-      $(event.target).closest('td').find('#inventory').show();
+      $(this).closest('td').find('#inventory').show();
     }
   });
 
@@ -70,13 +70,13 @@ $(document).ready(function () {
     var reg = /^(0|[1-9][0-9]*)$/;
 
     if (!reg.exec(number)) {
-      parseInt($(event.target).closest('td').find('#number').val(1));
+      parseInt($(this).closest('td').find('#number').val(1));
     }
   }
 
   function isShorted() {
 
-    var inputNumber = parseInt($(event.target).closest('td').find('#number').val());
+    var inputNumber = parseInt($(this).closest('td').find('#number').val());
     var leftNumber = $('#leftNumber').text();
 
     if (inputNumber > leftNumber) {
