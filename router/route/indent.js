@@ -7,7 +7,7 @@ var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
 
-  Indent.findById('551b8d053acc20a82a17e3fd')
+  Indent.findById('551cbc22ff9c98ae4e3d38fc')
     .populate('cartItems')
     .exec(function (err, indent) {
 
@@ -16,27 +16,13 @@ router.get('/', function (req, res, next) {
         .exec(function (err, cartItems) {
 
           var total = indent.getTotal(cartItems);
-          res.render('indent', {cartItems: cartItems, total: total});
+          //res.render('indent', {cartItems: cartItems, total: total});
+          res.render('indent', {cartItems: cartItems, total: total, indent: indent});
         });
     });
 });
 
 router.post('/', function (req, res, next) {
-
-  //Item.create({
-  //  name: '可乐',
-  //  unit: '瓶',
-  //  price: 5,
-  //  inventory: '100',
-  //  image:'image/kele.jpg',
-  //  description: 'kelekele',
-  //  specification: '500ml',
-  //  isRecommend: true
-  //});
-  //CartItem.create({
-  //  item: "551b893c460915fb21fe0bf1",
-  //  number: 15
-  //});
 
   Indent.create({
     cartItems: ["551b8afa1c8deae8254a91b7",
@@ -48,6 +34,15 @@ router.post('/', function (req, res, next) {
       return next(err);
     }
     res.send(indent);
+  });
+});
+
+router.post('/:id', function(req, res){
+  var id = req.params.id;
+
+  Indent.update(id, {$set: {isPaid: true}}, function(err, indent){
+
+    res.send('isPaid is true');
   });
 });
 
