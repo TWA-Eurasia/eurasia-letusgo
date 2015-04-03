@@ -41,7 +41,7 @@ block content
                     i.caret.left.icon
                     input(type="text" value="#{cartItem.number}" id="number" style="text-align:center; height: 20%; width:40%")
                     i.caret.right.icon
-                  div.ui.negative.message#inventory 最多能购买
+                  div.ui.negative.message#inventory(style="display: none;") 最多能购买
                     span#leftNumber #{cartItem.item.inventory}
                     span 件
                  // .ui.negative.message#inventory(style = 'display: none') 库存仅剩#{cartItem.item.inventory}!
