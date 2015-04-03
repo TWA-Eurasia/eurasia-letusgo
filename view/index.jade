@@ -53,7 +53,7 @@ html
             - each item in items
               div.column
                 div.ui.segment
-                  img.ui.fluid.image(id="#{item._id}" src="/#{item.image}")
+                  img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
                 div.info
                   div.name #{item.name}
                   p.price #{item.price}元
