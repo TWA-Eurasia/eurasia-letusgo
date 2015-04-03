@@ -47,9 +47,10 @@ block content
                           -var price = detail.price
                           -var itemId = detail.specification
                           -var isChecked = detail.isChecked
+                          -var inventory = detail.inventory
                             .field
                               .ui.radio
-                                input.specification(id = itemId, data-price = price, type="radio", name="specification", checked=isChecked)
+                                input.specification(id = itemId, data-price = price, data-inventory = inventory, type="radio", name="specification", checked=isChecked)
                                 label #{detail.specification}
               tr
                 td 数量

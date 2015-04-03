@@ -20,13 +20,14 @@ var ItemSchema = new Schema({
 ItemSchema.statics = {
   getDetails: function(items) {
     var details = [];
-    
+
     items.forEach(function(item) {
       if (item.specification !== '') {
-        var detail = {
 
+        var detail = {
           price: item.price,
-          specification: item.specification
+          specification: item.specification,
+          inventory: item.inventory
         };
 
         details.push(detail);
