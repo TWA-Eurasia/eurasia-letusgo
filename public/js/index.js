@@ -6,21 +6,31 @@ var $ = require('./jquery.pagination');
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
-  var path = 'index';
 
+  var pathId = '5519881c0042a1db62223b09';
   $('.pagination').pagination({
 
     pageCount: application.index.pageCount,
     currentPage: application.index.currentPage,
     visiblePageCount: 7,
     onPageChange: function(n) {
-      $(location).attr('href', '/' + path + '/'+ n);
+
+      var path = '/index/';
+      if(application.index.isCategory) {
+
+        path = '/categoryView/' + pathId + '/';
+      }
+
+      location.href = path + n;
     }
   });
 
-  $('item.secondMenu').on('click', function() {
-    var id = $(this).data('id');
-    path = 'subCategoryView/' + id;
-    console.log(path);
-  })
+  //var $secondMenu = $('.secondMenu');
+  //$secondMenu.on('click', function(c) {
+  //
+  //  pathId = $(this).data('id');
+  //  console.log(pathId);
+  //
+  //});
+
 });
