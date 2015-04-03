@@ -1,37 +1,29 @@
-// 'use strict';
+'use strict';
 
 var _ = require('lodash');
 var $ = require('./jquery.pagination');
-
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
-  var pathId = '5519881c0042a1db62223b09';
-  $('.pagination').pagination({
+  if(application.index.pageCount > 1) {
+    var visiblePageCount = 7;
 
-    pageCount: application.index.pageCount,
-    currentPage: application.index.currentPage,
-    visiblePageCount: 7,
-    onPageChange: function(n) {
+    $('.pagination').pagination({
+      pageCount: application.index.pageCount,
+      currentPage: application.index.currentPage,
+      visiblePageCount: visiblePageCount,
+      onPageChange: function(n) {
+        var path = '/index/';
+        if(application.index.isCategory) {
 
-      var path = '/index/';
-      if(application.index.isCategory) {
+          path = '/categoryView/' + pathId + '/';
+        }
 
-        path = '/categoryView/' + pathId + '/';
+        location.href = path + n;
       }
-
-      location.href = path + n;
-    }
-  });
-
-  //var $secondMenu = $('.secondMenu');
-  //$secondMenu.on('click', function(c) {
-  //
-  //  pathId = $(this).data('id');
-  //  console.log(pathId);
-  //
-  //});
+    });
+  }
 
   var $image = $('.image');
   $image.on('click', function() {

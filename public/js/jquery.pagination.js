@@ -15,9 +15,11 @@ Pagination.prototype.render = function() {
   this.jqContainer.empty();
   var that = this;
   var ulContainer = $('<ul />');
+  var range = this.getRange();
 
   $('<li />')
     .text('< 上一页')
+    .toggleClass('previous',  this.currentPage == 1)
     .on('click', function() {
       if(that.currentPage > 1) {
         that.emit(--that.currentPage);
@@ -28,6 +30,7 @@ Pagination.prototype.render = function() {
 
   $('<li />')
     .text('下一页 >')
+    .toggleClass('next',  this.currentPage == range.pop())
     .on('click', function() {
       if(that.currentPage < that.options.pageCount) {
         that.emit(++that.currentPage);
@@ -41,9 +44,8 @@ Pagination.prototype.render = function() {
 Pagination.prototype.renderMiddle = function(ulContainer) {
   var range = this.getRange();
   var that = this;
-  var pageId = this.getRange();
   for(var i=0; i<range.length; i++) {
-    var liEle = $('<li />')
+    $('<li />')
       .text(function() {
         return range[i] !== -1 ? range[i] : '';
       })
@@ -64,7 +66,6 @@ Pagination.prototype.renderMiddle = function(ulContainer) {
 Pagination.prototype.emit = function(n) {
   this.render();
   this.options.onPageChange(n);
-  //console.log(this.getRange());
 };
 
 Pagination.prototype.getRange = function() {
@@ -83,11 +84,11 @@ Pagination.prototype.getRange = function() {
     result.push(i);
   }
 
-  if(result[0] != 2) {
+  if(result[0] != 2 && result[0]) {
     result.unshift(-1);
   }
 
-  if(result[result.length-1] != this.options.pageCount - 1) {
+  if((this.options.pageCount > 5) && result[result.length-1] != this.options.pageCount - 1) {
     result.push(-1);
   }
 
@@ -105,7 +106,6 @@ var defaultConfig = {
 
 $.fn.pagination = function(config) {
   var options = $.extend(defaultConfig, config);
-  console.log(options);
   return new Pagination($(this), options);
 };
 
