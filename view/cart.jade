@@ -25,7 +25,7 @@ block content
             th.two.wide 小计
             th.two.wide
             th.two.wide
-              input#allSelected(type="checkbox" name="selectedAllCartItem" checked)
+              input#allChecked(type="checkbox" name="checkedAllCartItem" checked)
               span 全选
           tbody.center
             - each cartItem in cartItems
@@ -52,7 +52,7 @@ block content
                 td(id ="#{cartItem._id}")
                   .ui.red.button.delete_cartItem 删除
                 td
-                  input#selectCartItem(type="checkbox" name="selectedCartItem" checked)
+                  input#checkedCartItem(type="checkbox" name="checkedCartItem" checked)
 
           tfoot.right
             tr
