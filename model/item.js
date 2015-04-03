@@ -5,15 +5,17 @@ var _ = require('lodash');
 var ItemSchema = new Schema({
   name: String,
   unit: String,
-  price: Number,
   image: String,
   description: String,
-  inventory: Number,
   category: {
     type: Schema.ObjectId,
     ref: 'Category'
   },
-  specification: String,
+  specification: [{
+    name: String,
+    price: Number,
+    inventory: Number,
+  }],
   isRecommend: Boolean
 });
 
@@ -36,7 +38,7 @@ ItemSchema.statics.getDetails = function(items) {
   if (details.length > 0) {
     _.first(details).isChecked = "checked";
   }
-  
+
   return details;
 };
 
