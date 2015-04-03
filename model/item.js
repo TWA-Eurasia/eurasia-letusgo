@@ -14,7 +14,7 @@ var ItemSchema = new Schema({
   specification: [{
     name: String,
     price: Number,
-    inventory: Number,
+    inventory: Number
   }],
   isRecommend: Boolean
 });
