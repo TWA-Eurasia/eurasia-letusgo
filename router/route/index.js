@@ -8,9 +8,8 @@ var Item = require('../../model/item');
 
 router.get('/', function(req, res) {
 
-  var pageSize = 2;
 
-  initCategories({isRecommend: true}, 0, pageSize, function(mainCategories, items, pageCount) {
+  initCategories({isRecommend: true}, 0, 2, function(mainCategories, items, pageCount) {
 
     res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
   });
@@ -32,8 +31,8 @@ router.get('/index/:pageNumber', function(req, res) {
 router.get('/categoryView/:id', function(req, res) {
 
   var id = req.params.id;
-  var pageSize = 2;
-  initCategories({category: id}, 0, pageSize, function(mainCategories, items, pageCount) {
+
+  initCategories({category: id}, 0, 2, function(mainCategories, items, pageCount) {
 
     res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
   });
