@@ -5,35 +5,12 @@ require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
-  $('i.caret.left').on('click', function () {
-
-    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
-
-    if (numberInput !== 1) {
-      $(event.target).closest('td').find('#number').val(numberInput - 1);
-    }
-  });
-
-  $('i.caret.right').on('click', function () {
-
-    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
-
-    var inventory = $('#leftNumber').text();
-    //console.log(inventory);
-    if (inventory > numberInput) {
-
-      $(event.target).closest('td').find('#number').val(numberInput + 1);
-    }
-
-
-  });
-
-  $('input').on('change', function () {
-
-    var id = $(event.target).closest('tr').data('id');
-    var num = $('#number').val();
-    var price = $('#price').text();
+  function changetotal(t) {
+    var id = t.closest('tr').data('id');
+    var num = t.closest('td').find('#number').val();
+    var price = t.parents('td').prev().find('#price').text();
     var total = $('#total').text();
+    var input = t;
 
     $.ajax({
       url: 'cart/' + id,
@@ -41,25 +18,55 @@ $(document).ready(function () {
       data: {number: num, price: price, total: total},
 
       success: function (data) {
-        $('#subtotal').text(data.subtotal);
+        input.closest('tr').find('#subtotal').text(data.subtotal);
         $('#total').text(data.total);
       }
     })
+  }
+
+  $('i.caret.left').on('click', function () {
+
+    var numberInput = parseInt($(this).closest('td').find('#number').val());
+
+    if (numberInput !== 1) {
+      $(this).closest('td').find('#number').val(numberInput - 1);
+      changetotal($(this));
+    }
+  });
+
+  $('i.caret.right').on('click', function () {
+
+
+    var numberInput = parseInt($(this).closest('td').find('#number').val());
+
+    var inventory = $('#leftNumber').text();
+
+    if (inventory > numberInput) {
+      $(this).closest('td').find('#number').val(numberInput + 1);
+      changetotal($(this));
+    }
+
+
+  });
+
+  $('input').on('keyup', function () {
+    changetotal($(this));
   });
 
   $('input').on('blur', function () {
 
-    $(event.target).closest('td').find('#inventory').hide();
+    $(this).closest('td').find('#inventory').hide();
 
-    var numberInput = parseInt($(event.target).closest('td').find('#number').val());
+    var numberInput = parseInt($(this).closest('td').find('#number').val());
     numberInput = numberInput.toString();
+
     var number = numberInput.replace(/\b(0+)/gi, '');
-    $('#number').val(number);
+    var input = $(this);
 
     verifyNumber(number);
 
-    if (isShorted()) {
-      $(event.target).closest('td').find('#inventory').show();
+    if (isShorted(input)) {
+      $(this).closest('td').find('#inventory').show();
     }
   });
 
@@ -68,13 +75,13 @@ $(document).ready(function () {
     var reg = /^(0|[1-9][0-9]*)$/;
 
     if (!reg.exec(number)) {
-      parseInt($(event.target).closest('td').find('#number').val(1));
+      parseInt($(this).closest('td').find('#number').val(1));
     }
   }
 
-  function isShorted() {
+  function isShorted(input) {
 
-    var inputNumber = parseInt($(event.target).closest('td').find('#number').val());
+    var inputNumber = parseInt(input.closest('td').find('#number').val());
     var leftNumber = $('#leftNumber').text();
 
     if (inputNumber > leftNumber) {
