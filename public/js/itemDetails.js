@@ -5,7 +5,6 @@ $(document).ready(function() {
 
   $('i.minus').on('click', function() {
     var numberInput = parseInt($('#numberInput').val());
-
     if (numberInput !== 1) {
       $('#numberInput').val(numberInput - 1);
     }
@@ -22,12 +21,10 @@ $(document).ready(function() {
 
   $('#numberInput').on('mouseout', function() {
     $('#inputError').hide();
-
     var numberInput = $('#numberInput').val();
     var number = numberInput.replace(/\b(0+)/gi, '');
 
     $('#numberInput').val(number);
-
     verifyNumber(number);
 
     if (isShorted()) {
