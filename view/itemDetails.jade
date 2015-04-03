@@ -35,8 +35,8 @@ block content
                   span#itemPrice #{itemDetails.item.specification[0].price}
                   span  元
 
-              - var name = itemDetails.item.specification.name
-              - var isDisplay = (name === "") ? '' : 'none'
+              - var name = itemDetails.item.specification[0].name
+              - var isDisplay = (name === '') ? 'none' : ''
               - var attributes = {'style': 'display: ' + isDisplay}
                 tr&attributes(attributes)
                   td 规格
