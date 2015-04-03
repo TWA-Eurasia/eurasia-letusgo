@@ -17,28 +17,27 @@ var ItemSchema = new Schema({
   isRecommend: Boolean
 });
 
-ItemSchema.statics = {
-  getDetails: function(items) {
-    var details = [];
+ItemSchema.statics.getDetails = function(items) {
+  var details = [];
 
-    items.forEach(function(item) {
-      if (item.specification !== '') {
+  items.forEach(function(item) {
 
-        var detail = {
-          price: item.price,
-          specification: item.specification,
-          inventory: item.inventory
-        };
+    if (item.specification !== '') {
+      var detail = {
+        price: item.price,
+        specification: item.specification,
+        inventory: item.inventory
+      };
 
-        details.push(detail);
-      }
-    });
-
-    if (details.length > 0) {
-      _.first(details).isChecked = "checked";
+      details.push(detail);
     }
-    return details;
+  });
+
+  if (details.length > 0) {
+    _.first(details).isChecked = "checked";
   }
+  
+  return details;
 };
 
 module.exports = mongoose.model('Item', ItemSchema);
