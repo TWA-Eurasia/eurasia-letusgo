@@ -23,6 +23,28 @@ router.get('/', function (req, res) {
       });
 });
 
+router.get('/:id', function(req, res){
+  var id = req.params.id;
 
+  Item.findById(id, function(err, item){
+
+    res.send(item);
+  });
+});
+
+router.post('/:id',function(req, res) {
+
+  var id = req.params.id;
+
+  var inventory = req.body.inventory;
+
+  Item.update({_id: id}, {$set:
+    {
+      inventory: inventory
+     }
+  }, function(){
+    res.send('inventory decrease successful');
+  });
+});
 
 module.exports = router;

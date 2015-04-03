@@ -2,46 +2,52 @@ var express = require('express');
 var router = express.Router();
 var Indent = require('../../model/indent.js');
 var Item = require('../../model/item.js');
+var CartItem = require('../../model/cartItem.js');
 var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
 
-  Indent.find()
-    .populate('itemList.item')
-    .exec(function (err, orderList) {
-      var amount = 0;
-      if (err) {return next(err);}
-      var data = orderList[0].itemList;
+  Indent.findById('551b8d053acc20a82a17e3fd')
+    .populate('cartItems')
+    .exec(function (err, indent) {
 
-      _.forEach(data, function (indent) {
-        indent.subtotal = indent.item.price * indent.number;
-        amount += indent.subtotal;
-      });
+      CartItem.find()
+        .populate('item')
+        .exec(function (err, cartItems) {
 
-      res.render('indent', {Indents: data,amount: amount});
+          var total = indent.getTotal(cartItems);
+          res.render('indent', {cartItems: cartItems, total: total});
+        });
     });
 });
 
-router.post('/', function (req, res) {
-  //
+router.post('/', function (req, res, next) {
+
   //Item.create({
   //  name: '可乐',
   //  unit: '瓶',
   //  price: 5,
-  //  brand: '可口可乐',
-  //  leftNumber: '100',
-  //  imageUrl:'image/kele.jpg',
+  //  inventory: '100',
+  //  image:'image/kele.jpg',
   //  description: 'kelekele',
-  //  specification: '350ml'
-  //
+  //  specification: '500ml',
+  //  isRecommend: true
   //});
+  //CartItem.create({
+  //  item: "551b893c460915fb21fe0bf1",
+  //  number: 15
+  //});
+
   Indent.create({
-    itemList: [{item: "551abb584357be4b17ca39ea", number: 15},
-                {item: "551abb584357be4b17ca39ea", number: 10}
-               ]
+    cartItems: ["551b8afa1c8deae8254a91b7",
+      "551b8b8c1b1b373e2745798b"
+    ],
+    createDate: 2015 - 4 - 1
   }, function (err, indent) {
-      if (err) {return next(err);}
-      res.send(indent);
+    if (err) {
+      return next(err);
+    }
+    res.send(indent);
   });
 });
 

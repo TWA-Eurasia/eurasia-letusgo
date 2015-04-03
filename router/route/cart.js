@@ -6,53 +6,58 @@ var Cart = require('../../model/cart.js');
 var Item = require('../../model/item.js');
 var CartItem = require('../../model/cartItem.js');
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
   var cartId = req.id;
-  cartId = "551b9f2c3553749b16d41002";
-  //Cart.findById(cartId, function (err, carrr) {
-  //  console.log(carrr);
-  //})
-  //  .populate('cartItems')
-  //  .exec(function (err, cart) {
-  //    if (err) {
-  //      return next(err);
-  //    }
-  //    res.send(cart);
+  cartId = "551cc282a6b79c584b59bc0f";
+  Cart.findById(cartId)
+    .populate('cartItems')
+    .exec(function (err, cart) {
 
-      //Item.populate(cart.cartItems, 'item', function (err, deepCart) {
-      //  res.send(deepCart);
-      //  console.log(cart);
-      //});
-      //_.forEach(cart.cartItems, function (cartItem) {
-      //  cartItem.subtotal = cartItem.item.price * cartItem.number;
-      //  cart.totalAmount += cartItem.subtotal;
-      //});
-      //res.render('cart', {cartItems: cart.cartItems, cart: cart});
-  //  });
+      CartItem.find()
+        .populate('item')
+        .exec(function (err, cartItems) {
 
-  Cart.findById(cartId, function (err, cart) {
-    res.send(cart);
-  })
+          var total = cart.getTotal(cartItems);
+          res.render('cart', {cartItems: cartItems, total: total});
+        });
+    })
 });
 
-router.post('/', function (req, res) {
+router.post('/:id', function (req, res, next) {
 
-  var cart = new Cart();
-  cart.cartItems.push('551b9f00522d7e2116952002');
-  cart.cartItems.push('551b9f190cd2657d16b2858b');
+  var cartItemId = req.params.id;
+  var num = req.body.number;
+  var price = req.body.price;
+  var total = req.body.total;
 
-  cart.save(function (err, cart) {
-    res.send(cart);
-  })
-});
-
-router.post('/items', function (req, res) {
-  Item.create(
-    {name: '可乐', unit: '瓶', price: 3.5, image: 'image/kele.jpg'},
-    {name: '雪碧', unit: '瓶', price: 3.5, image: 'image/xuebi.jpg'},
-    function (err, item1, item2) {
-      res.send({item1: item1, item2: item2})
+  CartItem.findById(cartItemId, function (err, cartItem) {
+    var current = cartItem.number * price;
+    CartItem.update({_id: cartItemId}, {$set: {number: num}}, {upsert: true}, function () {
+      var subtotal = price * num;
+      total = total - current + subtotal;
+      res.send({subtotal: subtotal, total: total});
     });
+  });
+
+  //Item.create(
+  //  {name: '可乐', unit: '瓶', price: 3.5, image: 'image/kele.jpg', inventory: '100'},
+  //  {name: '雪碧', unit: '瓶', price: 4.5, image: 'image/xuebi.jpg', inventory: '100'},
+  //  function (err, item1, item2) {
+  //    var itemId1 = item1._id;
+  //    var itemId2 = item2._id;
+  //
+  //    console.log(itemId1);
+  //    CartItem.create(
+  //      {item: itemId1, number: 6},
+  //      {item: itemId2, number: 2},
+  //      {item: itemId1, number: 8},
+  //      {item: itemId2, number: 6}
+  //    );
+  //  }
+  //);
+
+  //Cart.create({cartItems: ['551cc20e47a654d14a280e9b', '551cc20e47a654d14a280e9c', '551cc20e47a654d14a280e9d', '551cc20e47a654d14a280e9e']});
+
 });
 
 router.post('/cartItems', function (req, res) {

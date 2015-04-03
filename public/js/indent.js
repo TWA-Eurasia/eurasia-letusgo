@@ -1,7 +1,6 @@
 'use strict';
 var $ = require('jquery');
-var _ = require('lodash');
-require('semantic-ui');
+require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 
 $(document).ready(function () {
@@ -11,23 +10,41 @@ $(document).ready(function () {
     $('.first.modal')
       .modal('show');
   });
+
+  $('#isPaid').on('click', function(){
+
+    var total = $(this).data('total');
+    var cart = $(this).data('cart');
+
+    cart.forEach(function(cartItem){
+      var number = cartItem.number;
+
+      $.ajax({
+        url: '/api/item/' + cartItem.item._id,
+        type: 'GET',
+        success: function(item){
+
+          var inventory = item.inventory;
+          if(number < inventory){
+
+            $(location).attr('href', '/success?amount=' + total);
+
+            updateInventory(inventory, number, item);
+          }
+        }
+      });
+    });
+  });
 });
 
-//$(document).ready(function () {
-//
-//  $('.ispay').on('click', function () {
-//    //var itemList = this.id;
-//    //console.log(itemList.toString().toArray());
-//    //_.forEach(itemList, function(aa) {
-//    //  $.ajax({
-//    //    url: '/indent'+aa.item._id,
-//    //    type: 'GET',
-//    //    data: item.number
-//    //  });
-//    //});
-//
-//    $('.second.modal')
-//      .modal('attach events', '.first.modal .button');
-//
-//  });
-//});
+function updateInventory(inventory, number, item){
+
+  inventory -= number;
+
+  $.ajax({
+    url:'/api/item/' + item._id,
+    type:'POST',
+    data: {inventory: inventory}
+  });
+}
+

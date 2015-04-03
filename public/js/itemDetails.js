@@ -1,9 +1,9 @@
 var $ = require('jquery');
-require('semantic-ui');
+require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-  $('i.minus').on('click',function () {
+  $('i.minus').on('click', function() {
 
     var numberInput = parseInt($('#numberInput').val());
 
@@ -12,19 +12,19 @@ $(document).ready(function () {
     }
   });
 
-  $('i.add').on('click',function () {
+  $('i.add').on('click', function() {
 
     var numberInput = parseInt($('#numberInput').val());
 
-    var leftNumber = $('#leftNumber').text();
+    var inventory = $('#inventory').text();
 
-    if(leftNumber > numberInput){
+    if (inventory > numberInput) {
 
       $('#numberInput').val(numberInput + 1);
     }
   });
 
-  $('#numberInput').on('mouseout', function () {
+  $('#numberInput').on('mouseout', function() {
 
     $('#inputError').hide();
 
@@ -34,44 +34,35 @@ $(document).ready(function () {
 
     verifyNumber(number);
 
-    if(isShorted()){
+    if (isShorted()) {
       $('#inputError').show();
     }
   });
 
-  $('#specification').on('change', function () {
+  $('input.specification').on('click', function() {
 
-    var specification = $('#specification').val();
-    var price = $('#' + specification).data('price');
-
+    var price = $(this).data('price');
     $('#itemPrice').text(price);
   });
 
-  function verifyNumber(number){
+  function verifyNumber(number) {
 
     var reg = /^(0|[1-9][0-9]*)$/;
 
-    if(!reg.exec(number)){
+    if (!reg.exec(number)) {
       $('#numberInput').val(1);
     }
   }
 
-  function isShorted(){
+  function isShorted() {
 
     var inputNumber = parseInt($('#numberInput').val());
-    var leftNumber = $('#leftNumber').text();
+    var inventory = $('#inventory').text();
 
-    if(inputNumber > leftNumber) {
+    if (inputNumber > inventory) {
       return true;
     }
 
     return false;
   }
-
-  function setHref() {
-
-    $('#parent').attr('href','#');
-    $('#child').attr('href','#');
-  }
-
 });

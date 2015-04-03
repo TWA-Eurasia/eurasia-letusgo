@@ -1,46 +1,36 @@
 var express = require('express');
 var router = express.Router();
 
-var _ = require('lodash');
-
 var Item = require('../../model/item');
 var Category = require('../../model/category');
 
-router.get('/', function(req, res){
+router.get('/:id', function(req, res) {
+  var id = req.params.id;
 
-  Category.findById('551aa95e2ef086a169628b74')
-  .populate('parent')
-  .exec(function(err, category){
+  Item.findById(id, function(err, item) {
 
-      Item.find({name: '男士短袖'})
+    Item.find({
+        name: item.name
+      })
       .populate('category')
-      .exec(function (err, items) {
+      .exec(function(err, items) {
 
-        var itemDetails = {
-          item: items[0],
-          category: category,
-          details : getDetails(items)
-        };
+        Category.findById(items[0].category._id)
+          .populate('parent')
+          .exec(function(err, category) {
 
-        res.render('itemDetails', {itemDetails: itemDetails});
+            var itemDetails = {
+              item: items[0],
+              details: Item.getDetails(items),
+              category: category,
+            };
+
+            res.render('itemDetails', {
+              itemDetails: itemDetails
+            });
+          });
       });
-    });
-
-    function getDetails (items) {
-      var details = [];
-
-      _.forEach(items, function(item){
-
-        var detail = {
-          price: item.price,
-          specification : item.specification
-        };
-        details.push(detail);
-      });
-
-      return details;
-    }
-
+  });
 });
 
 module.exports = router;

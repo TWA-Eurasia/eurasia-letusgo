@@ -1,13 +1,18 @@
 var express = require('express');
 var router = express.Router();
-var Item = require('../../model/item');
 
 var _ = require('lodash');
 
+var Category = require('../../model/category');
+var Item = require('../../model/item');
+
 router.get('/', function(req, res) {
 
-  Item.find().skip(0).limit(2).exec(function (err, items) {
-    res.render('index', {items: items});
+  var pageSize = 2;
+
+  initCategories({isRecommend: true}, 0, pageSize, function(mainCategories, items, pageCount) {
+
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
   });
 });
 
@@ -17,17 +22,90 @@ router.get('/index/:pageNumber', function(req, res) {
   var pageSize = 2;
   var start = (pageNumber - 1) * pageSize;
 
-  Item.find().skip(start).limit(pageSize).exec(function (err, items) {
-    res.render('index', {items: items});
+  initCategories({isRecommend: true}, start, pageSize, function(mainCategories, items, pageCount) {
+
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber});
   });
+
 });
 
+router.get('/categoryView/:id', function(req, res) {
+
+  var id = req.params.id;
+  console.log(id);
+  var pageSize = 2;
+  initCategories({category: id}, 0, pageSize, function(mainCategories, items, pageCount) {
+    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1});
+  });
+
+});
 
 
 router.post('/', function(req, res) {
-  Item.create({name: 'i', unit: '瓶', price: 3.5, imageUrl: 'image/cat2.png', state: 'recommend'}, function(err, item) {
-    res.send(item);
+
+  Item.create({
+    name: '雪纺衫',
+    unit: '件',
+    price: 199,
+    image: 'image/georgette.jpg',
+    description: '这是件雪纺衫',
+    inventory: 100,
+    category: '551c9f3f45c1d609c122a60d',
+    specification: 'S',
+    isRecommend: true}, function(err, item) {
+
+      res.send(item);
   });
 });
+
+
+function initItems (query, start, pageSize, callback) {
+
+  Item.find(query).exec(function (err, items) {
+    console.log(items);
+
+    var newItems = _.take(_.drop(items, start), pageSize);
+
+    var pageCount = Math.ceil(items.length / pageSize);
+
+    callback(newItems, pageCount);
+  });
+}
+
+function initCategories (query, start, pageSize, callback) {
+
+  initItems(query, start, pageSize, function (items, pageCount) {
+
+    Category.find()
+      .populate('parent')
+      .exec(function (err, categories) {
+
+        var mainCategories = [];
+
+        _.forEach(categories, function (category) {
+
+          if (!category.parent) {
+
+            mainCategories.push({id: category._id, name: category.name, subCategories: []});
+          }
+        });
+
+        _.forEach(categories, function (category) {
+          if (category.parent) {
+
+            _.forEach(mainCategories, function (mainCategory) {
+
+              if (category.parent.name === mainCategory.name) {
+
+                mainCategory.subCategories.push(category);
+              }
+            });
+          }
+        });
+        callback(mainCategories, items, pageCount);
+      });
+  });
+}
+
 
 module.exports = router;
