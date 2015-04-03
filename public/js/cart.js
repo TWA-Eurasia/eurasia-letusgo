@@ -5,35 +5,12 @@ require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
-  $('i.caret.left').on('click', function () {
-
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
-
-    if (numberInput !== 1) {
-      $(this).closest('td').find('#number').val(numberInput - 1);
-    }
-  });
-
-  $('i.caret.right').on('click', function () {
-
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
-
-    var inventory = $('#leftNumber').text();
-
-    if (inventory > numberInput) {
-      $(this).closest('td').find('#number').val(numberInput + 1);
-    }
-
-
-  });
-
-  $('input').on('keyup', function () {
-
-    var id = $(this).closest('tr').data('id');
-    var num = $(this).closest('td').find('#number').val();
-    var price = $(this).parents('td').prev().find('#price').text();
+  function changetotal(t) {
+    var id = t.closest('tr').data('id');
+    var num = t.closest('td').find('#number').val();
+    var price = t.parents('td').prev().find('#price').text();
     var total = $('#total').text();
-    var input = $(this);
+    var input = t;
 
     $.ajax({
       url: 'cart/' + id,
@@ -45,6 +22,35 @@ $(document).ready(function () {
         $('#total').text(data.total);
       }
     })
+  }
+
+  $('i.caret.left').on('click', function () {
+
+    var numberInput = parseInt($(this).closest('td').find('#number').val());
+
+    if (numberInput !== 1) {
+      $(this).closest('td').find('#number').val(numberInput - 1);
+      changetotal($(this));
+    }
+  });
+
+  $('i.caret.right').on('click', function () {
+
+
+    var numberInput = parseInt($(this).closest('td').find('#number').val());
+
+    var inventory = $('#leftNumber').text();
+
+    if (inventory > numberInput) {
+      $(this).closest('td').find('#number').val(numberInput + 1);
+      changetotal($(this));
+    }
+
+
+  });
+
+  $('input').on('keyup', function () {
+    changetotal($(this));
   });
 
   $('input').on('blur', function () {
