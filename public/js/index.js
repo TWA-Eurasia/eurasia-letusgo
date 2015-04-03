@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 var _ = require('lodash');
 var $ = require('./jquery.pagination');
@@ -32,5 +32,11 @@ $(document).ready(function () {
   //  console.log(pathId);
   //
   //});
+
+  var $image = $('.image');
+  $image.on('click', function() {
+    var id = $(this).data('id');
+    location.href = '/itemDetails/' + id;
+  });
 
 });
