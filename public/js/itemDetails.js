@@ -34,7 +34,10 @@ $(document).ready(function() {
 
   $('input.specification').on('click', function() {
     var price = $(this).data('price');
+    var inventory = $(this).data('inventory');
+
     $('#itemPrice').text(price);
+    $('#inventory').text(inventory);
   });
 
   function verifyNumber(number) {
