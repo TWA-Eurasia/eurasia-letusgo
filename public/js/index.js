@@ -18,19 +18,11 @@ $(document).ready(function () {
       var path = '/index/';
       if(application.index.isCategory) {
 
+        var pathId = location.href.toString().split('/')[4];
         path = '/categoryView/' + pathId + '/';
       }
 
       location.href = path + n;
     }
   });
-
-  //var $secondMenu = $('.secondMenu');
-  //$secondMenu.on('click', function(c) {
-  //
-  //  pathId = $(this).data('id');
-  //  console.log(pathId);
-  //
-  //});
-
 });
