@@ -27,13 +27,13 @@ $(document).ready(function () {
           var inventory = item.inventory;
           if(number < inventory){
 
-            //$(location).attr('href', '/success?amount=' + total);
+            $(location).attr('href', '/success?amount=' + total);
             updateInventory(inventory, number, item);
 
-            var indentId = '551cbc22ff9c98ae4e3d38fc';
+            var indentId = '551fd16975cd55ed0cfa5503';
             $.post('/indent/' + indentId);
 
-            var userId = '551e458dfa030a93d113e946"';
+            var userId = '551fd2a9ecb148410c4c8048';
             $.post('/api/user/' + userId, {indentId: indentId});
           }
         }
