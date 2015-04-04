@@ -161,6 +161,10 @@ $(document).ready(function () {
     }, 1000);
   }
 
+  $('.itemName').popup( {
+    content: $(this).prop("data-content")
+  });
+
 });
 
 
