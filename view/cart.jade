@@ -32,7 +32,8 @@ block content
               tr(data-id="#{cartItem._id}")
                 td
                   image.ui.fluid.image(src="#{cartItem.item.image}")
-                td #{cartItem.item.name}
+                td
+                  div.itemName(data-content="#{cartItem.item.name}") #{cartItem.item.shortName}
                 td
                   span#price #{cartItem.item.price}
                   span 元
