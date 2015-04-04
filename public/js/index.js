@@ -7,7 +7,6 @@ require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
-  var pathId = '5519881c0042a1db62223b09';
   $('.pagination').pagination({
 
     pageCount: application.index.pageCount,
