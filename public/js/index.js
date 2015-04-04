@@ -8,7 +8,6 @@ $(document).ready(function () {
 
   if(application.index.pageCount > 1) {
     var visiblePageCount = 7;
-
     $('.pagination').pagination({
       pageCount: application.index.pageCount,
       currentPage: application.index.currentPage,
@@ -17,9 +16,9 @@ $(document).ready(function () {
         var path = '/index/';
         if(application.index.isCategory) {
 
+          var pathId = location.href.toString().split('/')[4];
           path = '/categoryView/' + pathId + '/';
         }
-
         location.href = path + n;
       }
     });
@@ -30,5 +29,4 @@ $(document).ready(function () {
     var id = $(this).data('id');
     location.href = '/itemDetails/' + id;
   });
-
 });
