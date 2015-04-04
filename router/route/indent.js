@@ -7,7 +7,7 @@ var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
 
-  Indent.findById('551cbc22ff9c98ae4e3d38fc')
+  Indent.findById('551fd16975cd55ed0cfa5503')
     .populate('cartItems')
     .exec(function (err, indent) {
 
@@ -16,7 +16,6 @@ router.get('/', function (req, res, next) {
         .exec(function (err, cartItems) {
 
           var total = indent.getTotal(cartItems);
-          //res.render('indent', {cartItems: cartItems, total: total});
           res.render('indent', {cartItems: cartItems, total: total, indent: indent});
         });
     });
@@ -25,10 +24,9 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
   Indent.create({
-    cartItems: ["551b8afa1c8deae8254a91b7",
-      "551b8b8c1b1b373e2745798b"
+    cartItems: ["551cc20e47a654d14a280e9b", "551cc20e47a654d14a280e9c","551cc20e47a654d14a280e9d","551cc20e47a654d14a280e9e"
     ],
-    createDate: 2015 - 4 - 1
+    createDate: 2015-4-1
   }, function (err, indent) {
     if (err) {
       return next(err);
