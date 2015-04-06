@@ -8,11 +8,12 @@ var CartItem = require('../../model/cartItem.js');
 
 router.get('/', function (req, res) {
   var cartId = req.id;
-  cartId = "551fb07aa070742e4df671b4";
+  cartId = "551cc282a6b79c584b59bc0f";
 
   Cart.findById(cartId)
     .populate('cartItems')
     .exec(function (err, cart) {
+
 
       CartItem.find()
         .populate('item')
