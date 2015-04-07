@@ -18,25 +18,25 @@ html
     script.
       System.import('js/index');
   body#home
-    header
-      .topmenu
-        ul.menu
-          li
-            em.
-              Hi，欢迎来到Let Us Go商城
-            a.topbutton(href="#") 请登录
-            a.topbutton(href="#") 免费注册
-          li
-            a.topbutton.right(href="#") 我的Let Us Go
+    //header
+    //  .topmenu
+    //    ul.menu
+    //      li
+    //        em.
+    //          Hi，欢迎来到Let Us Go商城
+    //        a.topbutton(href="#") 请登录
+    //        a.topbutton(href="#") 免费注册
+    //      li
+    //        a.topbutton.right(href="#") 我的Let Us Go
     .container
       .searchcontainer
         .mylogo
           img(src= "/image/logo.png")
-        .search
-          .ui.fluid.action.input
-            input.topsearch(type="text" placeholder="Search...")
-            button.ui.icon.button
-              i.search.icon
+        //.search
+        //  .ui.fluid.action.input
+        //    input.topsearch(type="text" placeholder="Search...")
+        //    button.ui.icon.button
+        //      i.search.icon
       .ui.grid
         .four.wide.column
           .ui.secondary.vertical.menu
@@ -56,4 +56,5 @@ html
                 .info
                   .name #{item.name}
                   p.price #{item.price}元
+                  button 立即购买
           .pagination
