@@ -52,4 +52,17 @@ $(document).ready(function() {
     var inventory = $('#inventory').text();
     return inputNumber > inventory;
   }
+
+
+
+  $('.addToCart').on('click', function () {
+
+    var itemId = this.id;
+    var numberInput = parseInt($('#numberInput').val());
+      $.ajax({
+        url: 'cart/' + itemId,
+        type: 'PUT',
+        data: {number: numberInput}
+      })
+  });
 });

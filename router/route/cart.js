@@ -33,6 +33,12 @@ router.get('/', function (req, res) {
     })
 });
 
+router.put('/:id',function(req,res){
+  var number = req.body.number;
+  var id = req.params.id;
+
+  
+});
 router.post('/:id', function (req, res, next) {
 
   var cartItemId = req.params.id;
