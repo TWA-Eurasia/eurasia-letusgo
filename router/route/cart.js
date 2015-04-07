@@ -33,13 +33,28 @@ router.get('/', function (req, res) {
     })
 });
 
-router.put('/:id',function(req,res){
-  var number = req.body.number;
+router.post('/:id',function(req,res){
+  var number = parseInt(req.body.number);
   var id = req.params.id;
 
-  
+  CartItem.find({},function (err, cartItems) {
+    cartItems.forEach(function(cartItem) {
+      if(cartItem.item != id){
+        CartItem.create({item: id, number: number});
+        return;
+      }else{
+        number = cartItem.number + number;
+        console.log('33333');
+        CartItem.update({item: id},{$set: {number: number}},{upsert: true},function(err){
+          if (err) console.log(err);
+        });
+        return;
+      }
+    });
+
+  });
 });
-router.post('/:id', function (req, res, next) {
+router.put('/:id', function (req, res, next) {
 
   var cartItemId = req.params.id;
   var num = req.body.number;
