@@ -11,11 +11,9 @@ var ItemSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Category'
   },
-  specification: [{
-    name: String,
-    price: Number,
-    inventory: Number
-  }],
+  specification: String,
+  price: Number,
+  inventory: Number,
   isRecommend: Boolean
 });
 
