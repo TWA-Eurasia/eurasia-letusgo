@@ -22,7 +22,6 @@ router.get('/:id', function(req, res) {
           res.render('itemDetails', {
             itemDetails: itemDetails
           });
-
         });
     });
 });
