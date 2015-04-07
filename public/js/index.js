@@ -36,4 +36,9 @@ $(document).ready(function () {
     location.href = '/itemDetails/' + id;
   });
 
+  var $button = $('.button');
+  $button.on('click', function() {
+    var id = $(this).data('id');
+    location.href = '/itemDetails/' + id;
+  })
 });
