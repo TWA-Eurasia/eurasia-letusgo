@@ -23,7 +23,7 @@ $(document).ready(function () {
         $('#sec').text(count);
         jump(count);
       } else {
-        location.href = "/helloWorld";
+        location.href = "/";
       }
     }, 1000);
   }
