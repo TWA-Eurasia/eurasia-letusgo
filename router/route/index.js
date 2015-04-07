@@ -28,7 +28,7 @@ router.get('/index/:pageNumber', function(req, res) {
 
 });
 
-router.get('/categoryView/:id', function(req, res) {
+router.get('/subCategoryView/:id', function(req, res) {
 
   var id = req.params.id;
 
