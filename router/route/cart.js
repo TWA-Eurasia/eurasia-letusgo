@@ -82,23 +82,25 @@ router.post('/:id', function (req, res, next) {
 
 router.delete('/:cartItemId', function (req, res) {
   var cartItemId = req.params.cartItemId;
-  //var cartId = req.body.cartId;
-  var cartId = '551fb07aa070742e4df671b4';
+  var cartId = '551cc282a6b79c584b59bc0f';
 
   Cart.findById(cartId, function (err, cart) {
     if (err) {
       throw err;
     }
     cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
-      return cartItem._id.toString() !== cartItemId;
+      return cartItem.toString() !== cartItemId;
     });
 
-    cart.save(function (err, cart) {
-      if (err) {
-        throw err;
-      }
-      res.send(cart);
+    CartItem.remove({_id: cartItemId}, function(){
 
+      cart.save(function (err, cart) {
+        if (err) {
+          throw err;
+        }
+        res.send(cart);
+
+      });
     });
   });
 });
