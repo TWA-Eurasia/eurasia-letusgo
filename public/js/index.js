@@ -6,30 +6,23 @@ require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
-  $('.pagination').pagination({
+  if(application.index.pageCount > 1) {
+    var visiblePageCount = 7;
+    $('.pagination').pagination({
+      pageCount: application.index.pageCount,
+      currentPage: application.index.currentPage,
+      visiblePageCount: visiblePageCount,
+      onPageChange: function(n) {
+        var path = '/index/';
+        if(application.index.isCategory) {
 
-    pageCount: application.index.pageCount,
-    currentPage: application.index.currentPage,
-    visiblePageCount: 7,
-    onPageChange: function(n) {
-
-      var path = '/index/';
-      if(application.index.isCategory) {
-
-        path = '/categoryView/' + pathId + '/';
+          var pathId = location.href.toString().split('/')[4];
+          path = '/' + location.href.toString().split('/')[3] + '/' + pathId + '/';
+        }
+        location.href = path + n;
       }
-
-      location.href = path + n;
-    }
-  });
-
-  //var $secondMenu = $('.secondMenu');
-  //$secondMenu.on('click', function(c) {
-  //
-  //  pathId = $(this).data('id');
-  //  console.log(pathId);
-  //
-  //});
+    });
+  }
 
   var $firstMenu = $('.firstMenu');
   $firstMenu.on('click', function() {
