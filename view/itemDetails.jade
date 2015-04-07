@@ -32,25 +32,26 @@ block content
               tr
                 td.five.wide.column 单价
                 td
-                  span#itemPrice #{itemDetails.item.specification[0].price}
+                  //- span#itemPrice #{itemDetails.item.specification[0].price}
+                  //- span  元
+                  span#itemPrice #{itemDetails.item.price}
                   span  元
-
-              - var name = itemDetails.item.specification[0].name
-              - var isDisplay = (name === '') ? 'none' : ''
-              - var attributes = {'style': 'display: ' + isDisplay}
-                tr&attributes(attributes)
-                  td 规格
-                  td
-                    .ui.form
-                      .inline.fields
-                        - each detail in itemDetails.item.specification
-                          -var price = detail.price
-                          -var itemId = detail.specification
-                          -var inventory = detail.inventory
-                            .field
-                              .ui.radio
-                                input.specification(id = itemId, data-price = price, data-inventory = inventory, type="radio", name="specification", checked=isChecked)
-                                label #{detail.name}
+              //- - var name = itemDetails.item.specification[0].name
+              //- - var isDisplay = (name === '') ? 'none' : ''
+              //- - var attributes = {'style': 'display: ' + isDisplay}
+              //-   tr&attributes(attributes)
+              //-     td 规格
+              //-     td
+              //-       .ui.form
+              //-         .inline.fields
+              //-           - each detail in itemDetails.item.specification
+              //-             -var price = detail.price
+              //-             -var itemId = detail.specification
+              //-             -var inventory = detail.inventory
+              //-               .field
+              //-                 .ui.radio
+              //-                   input.specification(id = itemId, data-price = price, data-inventory = inventory, type="radio", name="specification", checked=isChecked)
+              //-                   label #{detail.name}
               tr
                 td 数量
                 td
@@ -61,7 +62,10 @@ block content
               tr
                 td 库存
                 td
-                  span#inventory #{itemDetails.item.specification[0].inventory}
+                  //- span#inventory #{itemDetails.item.specification[0].inventory}
+                  //- span  #{itemDetails.item.unit}
+                  
+                  span#inventory #{itemDetails.item.inventory}
                   span  #{itemDetails.item.unit}
 
           button.ui.primary.button
