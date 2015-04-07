@@ -12,7 +12,7 @@ block title
 
 block content
   .ui.grid
-    .sixteen.wide.centered.column
+    .sixteen.wide.column
     .sixteen.wide.column
       h1.ui.header.centered
         .content
@@ -22,23 +22,23 @@ block content
       table.ui.large.table
         thead
           tr
-          th.two.wide.column 图片
-          th.two.wide.column 名称
-          th.two.wide.column 单价
-          th.two.wide.column 单位
-          th.two.wide.column 数量
-          th.two.wide.column 小计
+          th.two.wide.column(style="text-align: center") 图片
+          th.two.wide.column(style="text-align: center") 名称
+          th.two.wide.column(style="text-align: center") 单价
+          th.two.wide.column(style="text-align: center") 单位
+          th.two.wide.column(style="text-align: center") 数量
+          th.two.wide.column(style="text-align: center") 小计
 
-        tbody
+        tbody.centered
           -each cartItem in cartItems
              tr
-               td
+               td(style="text-align: center")
                 img(src="#{cartItem.item.image}",width='70px',height='70px')
-               td #{cartItem.item.name}
-               td #{cartItem.item.price} 元
-               td #{cartItem.item.unit}
-               td #{cartItem.number}
-               td #{cartItem.getSubtotal()} 元
+               td(style="text-align: center") #{cartItem.item.name}
+               td(style="text-align: center") #{cartItem.item.price} 元
+               td(style="text-align: center") #{cartItem.item.unit}
+               td(style="text-align: center") #{cartItem.number}
+               td(style="text-align: center") #{cartItem.getSubtotal()} 元
 
       h2(align="right") 总计：
         span(style='color:red') #{total}
