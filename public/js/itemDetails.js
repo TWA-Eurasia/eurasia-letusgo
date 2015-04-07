@@ -57,11 +57,12 @@ $(document).ready(function() {
 
   $('.addToCart').on('click', function () {
 
-    var itemId = this.id;
+    var itemId = $(this).data('id');
+
     var numberInput = parseInt($('#numberInput').val());
       $.ajax({
-        url: 'cart/' + itemId,
-        type: 'PUT',
+        url: '../cart/' + itemId,
+        type: 'POST',
         data: {number: numberInput}
       })
   });

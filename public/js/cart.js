@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     $.ajax({
       url: 'cart/' + id,
-      type: 'POST',
+      type: 'PUT',
       data: {number: num, price: price, total: total},
 
       success: function (data) {
