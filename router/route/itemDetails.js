@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 
@@ -14,7 +15,6 @@ router.get('/:id', function(req, res) {
       Category.findById(item.category._id)
         .populate('parent')
         .exec(function(err, category) {
-
           var itemDetails = {
             item: item,
             category: category
@@ -23,6 +23,7 @@ router.get('/:id', function(req, res) {
           res.render('itemDetails', {
             itemDetails: itemDetails
           });
+
         });
     });
 });
