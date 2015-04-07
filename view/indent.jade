@@ -1,81 +1,59 @@
-doctype html
-html
-  head
-    meta(charset="utf-8")
-    meta(name="viewport" content="width=device-width")
-    block css
-      script(src="jspm_packages/system.js")
-      script(src="config.js")
-      link(rel="stylesheet" type="text/css" href="/jspm_packages/github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic.css")
+extends ./navBar.jade
 
-      script.
-        System.import('js/indent')
+block css
+  script(src="jspm_packages/system.js")
+  script(src="config.js")
+  link(rel="stylesheet" type="text/css" href="/jspm_packages/github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic.css")
+  script.
+    System.import('js/indent')
 
-    block title
-      title 首页
-  body
-    .container
-    .ui.inverted.masthead.segment
-      .row
-        .sixteen.wide.column
-          .ui.inverted.teal.menu
-            .left.menu
-              a.ui.item LetUsGo
-              block home
-                a#homeLink.ui.link.item(href="/") 主页
-                i.home.icon
-              block shop
-                a.ui.link.item(href="shop") 商城
-              block management
-                a.ui.link.item(href="shopManagement") 商城管理
-            .right.menu
-              block cart
-                a.ui.link.item(href="cart") 购物车
-                  i.cart.in.icon
-    block content
-    .ui.grid
-      .ten.wide.column.centered
-        h1 商品清单
-      .twelve.wide.centered.column
-        table.ui.large.table
-          thead
-            tr
-            th.two.wide 图片
-            th.two.wide 名称
-            th.two.wide 单价
-            th.two.wide 单位
-            th.two.wide 数量
-            th.two.wide 小计
+block title
+  title 支付订单
 
-          tbody.center
-            -each cartItem in cartItems
-               tr
-                 td
-                  img(src="#{cartItem.item.image}",width='70px',height='70px')
-                 td #{cartItem.item.name}
-                 td #{cartItem.item.price} 元
-                 td #{cartItem.item.unit}
-                 td #{cartItem.number}
-                 td #{cartItem.getSubtotal()} 元
+block content
+  .ui.grid
+    .ten.wide.column.centered
+      h1 商品清单
+    .twelve.wide.centered.column
+      table.ui.large.table
+        thead
+          tr
+          th.two.wide 图片
+          th.two.wide 名称
+          th.two.wide 单价
+          th.two.wide 单位
+          th.two.wide 数量
+          th.two.wide 小计
 
-        h2(align="right") 总计：
-          span(style='color:red') #{total}
-          span 元
-        a.ui.red.right.floated.right.labeled.icon.button#pay 支付
-          i.right.arrow.icon
+        tbody.center
+          -each cartItem in cartItems
+             tr
+               td
+                img(src="#{cartItem.item.image}",width='70px',height='70px')
+               td #{cartItem.item.name}
+               td #{cartItem.item.price} 元
+               td #{cartItem.item.unit}
+               td #{cartItem.number}
+               td #{cartItem.getSubtotal()} 元
 
-      .ui.first.coupled.small.modal.transition
-        .content
-          .description
-            p 您确认要支付吗？
-        .actions
-          .primary.ui.button.nopay 取消
-          a.ui.positive.right.labeled.icon.button#isPaid(data-total= total, data-cart = cartItems, data-indentId = indent._id ) 支付
-            i.checkmark.icon
+      h2(align="right") 总计：
+        span(style='color:red') #{total}
+        span 元
+      a.ui.red.right.floated.right.labeled.icon.button#pay 支付
+        i.right.arrow.icon
 
-      //.ui.second.small.coupled.modal.transition.hidden
-      //  .content
-      //    .description
-      //      p 我是第二个模态框
-      //  .actions
-      //    .primary.ui.button.confirm 确定
+    .ui.first.coupled.small.modal.transition
+      .content
+        .description
+          p 您确认要支付吗？
+      .actions
+        .primary.ui.button.nopay 取消
+        a.ui.positive.right.labeled.icon.button#isPaid(data-total= total, data-cart = cartItems, data-indentId = indent._id ) 支付
+          i.checkmark.icon
+
+    //.ui.second.small.coupled.modal.transition.hidden
+    //  .content
+    //    .description
+    //      p 我是第二个模态框
+    //  .actions
+    //    .primary.ui.button.confirm 确定
