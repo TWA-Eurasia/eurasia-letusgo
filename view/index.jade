@@ -38,16 +38,6 @@ html
         //    button.ui.icon.button
         //      i.search.icon
       .ui.grid
-        .sixteen.wide.column
-          .ui.inverted.teal.menu
-            .left.menu
-              a.ui.item LetUsGo
-                a#homeLink.ui.active.link.item(href="/") 首页
-                i.home.icon
-            .right.menu
-                a.ui.link.item(href="cart") 购物车
-                  i.cart.in.icon
-      .ui.grid
         .four.wide.column
           .ui.secondary.vertical.menu
             .ui.dropdown.item#categoryTitle 商品服务分类
@@ -58,6 +48,15 @@ html
                   - each subCategory in mainCategory.subCategories
                     a.item.secondMenu(data-id="#{subCategory._id}" href="/categoryView/#{subCategory._id}") #{subCategory.name}
         .twelve.wide.column
+          .ui.twelve.column.grid
+            .ui.inverted.teal.menu
+              .left.menu
+                a.ui.item LetUsGo
+                  a#homeLink.ui.active.link.item(href="/") 首页
+                  i.home.icon
+              .right.menu
+                a.ui.link.item(href="cart") 购物车
+                  i.cart.in.icon
           .ui.four.column.grid
             - each item in items
               .column
