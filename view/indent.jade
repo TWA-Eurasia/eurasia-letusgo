@@ -12,20 +12,24 @@ block title
 
 block content
   .ui.grid
-    .ten.wide.column.centered
-      h1 商品清单
-    .twelve.wide.centered.column
+    .sixteen.wide.centered.column
+    .sixteen.wide.column
+      h1.ui.header.centered
+        .content
+         i.icon.browser
+         .content 商品清单
+    .twelve.wide.column.centered
       table.ui.large.table
         thead
           tr
-          th.two.wide 图片
-          th.two.wide 名称
-          th.two.wide 单价
-          th.two.wide 单位
-          th.two.wide 数量
-          th.two.wide 小计
+          th.two.wide.column 图片
+          th.two.wide.column 名称
+          th.two.wide.column 单价
+          th.two.wide.column 单位
+          th.two.wide.column 数量
+          th.two.wide.column 小计
 
-        tbody.center
+        tbody
           -each cartItem in cartItems
              tr
                td
