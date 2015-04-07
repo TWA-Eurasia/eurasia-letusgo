@@ -10,4 +10,5 @@ module.exports = function (app) {
 
     app.use('/indent', require('./route/indent'));
     app.use('/success', require('./route/success'));
+    app.use('/api/user', require('./route/user'));
 };
