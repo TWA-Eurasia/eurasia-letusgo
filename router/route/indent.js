@@ -3,6 +3,7 @@ var router = express.Router();
 var Indent = require('../../model/indent.js');
 var Item = require('../../model/item.js');
 var CartItem = require('../../model/cartItem.js');
+var User = require('../../model/user.js');
 var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
@@ -18,6 +19,17 @@ router.get('/', function (req, res, next) {
           var total = indent.getTotal(cartItems);
           res.render('indent', {cartItems: cartItems, total: total, indent: indent});
         });
+    });
+});
+
+router.get('/', function (req, res, next) {
+
+  User.findById('551fd2a9ecb148410c4c8048')
+    .populate('indents')
+    .exec(function (err, user) {
+      res.send('user', {user: user});
+
+
     });
 });
 
