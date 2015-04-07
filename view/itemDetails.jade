@@ -32,7 +32,7 @@ block content
               tr
                 td.five.wide.column 单价
                 td
-                  span#itemPrice #{itemDetails.item.specification[0].price}
+                  span#itemPrice #{itemDetails.item.price}
                   span  元
 
               //- var name = itemDetails.item.specification[0].name
@@ -67,7 +67,7 @@ block content
                   span#inventory #{itemDetails.item.inventory}
                   span  #{itemDetails.item.unit}
 
-          button.ui.primary.button
+          button.ui.primary.button.addToCart(data-id="#{itemDetails.item.id}")
             i.cart.in.icon
             span 添加到购物车
             i.right.chevron.icon
