@@ -32,6 +32,12 @@ $(document).ready(function () {
   //
   //});
 
+  var $firstMenu = $('.firstMenu');
+  $firstMenu.on('click', function() {
+    var id = $(this).data('id');
+    location.href = '/categoryView/' + id;
+  });
+
   var $image = $('.image');
   $image.on('click', function() {
     var id = $(this).data('id');

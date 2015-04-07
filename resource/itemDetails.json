@@ -1,1 +1,1 @@
-{"name":"男士短袖", "unit":"件", "image":"image/11.jpg", "description":"这是个男士上衣", "category":"551aa95e2ef086a169628b74", "specification":[{"name":"30", "price":30, "inventory":30},{"name":"40", "price":40, "inventory":40},{"name":"50", "price":50, "inventory":50}]}
+{"name":"男士短袖", "unit":"件", "image":"image/11.jpg", "description":"这是个男士上衣", "category": ObjectId("5519881c0042a1db62223b04"), "specification":[{"name":"30", "price":30, "inventory":30},{"name":"40", "price":40, "inventory":40},{"name":"50", "price":50, "inventory":50}], "isRecommend": true}
