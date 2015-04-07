@@ -39,7 +39,7 @@ router.get('/subCategoryView/:id', function(req, res) {
 
 });
 
-router.get('/categoryView/:id/:pageNumber', function (req, res) {
+router.get('/subCategoryView/:id/:pageNumber', function (req, res) {
 
   var id = req.params.id;
   var pageNumber = req.params.pageNumber;
@@ -58,20 +58,21 @@ router.get('/categoryView/:id/:pageNumber', function (req, res) {
 router.post('/', function(req, res) {
 
   Item.create({
-    name: '雪纺衫',
+    name: '针织衫',
     unit: '件',
-    price: 199,
-    image: 'image/georgette.jpg',
-    description: '这是件雪纺衫',
-    inventory: 100,
-    category: '5519881c0042a1db62223b09',
-    specification: 'S',
+    image: 'image/hahh.jpg',
+    description: '这是件针织衫',
+    category: '5519881c0042a1db62223b0b',
+    specification: [
+      {name: 'S', price: 199, inventory: 90},
+      {name: 'M', price: 199, inventory: 90},
+      {name: 'L', price: 199, inventory: 90}
+    ],
     isRecommend: true}, function(err, item) {
 
       res.send(item);
   });
 });
-
 
 function initItems (query, start, pageSize, callback) {
 

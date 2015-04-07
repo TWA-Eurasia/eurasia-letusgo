@@ -17,7 +17,7 @@ $(document).ready(function () {
         if(application.index.isCategory) {
 
           var pathId = location.href.toString().split('/')[4];
-          path = '/categoryView/' + pathId + '/';
+          path = '/subCategoryView/' + pathId + '/';
         }
         location.href = path + n;
       }

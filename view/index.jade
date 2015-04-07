@@ -55,5 +55,5 @@ html
                   img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
                 .info
                   .name #{item.name}
-                  p.price #{item.price}元
+                  p.price #{item.specification[0].price}元
           .pagination
