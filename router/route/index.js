@@ -28,6 +28,33 @@ router.get('/index/:pageNumber', function(req, res) {
 
 });
 
+router.get('/categoryView/:id', function(req, res) {
+
+  var id = req.params.id;
+
+  var items = [];
+  Item.find(function(err, data) {
+    items.push(data);
+  });
+
+  Category.find({parent : id},function (err, subCategories) {
+
+    var newItems = [];
+    subCategories.forEach(function(subCategory) {
+      items.forEach(function(item) {
+
+      })
+    });
+
+  });
+
+  //initCategories({category: id}, 0, 2, function(mainCategories, items, pageCount) {
+  //
+  //  res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1, isCategory: true});
+  //});
+
+});
+
 router.get('/subCategoryView/:id', function(req, res) {
 
   var id = req.params.id;
