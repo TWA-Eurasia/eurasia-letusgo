@@ -99,4 +99,14 @@ input.topsearch
   display: block;
   background: rgba(255, 255, 255, 0.5);
 }
+.ui.four.column.grid
+{
+  padding-left: 0;
+  padding-right: 20px;
+}
+.pagination
+{
+  padding-left: 500px;
+  padding-top: 30px;
+}
 

@@ -23,7 +23,7 @@ block content
         .nine.wide.column
           .ui.fluid.card(style="height:400px; background:black;")
             - var imageUrl = itemDetails.item.image
-            img.ui.image(src='/' + imageUrl onerror="this.src='/image/nopicture.jpg'" style="vertical-align:middle")
+            img.ui.image(src="/" + imageUrl onerror="this.src='/image/nopicture.jpg'" style="vertical-align:middle")
 
         .seven.wide.column
           h2.ui.floated.header.orange.backge #{itemDetails.item.name}
