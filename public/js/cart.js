@@ -2,6 +2,8 @@
 var $ = require('jquery');
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
+var deleteId;
+var closeTr;
 
 $(document).ready(function () {
 
@@ -127,22 +129,26 @@ $(document).ready(function () {
 
     var delete_cartItem = this;
 
+    deleteId = delete_cartItem.closest('td').id;
+    closeTr = delete_cartItem.closest('tr');
+
     $('.first.modal')
       .modal('show');
+  });
 
-    $('.yes').on('click', function (event) {
-      var id = delete_cartItem.closest('td').id;
+  $('.yes').on('click', function (event) {
 
-      $.ajax({
-        url: 'cart/' + id,
-        type: 'DELETE',
+    $.ajax({
+      url: 'cart/' + deleteId,
+      type: 'DELETE',
 
-        success: function (data) {
-          $(delete_cartItem.closest('tr')).replaceWith(
-            "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
-          jump(2, delete_cartItem);
-        }
-      })
+      success: function (data) {
+
+        closeTr.remove();
+        //$(delete_cartItem.closest('tr')).replaceWith(
+        //  "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
+        //jump(2, delete_cartItem);
+      }
     })
   });
 
