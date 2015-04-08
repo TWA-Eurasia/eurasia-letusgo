@@ -105,12 +105,14 @@ input.topsearch
 {
   color: #fff;
 }
+
 .ui.dropdown.item#categoryTitle
 {
   margin: 0;
   font-size: 15px;
   background: #C30000;
 }
+
 .ui.dropdown.item:hover {
   background: darkred;
 }
@@ -119,19 +121,27 @@ input.topsearch
   display: block;
   background: rgba(255, 255, 255, 0.5);
 }
+
 .ui.four.column.grid
 {
   padding-left: 0;
   padding-right: 20px;
 }
+
 .ui.inverted.teal.menu
 {
   padding: 0px;
 }
+
 .ui.segment>img
 {
   cursor: pointer;
 }
+.itemDiv
+{
+  border: 1px solid #E5E5E5;
+}
+
 .pagination
 {
   padding-left: 750px;
