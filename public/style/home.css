@@ -137,8 +137,9 @@ input.topsearch
 {
   cursor: pointer;
 }
-.itemDiv
+.ui.grid>.column.itemDiv
 {
+  margin: 5px;
   border: 1px solid #E5E5E5;
 }
 
@@ -182,7 +183,6 @@ ul,li
 .pagination li.current
 {
   background: teal;
-
 }
 
 .pagination li.current:hover
