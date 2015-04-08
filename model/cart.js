@@ -14,11 +14,9 @@ CartSchema.methods.getTotal = function(cartItems){
 
   var totalAmount = 0;
   cartItems.forEach(function (cartItem) {
-
-    totalAmount += cartItem.getSubtotal();
+    totalAmount += parseFloat(cartItem.getSubtotal());
   });
-  return totalAmount;
-
+  return totalAmount.toFixed(2);
 };
 
 module.exports = mongoose.model('Cart', CartSchema);
