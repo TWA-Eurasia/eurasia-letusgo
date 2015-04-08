@@ -8,7 +8,6 @@ var Item = require('../../model/item');
 
 router.get('/', function(req, res) {
 
-
   initCategories({isRecommend: true}, 0, 2, function(mainCategories, items, pageCount) {
 
     res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1, isCategory: false});
