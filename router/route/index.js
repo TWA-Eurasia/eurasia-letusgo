@@ -28,7 +28,7 @@ router.get('/index/:pageNumber', function(req, res) {
 
 });
 
-router.get('/categoryView/:id', function(req, res) {
+router.get('/category/:id', function(req, res) {
 
   var id = req.params.id;
 
@@ -39,7 +39,7 @@ router.get('/categoryView/:id', function(req, res) {
 
 });
 
-router.get('/categoryView/:id/:pageNumber', function (req, res) {
+router.get('/category/:id/:pageNumber', function (req, res) {
 
   var id = req.params.id;
   var pageNumber = req.params.pageNumber;
