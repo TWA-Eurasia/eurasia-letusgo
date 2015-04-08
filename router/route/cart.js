@@ -45,9 +45,11 @@ router.post('/:id', function (req, res) {
       number = result.number + number;
       CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function (err) {
         if (err) console.log(err);
+        res.sendStatus(200);
       });
     } else {
       CartItem.create({item: id, number: number});
+      res.sendStatus(200);
     }
 
   });
