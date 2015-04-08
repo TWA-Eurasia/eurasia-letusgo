@@ -145,6 +145,9 @@ $(document).ready(function () {
 
         $(delete_cartItem.closest('tr')).replaceWith(
           "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
+
+        $("#total").text(data.total);
+
         jump(1, delete_cartItem);
       }
     })

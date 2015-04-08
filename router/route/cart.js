@@ -68,8 +68,12 @@ router.delete('/:cartItemId', function (req, res) {
         if (err) {
           throw err;
         }
-        res.send(cart);
+        CartItem.find()
+          .populate('item')
+          .exec(function(err, cartItems){
 
+            res.send({cart:cart, total:cart.getTotal(cartItems)});
+          });
       });
     });
   });
