@@ -5,6 +5,10 @@ require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
+  $('.itemName').popup( {
+    content: $(this).prop("data-content")
+  });
+
   $('#pay').on('click', function () {
 
     $('.first.modal')

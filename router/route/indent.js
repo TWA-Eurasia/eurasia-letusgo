@@ -16,6 +16,14 @@ router.get('/', function (req, res, next) {
         .populate('item')
         .exec(function (err, cartItems) {
 
+          cartItems.forEach(function (cartItem) {
+            if (cartItem.item.name.length > 8) {
+              cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
+            } else {
+              cartItem.item.shortName = cartItem.item.name;
+            }
+          });
+
           var total = indent.getTotal(cartItems);
           res.render('indent', {cartItems: cartItems, total: total, indent: indent});
         });

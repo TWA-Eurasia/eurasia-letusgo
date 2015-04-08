@@ -33,8 +33,10 @@ block content
           -each cartItem in cartItems
              tr
                td(style="text-align: center")
-                img(src="#{cartItem.item.image}",width='70px',height='70px')
-               td(style="text-align: center") #{cartItem.item.name}
+                a(href='/itemDetails/#{cartItem.item.id}')
+                  img.ui.fluid.image(src="#{cartItem.item.image}",width='70px',height='70px')
+               td
+                a.itemName(data-content="#{cartItem.item.name}" style="text-align: center" href="/itemDetails/#{cartItem.item.id}") #{cartItem.item.shortName}
                td(style="text-align: center") #{cartItem.item.price} 元
                td(style="text-align: center") #{cartItem.item.unit}
                td(style="text-align: center") #{cartItem.number}
