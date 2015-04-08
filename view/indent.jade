@@ -3,9 +3,9 @@ extends ./navBar.jade
 block css
   script(src="jspm_packages/system.js")
   script(src="config.js")
-  link(rel="stylesheet" type="text/css" href="/jspm_packages/github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic.css")
+  link(rel="styleSheet" type="text/css" href="/style/indent.css")
   script.
-    System.import('js/indent')
+    System.import("js/indent")
 
 block title
   title 支付订单
@@ -32,8 +32,8 @@ block content
           -each cartItem in cartItems
              tr
                td(style="text-align: center")
-                a(href='/itemDetails/#{cartItem.item.id}')
-                  img.ui.fluid.image(src="#{cartItem.item.image}",width='70px',height='70px')
+                a(href="/itemDetails/#{cartItem.item.id}")
+                  img.ui.fluid.image.size(src="#{cartItem.item.image}")
                td(style="text-align: center")
                 a.itemName(data-content="#{cartItem.item.name}" href="/itemDetails/#{cartItem.item.id}") #{cartItem.item.shortName}
                td(style="text-align: center") #{cartItem.item.price} 元
@@ -42,11 +42,11 @@ block content
                td(style="text-align: center") #{cartItem.getSubtotal()} 元
 
       h2(align="right") 总计：
-        span(style='color:red') #{total}
+        span.red #{total}
         span 元
       a.ui.red.right.floated.right.labeled.icon.button#pay 支付
         i.right.arrow.icon
-        span#shortedCartItemName(style="display: none;") #{shortedCartItemName}
+        span#shortedCartItemName.display.none #{shortedCartItemName}
 
     .ui.first.coupled.small.modal.transition
       .content
