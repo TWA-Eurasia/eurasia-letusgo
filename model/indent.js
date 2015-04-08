@@ -15,10 +15,10 @@ IndentSchema.methods.getTotal = function(cartItems) {
   var total = 0;
 
   cartItems.forEach(function(cartItem) {
-    total += cartItem.getSubtotal();
+    total += parseFloat(cartItem.getSubtotal());
   });
 
-  return total;
+  return total.toFixed(2);
 };
 
 module.exports = mongoose.model('Indent',IndentSchema);
