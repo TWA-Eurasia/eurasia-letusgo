@@ -67,7 +67,7 @@ router.put('/:id', function (req, res, next) {
     CartItem.update({_id: cartItemId}, {$set: {number: num}}, {upsert: true}, function () {
       var subtotal = price * num;
       total = total - current + subtotal;
-      res.send({subtotal: subtotal, total: total});
+      res.send({subtotal: subtotal.toFixed(2), total: total.toFixed(2)});
 
     });
   });
@@ -95,7 +95,7 @@ router.delete('/:cartItemId', function (req, res) {
           .populate('item')
           .exec(function(err, cartItems){
 
-            res.send({cart:cart, total:cart.getTotal(cartItems)});
+            res.send({cart:cart, total:cart.getTotal(cartItems).toFixed(2)});
           });
       });
     });
