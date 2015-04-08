@@ -13,9 +13,9 @@ block content
     .ui.grid.centered
       .sixteen.wide.column
         .ui.large.breadcrumb
-          a.section(href="/category/" + "#{itemDetails.category.parent._id}") #{itemDetails.category.parent.name}
+          a.section(href="/categories/" + "#{itemDetails.category.parent._id}") #{itemDetails.category.parent.name}
           i.right.chevron.icon.ider
-          a.section(href="/category/" + "#{itemDetails.category._id}") #{itemDetails.item.category.name}
+          a.section(href="/categories/" + "#{itemDetails.category._id}") #{itemDetails.item.category.name}
           i.right.chevron.icon.ider
           .active.section #{itemDetails.item.name}
 

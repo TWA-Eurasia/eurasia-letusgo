@@ -27,7 +27,7 @@ $(document).ready(function () {
   var $firstMenu = $('.firstMenu');
   $firstMenu.on('click', function() {
     var id = $(this).data('id');
-    location.href = '/category/' + id;
+    location.href = '/categories/' + id;
   });
 
   var $image = $('.image');

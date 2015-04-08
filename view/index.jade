@@ -46,7 +46,7 @@ html
                 i.dropdown.icon
                 .menu
                   - each subCategory in mainCategory.subCategories
-                    a.item.secondMenu(data-id="#{subCategory._id}" href="/category/#{subCategory._id}") #{subCategory.name}
+                    a.item.secondMenu(data-id="#{subCategory._id}" href="/categories/#{subCategory._id}") #{subCategory.name}
         .twelve.wide.column
           .ui.twelve.column.grid
             .ui.inverted.teal.menu
