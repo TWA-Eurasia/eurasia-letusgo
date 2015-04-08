@@ -27,13 +27,13 @@ $(document).ready(function () {
   var $firstMenu = $('.firstMenu');
   $firstMenu.on('click', function() {
     var id = $(this).data('id');
-    location.href = '/categoryView/' + id;
+    location.href = '/categories/' + id;
   });
 
   var $image = $('.image');
   $image.on('click', function() {
     var id = $(this).data('id');
-    location.href = '/itemDetails/' + id;
+    location.href = '/items/' + id;
   });
 
   var $itemName = $('.itemName');
@@ -44,6 +44,6 @@ $(document).ready(function () {
   var $button = $('.button');
   $button.on('click', function() {
     var id = $(this).data('id');
-    location.href = '/itemDetails/' + id;
+    location.href = '/items/' + id;
   })
 });
