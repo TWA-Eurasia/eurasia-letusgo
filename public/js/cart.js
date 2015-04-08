@@ -4,6 +4,7 @@ var $ = require('jquery');
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 var delete_cartItem;
+var JUMP_TIME = 1;
 
 $(document).ready(function () {
 
@@ -143,7 +144,7 @@ $(document).ready(function () {
 
         $("#total").text(data.total);
 
-        jump(1, delete_cartItem);
+        jump(JUMP_TIME, delete_cartItem);
       }
     })
   });
