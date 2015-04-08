@@ -59,7 +59,7 @@ html
                   i.cart.in.icon
           .ui.four.column.grid
             - each item in items
-              .column
+              .column.itemDiv
                 .ui.segment
                   img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
                 .info
