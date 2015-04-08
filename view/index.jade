@@ -63,7 +63,7 @@ html
                 .ui.segment
                   img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
                 .info
-                  a.name(href="/itemDetails/#{item._id}") #{item.name}
+                  a.name.itemName(href="/itemDetails/#{item._id}" data-content="#{item.name}") #{item.shortName}
                   p.price #{item.price}元
                   .ui.red.button(data-id="#{item._id}") 立即购买
           .pagination

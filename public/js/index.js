@@ -36,6 +36,11 @@ $(document).ready(function () {
     location.href = '/itemDetails/' + id;
   });
 
+  var $itemName = $('.itemName');
+  $itemName.popup( {
+    content: $(this).prop("data-content")
+  });
+
   var $button = $('.button');
   $button.on('click', function() {
     var id = $(this).data('id');
