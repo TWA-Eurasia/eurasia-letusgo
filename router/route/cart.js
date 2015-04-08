@@ -14,13 +14,12 @@ router.get('/', function (req, res) {
     .populate('cartItems')
     .exec(function (err, cart) {
 
-
       CartItem.find()
         .populate('item')
         .exec(function (err, cartItems) {
 
-          cartItems.forEach(function(cartItem) {
-            if(cartItem.item.name.length > 8) {
+          cartItems.forEach(function (cartItem) {
+            if (cartItem.item.name.length > 8) {
               cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
             } else {
               cartItem.item.shortName = cartItem.item.name;
@@ -33,24 +32,23 @@ router.get('/', function (req, res) {
     })
 });
 
-router.post('/:id',function(req,res){
+router.post('/:id', function (req, res) {
   var number = parseInt(req.body.number);
   var id = req.params.id;
 
-  CartItem.find({},function (err, cartItems) {
-    cartItems.forEach(function(cartItem) {
-      if(cartItem.item != id){
-        CartItem.create({item: id, number: number});
-        return;
-      }else{
-        number = cartItem.number + number;
-        console.log('33333');
-        CartItem.update({item: id},{$set: {number: number}},{upsert: true},function(err){
-          if (err) console.log(err);
-        });
-        return;
-      }
+  CartItem.find(function (err, cartItems) {
+    var result = _.find(cartItems, function (cartItem) {
+      return cartItem.item.toString() === id;
     });
+
+    if (result) {
+      number = result.number + number;
+      CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function (err) {
+        if (err) console.log(err);
+      });
+    } else {
+      CartItem.create({item: id, number: number});
+    }
 
   });
 });
