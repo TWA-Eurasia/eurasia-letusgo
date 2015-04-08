@@ -17,7 +17,6 @@ CartSchema.methods.getTotal = function(cartItems){
 
     totalAmount += cartItem.getSubtotal();
   });
-  console.log(totalAmount + "---------");
   return totalAmount;
 
 };
