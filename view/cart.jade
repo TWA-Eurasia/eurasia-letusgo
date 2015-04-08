@@ -4,8 +4,6 @@ block css
   script(src="jspm_packages/system.js")
   script(src="config.js")
   script.
-    System.import('semantic-ui')
-    System.import('jquery/jquery')
     System.import('js/cart')
   link(rel="stylesheet" type="text/css" href="/jspm_packages/github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic.css")
 
@@ -70,9 +68,9 @@ block content
           .description
             p 您确认要删除吗？
         .actions
-          .primary.ui.button.no 不要
+          .primary.ui.button.no 取消
 
-          a.ui.positive.right.labeled.icon.button.yes 删除
+          a.ui.positive.right.labeled.icon.button.yes#yes 删除
             i.checkmark.icon
 
 
