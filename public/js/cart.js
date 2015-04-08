@@ -1,9 +1,8 @@
 'use strict';
+
 var $ = require('jquery');
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
-//var deleteId;
-//var closeTr;
 var delete_cartItem;
 
 $(document).ready(function () {
@@ -126,7 +125,7 @@ $(document).ready(function () {
   }
 
 
-  $('.delete_cartItem').on('click', function (event) {
+  $('.delete_cartItem').on('click', function () {
 
     delete_cartItem = this;
 
@@ -134,7 +133,7 @@ $(document).ready(function () {
       .modal('show');
   });
 
-  $('.yes').on('click', function (event) {
+  $('.yes').on('click', function () {
 
     var deleteId = delete_cartItem.closest('td').id;
 
