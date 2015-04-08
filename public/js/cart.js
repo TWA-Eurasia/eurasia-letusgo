@@ -57,7 +57,7 @@ $(document).ready(function () {
     }
   });
 
-  $('i.caret.left').on('click', function () {
+  $('i.minus.square.icon').on('click', function () {
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
     }
   });
 
-  $('i.caret.right').on('click', function () {
+  $('i.add.square.icon').on('click', function () {
 
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());

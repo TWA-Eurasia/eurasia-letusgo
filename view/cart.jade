@@ -23,24 +23,25 @@ block content
             th.two.wide 数量
             th.two.wide 小计
             th.two.wide
-            th.two.wide
-              input#allChecked(type="checkbox" name="checkedAllCartItem" checked)
-              span 全选
+            //th.two.wide
+            //  input#allChecked(type="checkbox" name="checkedAllCartItem" checked)
+            //  span 全选
           tbody.center
             - each cartItem in cartItems
               tr(data-id="#{cartItem._id}")
                 td
-                  image.ui.fluid.image(src="#{cartItem.item.image}")
+                  a(href='/itemDetails/#{cartItem.item.id}')
+                    image.ui.fluid.image(src="#{cartItem.item.image}" href='/itemDetails/#{cartItem.item.id}')
                 td
-                  div.itemName(data-content="#{cartItem.item.name}") #{cartItem.item.shortName}
+                  a.itemName(data-content="#{cartItem.item.name}" href='/itemDetails/#{cartItem.item.id}') #{cartItem.item.shortName}
                 td
                   span#price #{cartItem.item.price}
                   span 元
                 td
                   div
-                    i.caret.left.icon
+                    i.minus.square.icon
                     input(type="text" value="#{cartItem.number}" id="number" style="text-align:center; height: 20%; width:40%")
-                    i.caret.right.icon
+                    i.add.square.icon
                   div.ui.negative.message#inventory(style="display: none;") 最多能购买
                     span#leftNumber #{cartItem.item.inventory}
                     span 件
@@ -51,8 +52,8 @@ block content
                   span 元
                 td(id ="#{cartItem._id}")
                   .ui.red.button.delete_cartItem 删除
-                td
-                  input.checkedCartItem(type="checkbox" name="checkedCartItem" checked)
+                //td
+                //  input.checkedCartItem(type="checkbox" name="checkedCartItem" checked)
 
           tfoot.right
             tr
