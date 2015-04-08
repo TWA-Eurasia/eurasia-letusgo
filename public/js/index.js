@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 var _ = require('lodash');
 var $ = require('./jquery.pagination');
@@ -17,7 +17,7 @@ $(document).ready(function () {
         if(application.index.isCategory) {
 
           var pathId = location.href.toString().split('/')[4];
-          path = '/categoryView/' + pathId + '/';
+          path = '/' + location.href.toString().split('/')[3] + '/' + pathId + '/';
         }
         location.href = path + n;
       }
@@ -35,4 +35,10 @@ $(document).ready(function () {
     var id = $(this).data('id');
     location.href = '/itemDetails/' + id;
   });
+
+  var $button = $('.button');
+  $button.on('click', function() {
+    var id = $(this).data('id');
+    location.href = '/itemDetails/' + id;
+  })
 });

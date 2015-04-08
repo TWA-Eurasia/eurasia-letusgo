@@ -4,8 +4,6 @@ block css
   script(src="jspm_packages/system.js")
   script(src="config.js")
   script.
-    System.import('semantic-ui')
-    System.import('jquery/jquery')
     System.import('js/cart')
   link(rel="stylesheet" type="text/css" href="/jspm_packages/github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic.css")
 
@@ -15,7 +13,7 @@ block content
       h1.ui.header
         img(src="image/cart.png")
         .content 购物车列表
-      .ten.wide.column
+      .twelve.wide.column
         table.ui.large.table.center
           thead.center
             th.two.wide 图片
@@ -63,16 +61,16 @@ block content
                   span#total #{total}
                   span 元
 
-         a.ui.teal.right.floated.right.labeled.icon.button 结算
+         a.ui.teal.right.floated.right.labeled.icon.button(href='/indent') 结算
           i.right.arrow.icon
       .ui.first.coupled.small.modal.transition
         .content
           .description
             p 您确认要删除吗？
         .actions
-          .primary.ui.button.no 不要
+          .primary.ui.button.no 取消
 
-          a.ui.positive.right.labeled.icon.button.yes 删除
+          a.ui.positive.right.labeled.icon.button.yes#yes 删除
             i.checkmark.icon
 
 

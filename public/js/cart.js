@@ -1,7 +1,9 @@
 'use strict';
+
 var $ = require('jquery');
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
+var delete_cartItem;
 
 $(document).ready(function () {
 
@@ -14,7 +16,7 @@ $(document).ready(function () {
 
     $.ajax({
       url: 'cart/' + id,
-      type: 'POST',
+      type: 'PUT',
       data: {number: num, price: price, total: total},
 
       success: function (data) {
@@ -123,26 +125,28 @@ $(document).ready(function () {
   }
 
 
-  $('.delete_cartItem').on('click', function (event) {
+  $('.delete_cartItem').on('click', function () {
 
-    var delete_cartItem = this;
+    delete_cartItem = this;
 
     $('.first.modal')
       .modal('show');
+  });
 
-    $('.yes').on('click', function (event) {
-      var id = delete_cartItem.closest('td').id;
+  $('.yes').on('click', function () {
 
-      $.ajax({
-        url: 'cart/' + id,
-        type: 'DELETE',
+    var deleteId = delete_cartItem.closest('td').id;
 
-        success: function (data) {
-          $(delete_cartItem.closest('tr')).replaceWith(
-            "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
-          jump(2, delete_cartItem);
-        }
-      })
+    $.ajax({
+      url: 'cart/' + deleteId,
+      type: 'DELETE',
+
+      success: function (data) {
+
+        $(delete_cartItem.closest('tr')).replaceWith(
+          "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
+        jump(1, delete_cartItem);
+      }
     })
   });
 
