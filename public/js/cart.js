@@ -7,12 +7,12 @@ var delete_cartItem;
 
 $(document).ready(function () {
 
-  function changetotal(t) {
-    var id = t.closest('tr').data('id');
-    var num = t.closest('td').find('#number').val();
-    var price = t.parents('td').prev().find('#price').text();
+  function changetotal(event) {
+    var id = event.closest('tr').data('id');
+    var num = event.closest('td').find('#number').val();
+    var price = event.parents('td').prev().find('#price').text();
     var total = $('#total').text();
-    var input = t;
+    var input = event;
 
     $.ajax({
       url: 'cart/' + id,
@@ -83,32 +83,27 @@ $(document).ready(function () {
   });
 
   $('input').on('keyup', function () {
-    changetotal($(this));
-  });
-
-  $('input').on('blur', function () {
 
     $(this).closest('td').find('#inventory').hide();
 
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
-    numberInput = numberInput.toString();
+    var numberInput = $(this).closest('td').find('#number').val();
+    //numberInput = numberInput.toString();
 
     var number = numberInput.replace(/\b(0+)/gi, '');
     var input = $(this);
 
-    verifyNumber(number);
-
+    verifyNumber(number,input);
+    changetotal(input);
     if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
     }
   });
 
-  function verifyNumber(number) {
+  function verifyNumber(number,input) {
 
     var reg = /^(0|[1-9][0-9]*)$/;
-
     if (!reg.exec(number)) {
-      parseInt($(this).closest('td').find('#number').val(1));
+      input.val(1);
     }
   }
 
