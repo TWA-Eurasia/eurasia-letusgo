@@ -1,20 +1,23 @@
 'use strict';
+
 var $ = require('jquery');
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
+var delete_cartItem;
+var JUMP_TIME = 1;
 
 $(document).ready(function () {
 
-  function changetotal(t) {
-    var id = t.closest('tr').data('id');
-    var num = t.closest('td').find('#number').val();
-    var price = t.parents('td').prev().find('#price').text();
+  function changetotal(event) {
+    var id = event.closest('tr').data('id');
+    var num = event.closest('td').find('#number').val();
+    var price = event.parents('td').prev().find('#price').text();
     var total = $('#total').text();
-    var input = t;
+    var input = event;
 
     $.ajax({
       url: 'cart/' + id,
-      type: 'POST',
+      type: 'PUT',
       data: {number: num, price: price, total: total},
 
       success: function (data) {
@@ -55,7 +58,7 @@ $(document).ready(function () {
     }
   });
 
-  $('i.caret.left').on('click', function () {
+  $('i.minus.square.icon').on('click', function () {
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
 
@@ -65,7 +68,7 @@ $(document).ready(function () {
     }
   });
 
-  $('i.caret.right').on('click', function () {
+  $('i.add.square.icon').on('click', function () {
 
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
@@ -81,32 +84,27 @@ $(document).ready(function () {
   });
 
   $('input').on('keyup', function () {
-    changetotal($(this));
-  });
-
-  $('input').on('blur', function () {
 
     $(this).closest('td').find('#inventory').hide();
 
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
-    numberInput = numberInput.toString();
+    var numberInput = $(this).closest('td').find('#number').val();
+    //numberInput = numberInput.toString();
 
     var number = numberInput.replace(/\b(0+)/gi, '');
     var input = $(this);
 
-    verifyNumber(number);
-
+    verifyNumber(number,input);
+    changetotal(input);
     if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
     }
   });
 
-  function verifyNumber(number) {
+  function verifyNumber(number,input) {
 
     var reg = /^(0|[1-9][0-9]*)$/;
-
     if (!reg.exec(number)) {
-      parseInt($(this).closest('td').find('#number').val(1));
+      input.val(1);
     }
   }
 
@@ -123,26 +121,31 @@ $(document).ready(function () {
   }
 
 
-  $('.delete_cartItem').on('click', function (event) {
+  $('.delete_cartItem').on('click', function () {
 
-    var delete_cartItem = this;
+    delete_cartItem = this;
 
     $('.first.modal')
       .modal('show');
+  });
 
-    $('.yes').on('click', function (event) {
-      var id = delete_cartItem.closest('td').id;
+  $('.yes').on('click', function () {
 
-      $.ajax({
-        url: 'cart/' + id,
-        type: 'DELETE',
+    var deleteId = delete_cartItem.closest('td').id;
 
-        success: function (data) {
-          $(delete_cartItem.closest('tr')).replaceWith(
-            "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
-          jump(2, delete_cartItem);
-        }
-      })
+    $.ajax({
+      url: 'cart/' + deleteId,
+      type: 'DELETE',
+
+      success: function (data) {
+
+        $(delete_cartItem.closest('tr')).replaceWith(
+          "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
+
+        $("#total").text(data.total);
+
+        jump(JUMP_TIME, delete_cartItem);
+      }
     })
   });
 

@@ -18,35 +18,25 @@ html
     script.
       System.import('js/index');
   body#home
-    //header
-    //  .topmenu
-    //    ul.menu
-    //      li
-    //        em.
-    //          Hi，欢迎来到Let Us Go商城
-    //        a.topbutton(href="#") 请登录
-    //        a.topbutton(href="#") 免费注册
-    //      li
-    //        a.topbutton.right(href="#") 我的Let Us Go
+    header
+      //.topmenu
+      //  ul.menu
+      //    li
+      //      em.
+      //        Hi，欢迎来到Let Us Go商城
+      //      a.topbutton(href="#") 请登录
+      //      a.topbutton(href="#") 免费注册
+      //    li
+      //      a.topbutton.right(href="#") 我的Let Us Go
     .container
-      .searchcontainer
-        .mylogo
+      .ui.grid.mylogo
+        .four.wide.column
           img(src= "/image/logo.png")
-        //.search
-        //  .ui.fluid.action.input
-        //    input.topsearch(type="text" placeholder="Search...")
-        //    button.ui.icon.button
-        //      i.search.icon
-      .ui.grid
-        .sixteen.wide.column
-          .ui.inverted.teal.menu
-            .left.menu
-              a.ui.item LetUsGo
-                a#homeLink.ui.active.link.item(href="/") 首页
-                i.home.icon
-            .right.menu
-                a.ui.link.item(href="cart") 购物车
-                  i.cart.in.icon
+        .twelve.wide.column.search
+          //.ui.fluid.action.input
+          //  input.topsearch(type="text" placeholder="Search...")
+          //  button.ui.icon.button
+          //    i.search.icon
       .ui.grid
         .four.wide.column
           .ui.secondary.vertical.menu
@@ -58,13 +48,22 @@ html
                   - each subCategory in mainCategory.subCategories
                     a.item.secondMenu(data-id="#{subCategory._id}" href="/categoryView/#{subCategory._id}") #{subCategory.name}
         .twelve.wide.column
+          .ui.twelve.column.grid
+            .ui.inverted.teal.menu
+              .left.menu
+                a.ui.item LetUsGo
+                  a#homeLink.ui.active.link.item(href="/") 首页
+                  i.home.icon
+              .right.menu
+                a.ui.link.item(href="/cart") 购物车
+                  i.cart.in.icon
           .ui.four.column.grid
             - each item in items
-              .column
+              .column.itemDiv
                 .ui.segment
                   img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
                 .info
-                  a.name(href="/itemDetails/#{item._id}") #{item.name}
+                  a.name.itemName(href="/itemDetails/#{item._id}" data-content="#{item.name}") #{item.shortName}
                   p.price #{item.price}元
                   .ui.red.button(data-id="#{item._id}") 立即购买
           .pagination

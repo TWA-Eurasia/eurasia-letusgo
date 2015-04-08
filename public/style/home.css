@@ -46,7 +46,7 @@ ul.menu li
 
 .mylogo
 {
-  display: inline-block;
+  background: #fff;
 }
 
 .ui.input
@@ -105,12 +105,14 @@ input.topsearch
 {
   color: #fff;
 }
+
 .ui.dropdown.item#categoryTitle
 {
   margin: 0;
   font-size: 15px;
   background: #C30000;
 }
+
 .ui.dropdown.item:hover {
   background: darkred;
 }
@@ -119,14 +121,31 @@ input.topsearch
   display: block;
   background: rgba(255, 255, 255, 0.5);
 }
+
 .ui.four.column.grid
 {
   padding-left: 0;
   padding-right: 20px;
 }
+
+.ui.inverted.teal.menu
+{
+  padding: 0px;
+}
+
+.ui.segment>img
+{
+  cursor: pointer;
+}
+.ui.grid>.column.itemDiv
+{
+  margin: 5px;
+  border: 1px solid #E5E5E5;
+}
+
 .pagination
 {
-  padding-left: 500px;
+  padding-left: 750px;
   padding-top: 30px;
 }
 
@@ -164,7 +183,6 @@ ul,li
 .pagination li.current
 {
   background: teal;
-
 }
 
 .pagination li.current:hover

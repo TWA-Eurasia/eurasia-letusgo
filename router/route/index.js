@@ -77,6 +77,14 @@ function initItems (query, start, pageSize, callback) {
 
   Item.find(query).exec(function (err, items) {
 
+    items.forEach(function(item) {
+      if(item.name.length > 8) {
+        item.shortName = item.name.substring(0, 8) + '..';
+      } else {
+        item.shortName = item.name;
+      }
+    });
+
     var newItems = _.take(_.drop(items, start), pageSize);
     var pageCount = Math.ceil(items.length / pageSize);
 

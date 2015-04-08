@@ -1,21 +1,19 @@
 extends ./navBar.jade
-
 block css
   script(src="jspm_packages/system.js")
   script(src="config.js")
   script.
-    System.import('semantic-ui')
-    System.import('jquery/jquery')
     System.import('js/cart')
   link(rel="stylesheet" type="text/css" href="/jspm_packages/github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic.css")
-
+block title
+  title 我的购物车
 block content
   .ui.masthead
     .ui.grid.centered
       h1.ui.header
         img(src="image/cart.png")
         .content 购物车列表
-      .ten.wide.column
+      .twelve.wide.column
         table.ui.large.table.center
           thead.center
             th.two.wide 图片
@@ -24,24 +22,25 @@ block content
             th.two.wide 数量
             th.two.wide 小计
             th.two.wide
-            th.two.wide
-              input#allChecked(type="checkbox" name="checkedAllCartItem" checked)
-              span 全选
+            //th.two.wide
+            //  input#allChecked(type="checkbox" name="checkedAllCartItem" checked)
+            //  span 全选
           tbody.center
             - each cartItem in cartItems
               tr(data-id="#{cartItem._id}")
                 td
-                  image.ui.fluid.image(src="#{cartItem.item.image}")
+                  a(href='/itemDetails/#{cartItem.item.id}')
+                    image.ui.fluid.image(src="#{cartItem.item.image}" href='/itemDetails/#{cartItem.item.id}')
                 td
-                  div.itemName(data-content="#{cartItem.item.name}") #{cartItem.item.shortName}
+                  a.itemName(data-content="#{cartItem.item.name}" href='/itemDetails/#{cartItem.item.id}') #{cartItem.item.shortName}
                 td
                   span#price #{cartItem.item.price}
                   span 元
                 td
                   div
-                    i.caret.left.icon
+                    i.minus.square.icon(style='cursor:pointer')
                     input(type="text" value="#{cartItem.number}" id="number" style="text-align:center; height: 20%; width:40%")
-                    i.caret.right.icon
+                    i.add.square.icon(style='cursor:pointer')
                   div.ui.negative.message#inventory(style="display: none;") 最多能购买
                     span#leftNumber #{cartItem.item.inventory}
                     span 件
@@ -52,8 +51,8 @@ block content
                   span 元
                 td(id ="#{cartItem._id}")
                   .ui.red.button.delete_cartItem 删除
-                td
-                  input.checkedCartItem(type="checkbox" name="checkedCartItem" checked)
+                //td
+                //  input.checkedCartItem(type="checkbox" name="checkedCartItem" checked)
 
           tfoot.right
             tr
@@ -70,9 +69,9 @@ block content
           .description
             p 您确认要删除吗？
         .actions
-          .primary.ui.button.no 不要
+          .primary.ui.button.no 取消
 
-          a.ui.positive.right.labeled.icon.button.yes 删除
+          a.ui.positive.right.labeled.icon.button.yes#yes 删除
             i.checkmark.icon
 
 

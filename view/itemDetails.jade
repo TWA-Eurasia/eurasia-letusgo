@@ -9,7 +9,7 @@ block css
     System.import('js/itemDetails')
 
 block content
-  .ui.centered.segment
+  .ui.centered
     .ui.grid.centered
       .sixteen.wide.column
         .ui.large.breadcrumb
@@ -34,29 +34,28 @@ block content
                 td
                   span#itemPrice #{itemDetails.item.price}
                   span  元
-
-              //- var name = itemDetails.item.specification[0].name
-              //- var isDisplay = (name === '') ? 'none' : ''
-              //- var attributes = {'style': 'display: ' + isDisplay}
-              //  tr&attributes(attributes)
-              //    td 规格
-              //    td
-              //      .ui.form
-              //        .inline.fields
-              //          - each detail in itemDetails.item.specification
-              //            -var price = detail.price
-              //            -var itemId = detail.specification
-              //            -var inventory = detail.inventory
-              //              .field
-              //                .ui.radio
-              //                  input.specification(id = itemId, data-price = price, data-inventory = inventory, type="radio", name="specification", checked=isChecked)
-              //                  label #{detail.name}
+              //- - var name = itemDetails.item.specnification[0].name
+              //- - var isDisplay = (name === '') ? 'none' : ''
+              //- - var attributes = {'style': 'display: ' + isDisplay}
+              //-   tr&attributes(attributes)
+              //-     td 规格
+              //-     td
+              //-       .ui.form
+              //-         .inline.fields
+              //-           - each detail in itemDetails.item.specification
+              //-             -var price = detail.price
+              //-             -var itemId = detail.specification
+              //-             -var inventory = detail.inventory
+              //-               .field
+              //-                 .ui.radio
+              //-                   input.specification(id = itemId, data-price = price, data-inventory = inventory, type="radio", name="specification", checked=isChecked)
+              //-                   label #{detail.name}
               tr
                 td 数量
                 td
-                  i.minus.square.icon
+                  i.minus.square.icon(style="cursor:pointer")
                   input(type="text" value=1 id="numberInput" style="text-align:center; width:50%")
-                  i.add.square.icon
+                  i.add.square.icon(style="cursor:pointer")
                   .ui.negative.message#inputError(style = 'display: none') 您所填写的数量超过库存!
               tr
                 td 库存
@@ -67,10 +66,11 @@ block content
                   span#inventory #{itemDetails.item.inventory}
                   span  #{itemDetails.item.unit}
 
-          button.ui.primary.button
+          button.ui.primary.button.addToCart(data-id="#{itemDetails.item.id}")
             i.cart.in.icon
             span 添加到购物车
             i.right.chevron.icon
+          .ui.teal.message.success(hidden='true') 添加成功
 
       .ui.grid.centered
         .ten.wide.column
