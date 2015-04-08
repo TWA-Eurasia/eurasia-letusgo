@@ -9,18 +9,17 @@ html
     block title
       title 首页
   body
-    div.container
-    div.ui.inverted.masthead.segment
-      div.row
-        div.sixteen.wide.column
-          div.ui.inverted.teal.menu
-            div.left.menu
-              a.ui.item LetUsGo
-              block home
-                a#homeLink.ui.link.item(href="/") 首页
-                i.home.icon
-            div.right.menu
-              block cart
-                a.ui.link.item(href="/cart") 购物车
-                  i.cart.in.icon
+    .ui.grid.centered
+      .sixteen.wide.column
+      .fourteen.wide.column
+        .ui.inverted.teal.menu
+          .left.menu
+            a.ui.item LetUsGo
+            block home
+              a#homeLink.ui.link.item(href="/") 首页
+              i.home.icon
+          .right.menu
+            block cart
+              a.ui.link.item(href="/cart") 购物车
+                i.cart.in.icon
     block content
