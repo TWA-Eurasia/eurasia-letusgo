@@ -1,35 +1,44 @@
-'use strict';
+// 'use strict';
 
 var _ = require('lodash');
 var $ = require('./jquery.pagination');
-
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
-  $('.pagination').pagination({
+  if(application.index.pageCount > 1) {
+    var visiblePageCount = 7;
+    $('.pagination').pagination({
+      pageCount: application.index.pageCount,
+      currentPage: application.index.currentPage,
+      visiblePageCount: visiblePageCount,
+      onPageChange: function(n) {
+        var path = '/index/';
+        if(application.index.isCategory) {
 
-    pageCount: application.index.pageCount,
-    currentPage: application.index.currentPage,
-    visiblePageCount: 7,
-    onPageChange: function(n) {
-      $(location).attr('href', '/index/'+ n);
-    }
+          var pathId = location.href.toString().split('/')[4];
+          path = '/' + location.href.toString().split('/')[3] + '/' + pathId + '/';
+        }
+        location.href = path + n;
+      }
+    });
+  }
+
+  var $firstMenu = $('.firstMenu');
+  $firstMenu.on('click', function() {
+    var id = $(this).data('id');
+    location.href = '/categoryView/' + id;
   });
 
-  $('.item.secondMenu').on('click', function () {
-
-    var id = $('.item.secondMenu').data('id');
-    console.log(id + '++++++++++++++++++++');
-    var parentId = this.closest('.firstMenu').id;
-    console.log(id + parentId);
-
-    $.get('/api/category/' + id, {id : id})
-      .success(function (data) {
-
-        console.log(data);
-      })
+  var $image = $('.image');
+  $image.on('click', function() {
+    var id = $(this).data('id');
+    location.href = '/itemDetails/' + id;
   });
 
-
+  var $button = $('.button');
+  $button.on('click', function() {
+    var id = $(this).data('id');
+    location.href = '/itemDetails/' + id;
+  })
 });

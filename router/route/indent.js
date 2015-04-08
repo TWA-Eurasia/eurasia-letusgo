@@ -3,11 +3,12 @@ var router = express.Router();
 var Indent = require('../../model/indent.js');
 var Item = require('../../model/item.js');
 var CartItem = require('../../model/cartItem.js');
+var User = require('../../model/user.js');
 var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
 
-  Indent.findById('551b8d053acc20a82a17e3fd')
+  Indent.findById('551fd16975cd55ed0cfa5503')
     .populate('cartItems')
     .exec(function (err, indent) {
 
@@ -16,38 +17,40 @@ router.get('/', function (req, res, next) {
         .exec(function (err, cartItems) {
 
           var total = indent.getTotal(cartItems);
-          res.render('indent', {cartItems: cartItems, total: total});
+          res.render('indent', {cartItems: cartItems, total: total, indent: indent});
         });
     });
 });
 
+//router.get('/', function (req, res, next) {
+//
+//  User.findById('551fd2a9ecb148410c4c8048')
+//    .populate('indents')
+//    .exec(function (err, user) {
+//      res.send('user', {user: user});
+//    });
+//});
+
 router.post('/', function (req, res, next) {
 
-  //Item.create({
-  //  name: '可乐',
-  //  unit: '瓶',
-  //  price: 5,
-  //  inventory: '100',
-  //  image:'image/kele.jpg',
-  //  description: 'kelekele',
-  //  specification: '500ml',
-  //  isRecommend: true
-  //});
-  //CartItem.create({
-  //  item: "551b893c460915fb21fe0bf1",
-  //  number: 15
-  //});
-
   Indent.create({
-    cartItems: ["551b8afa1c8deae8254a91b7",
-      "551b8b8c1b1b373e2745798b"
+    cartItems: ["551cc20e47a654d14a280e9b", "551cc20e47a654d14a280e9c","551cc20e47a654d14a280e9d","551cc20e47a654d14a280e9e"
     ],
-    createDate: 2015 - 4 - 1
+    createDate: 2015-4-1
   }, function (err, indent) {
     if (err) {
       return next(err);
     }
     res.send(indent);
+  });
+});
+
+router.post('/:id', function(req, res){
+  var id = req.params.id;
+
+  Indent.update(id, {$set: {isPaid: true}}, function(err, indent){
+
+    res.send('isPaid is true');
   });
 });
 

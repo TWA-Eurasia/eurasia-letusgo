@@ -28,8 +28,13 @@ $(document).ready(function () {
           if(number < inventory){
 
             $(location).attr('href', '/success?amount=' + total);
-
             updateInventory(inventory, number, item);
+
+            var indentId = '551fd16975cd55ed0cfa5503';
+            $.post('/indent/' + indentId);
+
+            var userId = '551fd2a9ecb148410c4c8048';
+            $.post('/api/user/' + userId, {indentId: indentId});
           }
         }
       });

@@ -13,17 +13,17 @@ block content
     .ui.grid.centered
       .sixteen.wide.column
         .ui.large.breadcrumb
-          a.section(href="/index/categoryView/" + "#{itemDetails.category.parent._id}") #{itemDetails.category.parent.name}
+          a.section(href="/categoryView/" + "#{itemDetails.category.parent._id}") #{itemDetails.category.parent.name}
           i.right.chevron.icon.ider
-          a.section(href="/index/categoryView/" + "#{itemDetails.category._id}") #{itemDetails.item.category.name}
+          a.section(href="/categoryView/" + "#{itemDetails.category._id}") #{itemDetails.item.category.name}
           i.right.chevron.icon.ider
           .active.section #{itemDetails.item.name}
 
-      .ui.grid.ten.wide.column.centered
+      .ui.grid.ten.wide.column
         .nine.wide.column
-          .ui.fluid.card(style="height:500px; background:black; align:center")
+          .ui.fluid.card(style="height:400px; background:black;")
             - var imageUrl = itemDetails.item.image
-            img.ui.vertical.bordered.centered.image(src=imageUrl)
+            img.ui.image(src="/" + imageUrl onerror="this.src='/image/nopicture.jpg'" style="vertical-align:middle")
 
         .seven.wide.column
           h2.ui.floated.header.orange.backge #{itemDetails.item.name}
@@ -35,22 +35,22 @@ block content
                   span#itemPrice #{itemDetails.item.price}
                   span  元
 
-              - var length = itemDetails.details.length
-              - var isDisplay = (length == 0) ? 'none' : ''
-              - var attributes = {'style': 'display: ' + isDisplay}
-                tr&attributes(attributes)
-                  td 规格
-                  td
-                    .ui.form
-                      .inline.fields
-                        - each detail in itemDetails.details
-                          -var price = detail.price
-                          -var itemId = detail.specification
-                          -var isChecked = detail.isChecked
-                            .field
-                              .ui.radio
-                                input.specification(id = itemId, data-price = price, type="radio", name="specification", checked=isChecked)
-                                label #{detail.specification}
+              //- var name = itemDetails.item.specification[0].name
+              //- var isDisplay = (name === '') ? 'none' : ''
+              //- var attributes = {'style': 'display: ' + isDisplay}
+              //  tr&attributes(attributes)
+              //    td 规格
+              //    td
+              //      .ui.form
+              //        .inline.fields
+              //          - each detail in itemDetails.item.specification
+              //            -var price = detail.price
+              //            -var itemId = detail.specification
+              //            -var inventory = detail.inventory
+              //              .field
+              //                .ui.radio
+              //                  input.specification(id = itemId, data-price = price, data-inventory = inventory, type="radio", name="specification", checked=isChecked)
+              //                  label #{detail.name}
               tr
                 td 数量
                 td
@@ -61,6 +61,9 @@ block content
               tr
                 td 库存
                 td
+                  //- span#inventory #{itemDetails.item.specification[0].inventory}
+                  //- span  #{itemDetails.item.unit}
+
                   span#inventory #{itemDetails.item.inventory}
                   span  #{itemDetails.item.unit}
 
