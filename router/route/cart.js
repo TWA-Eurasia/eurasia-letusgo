@@ -95,7 +95,7 @@ router.delete('/:cartItemId', function (req, res) {
           .populate('item')
           .exec(function(err, cartItems){
 
-            res.send({cart:cart, total:cart.getTotal(cartItems).toFixed(2)});
+            res.send({cart:cart, total:cart.getTotal(cartItems)});
           });
       });
     });
