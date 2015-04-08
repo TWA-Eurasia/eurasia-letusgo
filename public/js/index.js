@@ -24,6 +24,7 @@ $(document).ready(function () {
     });
   }
 
+
   var $firstMenu = $('.firstMenu');
   $firstMenu.on('click', function() {
     var id = $(this).data('id');

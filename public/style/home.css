@@ -149,6 +149,10 @@ input.topsearch
   border: 1px solid #E5E5E5;
 }
 
+.ui.breadcrumb a
+{
+  color: #000;
+}
 .pagination
 {
   padding-left: 750px;
