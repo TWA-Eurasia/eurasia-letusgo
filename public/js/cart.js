@@ -57,7 +57,7 @@ $(document).ready(function () {
     }
   });
 
-  $('i.caret.left').on('click', function () {
+  $('i.minus.square.icon').on('click', function () {
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
     }
   });
 
-  $('i.caret.right').on('click', function () {
+  $('i.add.square.icon').on('click', function () {
 
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
@@ -145,6 +145,9 @@ $(document).ready(function () {
 
         $(delete_cartItem.closest('tr')).replaceWith(
           "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
+
+        $("#total").text(data.total);
+
         jump(1, delete_cartItem);
       }
     })
