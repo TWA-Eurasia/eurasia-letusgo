@@ -46,7 +46,7 @@ ul.menu li
 
 .mylogo
 {
-  display: inline-block;
+  background: #fff;
 }
 
 .ui.input
@@ -127,6 +127,10 @@ input.topsearch
 .ui.inverted.teal.menu
 {
   padding: 0px;
+}
+.ui.segment>img
+{
+  cursor: pointer;
 }
 .pagination
 {

@@ -29,14 +29,14 @@ html
           li
             a.topbutton.right(href="#") 我的Let Us Go
     .container
-      .searchcontainer
-        .mylogo
+      .ui.grid.mylogo
+        .four.wide.column
           img(src= "/image/logo.png")
-        //.search
-        //  .ui.fluid.action.input
-        //    input.topsearch(type="text" placeholder="Search...")
-        //    button.ui.icon.button
-        //      i.search.icon
+        .twelve.wide.column.search
+          //.ui.fluid.action.input
+          //  input.topsearch(type="text" placeholder="Search...")
+          //  button.ui.icon.button
+          //    i.search.icon
       .ui.grid
         .four.wide.column
           .ui.secondary.vertical.menu
@@ -55,7 +55,7 @@ html
                   a#homeLink.ui.active.link.item(href="/") 首页
                   i.home.icon
               .right.menu
-                a.ui.link.item(href="cart") 购物车
+                a.ui.link.item(href="/cart") 购物车
                   i.cart.in.icon
           .ui.four.column.grid
             - each item in items
