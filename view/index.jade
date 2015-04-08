@@ -31,7 +31,8 @@ html
     .container
       .ui.grid.mylogo
         .four.wide.column
-          img(src= "/image/logo.png")
+          a(href="/")
+            img(src= "/image/logo.png")
         .twelve.wide.column.search
           //.ui.fluid.action.input
           //  input.topsearch(type="text" placeholder="Search...")
@@ -51,9 +52,7 @@ html
           .ui.twelve.column.grid
             .ui.inverted.teal.menu
               .left.menu
-                a.ui.item LetUsGo
-                  a#homeLink.ui.active.link.item(href="/") 首页
-                  i.home.icon
+                a.ui.item(href="/") Let Us Go
               .right.menu
                 a.ui.link.item(href="/cart") 购物车
                   i.cart.in.icon
@@ -67,3 +66,8 @@ html
                   p.price #{item.price}元
                   .ui.red.button(data-id="#{item._id}") 立即购买
           .pagination
+    footer
+      .ui.grid(style="text-align: center")
+        .sixteen.wide.column
+        .sixteen.wide.column
+          p copyright@letusgo All Rights Reserved
