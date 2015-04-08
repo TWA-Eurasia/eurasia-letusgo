@@ -18,8 +18,8 @@ router.get('/', function (req, res) {
         .populate('item')
         .exec(function (err, cartItems) {
 
-          cartItems.forEach(function(cartItem) {
-            if(cartItem.item.name.length > 8) {
+          cartItems.forEach(function (cartItem) {
+            if (cartItem.item.name.length > 8) {
               cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
             } else {
               cartItem.item.shortName = cartItem.item.name;
@@ -33,6 +33,29 @@ router.get('/', function (req, res) {
 });
 
 router.post('/:id', function (req, res) {
+
+  var number = parseInt(req.body.number);
+  var id = req.params.id;
+
+  CartItem.find(function (err, cartItems) {
+    var result = _.find(cartItems, function (cartItem) {
+      return cartItem.item.toString() === id;
+    });
+
+    if (result) {
+      number = result.number + number;
+      CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function (err) {
+        if (err) console.log(err);
+        res.sendStatus(200);
+      });
+    } else {
+      CartItem.create({item: id, number: number});
+      res.sendStatus(200);
+    }
+
+  });
+});
+router.put('/:id', function (req, res, next) {
 
   var cartItemId = req.params.id;
   var num = req.body.number;

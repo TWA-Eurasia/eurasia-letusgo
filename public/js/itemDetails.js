@@ -1,16 +1,16 @@
 var $ = require('jquery');
 require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-  $('i.minus').on('click', function() {
+  $('i.minus').on('click', function () {
     var numberInput = parseInt($('#numberInput').val());
     if (numberInput !== 1) {
       $('#numberInput').val(numberInput - 1);
     }
   });
 
-  $('i.add').on('click', function() {
+  $('i.add').on('click', function () {
     var numberInput = parseInt($('#numberInput').val());
     var inventory = $('#inventory').text();
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
     }
   });
 
-  $('#numberInput').on('mouseout', function() {
+  $('#numberInput').on('mouseout', function () {
     $('#inputError').hide();
     var numberInput = $('#numberInput').val();
     var number = numberInput.replace(/\b(0+)/gi, '');
@@ -32,7 +32,7 @@ $(document).ready(function() {
     }
   });
 
-  $('input.specification').on('click', function() {
+  $('input.specification').on('click', function () {
     var price = $(this).data('price');
     var inventory = $(this).data('inventory');
 
@@ -52,4 +52,36 @@ $(document).ready(function() {
     var inventory = $('#inventory').text();
     return inputNumber > inventory;
   }
+
+
+  $('.addToCart').on('click', function () {
+
+    var itemId = $(this).data('id');
+
+    var numberInput = parseInt($('#numberInput').val());
+    $.ajax({
+      url: '../cart/' + itemId,
+      type: 'POST',
+      data: {number: numberInput},
+      success: function () {
+
+        $('.success').show();
+        function jump(count) {
+
+          window.setTimeout(function () {
+            count--;
+
+            if (count > 0) {
+              $('.success').show();
+              jump(count);
+            } else {
+              $('.success').hide();
+
+            }
+          }, 1000);
+        }
+      jump(1);
+      }
+    })
+  });
 });

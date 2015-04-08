@@ -67,10 +67,11 @@ block content
                   span#inventory #{itemDetails.item.inventory}
                   span  #{itemDetails.item.unit}
 
-          button.ui.primary.button
+          button.ui.primary.button.addToCart(data-id="#{itemDetails.item.id}")
             i.cart.in.icon
             span 添加到购物车
             i.right.chevron.icon
+          .ui.teal.message.success(hidden='true') 添加成功
 
       .ui.grid.centered
         .ten.wide.column
