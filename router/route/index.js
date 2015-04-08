@@ -8,9 +8,11 @@ var Item = require('../../model/item');
 
 router.get('/', function(req, res) {
 
+  var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
+
   initCategories({isRecommend: true}, 0, 2, function(mainCategories, items, pageCount) {
 
-    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1, isCategory: false});
+    res.render('index', {mainCategories: mainCategories, currentCategory: currentCategory, items: items, pageCount: pageCount, currentPage: 1, isCategory: false});
   });
 });
 
@@ -20,9 +22,11 @@ router.get('/index/:pageNumber', function(req, res) {
   var pageSize = 2;
   var start = (pageNumber - 1) * pageSize;
 
+  var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
+
   initCategories({isRecommend: true}, start, pageSize, function(mainCategories, items, pageCount) {
 
-    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber, isCategory: false});
+    res.render('index', {mainCategories: mainCategories, currentCategory: currentCategory, items: items, pageCount: pageCount, currentPage: pageNumber, isCategory: false});
   });
 
 });
@@ -30,10 +34,19 @@ router.get('/index/:pageNumber', function(req, res) {
 router.get('/categories/:id', function(req, res) {
 
   var id = req.params.id;
+  var currentCategory;
+
+  Category.findById(id)
+    .populate('parent')
+    .exec(function(err, category) {
+
+      currentCategory = category;
+      currentCategory.isDisplay = true;
+    });
 
   initCategories({category: id}, 0, 2, function(mainCategories, items, pageCount) {
 
-    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: 1, isCategory: true});
+    res.render('index', {mainCategories: mainCategories, currentCategory: currentCategory, items: items, pageCount: pageCount, currentPage: 1, isCategory: true});
   });
 
 });
@@ -41,6 +54,17 @@ router.get('/categories/:id', function(req, res) {
 router.get('/categories/:id/:pageNumber', function (req, res) {
 
   var id = req.params.id;
+
+  var currentCategory;
+
+  Category.findById(id)
+    .populate('parent')
+    .exec(function(err, category) {
+
+      currentCategory = category;
+      currentCategory.isDisplay = true;
+    });
+
   var pageNumber = req.params.pageNumber;
 
   var pageSize = 2;
@@ -48,7 +72,7 @@ router.get('/categories/:id/:pageNumber', function (req, res) {
 
   initCategories({category: id}, start, pageSize, function(mainCategories, items, pageCount) {
 
-    res.render('index', {mainCategories: mainCategories, items: items, pageCount: pageCount, currentPage: pageNumber, isCategory: true});
+    res.render('index', {mainCategories: mainCategories, currentCategory: currentCategory, items: items, pageCount: pageCount, currentPage: pageNumber, isCategory: true});
   });
 
 });

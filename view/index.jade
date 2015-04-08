@@ -56,6 +56,19 @@ html
               .right.menu
                 a.ui.link.item(href="/cart") 购物车
                   i.cart.in.icon
+          - var isDisplay = currentCategory.isDisplay
+          - var recommendDisplay = isDisplay ? 'none' : 'auto'
+          - var crumbDisplay = isDisplay ? 'auto' : 'none'
+          - var recommendStyle = {'style': 'display:' + recommendDisplay}
+          - var crumbStyle = {'style': 'display:' + crumbDisplay}
+          .ui.items.crumb&attributes(recommendStyle)
+            .item
+              .content
+                a.header 推荐商品
+          .ui.large.breadcrumb.crumb&attributes(crumbStyle)
+            a.section #{currentCategory.parent.name}
+             i.right.chevron.icon.ider
+            a.section #{currentCategory.name}
           .ui.four.column.grid
             - each item in items
               .column.itemDiv
