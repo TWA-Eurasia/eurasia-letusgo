@@ -46,6 +46,7 @@ block content
         span 元
       a.ui.red.right.floated.right.labeled.icon.button#pay 支付
         i.right.arrow.icon
+        span#shortedCartItemName(style="display: none;") #{shortedCartItemName}
 
     .ui.first.coupled.small.modal.transition
       .content
@@ -56,9 +57,10 @@ block content
         a.ui.positive.right.labeled.icon.button#isPaid(data-total= total, data-cart = cartItems, data-indentId = indent._id ) 支付
           i.checkmark.icon
 
-    //.ui.second.small.coupled.modal.transition.hidden
-    //  .content
-    //    .description
-    //      p 我是第二个模态框
-    //  .actions
-    //    .primary.ui.button.confirm 确定
+    .ui.second.small.coupled.modal.transition.hidden
+      .header 支付失败
+      .content
+        .description
+          .p#modalTips 库存不足
+      .actions
+        .primary.ui.button.confirm 确定
