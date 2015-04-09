@@ -25,7 +25,7 @@ mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
 // development settings
 if (app.get('env') === 'development') {
 
-    app.set('port',3000);
+    app.set('port',80);
     app.use(express.static(path.join(__dirname, './public')));
     app.use(express.static(path.join(__dirname, './.tmp')));
     app.use(express.static(path.join(__dirname, './')));
@@ -46,12 +46,13 @@ if (app.get('env') === 'development') {
 // production settings
 if (app.get('env') === 'production') {
 
-    console.log('--------');
     app.set('port',80);
-
     // changes it to use the optimized version for production
-    app.use(express.static(path.join(__dirname, '/dist')));
-
+    //app.use(express.static(path.join(__dirname, '/dist')));
+    app.use(express.static(path.join(__dirname, './public')));
+    app.use(express.static(path.join(__dirname, './.tmp')));
+    app.use(express.static(path.join(__dirname, './')));
+    app.use(express.static(path.join(__dirname, './jspm_packages')));
     // production error handler
     // no stacktraces leaked to user
     app.use(function (err, req, res, next) {
