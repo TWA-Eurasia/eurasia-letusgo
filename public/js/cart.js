@@ -55,11 +55,7 @@ $(function () {
     var inputNumber = parseInt(input.closest('td').find('#number').val());
     var leftNumber = $('#leftNumber').text();
 
-    if (inputNumber > leftNumber) {
-      return true;
-    }
-
-    return false;
+    return inputNumber > leftNumber
   }
 
   $(document).on('cart-count-change', function (event, cartId) {
