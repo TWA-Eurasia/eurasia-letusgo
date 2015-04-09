@@ -29,10 +29,10 @@ block content
             - each cartItem in cartItems
               tr(data-id="#{cartItem._id}")
                 td
-                  a(href='/itemDetails/#{cartItem.item.id}')
-                    image.ui.fluid.image(src="#{cartItem.item.image}" href='/itemDetails/#{cartItem.item.id}')
+                  a(href='/items/#{cartItem.item.id}')
+                    image.ui.fluid.image(src="#{cartItem.item.image}")
                 td
-                  a.itemName(data-content="#{cartItem.item.name}" href='/itemDetails/#{cartItem.item.id}') #{cartItem.item.shortName}
+                  a.itemName(data-content="#{cartItem.item.name}" href='/items/#{cartItem.item.id}') #{cartItem.item.shortName}
                 td
                   span#price #{cartItem.item.price}
                   span 元
