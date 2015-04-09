@@ -53,7 +53,7 @@ html
         .ui.twelve.column.grid
           .ui.inverted.teal.menu
             .left.menu
-              a.ui.item(href="/") Let Us Go
+              a.ui.active.link.item(href="/") Let Us Go
             .right.menu
               a.ui.link.item(href="/cart") 购物车
                 i.cart.in.icon
@@ -67,7 +67,7 @@ html
             .content
               .header 推荐商品
         .ui.large.breadcrumb.crumb&attributes(crumbStyle)
-          a.section #{currentCategory.parent.name}
+          a.section(href="#") #{currentCategory.parent.name}
            i.right.chevron.icon.ider
           a.active.section(href="/categories/#{currentCategory._id}") #{currentCategory.name}
         .ui.four.column.grid

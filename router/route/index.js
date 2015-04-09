@@ -6,15 +6,13 @@ var _ = require('lodash');
 var Category = require('../../model/category');
 var Item = require('../../model/item');
 
-var pageNumber;
-var pageSize = 8;
-var start = 0;
+var PAGESIZE = 8;
 
 router.get('/', function(req, res) {
 
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
 
-  initCategories({isRecommend: true}, start, pageSize, function(mainCategories, items, pageCount) {
+  initCategories({isRecommend: true}, 0, PAGESIZE, function(mainCategories, items, pageCount) {
 
     res.render('index', {mainCategories: mainCategories, currentCategory: currentCategory, items: items, pageCount: pageCount, currentPage: 1, isCategory: false});
   });
@@ -22,12 +20,12 @@ router.get('/', function(req, res) {
 
 router.get('/index/:pageNumber', function(req, res) {
 
-  pageNumber = req.params.pageNumber;
-  start = (pageNumber - 1) * pageSize;
+  var pageNumber = req.params.pageNumber;
+  var start = (pageNumber - 1) * PAGESIZE;
 
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
 
-  initCategories({isRecommend: true}, start, pageSize, function(mainCategories, items, pageCount) {
+  initCategories({isRecommend: true}, start, PAGESIZE, function(mainCategories, items, pageCount) {
 
     res.render('index', {mainCategories: mainCategories, currentCategory: currentCategory, items: items, pageCount: pageCount, currentPage: pageNumber, isCategory: false});
   });
@@ -47,7 +45,7 @@ router.get('/categories/:id', function(req, res) {
       currentCategory.isDisplay = true;
     });
 
-  initCategories({category: id}, start, pageSize, function(mainCategories, items, pageCount) {
+  initCategories({category: id}, 0, PAGESIZE, function(mainCategories, items, pageCount) {
 
     res.render('index', {mainCategories: mainCategories, currentCategory: currentCategory, items: items, pageCount: pageCount, currentPage: 1, isCategory: true});
   });
@@ -57,8 +55,9 @@ router.get('/categories/:id', function(req, res) {
 router.get('/categories/:id/:pageNumber', function (req, res) {
 
   var id = req.params.id;
-  pageNumber = req.params.pageNumber;
-  start = (pageNumber - 1) * pageSize;
+
+  var pageNumber = req.params.pageNumber;
+  var start = (pageNumber - 1) * PAGESIZE;
 
   var currentCategory;
   Category.findById(id)
@@ -69,7 +68,7 @@ router.get('/categories/:id/:pageNumber', function (req, res) {
       currentCategory.isDisplay = true;
     });
 
-  initCategories({category: id}, start, pageSize, function(mainCategories, items, pageCount) {
+  initCategories({category: id}, start, PAGESIZE, function(mainCategories, items, pageCount) {
 
     res.render('index', {mainCategories: mainCategories, currentCategory: currentCategory, items: items, pageCount: pageCount, currentPage: pageNumber, isCategory: true});
   });
