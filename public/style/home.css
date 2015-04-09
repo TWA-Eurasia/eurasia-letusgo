@@ -143,11 +143,6 @@ input.topsearch
 {
   cursor: pointer;
 }
-.ui.grid>.column.itemDiv
-{
-  margin: 5px;
-  border: 1px solid #E5E5E5;
-}
 
 .ui.breadcrumb a
 {
