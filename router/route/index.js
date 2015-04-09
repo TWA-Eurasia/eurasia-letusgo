@@ -121,17 +121,14 @@ function initCategories (query, start, pageSize, callback) {
       .populate('parent')
       .exec(function (err, categories) {
 
-        var mainCategories = [];
+        var mainCategories = _.filter(categories, function(category) {
 
-        _.forEach(categories, function (category) {
-
-          if (!category.parent) {
-
-            mainCategories.push({id: category._id, name: category.name, subCategories: []});
-          }
+          category.subCategories = [];
+          return category.parent == null;
         });
 
         _.forEach(categories, function (category) {
+
           if (category.parent) {
 
             _.forEach(mainCategories, function (mainCategory) {
@@ -143,6 +140,7 @@ function initCategories (query, start, pageSize, callback) {
             });
           }
         });
+
         callback(mainCategories, items, pageCount);
       });
   });
