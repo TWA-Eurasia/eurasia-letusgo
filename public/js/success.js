@@ -16,7 +16,6 @@ $(document).ready(function () {
 
   });
 });
-<<<<<<< HEAD
 
 function jump(count) {
 
@@ -31,7 +30,3 @@ function jump(count) {
     }
   }, 1000);
 }
-
-
-=======
->>>>>>> changefont
