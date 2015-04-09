@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
-require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
+require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var JUMP_TIME =3;
 
@@ -16,6 +16,7 @@ $(document).ready(function () {
 
   });
 });
+<<<<<<< HEAD
 
 function jump(count) {
 
@@ -32,3 +33,5 @@ function jump(count) {
 }
 
 
+=======
+>>>>>>> changefont
