@@ -9,7 +9,7 @@ block css
     System.import('js/itemDetails')
 
 block content
-  .ui.centered
+
     .ui.grid.centered
       .sixteen.wide.column(style="margin-left: 100px")
         .ui.large.breadcrumb
@@ -19,13 +19,14 @@ block content
           i.right.chevron.icon.ider
           .active.section #{itemDetails.item.name}
 
-    .ui.grid.ten.wide.column
-      .nine.wide.column
+    .ui.grid
+      .three.wide.column
+      .six.wide.column
         .ui.fluid.card(style="height:400px; background:black;")
           - var imageUrl = itemDetails.item.image
           img.ui.image(src="/" + imageUrl onerror="this.src='/image/nopicture.jpg'" style="vertical-align:middle")
 
-      .seven.wide.column
+      .four.wide.column
         h2.ui.floated.header.orange.backge #{itemDetails.item.name}
         table.ui.definition.table
           tbody
