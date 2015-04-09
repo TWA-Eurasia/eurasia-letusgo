@@ -1,6 +1,6 @@
 'use strict';
 var $ = require('jquery');
-require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
+require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 
 $(document).ready(function () {
@@ -56,4 +56,3 @@ function updateInventory(inventory, number, item){
     data: {inventory: inventory}
   });
 }
-

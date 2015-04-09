@@ -1,6 +1,6 @@
 'use strict';
 var $ = require('jquery');
-require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
+require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -30,6 +30,3 @@ $(document).ready(function () {
 
   jump(3);
 });
-
-
-
