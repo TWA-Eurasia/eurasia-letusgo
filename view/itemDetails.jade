@@ -13,7 +13,8 @@ block content
     .ui.grid.centered
       .sixteen.wide.column(style="margin-left: 100px")
         .ui.large.breadcrumb
-          a.section(href="/categories/" + "#{itemDetails.category.parent._id}") #{itemDetails.category.parent.name}
+          //a.section(href="/categories/" + "#{itemDetails.category.parent._id}") #{itemDetails.category.parent.name}
+          a.section(href='/') #{itemDetails.category.parent.name}
           i.right.chevron.icon.ider
           a.section(href="/categories/" + "#{itemDetails.category._id}") #{itemDetails.item.category.name}
           i.right.chevron.icon.ider
