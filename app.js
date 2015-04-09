@@ -25,7 +25,7 @@ mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
 // development settings
 if (app.get('env') === 'development') {
 
-    app.set('port',80);
+    app.set('port',3000);
     app.use(express.static(path.join(__dirname, './public')));
     app.use(express.static(path.join(__dirname, './.tmp')));
     app.use(express.static(path.join(__dirname, './')));
