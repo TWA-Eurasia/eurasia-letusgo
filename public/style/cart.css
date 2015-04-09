@@ -30,9 +30,13 @@ table.ui.large.table td
     text-align: center;
 }
 
-.ui.fluid.image.size
-{
+.ui.fluid.image.size {
   width: 100px;
   height: 100px;
   margin: 0 auto;
+}
+
+.red
+{
+  color:red;
 }
