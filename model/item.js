@@ -12,9 +12,13 @@ var ItemSchema = new Schema({
     ref: 'Category'
   },
   specification: String,
-  price: Number,
+  price: {type: Number, get: setPrice},
   inventory: Number,
   isRecommend: Boolean
 });
+
+function setPrice(num){
+  return num.toFixed(2);
+}
 
 module.exports = mongoose.model('Item', ItemSchema);
