@@ -15,7 +15,5 @@
 
 {_id: ObjectId('5523cea79294d58a8e06c3c7'), name: '2015欧美大牌春装新款 修身显瘦镂空蕾丝连衣裙中长款 夏短袖长裙', unit: '件', price: 368, image: 'image/14.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c38f'), specification: '100ml', isRecommend: true}
 
-{_id: ObjectId('5523cea79294d58a8e06c3c8'), name: 'Nestle雀巢(三合一)速溶咖啡180ml 罐装', unit: '瓶', price: 3.5, image: 'image/coffee.png', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c3a0'), specification: '100ml', isRecommend: true}
-
-{_id: ObjectId('5523cea79294d58a8e06c3c9'), name: '海澜之家2015夏季男士POLO衫 短袖', unit: '件', price: 128, image: 'image/11.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c387'), specification: '100ml', isRecommend: true}
-{_id: ObjectId('5523cea79294d58a8e06c3cf'), name: 'AMH男装韩版夏季 修身时尚短袖', unit: '件', price: 142, image: 'image/12.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c387'), specification: '100ml', isRecommend: true}
+{_id: ObjectId('5523cea79294d58a8e06c3c8'), name: '海澜之家2015夏季男士POLO衫 短袖', unit: '件', price: 128, image: 'image/11.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c387'), specification: '100ml', isRecommend: true}
+{_id: ObjectId('5523cea79294d58a8e06c3c9'), name: 'AMH男装韩版夏季 修身时尚短袖', unit: '件', price: 142, image: 'image/12.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c387'), specification: '100ml', isRecommend: true}
