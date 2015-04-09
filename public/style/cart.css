@@ -1,0 +1,38 @@
+body{
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+}
+
+.pointer
+{
+  cursor: pointer;
+}
+
+.hidden
+{
+  display: none;
+}
+
+input
+{
+  text-align: center;
+  height: 20%;
+  width: 40%;
+}
+
+table.ui.large.table th
+{
+  text-align: center;
+}
+
+table.ui.large.table td
+{
+    text-align: center;
+}
+
+.ui.fluid.image.size
+{
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
