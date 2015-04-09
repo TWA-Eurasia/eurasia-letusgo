@@ -70,6 +70,9 @@ html
           a.section(href="#") #{currentCategory.parent.name}
            i.right.chevron.icon.ider
           a.active.section(href="/categories/#{currentCategory._id}") #{currentCategory.name}
+        - var display = (items.length === 0 ? 'auto' : 'none')
+        - var style = {'style': 'display:' + display}
+        .section.notice&attributes(style) 此分类下暂无商品！
         .ui.four.column.grid
           - each item in items
             .column.itemDiv
