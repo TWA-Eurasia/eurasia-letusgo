@@ -31,8 +31,8 @@ body{
 
 .myLogo
 {
-  width: 65%;
-  height: 65%;
+  width: 75%;
+  height: 75%;
 }
 
 .ui.vertical.menu
@@ -92,7 +92,7 @@ body{
 }
 .pagination
 {
-  padding-left: 750px;
+  padding-left: 500px;
   padding-top: 30px;
 }
 
