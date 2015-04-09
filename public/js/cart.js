@@ -8,24 +8,20 @@ var JUMP_TIME = 1;
 
 $(function () {
 
-  $(document).on('cart-count-change', function (event, cartId) {
-    $.ajax({
-      url: 'cart' + cartId,
-      type: 'GET',
+  function jump(count, self) {
 
-      success: function (data) {
-        $(".nav-cart-count").text(data);
+    window.setTimeout(function () {
+      count--;
+
+      if (count > 0) {
+        jump(count, self);
+
+      } else {
+        $('.delete-massage').closest('tr').remove();
       }
-    });
-  });
 
-  $('img')
-    .error(function() {
-      $(this).attr('src', '/image/missing.jpg')
-    })
-    .attr( 'src', function () {
-      return $(this).data('src');
-    });
+    }, 1000);
+  }
 
   function changeTotal(jQ_DOM) {
     var id = jQ_DOM.closest('tr').data('id');
@@ -45,6 +41,45 @@ $(function () {
       }
     })
   }
+
+  function verifyNumber(number,input) {
+
+    var reg = /^(0|[1-9][0-9]*)$/;
+    if (!reg.exec(number)) {
+      input.val(1);
+    }
+  }
+
+  function isShorted(input) {
+
+    var inputNumber = parseInt(input.closest('td').find('#number').val());
+    var leftNumber = $('#leftNumber').text();
+
+    if (inputNumber > leftNumber) {
+      return true;
+    }
+
+    return false;
+  }
+
+  $(document).on('cart-count-change', function (event, cartId) {
+    $.ajax({
+      url: 'cart' + cartId,
+      type: 'GET',
+
+      success: function (data) {
+        $(".nav-cart-count").text(data);
+      }
+    });
+  });
+
+  $('img')
+    .error(function() {
+      $(this).attr('src', '/image/missing.jpg')
+    })
+    .attr( 'src', function () {
+      return $(this).data('src');
+    });
 
   $('#allChecked').on('change', function() {
 
@@ -78,28 +113,26 @@ $(function () {
   });
 
   $('.reduce').on('click', function () {
-
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
+    var inputDom = $(this).closest('td').find('#number');
+    var numberInput = parseInt(inputDom.val());
 
     if (numberInput !== 1) {
-      $(this).closest('td').find('#number').val(numberInput - 1);
+      inputDom.val(numberInput - 1);
       changeTotal($(this));
     }
   });
 
   $('.increase').on('click', function () {
 
-
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
+    var inputDom = $(this).closest('td').find('#number');
+    var numberInput = parseInt(inputDom.val());
 
     var inventory = $('#leftNumber').text();
 
     if (inventory > numberInput) {
-      $(this).closest('td').find('#number').val(numberInput + 1);
+      inputDom.val(numberInput + 1);
       changeTotal($(this));
     }
-
-
   });
 
   $('input').on('keyup', function () {
@@ -118,27 +151,6 @@ $(function () {
       $(this).closest('td').find('#inventory').show();
     }
   });
-
-  function verifyNumber(number,input) {
-
-    var reg = /^(0|[1-9][0-9]*)$/;
-    if (!reg.exec(number)) {
-      input.val(1);
-    }
-  }
-
-  function isShorted(input) {
-
-    var inputNumber = parseInt(input.closest('td').find('#number').val());
-    var leftNumber = $('#leftNumber').text();
-
-    if (inputNumber > leftNumber) {
-      return true;
-    }
-
-    return false;
-  }
-
 
   $('.delete_cartItem').on('click', function () {
 
@@ -167,21 +179,6 @@ $(function () {
       }
     })
   });
-
-  function jump(count, self) {
-
-    window.setTimeout(function () {
-      count--;
-
-      if (count > 0) {
-        jump(count, self);
-
-      } else {
-        $('.delete-massage').closest('tr').remove();
-      }
-
-    }, 1000);
-  }
 
   $('.itemName').popup( {
     content: $(this).prop("data-content")
