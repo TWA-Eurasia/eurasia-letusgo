@@ -90,6 +90,16 @@ body{
 {
   color: #000;
 }
+
+.notice
+{
+  text-align: center;
+  font-size: 2rem;
+  height: 200px;
+  line-height: 200px;
+  color: teal;
+}
+
 .pagination
 {
   padding-left: 500px;
