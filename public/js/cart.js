@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
-require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
+require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
 var JUMP_TIME = 1;
@@ -186,5 +186,3 @@ $(document).ready(function () {
   });
 
 });
-
-
