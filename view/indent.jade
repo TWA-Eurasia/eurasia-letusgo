@@ -24,32 +24,32 @@ block content
       table.ui.large.table
         thead
           tr
-          th.two.wide.column(style="text-align: center") 图片
-          th.three.wide.column(style="text-align: center") 名称
-          th.two.wide.column(style="text-align: center") 单价
-          th.two.wide.column(style="text-align: center") 单位
-          th.three.wide.column(style="text-align: center") 数量
-          th.two.wide.column(style="text-align: center") 小计
+          th.two.wide.column 图片
+          th.three.wide.column 名称
+          th.two.wide.column 单价
+          th.two.wide.column 单位
+          th.three.wide.column 数量
+          th.two.wide.column 小计
 
-        tbody.centered
+        tbody
           -each cartItem in cartItems
              tr
-               td(style="text-align: center")
+               td
                 a(href='/items/#{cartItem.item.id}')
-                  img.ui.fluid.image(src="#{cartItem.item.image}",width='70px',height='70px')
-               td(style="text-align: center")
+                  img.ui.fluid.image.size(src="#{cartItem.item.image}")
+               td.center
                 a.itemName(data-content="#{cartItem.item.name}" href="/items/#{cartItem.item.id}") #{cartItem.item.shortName}
-               td(style="text-align: center") #{cartItem.item.price} 元
-               td(style="text-align: center") #{cartItem.item.unit}
-               td(style="text-align: center") #{cartItem.number}
-               td(style="text-align: center") #{cartItem.getSubtotal()} 元
+               td #{cartItem.item.price} 元
+               td #{cartItem.item.unit}
+               td #{cartItem.number}
+               td #{cartItem.getSubtotal()} 元
 
-      h2(align="right") 总计：
+      h2.total 总计：
         span.red #{total}
         span 元
       a.ui.red.right.floated.right.labeled.icon.button#pay 支付
         i.right.arrow.icon
-        span#shortedCartItemName.display.none #{shortedCartItemName}
+        span#shortedCartItemName.hidden #{shortedCartItemName}
 
     .ui.first.coupled.small.modal.transition
       .content
