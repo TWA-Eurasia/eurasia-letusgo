@@ -31,7 +31,8 @@ html
     .container
       .ui.grid.mylogo
         .four.wide.column
-          img(src= "/image/logo.png")
+          a(href="/")
+            img(src= "/image/logo.png")
         .twelve.wide.column.search
           //.ui.fluid.action.input
           //  input.topsearch(type="text" placeholder="Search...")
@@ -46,24 +47,40 @@ html
                 i.dropdown.icon
                 .menu
                   - each subCategory in mainCategory.subCategories
-                    a.item.secondMenu(data-id="#{subCategory._id}" href="/categoryView/#{subCategory._id}") #{subCategory.name}
+                    a.item.secondMenu(data-id="#{subCategory._id}" href="/categories/#{subCategory._id}") #{subCategory.name}
         .twelve.wide.column
           .ui.twelve.column.grid
             .ui.inverted.teal.menu
               .left.menu
-                a.ui.item LetUsGo
-                  a#homeLink.ui.active.link.item(href="/") 首页
-                  i.home.icon
+                a.ui.item(href="/") Let Us Go
               .right.menu
                 a.ui.link.item(href="/cart") 购物车
                   i.cart.in.icon
+          - var isDisplay = currentCategory.isDisplay
+          - var recommendDisplay = isDisplay ? 'none' : 'auto'
+          - var crumbDisplay = isDisplay ? 'auto' : 'none'
+          - var recommendStyle = {'style': 'display:' + recommendDisplay}
+          - var crumbStyle = {'style': 'display:' + crumbDisplay}
+          .ui.items.crumb&attributes(recommendStyle)
+            .item
+              .content
+                a.header 推荐商品
+          .ui.large.breadcrumb.crumb&attributes(crumbStyle)
+            a.section #{currentCategory.parent.name}
+             i.right.chevron.icon.ider
+            a.section(href="/categories/#{currentCategory._id}") #{currentCategory.name}
           .ui.four.column.grid
             - each item in items
               .column.itemDiv
                 .ui.segment
                   img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
                 .info
-                  a.name.itemName(href="/itemDetails/#{item._id}" data-content="#{item.name}") #{item.shortName}
+                  a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
                   p.price #{item.price}元
                   .ui.red.button(data-id="#{item._id}") 立即购买
           .pagination
+    footer
+      .ui.grid(style="text-align: center")
+        .sixteen.wide.column
+        .sixteen.wide.column
+          p copyright@letusgo All Rights Reserved

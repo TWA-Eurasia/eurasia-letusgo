@@ -8,6 +8,17 @@ var JUMP_TIME = 1;
 
 $(document).ready(function () {
 
+  $(document).on('cart-count-change', function (event, cartId) {
+    $.ajax({
+      url: 'cart' + cartId,
+      type: 'GET',
+
+      success: function (data) {
+        $(".nav-cart-count").text(data);
+      }
+    });
+  });
+
   $( "img" )
     .error(function() {
       $( this ).hide();
