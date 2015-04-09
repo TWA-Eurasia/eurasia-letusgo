@@ -32,7 +32,7 @@ html
       .ui.grid.mylogo
         .four.wide.column
           a(href="/")
-            img(src= "/image/logo.png")
+            img(data-src= "/image/logo.png")
         .twelve.wide.column.search
           //.ui.fluid.action.input
           //  input.topsearch(type="text" placeholder="Search...")
@@ -73,7 +73,7 @@ html
             - each item in items
               .column.itemDiv
                 .ui.segment
-                  img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
+                  img.ui.fluid.image(data-id="#{item._id}" data-src="/#{item.image}")
                 .info
                   a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
                   p.price #{item.price}元

@@ -6,11 +6,13 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(document).ready(function () {
 
-  $( "img" )
+  $('img')
     .error(function() {
-      $( this ).hide();
+      $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( "src", "../image/missing.jpg" );
+    .attr( 'src', function () {
+      return $(this).data('src');
+    });
 
   if(application.index.pageCount > 1) {
     var visiblePageCount = 7;

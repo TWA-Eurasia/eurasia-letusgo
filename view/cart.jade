@@ -30,7 +30,7 @@ block content
               tr(data-id="#{cartItem._id}")
                 td
                   a(href='/itemDetails/#{cartItem.item.id}')
-                    image.ui.fluid.image(src="#{cartItem.item.image}" href='/itemDetails/#{cartItem.item.id}')
+                    image.ui.fluid.image(data-src="#{cartItem.item.image}" href='/itemDetails/#{cartItem.item.id}')
                 td
                   a.itemName(data-content="#{cartItem.item.name}" href='/itemDetails/#{cartItem.item.id}') #{cartItem.item.shortName}
                 td

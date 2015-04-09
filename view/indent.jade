@@ -33,7 +33,7 @@ block content
              tr
                td(style="text-align: center")
                 a(href='/itemDetails/#{cartItem.item.id}')
-                  img.ui.fluid.image(src="#{cartItem.item.image}",width='70px',height='70px')
+                  img.ui.fluid.image(data-src="#{cartItem.item.image}",width='70px',height='70px')
                td(style="text-align: center")
                 a.itemName(data-content="#{cartItem.item.name}" href="/itemDetails/#{cartItem.item.id}") #{cartItem.item.shortName}
                td(style="text-align: center") #{cartItem.item.price} 元

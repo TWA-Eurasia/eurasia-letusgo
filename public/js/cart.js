@@ -19,11 +19,13 @@ $(document).ready(function () {
     });
   });
 
-  $( "img" )
+  $('img')
     .error(function() {
-      $( this ).hide();
+      $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( "src", "../image/missing.jpg" );
+    .attr( 'src', function () {
+      return $(this).data('src');
+    });
 
   function changetotal(event) {
     var id = event.closest('tr').data('id');
