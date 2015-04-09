@@ -6,6 +6,12 @@ require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
 
 $(document).ready(function () {
 
+  $( "img" )
+    .error(function() {
+      $( this ).hide();
+    })
+    .attr( "src", "../image/missing.jpg" );
+
   if(application.index.pageCount > 1) {
     var visiblePageCount = 7;
     $('.pagination').pagination({

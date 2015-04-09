@@ -8,6 +8,12 @@ var JUMP_TIME = 1;
 
 $(document).ready(function () {
 
+  $( "img" )
+    .error(function() {
+      $( this ).hide();
+    })
+    .attr( "src", "../image/missing.jpg" );
+
   function changetotal(event) {
     var id = event.closest('tr').data('id');
     var num = event.closest('td').find('#number').val();
