@@ -6,7 +6,7 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 var delete_cartItem;
 var JUMP_TIME = 1;
 
-$(document).ready(function () {
+$(function () {
 
   $(document).on('cart-count-change', function (event, cartId) {
     $.ajax({
