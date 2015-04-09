@@ -5,6 +5,8 @@ block css
   script.
     System.import('js/cart')
   link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
+  link(rel="styleSheet" type="text/css" href="/style/indent.css")
+
 block title
   title 我的购物车
 block cart
@@ -17,7 +19,7 @@ block content
         img(src="image/cart.png")
         .content 购物车列表
       .fourteen.wide.column
-        table.ui.large.table.center
+        table.ui.large.table
           thead.center
             th.two.wide 图片
             th.three.wide 名称
@@ -33,7 +35,7 @@ block content
               tr(data-id="#{cartItem._id}")
                 td
                   a(href='/items/#{cartItem.item.id}')
-                    image.ui.fluid.image(src="#{cartItem.item.image}")
+                    img.ui.fluid.image.size(src="#{cartItem.item.image}")
                 td
                   a.itemName(data-content="#{cartItem.item.name}" href='/items/#{cartItem.item.id}') #{cartItem.item.shortName}
                 td

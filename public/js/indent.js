@@ -11,11 +11,26 @@ $(document).ready(function () {
 
   $('#pay').on('click', function () {
 
-    $('.first.modal')
-      .modal('show');
+    var shortedCartItemName = $('#shortedCartItemName').text();
+
+    if(shortedCartItemName) {
+
+      $('#modalTips').text(shortedCartItemName + '  库存不足  请减少商品数量！');
+
+      $('.second.modal')
+        .modal('show');
+
+    } else {
+      $('.first.modal')
+        .modal('show');
+    }
   });
 
-  $('#isPaid').on('click', function(){
+  $('.confirm').on('click', function () {
+    location.href = '/cart';
+  });
+
+  $('#isPaid').on('click', function() {
 
     var total = $(this).data('total');
     var cart = $(this).data('cart');
@@ -40,6 +55,8 @@ $(document).ready(function () {
 
             var userId = '551fd2a9ecb148410c4c8048';
             $.post('/api/user/' + userId, {indentId: indentId});
+          } else {
+
           }
         }
       });

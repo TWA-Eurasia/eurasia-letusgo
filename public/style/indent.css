@@ -1,0 +1,36 @@
+body{
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+}
+
+.hidden
+{
+  display: none;
+}
+
+h2.total
+{
+  text-align: right;
+}
+
+
+table.ui.large.table th
+{
+  text-align: center;
+}
+
+table.ui.large.table td
+{
+  text-align: center;
+}
+
+.red
+{
+  color:red;
+}
+
+.ui.fluid.image.size{
+  width: 100px;
+  height: 100px;
+  margin: 0 20% 0 20%
+}

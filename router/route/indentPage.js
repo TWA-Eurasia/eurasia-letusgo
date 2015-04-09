@@ -25,9 +25,24 @@ router.get('/', function (req, res) {
           });
 
           var total = indent.getTotal(cartItems);
-          res.render('indent', {cartItems: cartItems, total: total, indent: indent});
+          var shortedCartItemName = getShortedCartItemName(cartItems);
+
+          res.render('indent', {cartItems: cartItems, total: total, indent: indent, shortedCartItemName: shortedCartItemName});
         });
     });
 });
+
+function getShortedCartItemName(cartItems) {
+
+  var shortedCartItemName = '';
+
+  cartItems.forEach(function(cartItem) {
+    if(cartItem.number > cartItem.item.inventory) {
+      shortedCartItemName += cartItem.item.name + '、'
+    }
+  });
+
+  return shortedCartItemName.substring(0, shortedCartItemName.length - 1);
+}
 
 module.exports = router;
