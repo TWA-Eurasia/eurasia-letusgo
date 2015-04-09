@@ -77,11 +77,12 @@ html
           - each item in items
             .column.itemDiv
               .ui.segment
-                img.ui.fluid.image(data-id="#{item._id}" data-src="/#{item.image}")
+                a(href="/items/#{item._id}")
+                  img.ui.fluid.image(data-id="#{item._id}" data-src="/#{item.image}")
               .info
                 a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
                 p.price #{item.price}元
-                .ui.red.button(data-id="#{item._id}") 立即购买
+                a.ui.red.button(href="/items/#{item._id}" data-id="#{item._id}") 立即购买
         .pagination
   footer
     .ui.grid(style="text-align: center")
