@@ -1,8 +1,8 @@
-// 'use strict';
+'use strict';
 
 var _ = require('lodash');
 var $ = require('./jquery.pagination');
-require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
+require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(document).ready(function () {
 
