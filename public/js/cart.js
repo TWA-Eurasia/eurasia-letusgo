@@ -27,12 +27,12 @@ $(function () {
       return $(this).data('src');
     });
 
-  function changetotal(event) {
-    var id = event.closest('tr').data('id');
-    var num = event.closest('td').find('#number').val();
-    var price = event.parents('td').prev().find('#price').text();
+  function changeTotal(jQ_DOM) {
+    var id = jQ_DOM.closest('tr').data('id');
+    var num = jQ_DOM.closest('td').find('#number').val();
+    var price = jQ_DOM.parents('td').prev().find('#price').text();
     var total = $('#total').text();
-    var input = event;
+    var input = jQ_DOM;
 
     $.ajax({
       url: 'cart/' + id,
@@ -83,7 +83,7 @@ $(function () {
 
     if (numberInput !== 1) {
       $(this).closest('td').find('#number').val(numberInput - 1);
-      changetotal($(this));
+      changeTotal($(this));
     }
   });
 
@@ -96,7 +96,7 @@ $(function () {
 
     if (inventory > numberInput) {
       $(this).closest('td').find('#number').val(numberInput + 1);
-      changetotal($(this));
+      changeTotal($(this));
     }
 
 
@@ -113,7 +113,7 @@ $(function () {
     var input = $(this);
 
     verifyNumber(number,input);
-    changetotal(input);
+    changeTotal(input);
     if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
     }
