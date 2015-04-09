@@ -21,11 +21,11 @@ block content
 
     .ui.grid
       .three.wide.column
-      .six.wide.column
-        .ui.fluid.card(style="height:400px; background:black;")
+      .five.wide.column
+        .ui.fluid.card(style="height:431px; weight:400px; background:#ffffff;")
           - var imageUrl = itemDetails.item.image
           img.ui.image(src="/" + imageUrl onerror="this.src='/image/nopicture.jpg'" style="vertical-align:middle")
-
+      .one.wide.column
       .four.wide.column
         h2.ui.floated.header.orange.backge #{itemDetails.item.name}
         table.ui.definition.table
