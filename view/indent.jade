@@ -44,6 +44,14 @@ block content
                td #{cartItem.number}
                td #{cartItem.getSubtotal()} 元
 
+        tfoot.right
+          tr
+            th(colspan='7')
+              .ui.right.floated.small.primary.labeled.header
+                h4.ui.orange.header 总计：
+                  span#total #{total}
+                  span 元
+
       h4.total 总计：
         span.red #{total}
         span 元
