@@ -19,68 +19,69 @@ html
       System.import('js/index');
   body#home
     header
-      //.topmenu
-      //  ul.menu
-      //    li
-      //      em.
-      //        Hi，欢迎来到Let Us Go商城
-      //      a.topbutton(href="#") 请登录
-      //      a.topbutton(href="#") 免费注册
-      //    li
-      //      a.topbutton.right(href="#") 我的Let Us Go
-    .container
-      .ui.grid.mylogo
-        .four.wide.column
+      .ui.grid.topBar
+        .one.wide.column &nbsp;
+        .nine.wide.column Hi，欢迎来到Let Us Go商城
+        .two.wide.column
+          a(href="#") 我的Let Us Go
+        .one.wide.column
+          a(href="#") 请登录
+        .one.wide.column
+          a(href="#") 免费注册
+      .ui.grid.logoAndSearch
+        .one.wide.column &nbsp;
+        .three.wide.column
           a(href="/")
-            img(src= "/image/logo.png")
+            img.myLogo(src= "/image/logo.png")
         .twelve.wide.column.search
-          //.ui.fluid.action.input
-          //  input.topsearch(type="text" placeholder="Search...")
-          //  button.ui.icon.button
-          //    i.search.icon
-      .ui.grid
-        .four.wide.column
-          .ui.secondary.vertical.menu
-            .ui.dropdown.item#categoryTitle 商品服务分类
-            - each mainCategory in mainCategories
-              .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
-                i.dropdown.icon
-                .menu
-                  - each subCategory in mainCategory.subCategories
-                    a.item.secondMenu(data-id="#{subCategory._id}" href="/categories/#{subCategory._id}") #{subCategory.name}
-        .twelve.wide.column
-          .ui.twelve.column.grid
-            .ui.inverted.teal.menu
-              .left.menu
-                a.ui.item(href="/") Let Us Go
-              .right.menu
-                a.ui.link.item(href="/cart") 购物车
-                  i.cart.in.icon
-          - var isDisplay = currentCategory.isDisplay
-          - var recommendDisplay = isDisplay ? 'none' : 'auto'
-          - var crumbDisplay = isDisplay ? 'auto' : 'none'
-          - var recommendStyle = {'style': 'display:' + recommendDisplay}
-          - var crumbStyle = {'style': 'display:' + crumbDisplay}
-          .ui.items.crumb&attributes(recommendStyle)
-            .item
-              .content
-                a.header 推荐商品
-          .ui.large.breadcrumb.crumb&attributes(crumbStyle)
-            a.section #{currentCategory.parent.name}
-             i.right.chevron.icon.ider
-            a.active.section(href="/categories/#{currentCategory._id}") #{currentCategory.name}
-          .ui.four.column.grid
-            - each item in items
-              .column.itemDiv
-                .ui.segment
-                  img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
-                .info
-                  a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
-                  p.price #{item.price}元
-                  .ui.red.button(data-id="#{item._id}") 立即购买
-          .pagination
-    footer
-      .ui.grid(style="text-align: center")
-        .sixteen.wide.column
-        .sixteen.wide.column
-          p copyright@letusgo All Rights Reserved
+          .ui.fluid.action.input
+            input.topsearch(type="text" placeholder="Search...")
+            button.ui.icon.button
+              i.search.icon
+    .ui.grid.content
+      .one.wide.column &nbsp;
+      .three.wide.column
+        .ui.secondary.vertical.menu
+          .ui.dropdown.item#categoryTitle 商品服务分类
+          - each mainCategory in mainCategories
+            .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
+              i.dropdown.icon
+              .menu
+                - each subCategory in mainCategory.subCategories
+                  a.item.secondMenu(data-id="#{subCategory._id}" href="/categories/#{subCategory._id}") #{subCategory.name}
+      .twelve.wide.column
+        .ui.twelve.column.grid
+          .ui.inverted.teal.menu
+            .left.menu
+              a.ui.item(href="/") Let Us Go
+            .right.menu
+              a.ui.link.item(href="/cart") 购物车
+                i.cart.in.icon
+        - var isDisplay = currentCategory.isDisplay
+        - var recommendDisplay = isDisplay ? 'none' : 'auto'
+        - var crumbDisplay = isDisplay ? 'auto' : 'none'
+        - var recommendStyle = {'style': 'display:' + recommendDisplay}
+        - var crumbStyle = {'style': 'display:' + crumbDisplay}
+        .ui.items.crumb&attributes(recommendStyle)
+          .item
+            .content
+              a.header 推荐商品
+        .ui.large.breadcrumb.crumb&attributes(crumbStyle)
+          a.section #{currentCategory.parent.name}
+           i.right.chevron.icon.ider
+          a.active.section(href="/categories/#{currentCategory._id}") #{currentCategory.name}
+        .ui.four.column.grid
+          - each item in items
+            .column.itemDiv
+              .ui.segment
+                img.ui.fluid.image(data-id="#{item._id}" src="/#{item.image}")
+              .info
+                a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
+                p.price #{item.price}元
+                .ui.red.button(data-id="#{item._id}") 立即购买
+        .pagination
+  footer
+    .ui.grid(style="text-align: center")
+      .sixteen.wide.column
+      .sixteen.wide.column
+        p copyright@letusgo All Rights Reserved
