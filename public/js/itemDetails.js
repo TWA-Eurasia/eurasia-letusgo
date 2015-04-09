@@ -3,6 +3,14 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(document).ready(function () {
 
+  $('img')
+    .error(function() {
+      $(this).attr('src', '/image/missing.jpg')
+    })
+    .attr( 'src', function () {
+      return $(this).data('src');
+    });
+
   $('i.minus').on('click', function () {
     var numberInput = parseInt($('#numberInput').val());
     if (numberInput !== 1) {

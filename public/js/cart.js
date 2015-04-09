@@ -8,6 +8,25 @@ var JUMP_TIME = 1;
 
 $(document).ready(function () {
 
+  $(document).on('cart-count-change', function (event, cartId) {
+    $.ajax({
+      url: 'cart' + cartId,
+      type: 'GET',
+
+      success: function (data) {
+        $(".nav-cart-count").text(data);
+      }
+    });
+  });
+
+  $('img')
+    .error(function() {
+      $(this).attr('src', '/image/missing.jpg')
+    })
+    .attr( 'src', function () {
+      return $(this).data('src');
+    });
+
   function changetotal(event) {
     var id = event.closest('tr').data('id');
     var num = event.closest('td').find('#number').val();
