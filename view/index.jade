@@ -29,15 +29,15 @@ html
         .one.wide.column
           a(href="#") 免费注册
       .ui.grid.logoAndSearch
-        .one.wide.column &nbsp;
-        .three.wide.column
+        .four.wide.column.myLogo
           a(href="/")
-            img.myLogo(data-src= "/image/logo.png")
-        .twelve.wide.column.search
-          .ui.fluid.action.input
-            input.topsearch(type="text" placeholder="Search...")
-            button.ui.icon.button
+            img.myLogoImg(data-src= "/image/logo.png")
+        .twelve.wide.column.mySearch
+          .ui.fluid.category.search
+            .ui.icon.input.searchInput
+              input.prompt(type="text" placeholder="Search...")
               i.search.icon
+            .results
     .ui.grid.content
       .one.wide.column &nbsp;
       .three.wide.column
@@ -77,11 +77,12 @@ html
           - each item in items
             .column.itemDiv
               .ui.segment
-                img.ui.fluid.image(data-id="#{item._id}" data-src="/#{item.image}")
+                a(href="/items/#{item._id}")
+                  img.ui.fluid.image(data-id="#{item._id}" data-src="/#{item.image}")
               .info
                 a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
                 p.price #{item.price}元
-                .ui.red.button(data-id="#{item._id}") 立即购买
+                a.ui.red.button(href="/items/#{item._id}" data-id="#{item._id}") 立即购买
         .pagination
   footer
     .ui.grid(style="text-align: center")
