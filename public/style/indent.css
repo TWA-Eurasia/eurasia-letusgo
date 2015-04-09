@@ -3,24 +3,25 @@ body{
   font-size: 15px;
 }
 
-.display.none
+.hidden
 {
   display: none;
 }
 
-.center
+h2.total
+{
+  text-align: right;
+}
+
+
+table.ui.large.table th
 {
   text-align: center;
 }
 
-td.center
+table.ui.large.table td
 {
   text-align: center;
-}
-
-h1.right
-{
-  align: right;
 }
 
 .red
@@ -28,7 +29,8 @@ h1.right
   color:red;
 }
 
-img.size{
-  width: 70px;
-  height: 70px;
+.ui.fluid.image.size{
+  width: 100px;
+  height: 100px;
+  margin: 0 20% 0 20%
 }
