@@ -8,12 +8,6 @@ body{
   display: none;
 }
 
-h4.total
-{
-  text-align: right;
-}
-
-
 table.ui.large.table th
 {
   text-align: center;
