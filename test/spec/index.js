@@ -20,4 +20,16 @@ describe('index', function() {
         .expect(200, done);
     });
   });
+
+  //describe('GET /', function () {
+  //  it('should return cannot find the username', function (done) {
+  //    request(app)
+  //      .get('/index/:pageNumber')
+  //      .send({username: 'Jacobs', password: 'd'})
+  //      .expect('无法找到用户: Jacobs', done)
+  //      .expect(401);
+  //  });
+  //});
+
+
 });
