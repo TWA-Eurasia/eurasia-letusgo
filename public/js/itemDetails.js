@@ -2,11 +2,14 @@ var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(document).ready(function () {
-  $( "img" )
+
+  $('img')
     .error(function() {
-      $( this ).hide();
+      $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( "src", "../image/missing.jpg" );
+    .attr( 'src', function () {
+      return $(this).data('src');
+    });
 
   $('i.minus').on('click', function () {
     var numberInput = parseInt($('#numberInput').val());
