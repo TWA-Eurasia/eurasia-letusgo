@@ -8,7 +8,7 @@ body{
   display: none;
 }
 
-h2.total
+h4.total
 {
   text-align: right;
 }
@@ -32,5 +32,5 @@ table.ui.large.table td
 .ui.fluid.image.size{
   width: 100px;
   height: 100px;
-  margin: 0 20% 0 20%
+  margin: 0 auto;
 }
