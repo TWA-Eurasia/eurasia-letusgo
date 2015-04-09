@@ -37,14 +37,14 @@ block content
                td
                 a(href='/items/#{cartItem.item.id}')
                   img.ui.fluid.image.size(src="#{cartItem.item.image}")
-               td.center
+               td
                 a.itemName(data-content="#{cartItem.item.name}" href="/items/#{cartItem.item.id}") #{cartItem.item.shortName}
                td #{cartItem.item.price} 元
                td #{cartItem.item.unit}
                td #{cartItem.number}
                td #{cartItem.getSubtotal()} 元
 
-      h2.total 总计：
+      h4.total 总计：
         span.red #{total}
         span 元
       a.ui.red.right.floated.right.labeled.icon.button#pay 支付
