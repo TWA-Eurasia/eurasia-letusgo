@@ -77,7 +77,7 @@ $(function () {
     }
   });
 
-  $('i.minus.square.icon').on('click', function () {
+  $('.reduce').on('click', function () {
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
 
@@ -87,7 +87,7 @@ $(function () {
     }
   });
 
-  $('i.add.square.icon').on('click', function () {
+  $('.increase').on('click', function () {
 
 
     var numberInput = parseInt($(this).closest('td').find('#number').val());
