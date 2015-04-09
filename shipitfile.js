@@ -9,7 +9,7 @@ module.exports = function (shipit) {
       workspace: '/tmp/github-monitor',
       deployTo: '/tmp/deploy_to',
       repositoryUrl: 'git@github.com:TWA-Eurasia/eurasia-letusgo.git',
-      branch: 'development',
+      branch: 'uat',
       ignores: ['.git', 'node_modules', '.idea', 'eurasia-letusgo.iml', 'jspm_packages', '.DS_Store'],
       key: 'id_aliyun',
       keepReleases: 2,
