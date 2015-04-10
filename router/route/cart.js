@@ -102,4 +102,20 @@ router.delete('/:cartItemId', function (req, res) {
   });
 });
 
+router.get('/:amount', function(req, res){
+
+  var cartId = "551cc282a6b79c584b59bc0f";
+
+  Cart.findById(cartId)
+    .populate('cartItems')
+    .exec(function (err, cart) {
+      var count = _.reduce(cart.cartItems, function (count, cartItem) {
+        return cartItem.number + count;
+      }, 0);
+      res.send({amount: count});
+
+
+    });
+});
+
 module.exports = router;

@@ -5,6 +5,7 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
 var JUMP_TIME = 1;
+var MAX_CART_AMOUNT = 99;
 
 $(function () {
 
@@ -42,7 +43,7 @@ $(function () {
     })
   }
 
-  function verifyNumber(number,input) {
+  function verifyNumber(number, input) {
 
     var reg = /^(0|[1-9][0-9]*)$/;
     if (!reg.exec(number)) {
@@ -70,14 +71,14 @@ $(function () {
   });
 
   $('img')
-    .error(function() {
+    .error(function () {
       $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( 'src', function () {
+    .attr('src', function () {
       return $(this).data('src');
     });
 
-  $('#allChecked').on('change', function() {
+  $('#allChecked').on('change', function () {
 
     var checkboxes = $('input[name="checkedCartItem"]');
     for (var i = 0; i < checkboxes.length; i++) {
@@ -86,24 +87,24 @@ $(function () {
 
   });
 
-  $('.checkedCartItem').on('change', function() {
+  $('.checkedCartItem').on('change', function () {
 
     var isChecked = $(this).prop('checked');
-    if(!isChecked) {
+    if (!isChecked) {
       $('#allChecked').prop('checked', false);
     }
 
     var isAllChecked = true;
     var checkboxes = $('input[name="checkedCartItem"]');
 
-    for(var i = 0; i < checkboxes.length; i++) {
+    for (var i = 0; i < checkboxes.length; i++) {
       isAllChecked = checkboxes[i].checked;
-      if(!isAllChecked) {
+      if (!isAllChecked) {
         return;
       }
     }
 
-    if(isAllChecked) {
+    if (isAllChecked) {
       $('#allChecked').prop('checked', true);
     }
   });
@@ -116,6 +117,7 @@ $(function () {
       inputDom.val(numberInput - 1);
       changeTotal($(this));
     }
+    countCartAmount();
   });
 
   $('.increase').on('click', function () {
@@ -129,6 +131,7 @@ $(function () {
       inputDom.val(numberInput + 1);
       changeTotal($(this));
     }
+    countCartAmount();
   });
 
   $('input').on('keyup', function () {
@@ -141,10 +144,12 @@ $(function () {
     var number = numberInput.replace(/\b(0+)/gi, '');
     var input = $(this);
 
-    verifyNumber(number,input);
+    verifyNumber(number, input);
     changeTotal(input);
     if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
+    } else {
+      countCartAmount();
     }
   });
 
@@ -172,12 +177,30 @@ $(function () {
         $("#total").text(data.total);
 
         jump(JUMP_TIME, delete_cartItem);
+        countCartAmount();
       }
     })
   });
 
-  $('.itemName').popup( {
+  $('.itemName').popup({
     content: $(this).prop("data-content")
   });
 
+
+  countCartAmount();
+  function countCartAmount() {
+
+    $.ajax({
+      url: '/cart/:amount',
+      type: 'GET',
+
+      success: function (data) {
+        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+          data.amount = '99+';
+        }
+        console.log(data.amount);
+        $('#cart-amount').text(data.amount);
+      }
+    })
+  }
 });

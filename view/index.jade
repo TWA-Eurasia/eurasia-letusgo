@@ -17,6 +17,7 @@ html
     script(src="/config.js")
     script.
       System.import('js/index');
+      System.import('js/cart');
   body#home
     .container
       header
@@ -41,6 +42,7 @@ html
               .results
       .ui.grid.content
         .one.wide.column &nbsp;
+<<<<<<< HEAD
         .three.wide.column
           .ui.secondary.vertical.menu
             .ui.dropdown.item#categoryTitle 商品服务分类
@@ -58,6 +60,8 @@ html
               .right.menu
                 a.ui.link.item(href="/cart") 购物车
                   i.cart.in.icon
+                  strong.ui.label#cart-amount 0
+
           - var isDisplay = currentCategory.isDisplay
           - var recommendDisplay = isDisplay ? 'none' : 'auto'
           - var crumbDisplay = isDisplay ? 'auto' : 'none'
@@ -92,4 +96,3 @@ html
           .sixteen.wide.column
           .sixteen.wide.column
             p copyright@letusgo All Rights Reserved
-

@@ -1,13 +1,14 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
+var MAX_CART_AMOUNT = 99;
 
 $(document).ready(function () {
 
   $('img')
-    .error(function() {
+    .error(function () {
       $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( 'src', function () {
+    .attr('src', function () {
       return $(this).data('src');
     });
 
@@ -61,6 +62,21 @@ $(document).ready(function () {
     return inputNumber > inventory;
   }
 
+  function countCartAmount() {
+
+    $.ajax({
+      url: '/cart/:amount',
+      type: 'GET',
+
+      success: function (data) {
+        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+          data.amount = '99+';
+        }
+        console.log(data.amount);
+        $('#cart-amount').text(data.amount);
+      }
+    })
+  }
 
   $('.addToCart').on('click', function () {
 
@@ -72,7 +88,7 @@ $(document).ready(function () {
       type: 'POST',
       data: {number: numberInput},
       success: function () {
-
+        countCartAmount();
         $('.success').show();
         function jump(count) {
 
@@ -88,7 +104,8 @@ $(document).ready(function () {
             }
           }, 1000);
         }
-      jump(1);
+
+        jump(1);
       }
     })
   });
