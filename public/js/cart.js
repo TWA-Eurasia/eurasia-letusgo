@@ -5,7 +5,7 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
 var JUMP_TIME = 1;
-var maximum_cart_amount = 99;
+var MAX_CART_AMOUNT = 99;
 
 $(function () {
 
@@ -195,7 +195,7 @@ $(function () {
       type: 'GET',
 
       success: function (data) {
-        if(maximum_cart_amount<parseInt(data.amount)){
+        if(MAX_CART_AMOUNT < parseInt(data.amount)){
           data.amount = '99+';
         }
         console.log(data.amount);
