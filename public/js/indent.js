@@ -15,18 +15,6 @@ function updateInventory(inventory, number, item){
 
 $(document).ready(function () {
 
-  $('img')
-    .error(function() {
-      $(this).attr('src', '/image/missing.jpg')
-    })
-    .attr( 'src', function () {
-      return $(this).data('src');
-    });
-
-  $('.itemName').popup( {
-    content: $(this).prop("data-content")
-  });
-
   $('#pay').on('click', function () {
 
     var shortedCartItemName = $('#shortedCartItemName').text();
@@ -71,11 +59,23 @@ $(document).ready(function () {
               //$.post('/api/user/' + userId, {indentId: indentId});
             }
           }
-
         });
       });
     });
   });
+
+
+  $('.itemName').popup( {
+    content: $(this).prop("data-content")
+  });
+
+  $('img')
+    .error(function() {
+      $(this).attr('src', '/image/missing.jpg')
+    })
+    .attr( 'src', function () {
+      return $(this).data('src');
+    });
 });
 
 
