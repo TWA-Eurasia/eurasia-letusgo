@@ -5,6 +5,7 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
 var JUMP_TIME = 1;
+var maximum_cart_amount = 99;
 
 $(function () {
 
@@ -147,6 +148,8 @@ $(function () {
     changeTotal(input);
     if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
+    }else{
+      countCartAmount();
     }
   });
 
@@ -174,6 +177,7 @@ $(function () {
         $("#total").text(data.total);
 
         jump(JUMP_TIME, delete_cartItem);
+        countCartAmount();
       }
     })
   });
@@ -191,7 +195,9 @@ $(function () {
       type: 'GET',
 
       success: function (data) {
-        console.log(data.amount);
+        if(maximum_cart_amount<parseInt(data.amount)){
+          data.amount = '99+';
+        }
         $('#cart-amount').text(data.amount);
       }
     })
