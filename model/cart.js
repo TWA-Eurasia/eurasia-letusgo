@@ -9,7 +9,7 @@ var CartSchema = new Schema({
   ]
 });
 
-CartSchema.methods.getTotal = function(cartItems){
+CartSchema.methods.getTotal = function (cartItems) {
 
   var totalAmount = 0;
   cartItems.forEach(function (cartItem) {

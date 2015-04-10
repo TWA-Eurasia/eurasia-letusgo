@@ -17,7 +17,7 @@ var ItemSchema = new Schema({
   isRecommend: Boolean
 });
 
-function setPrice(num){
+function setPrice(num) {
   return num.toFixed(2);
 }
 

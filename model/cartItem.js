@@ -7,11 +7,11 @@ var CartItemSchema = new Schema({
   number: Number
 });
 
-CartItemSchema.methods.getSubtotal = function() {
+CartItemSchema.methods.getSubtotal = function () {
 
-  var subtotal =  this.item.price * this.number;
+  var subtotal = this.item.price * this.number;
 
-  return  subtotal.toFixed(2);
+  return subtotal.toFixed(2);
 };
 
-module.exports = mongoose.model('CartItem',CartItemSchema);
+module.exports = mongoose.model('CartItem', CartItemSchema);

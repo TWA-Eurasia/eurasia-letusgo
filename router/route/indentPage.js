@@ -27,7 +27,12 @@ router.get('/', function (req, res) {
           var total = indent.getTotal(cartItems);
           var shortedCartItemName = getShortedCartItemName(cartItems);
 
-          res.render('indent', {cartItems: cartItems, total: total, indent: indent, shortedCartItemName: shortedCartItemName});
+          res.render('indent', {
+            cartItems: cartItems,
+            total: total,
+            indent: indent,
+            shortedCartItemName: shortedCartItemName
+          });
         });
     });
 });
@@ -36,8 +41,8 @@ function getShortedCartItemName(cartItems) {
 
   var shortedCartItemName = '';
 
-  cartItems.forEach(function(cartItem) {
-    if(cartItem.number > cartItem.item.inventory) {
+  cartItems.forEach(function (cartItem) {
+    if (cartItem.number > cartItem.item.inventory) {
       shortedCartItemName += cartItem.item.name + '、'
     }
   });

@@ -2,18 +2,18 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-function updateInventory(inventory, number, item){
+function updateInventory(inventory, number, item) {
 
   inventory -= number;
 
   $.ajax({
-    url:'/api/item/' + item._id,
-    type:'POST',
+    url: '/api/item/' + item._id,
+    type: 'POST',
     data: {inventory: inventory}
   });
 }
 
-function showShortage(shortedCartItemName){
+function showShortage(shortedCartItemName) {
 
   var message = '  库存不足  请减少商品数量！';
   $('#modalTips').text(shortedCartItemName + message);
@@ -28,16 +28,16 @@ $(document).ready(function () {
 
     var shortedCartItemName = $('#shortedCartItemName').text();
 
-    if(shortedCartItemName) {
+    if (shortedCartItemName) {
 
-     showShortage(shortedCartItemName);
+      showShortage(shortedCartItemName);
     } else {
       $('.first.modal')
         .modal('show');
     }
   });
 
-  $('#isPaid').on('click', function() {
+  $('#isPaid').on('click', function () {
 
     var total = $(this).data('total');
     var cartItems = $(this).data('cart');
@@ -49,7 +49,7 @@ $(document).ready(function () {
 
           var number = cartItem.number;
           var inventory = item.inventory;
-          if(item._id === cartItem.item._id){
+          if (item._id === cartItem.item._id) {
 
             if (number < inventory) {
 
@@ -68,15 +68,15 @@ $(document).ready(function () {
     });
   });
 
-  $('.itemName').popup( {
+  $('.itemName').popup({
     content: $(this).prop("data-content")
   });
 
   $('img')
-    .error(function() {
+    .error(function () {
       $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( 'src', function () {
+    .attr('src', function () {
       return $(this).data('src');
     });
 });

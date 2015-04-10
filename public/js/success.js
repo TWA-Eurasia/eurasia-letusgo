@@ -3,7 +3,7 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-var JUMP_TIME =3;
+var JUMP_TIME = 3;
 
 function jump(jumpTime) {
 
@@ -21,7 +21,7 @@ function jump(jumpTime) {
 
 $(document).ready(function () {
 
-  $.get('/api/indent', function(data){
+  $.get('/api/indent', function (data) {
 
     var amount = data.total;
     $('#amount').text(amount);
