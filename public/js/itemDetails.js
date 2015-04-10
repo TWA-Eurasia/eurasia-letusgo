@@ -5,10 +5,10 @@ var MAX_CART_AMOUNT = 99;
 $(document).ready(function () {
 
   $('img')
-    .error(function() {
+    .error(function () {
       $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( 'src', function () {
+    .attr('src', function () {
       return $(this).data('src');
     });
 
@@ -69,7 +69,7 @@ $(document).ready(function () {
       type: 'GET',
 
       success: function (data) {
-        if(MAX_CART_AMOUNT < parseInt(data.amount)){
+        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
           data.amount = '99+';
         }
         console.log(data.amount);
@@ -104,7 +104,8 @@ $(document).ready(function () {
             }
           }, 1000);
         }
-      jump(1);
+
+        jump(1);
       }
     })
   });
