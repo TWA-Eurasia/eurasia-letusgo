@@ -17,6 +17,7 @@ html
     script(src="/config.js")
     script.
       System.import('js/index');
+      System.import('js/cart');
   body#home
     header
       .ui.grid.topBar
@@ -57,6 +58,7 @@ html
             .right.menu
               a.ui.link.item(href="/cart") 购物车
                 i.cart.in.icon
+                strong.ui.label#cart-amount 0
         - var isDisplay = currentCategory.isDisplay
         - var recommendDisplay = isDisplay ? 'none' : 'auto'
         - var crumbDisplay = isDisplay ? 'auto' : 'none'

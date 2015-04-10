@@ -102,4 +102,10 @@ router.delete('/:cartItemId', function (req, res) {
   });
 });
 
+router.get('/:amount', function(req, res){
+  
+
+  res.send({amount: '50'});
+});
+
 module.exports = router;

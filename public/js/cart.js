@@ -129,6 +129,7 @@ $(function () {
       inputDom.val(numberInput + 1);
       changeTotal($(this));
     }
+    countCartAmount();
   });
 
   $('input').on('keyup', function () {
@@ -180,4 +181,18 @@ $(function () {
     content: $(this).prop("data-content")
   });
 
+
+  countCartAmount();
+  function countCartAmount() {
+
+    $.ajax({
+      url: 'cart/:amount',
+      type: 'GET',
+
+      success: function (data) {
+        console.log(data.amount);
+        $('#cart-amount').text(data.amount);
+      }
+    })
+  }
 });
