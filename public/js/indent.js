@@ -13,6 +13,15 @@ function updateInventory(inventory, number, item){
   });
 }
 
+function showShortage(shortedCartItemName){
+
+  var message = '  库存不足  请减少商品数量！';
+  $('#modalTips').text(shortedCartItemName + message);
+
+  $('.second.modal')
+    .modal('show');
+}
+
 $(document).ready(function () {
 
   $('#pay').on('click', function () {
@@ -21,12 +30,7 @@ $(document).ready(function () {
 
     if(shortedCartItemName) {
 
-      var message = '  库存不足  请减少商品数量！';
-      $('#modalTips').text(shortedCartItemName + message);
-
-      $('.second.modal')
-        .modal('show');
-
+     showShortage(shortedCartItemName);
     } else {
       $('.first.modal')
         .modal('show');
@@ -63,7 +67,6 @@ $(document).ready(function () {
       });
     });
   });
-
 
   $('.itemName').popup( {
     content: $(this).prop("data-content")
