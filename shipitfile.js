@@ -10,7 +10,7 @@ module.exports = function (shipit) {
       deployTo: '/tmp/deploy_to',
       repositoryUrl: 'git@github.com:TWA-Eurasia/eurasia-letusgo.git',
       branch: 'uat',
-      ignores: ['.git', 'node_modules', '.idea', 'eurasia-letusgo.iml', 'jspm_packages', '.DS_Store'],
+      ignores: ['.git', 'node_modules', '.idea', 'eurasia-letusgo.iml', 'jspm_packages', '.DS_Store', 'test-reports.xml'],
       key: 'id_aliyun',
       keepReleases: 2,
       shallowClone: true
