@@ -44,9 +44,9 @@ block content
                 span 元
               td
                 .ui
-                  i.minus.square.icon.pointer
+                  i.minus.square.icon.pointer.reduce
                   input(type="text" value="#{cartItem.number}" id="number")
-                  i.add.square.icon.pointer
+                  i.add.square.icon.pointer.increase
                 .ui.negative.message#inventory.hidden 最多能购买
                   span#leftNumber #{cartItem.item.inventory}
                   span 件

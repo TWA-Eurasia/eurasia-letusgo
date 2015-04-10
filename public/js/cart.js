@@ -6,7 +6,57 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 var delete_cartItem;
 var JUMP_TIME = 1;
 
-$(document).ready(function () {
+$(function () {
+
+  function jump(count, self) {
+
+    window.setTimeout(function () {
+      count--;
+
+      if (count > 0) {
+        jump(count, self);
+
+      } else {
+        $('.delete-massage').closest('tr').remove();
+      }
+
+    }, 1000);
+  }
+
+  function changeTotal(jQ_DOM) {
+    var id = jQ_DOM.closest('tr').data('id');
+    var num = jQ_DOM.closest('td').find('#number').val();
+    var price = jQ_DOM.parents('td').prev().find('#price').text();
+    var total = $('#total').text();
+    var input = jQ_DOM;
+
+    $.ajax({
+      url: 'cart/' + id,
+      type: 'PUT',
+      data: {number: num, price: price, total: total},
+
+      success: function (data) {
+        input.closest('tr').find('#subtotal').text(data.subtotal);
+        $('#total').text(data.total);
+      }
+    })
+  }
+
+  function verifyNumber(number,input) {
+
+    var reg = /^(0|[1-9][0-9]*)$/;
+    if (!reg.exec(number)) {
+      input.val(1);
+    }
+  }
+
+  function isShorted(input) {
+
+    var inputNumber = parseInt(input.closest('td').find('#number').val());
+    var leftNumber = $('#leftNumber').text();
+
+    return inputNumber > leftNumber
+  }
 
   $(document).on('cart-count-change', function (event, cartId) {
     $.ajax({
@@ -26,25 +76,6 @@ $(document).ready(function () {
     .attr( 'src', function () {
       return $(this).data('src');
     });
-
-  function changetotal(event) {
-    var id = event.closest('tr').data('id');
-    var num = event.closest('td').find('#number').val();
-    var price = event.parents('td').prev().find('#price').text();
-    var total = $('#total').text();
-    var input = event;
-
-    $.ajax({
-      url: 'cart/' + id,
-      type: 'PUT',
-      data: {number: num, price: price, total: total},
-
-      success: function (data) {
-        input.closest('tr').find('#subtotal').text(data.subtotal);
-        $('#total').text(data.total);
-      }
-    })
-  }
 
   $('#allChecked').on('change', function() {
 
@@ -77,29 +108,27 @@ $(document).ready(function () {
     }
   });
 
-  $('i.minus.square.icon').on('click', function () {
-
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
+  $('.reduce').on('click', function () {
+    var inputDom = $(this).closest('td').find('#number');
+    var numberInput = parseInt(inputDom.val());
 
     if (numberInput !== 1) {
-      $(this).closest('td').find('#number').val(numberInput - 1);
-      changetotal($(this));
+      inputDom.val(numberInput - 1);
+      changeTotal($(this));
     }
   });
 
-  $('i.add.square.icon').on('click', function () {
+  $('.increase').on('click', function () {
 
-
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
+    var inputDom = $(this).closest('td').find('#number');
+    var numberInput = parseInt(inputDom.val());
 
     var inventory = $('#leftNumber').text();
 
     if (inventory > numberInput) {
-      $(this).closest('td').find('#number').val(numberInput + 1);
-      changetotal($(this));
+      inputDom.val(numberInput + 1);
+      changeTotal($(this));
     }
-
-
   });
 
   $('input').on('keyup', function () {
@@ -113,32 +142,11 @@ $(document).ready(function () {
     var input = $(this);
 
     verifyNumber(number,input);
-    changetotal(input);
+    changeTotal(input);
     if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
     }
   });
-
-  function verifyNumber(number,input) {
-
-    var reg = /^(0|[1-9][0-9]*)$/;
-    if (!reg.exec(number)) {
-      input.val(1);
-    }
-  }
-
-  function isShorted(input) {
-
-    var inputNumber = parseInt(input.closest('td').find('#number').val());
-    var leftNumber = $('#leftNumber').text();
-
-    if (inputNumber > leftNumber) {
-      return true;
-    }
-
-    return false;
-  }
-
 
   $('.delete_cartItem').on('click', function () {
 
@@ -167,21 +175,6 @@ $(document).ready(function () {
       }
     })
   });
-
-  function jump(count, self) {
-
-    window.setTimeout(function () {
-      count--;
-
-      if (count > 0) {
-        jump(count, self);
-
-      } else {
-        $('.delete-massage').closest('tr').remove();
-      }
-
-    }, 1000);
-  }
 
   $('.itemName').popup( {
     content: $(this).prop("data-content")
