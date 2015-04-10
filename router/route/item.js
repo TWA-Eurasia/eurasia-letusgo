@@ -5,6 +5,22 @@ var Category = require('../../model/category');
 
 router.get('/', function (req, res) {
 
+  var cartItems = req.query.cartItems;
+
+  if(cartItems){
+
+    var itemIds = [];
+    cartItems.forEach(function(cartItem){
+
+      itemIds.push(cartItem.item._id);
+    });
+
+    Item.where('_id').in(itemIds).exec(function(err, items){
+      res.send(items);
+    });
+
+  }else{
+
     Category.findById('551aa95e2ef086a169628b74')
     .populate('parent')
     .exec(function(err, category){
@@ -21,6 +37,7 @@ router.get('/', function (req, res) {
           res.send(test);
         });
       });
+  }
 });
 
 router.get('/:id', function(req, res){

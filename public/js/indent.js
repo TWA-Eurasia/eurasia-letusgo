@@ -2,6 +2,16 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
+function updateInventory(inventory, number, item){
+
+  inventory -= number;
+
+  $.ajax({
+    url:'/api/item/' + item._id,
+    type:'POST',
+    data: {inventory: inventory}
+  });
+}
 
 $(document).ready(function () {
 
@@ -23,7 +33,8 @@ $(document).ready(function () {
 
     if(shortedCartItemName) {
 
-      $('#modalTips').text(shortedCartItemName + '  库存不足  请减少商品数量！');
+      var message = '  库存不足  请减少商品数量！';
+      $('#modalTips').text(shortedCartItemName + message);
 
       $('.second.modal')
         .modal('show');
@@ -34,51 +45,37 @@ $(document).ready(function () {
     }
   });
 
-  $('.confirm').on('click', function () {
-    location.href = '/cart';
-  });
-
   $('#isPaid').on('click', function() {
 
     var total = $(this).data('total');
-    var cart = $(this).data('cart');
+    var cartItems = $(this).data('cart');
 
-    cart.forEach(function(cartItem){
-      var number = cartItem.number;
+    $.get('/api/item', {cartItems: cartItems}, function (items) {
 
-      $.ajax({
-        url: '/api/item/' + cartItem.item._id,
-        type: 'GET',
-        success: function(item){
+      cartItems.forEach(function (cartItem) {
+        items.forEach(function (item) {
 
+          var number = cartItem.number;
           var inventory = item.inventory;
-          if(number < inventory){
+          if(item._id === cartItem.item._id){
 
-            $(location).attr('href', '/success');
+            if (number < inventory) {
 
-            updateInventory(inventory, number, item);
+              $(location).attr('href', '/success');
+              updateInventory(inventory, number, item);
 
-            var indentId = '551fd16975cd55ed0cfa5503';
-            $.post('/api/indent/' + indentId);
-
-            var userId = '551fd2a9ecb148410c4c8048';
-            $.post('/api/user/' + userId, {indentId: indentId});
-          } else {
-
+              //var indentId = '551fd16975cd55ed0cfa5503';
+              //$.post('/api/indent/' + indentId);
+              //
+              //var userId = '551fd2a9ecb148410c4c8048';
+              //$.post('/api/user/' + userId, {indentId: indentId});
+            }
           }
-        }
+
+        });
       });
     });
   });
 });
 
-function updateInventory(inventory, number, item){
 
-  inventory -= number;
-
-  $.ajax({
-    url:'/api/item/' + item._id,
-    type:'POST',
-    data: {inventory: inventory}
-  });
-}
