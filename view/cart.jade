@@ -12,6 +12,7 @@ block title
 block cart
   a.ui.active.link.item(href="/cart") 购物车
     i.cart.in.icon
+    strong.ui.label#cart-amount 0
 block content
   .ui.grid.centered
     .sixteen.wide.column
@@ -44,10 +45,10 @@ block content
                 span 元
               td
                 .ui
-                  i.minus.square.icon.pointer
+                  i.minus.square.icon.pointer.reduce
                   input(type="text" value="#{cartItem.number}" id="number")
-                  i.add.square.icon.pointer
-                .ui.negative.message#inventory.hidden 最多能购买
+                  i.add.square.icon.pointer.increase
+                .ui.negative.message.hidden#inventory 最多能购买
                   span#leftNumber #{cartItem.item.inventory}
                   span 件
                // .ui.negative.message#inventory(style = 'display: none') 库存仅剩#{cartItem.item.inventory}!
@@ -65,7 +66,7 @@ block content
            th(colspan='7')
             .ui.right.floated.small.primary.labeled.header
               h4.ui.black.header 总计：
-                span.red#total #{total}
+                span.total#total #{total}
                 span 元
 
        a.ui.teal.right.floated.right.labeled.icon.button(href='/indent') 结算

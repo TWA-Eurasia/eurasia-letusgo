@@ -85,7 +85,7 @@ router.delete('/:cartItemId', function (req, res) {
       return cartItem.toString() !== cartItemId;
     });
 
-    CartItem.remove({_id: cartItemId}, function(){
+    CartItem.remove({_id: cartItemId}, function () {
 
       cart.save(function (err, cart) {
         if (err) {
@@ -93,13 +93,29 @@ router.delete('/:cartItemId', function (req, res) {
         }
         CartItem.find()
           .populate('item')
-          .exec(function(err, cartItems){
+          .exec(function (err, cartItems) {
 
-            res.send({cart:cart, total:cart.getTotal(cartItems)});
+            res.send({cart: cart, total: cart.getTotal(cartItems)});
           });
       });
     });
   });
+});
+
+router.get('/:amount', function (req, res) {
+
+  var cartId = "551cc282a6b79c584b59bc0f";
+
+  Cart.findById(cartId)
+    .populate('cartItems')
+    .exec(function (err, cart) {
+      var count = _.reduce(cart.cartItems, function (count, cartItem) {
+        return cartItem.number + count;
+      }, 0);
+      res.send({amount: count});
+
+
+    });
 });
 
 module.exports = router;

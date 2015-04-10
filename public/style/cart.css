@@ -12,7 +12,6 @@ body{
 {
   display: none;
 }
-
 input
 {
   text-align: center;
@@ -36,7 +35,7 @@ table.ui.large.table td
   margin: 0 auto;
 }
 
-.red
+.total
 {
   color:red;
 }

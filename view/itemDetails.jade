@@ -4,9 +4,11 @@ block title
 block css
   script(src="/jspm_packages/system.js")
   script(src="/config.js")
+  link(rel="styleSheet" type="text/css" href="/style/itemDetails.css")
 
   script.
     System.import('js/itemDetails')
+    System.import('js/cart')
 
 block content
 
@@ -23,9 +25,9 @@ block content
     .ui.grid
       .three.wide.column
       .five.wide.column
-        .ui.fluid.card(style="height:431px; weight:400px; background:#ffffff;")
+        .image-preview
           - var imageUrl = itemDetails.item.image
-          img.ui.image(data-src="/" + imageUrl style="vertical-align:middle")
+          img.ui.image.item-image(data-src="/" + imageUrl)
       .one.wide.column
       .four.wide.column
         h2.ui.floated.header.orange.backge #{itemDetails.item.name}

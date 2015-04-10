@@ -2,7 +2,7 @@
 
 var $ = require('jquery');
 
-function Pagination (jqContainer, options){
+function Pagination(jqContainer, options) {
   this.jqContainer = jqContainer;
   this.options = options;
   this.currentPage = options.currentPage;
@@ -11,7 +11,7 @@ function Pagination (jqContainer, options){
   this.jqContainer.data('pagination', this);
 }
 
-Pagination.prototype.render = function() {
+Pagination.prototype.render = function () {
   this.jqContainer.empty();
   var that = this;
   var ulContainer = $('<ul />');
@@ -19,9 +19,9 @@ Pagination.prototype.render = function() {
 
   $('<li />')
     .text('< 上一页')
-    .toggleClass('previous',  this.currentPage == 1)
-    .on('click', function() {
-      if(that.currentPage > 1) {
+    .toggleClass('previous', this.currentPage == 1)
+    .on('click', function () {
+      if (that.currentPage > 1) {
         that.emit(--that.currentPage);
       }
     }).appendTo(ulContainer);
@@ -30,9 +30,9 @@ Pagination.prototype.render = function() {
 
   $('<li />')
     .text('下一页 >')
-    .toggleClass('next',  this.currentPage == range.pop())
-    .on('click', function() {
-      if(that.currentPage < that.options.pageCount) {
+    .toggleClass('next', this.currentPage == range.pop())
+    .on('click', function () {
+      if (that.currentPage < that.options.pageCount) {
         that.emit(++that.currentPage);
       }
     })
@@ -41,20 +41,20 @@ Pagination.prototype.render = function() {
   ulContainer.appendTo(this.jqContainer);
 };
 
-Pagination.prototype.renderMiddle = function(ulContainer) {
+Pagination.prototype.renderMiddle = function (ulContainer) {
   var range = this.getRange();
   var that = this;
-  for(var i=0; i<range.length; i++) {
+  for (var i = 0; i < range.length; i++) {
     $('<li />')
-      .text(function() {
+      .text(function () {
         return range[i] !== -1 ? range[i] : '';
       })
       .addClass('pageNumber')
       .toggleClass('current', range[i] == this.currentPage)
       .toggleClass('ellipsis', range[i] == -1)
-      .on('click', function(i) {
-        return function() {
-          if(i !== that.currentPage) {
+      .on('click', function (i) {
+        return function () {
+          if (i !== that.currentPage) {
             that.currentPage = i;
             that.emit(i);
           }
@@ -63,12 +63,12 @@ Pagination.prototype.renderMiddle = function(ulContainer) {
   }
 };
 
-Pagination.prototype.emit = function(n) {
+Pagination.prototype.emit = function (n) {
   this.render();
   this.options.onPageChange(n);
 };
 
-Pagination.prototype.getRange = function() {
+Pagination.prototype.getRange = function () {
   var rangeCount = this.options.visiblePageCount - 3;
   var leftPageCount = Math.floor(rangeCount / 2);
   var current = this.currentPage;
@@ -80,15 +80,15 @@ Pagination.prototype.getRange = function() {
 
   var result = [];
 
-  for(var i=startPage; i<=endPage; i++) {
+  for (var i = startPage; i <= endPage; i++) {
     result.push(i);
   }
 
-  if(result[0] != 2 && result[0]) {
+  if (result[0] != 2 && result[0]) {
     result.unshift(-1);
   }
 
-  if((this.options.pageCount > 5) && result[result.length-1] != this.options.pageCount - 1) {
+  if ((this.options.pageCount > 5) && result[result.length - 1] != this.options.pageCount - 1) {
     result.push(-1);
   }
 
@@ -104,7 +104,7 @@ var defaultConfig = {
   visiblePageCount: 7
 };
 
-$.fn.pagination = function(config) {
+$.fn.pagination = function (config) {
   var options = $.extend(defaultConfig, config);
   return new Pagination($(this), options);
 };

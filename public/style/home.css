@@ -17,6 +17,10 @@ body{
   margin-left: 5px;
   padding: 5px;
 }
+.ui.grid.logoAndSearch
+{
+  padding: 20px;
+}
 
 .ui.grid.logoAndSearch>.column,
 .ui.grid.content>.column
@@ -29,10 +33,28 @@ body{
   background: #fff;
 }
 
-.myLogo
+.myLogo {
+  text-align: center;
+}
+
+.myLogoImg
 {
   width: 75%;
   height: 75%;
+}
+
+.ui.grid.logoAndSearch>.mySearch
+{
+  padding-top: 30px;
+}
+
+.searchInput {
+  width: 50%;
+}
+
+.ui.search .prompt
+{
+  border: 2px solid #00B5AD;
 }
 
 .ui.vertical.menu
@@ -60,6 +82,7 @@ body{
 .ui.dropdown.item:hover {
   background: darkred;
 }
+
 .ui.dropdown.item:hover .menu
 {
   display: block;
@@ -67,7 +90,8 @@ body{
 }
 
 .ui.secondary.menu .dropdown.item .menu {
-  min-width: 15%;
+  min-width: 0%;
+  max-width: 45%;
 }
 
 .ui.four.column.grid
@@ -98,6 +122,11 @@ body{
   height: 200px;
   line-height: 200px;
   color: teal;
+}
+
+img.ui.fluid.image.itemImg
+{
+  height: 200px;
 }
 
 .pagination

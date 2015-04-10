@@ -11,11 +11,11 @@ router.get('/', function (req, res) {
 
   Indent.findById('551fd16975cd55ed0cfa5503')
     .populate('cartItems')
-    .exec(function(err, indent){
+    .exec(function (err, indent) {
 
       CartItem.find()
         .populate('item')
-        .exec(function (err, cartItems){
+        .exec(function (err, cartItems) {
 
           var total = indent.getTotal(cartItems);
 
@@ -36,9 +36,9 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res, next) {
 
   Indent.create({
-    cartItems: ["551cc20e47a654d14a280e9b", "551cc20e47a654d14a280e9c","551cc20e47a654d14a280e9d","551cc20e47a654d14a280e9e"
+    cartItems: ["551cc20e47a654d14a280e9b", "551cc20e47a654d14a280e9c", "551cc20e47a654d14a280e9d", "551cc20e47a654d14a280e9e"
     ],
-    createDate: 2015-4-1
+    createDate: 2015 - 4 - 1
   }, function (err, indent) {
     if (err) {
       return next(err);
@@ -47,10 +47,10 @@ router.post('/', function (req, res, next) {
   });
 });
 
-router.post('/:id', function(req, res){
+router.post('/:id', function (req, res) {
   var id = req.params.id;
 
-  Indent.update(id, {$set: {isPaid: true}}, function(err, indent){
+  Indent.update(id, {$set: {isPaid: true}}, function (err, indent) {
 
     res.send('isPaid is true');
   });

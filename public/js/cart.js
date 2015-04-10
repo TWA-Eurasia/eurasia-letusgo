@@ -5,34 +5,31 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
 var JUMP_TIME = 1;
+var MAX_CART_AMOUNT = 99;
 
-$(document).ready(function () {
+$(function () {
 
-  $(document).on('cart-count-change', function (event, cartId) {
-    $.ajax({
-      url: 'cart' + cartId,
-      type: 'GET',
+  function jump(count, self) {
 
-      success: function (data) {
-        $(".nav-cart-count").text(data);
+    window.setTimeout(function () {
+      count--;
+
+      if (count > 0) {
+        jump(count, self);
+
+      } else {
+        $('.delete-massage').closest('tr').remove();
       }
-    });
-  });
 
-  $('img')
-    .error(function() {
-      $(this).attr('src', '/image/missing.jpg')
-    })
-    .attr( 'src', function () {
-      return $(this).data('src');
-    });
+    }, 1000);
+  }
 
-  function changetotal(event) {
-    var id = event.closest('tr').data('id');
-    var num = event.closest('td').find('#number').val();
-    var price = event.parents('td').prev().find('#price').text();
+  function changeTotal(jQ_DOM) {
+    var id = jQ_DOM.closest('tr').data('id');
+    var num = jQ_DOM.closest('td').find('#number').val();
+    var price = jQ_DOM.parents('td').prev().find('#price').text();
     var total = $('#total').text();
-    var input = event;
+    var input = jQ_DOM;
 
     $.ajax({
       url: 'cart/' + id,
@@ -46,80 +43,7 @@ $(document).ready(function () {
     })
   }
 
-  $('#allChecked').on('change', function() {
-
-    var checkboxes = $('input[name="checkedCartItem"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].checked = this.checked;
-    }
-
-  });
-
-  $('.checkedCartItem').on('change', function() {
-
-    var isChecked = $(this).prop('checked');
-    if(!isChecked) {
-      $('#allChecked').prop('checked', false);
-    }
-
-    var isAllChecked = true;
-    var checkboxes = $('input[name="checkedCartItem"]');
-
-    for(var i = 0; i < checkboxes.length; i++) {
-      isAllChecked = checkboxes[i].checked;
-      if(!isAllChecked) {
-        return;
-      }
-    }
-
-    if(isAllChecked) {
-      $('#allChecked').prop('checked', true);
-    }
-  });
-
-  $('i.minus.square.icon').on('click', function () {
-
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
-
-    if (numberInput !== 1) {
-      $(this).closest('td').find('#number').val(numberInput - 1);
-      changetotal($(this));
-    }
-  });
-
-  $('i.add.square.icon').on('click', function () {
-
-
-    var numberInput = parseInt($(this).closest('td').find('#number').val());
-
-    var inventory = $('#leftNumber').text();
-
-    if (inventory > numberInput) {
-      $(this).closest('td').find('#number').val(numberInput + 1);
-      changetotal($(this));
-    }
-
-
-  });
-
-  $('input').on('keyup', function () {
-
-    $(this).closest('td').find('#inventory').hide();
-
-    var numberInput = $(this).closest('td').find('#number').val();
-    //numberInput = numberInput.toString();
-
-    var number = numberInput.replace(/\b(0+)/gi, '');
-    var input = $(this);
-
-    verifyNumber(number,input);
-    changetotal(input);
-    if (isShorted(input)) {
-      $(this).closest('td').find('#inventory').show();
-    }
-  });
-
-  function verifyNumber(number,input) {
+  function verifyNumber(number, input) {
 
     var reg = /^(0|[1-9][0-9]*)$/;
     if (!reg.exec(number)) {
@@ -132,13 +56,102 @@ $(document).ready(function () {
     var inputNumber = parseInt(input.closest('td').find('#number').val());
     var leftNumber = $('#leftNumber').text();
 
-    if (inputNumber > leftNumber) {
-      return true;
-    }
-
-    return false;
+    return inputNumber > leftNumber
   }
 
+  $(document).on('cart-count-change', function (event, cartId) {
+    $.ajax({
+      url: 'cart' + cartId,
+      type: 'GET',
+
+      success: function (data) {
+        $(".nav-cart-count").text(data);
+      }
+    });
+  });
+
+  $('img')
+    .error(function () {
+      $(this).attr('src', '/image/missing.jpg')
+    })
+    .attr('src', function () {
+      return $(this).data('src');
+    });
+
+  $('#allChecked').on('change', function () {
+
+    var checkboxes = $('input[name="checkedCartItem"]');
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = this.checked;
+    }
+
+  });
+
+  $('.checkedCartItem').on('change', function () {
+
+    var isChecked = $(this).prop('checked');
+    if (!isChecked) {
+      $('#allChecked').prop('checked', false);
+    }
+
+    var isAllChecked = true;
+    var checkboxes = $('input[name="checkedCartItem"]');
+
+    for (var i = 0; i < checkboxes.length; i++) {
+      isAllChecked = checkboxes[i].checked;
+      if (!isAllChecked) {
+        return;
+      }
+    }
+
+    if (isAllChecked) {
+      $('#allChecked').prop('checked', true);
+    }
+  });
+
+  $('.reduce').on('click', function () {
+    var inputDom = $(this).closest('td').find('#number');
+    var numberInput = parseInt(inputDom.val());
+
+    if (numberInput !== 1) {
+      inputDom.val(numberInput - 1);
+      changeTotal($(this));
+    }
+    countCartAmount();
+  });
+
+  $('.increase').on('click', function () {
+
+    var inputDom = $(this).closest('td').find('#number');
+    var numberInput = parseInt(inputDom.val());
+
+    var inventory = $('#leftNumber').text();
+
+    if (inventory > numberInput) {
+      inputDom.val(numberInput + 1);
+      changeTotal($(this));
+    }
+    countCartAmount();
+  });
+
+  $('input').on('keyup', function () {
+
+    $(this).closest('td').find('#inventory').hide();
+
+    var numberInput = $(this).closest('td').find('#number').val();
+    //numberInput = numberInput.toString();
+
+    var number = numberInput.replace(/\b(0+)/gi, '');
+    var input = $(this);
+
+    verifyNumber(number, input);
+    changeTotal(input);
+    if (isShorted(input)) {
+      $(this).closest('td').find('#inventory').show();
+    } else {
+      countCartAmount();
+    }
+  });
 
   $('.delete_cartItem').on('click', function () {
 
@@ -164,27 +177,30 @@ $(document).ready(function () {
         $("#total").text(data.total);
 
         jump(JUMP_TIME, delete_cartItem);
+        countCartAmount();
       }
     })
   });
 
-  function jump(count, self) {
-
-    window.setTimeout(function () {
-      count--;
-
-      if (count > 0) {
-        jump(count, self);
-
-      } else {
-        $('.delete-massage').closest('tr').remove();
-      }
-
-    }, 1000);
-  }
-
-  $('.itemName').popup( {
+  $('.itemName').popup({
     content: $(this).prop("data-content")
   });
 
+
+  countCartAmount();
+  function countCartAmount() {
+
+    $.ajax({
+      url: '/cart/:amount',
+      type: 'GET',
+
+      success: function (data) {
+        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+          data.amount = '99+';
+        }
+        console.log(data.amount);
+        $('#cart-amount').text(data.amount);
+      }
+    })
+  }
 });

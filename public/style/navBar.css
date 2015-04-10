@@ -8,3 +8,17 @@
   width: 310px;
   height: 80px;
 }
+
+.ui.divider.horizontal{
+  color: black;
+}
+.seven.wide.column.group
+{
+  text-align: right;
+}
+
+.sixteen.wide.column.copyright p
+{
+  text-align: center;
+}
+

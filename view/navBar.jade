@@ -30,11 +30,23 @@ html
               block cart
                 a.ui.link.item(href="/cart") 购物车
                   i.cart.in.icon
+                  strong.ui.label#cart-amount 0
       block content
 
       .ui.divider.horizontal 关于我们
       footer
-        .ui.grid(style="text-align: center")
+        .ui.grid
           .sixteen.wide.column
-          .sixteen.wide.column
-            p copyright@letusgo All Rights Reserved
+          .seven.wide.column.group
+
+            h4 LetUsgo 团队
+            p TWA 学院
+            p LetUsGo 计划组
+          .two.wide.column
+          .seven.wide.column
+            h4 联系我们
+            p 地址：陕西省西安市雁塔区欧亚路一号
+            p 邮编：710077
+          .sixteen.wide.column.copyright
+            p copyright@letusgo All Rights Reserved 版权所有LETUSGO商城
+            p © 2015 LetUsGo, Inc.

@@ -11,14 +11,14 @@ var IndentSchema = new Schema({
   isPaid: {type: Boolean, default: false}
 });
 
-IndentSchema.methods.getTotal = function(cartItems) {
+IndentSchema.methods.getTotal = function (cartItems) {
   var total = 0;
 
-  cartItems.forEach(function(cartItem) {
+  cartItems.forEach(function (cartItem) {
     total += parseFloat(cartItem.getSubtotal());
   });
 
   return total.toFixed(2);
 };
 
-module.exports = mongoose.model('Indent',IndentSchema);
+module.exports = mongoose.model('Indent', IndentSchema);

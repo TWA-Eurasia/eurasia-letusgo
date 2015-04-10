@@ -1,20 +1,19 @@
-
 var express = require('express');
 var router = express.Router();
 
 var Item = require('../../model/item');
 var Category = require('../../model/category');
 
-router.get('/:id', function(req, res) {
+router.get('/:id', function (req, res) {
   var id = req.params.id;
 
   Item.findById(id)
     .populate('category')
-    .exec(function(err, item) {
+    .exec(function (err, item) {
 
       Category.findById(item.category._id)
         .populate('parent')
-        .exec(function(err, category) {
+        .exec(function (err, category) {
           var itemDetails = {
             item: item,
             category: category

@@ -7,22 +7,22 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 $(document).ready(function () {
 
   $('img')
-    .error(function() {
+    .error(function () {
       $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( 'src', function () {
+    .attr('src', function () {
       return $(this).data('src');
     });
 
-  if(application.index.pageCount > 1) {
+  if (application.index.pageCount > 1) {
     var visiblePageCount = 7;
     $('.pagination').pagination({
       pageCount: application.index.pageCount,
       currentPage: application.index.currentPage,
       visiblePageCount: visiblePageCount,
-      onPageChange: function(n) {
+      onPageChange: function (n) {
         var path = '/index/';
-        if(application.index.isCategory) {
+        if (application.index.isCategory) {
 
           var pathId = location.href.toString().split('/')[4];
           path = '/' + location.href.toString().split('/')[3] + '/' + pathId + '/';
@@ -32,20 +32,9 @@ $(document).ready(function () {
     });
   }
 
-  var $image = $('.image');
-  $image.on('click', function() {
-    var id = $(this).data('id');
-    location.href = '/items/' + id;
-  });
-
   var $itemName = $('.itemName');
-  $itemName.popup( {
+  $itemName.popup({
     content: $(this).prop("data-content")
   });
 
-  var $button = $('.button');
-  $button.on('click', function() {
-    var id = $(this).data('id');
-    location.href = '/items/' + id;
-  })
 });
