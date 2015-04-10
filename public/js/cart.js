@@ -116,6 +116,7 @@ $(function () {
       inputDom.val(numberInput - 1);
       changeTotal($(this));
     }
+    countCartAmount();
   });
 
   $('.increase').on('click', function () {
