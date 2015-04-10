@@ -4,6 +4,7 @@ block title
 block css
   script(src="/jspm_packages/system.js")
   script(src="/config.js")
+  link(rel="styleSheet" type="text/css" href="/style/itemDetails.css")
 
   script.
     System.import('js/itemDetails')
@@ -23,7 +24,7 @@ block content
     .ui.grid
       .three.wide.column
       .five.wide.column
-        .ui.fluid.card(style="height:431px; weight:400px; background:#ffffff;")
+        .ui.fluid(style="height:431px; weight:400px; border:10px; border-color:black; background:#ffffff;")
           - var imageUrl = itemDetails.item.image
           img.ui.image(data-src="/" + imageUrl style="vertical-align:middle")
       .one.wide.column
