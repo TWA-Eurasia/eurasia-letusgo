@@ -124,6 +124,11 @@ body{
   color: teal;
 }
 
+img.ui.fluid.image.itemImg
+{
+  height: 200px;
+}
+
 .pagination
 {
   padding-left: 500px;

@@ -78,7 +78,7 @@ html
             .column.itemDiv
               .ui.segment
                 a(href="/items/#{item._id}")
-                  img.ui.fluid.image(data-id="#{item._id}" data-src="/#{item.image}")
+                  img.ui.fluid.image.itemImg(data-id="#{item._id}" data-src="/#{item.image}")
               .info
                 a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
                 p.price #{item.price}元
