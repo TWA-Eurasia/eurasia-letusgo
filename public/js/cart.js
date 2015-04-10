@@ -191,13 +191,14 @@ $(function () {
   function countCartAmount() {
 
     $.ajax({
-      url: 'cart/:amount',
+      url: '/cart/:amount',
       type: 'GET',
 
       success: function (data) {
         if(maximum_cart_amount<parseInt(data.amount)){
           data.amount = '99+';
         }
+        console.log(data.amount);
         $('#cart-amount').text(data.amount);
       }
     })
