@@ -5,7 +5,7 @@ block css
   script(src="config.js")
 
   link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
-  link(rel="styleSheet" type="text/css" href="/style/indent.css")
+  link(rel="styleSheet" type="text/css" href="/style/cart.css")
 
   script.
     System.import("js/indent")
@@ -49,7 +49,7 @@ block content
             th(colspan='7')
               .ui.right.floated.small.primary.labeled.header
                 h4.ui.black.header 总计：
-                  span.red#total #{total}
+                  span.total#total #{total}
                   span 元
 
       a.ui.red.right.floated.right.labeled.icon.button#pay 支付
