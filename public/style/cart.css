@@ -8,11 +8,6 @@ body{
   cursor: pointer;
 }
 
-.hidden
-{
-  display: none;
-}
-
 input
 {
   text-align: center;
