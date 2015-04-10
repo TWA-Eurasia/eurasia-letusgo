@@ -13,19 +13,16 @@ function updateInventory(inventory, number, item){
   });
 }
 
+function showShortage(shortedCartItemName){
+
+  var message = '  库存不足  请减少商品数量！';
+  $('#modalTips').text(shortedCartItemName + message);
+
+  $('.second.modal')
+    .modal('show');
+}
+
 $(document).ready(function () {
-
-  $('img')
-    .error(function() {
-      $(this).attr('src', '/image/missing.jpg')
-    })
-    .attr( 'src', function () {
-      return $(this).data('src');
-    });
-
-  $('.itemName').popup( {
-    content: $(this).prop("data-content")
-  });
 
   $('#pay').on('click', function () {
 
@@ -33,12 +30,7 @@ $(document).ready(function () {
 
     if(shortedCartItemName) {
 
-      var message = '  库存不足  请减少商品数量！';
-      $('#modalTips').text(shortedCartItemName + message);
-
-      $('.second.modal')
-        .modal('show');
-
+     showShortage(shortedCartItemName);
     } else {
       $('.first.modal')
         .modal('show');
@@ -71,11 +63,22 @@ $(document).ready(function () {
               //$.post('/api/user/' + userId, {indentId: indentId});
             }
           }
-
         });
       });
     });
   });
+
+  $('.itemName').popup( {
+    content: $(this).prop("data-content")
+  });
+
+  $('img')
+    .error(function() {
+      $(this).attr('src', '/image/missing.jpg')
+    })
+    .attr( 'src', function () {
+      return $(this).data('src');
+    });
 });
 
 
