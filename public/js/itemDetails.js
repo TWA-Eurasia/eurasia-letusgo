@@ -72,7 +72,6 @@ $(document).ready(function () {
         if (MAX_CART_AMOUNT < parseInt(data.amount)) {
           data.amount = '99+';
         }
-        console.log(data.amount);
         $('#cart-amount').text(data.amount);
       }
     })

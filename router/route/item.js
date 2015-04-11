@@ -1,7 +1,23 @@
 var express = require('express');
 var router = express.Router();
+
 var Item = require('../../model/item');
+var CartItem = require('../../model/cartItem');
 var Category = require('../../model/category');
+
+function getItemsByCartItemId(cartItems, callback) {
+
+  var itemIds = [];
+  cartItems.forEach(function (cartItem) {
+
+    var cartItemModel = new CartItem();
+    itemIds.push(cartItemModel.getItemId(cartItem));
+  });
+
+  Item.where('_id').in(itemIds).exec(function (err, items) {
+    callback(items);
+  });
+}
 
 router.get('/', function (req, res) {
 
@@ -9,16 +25,9 @@ router.get('/', function (req, res) {
 
   if (cartItems) {
 
-    var itemIds = [];
-    cartItems.forEach(function (cartItem) {
-
-      itemIds.push(cartItem.item._id);
-    });
-
-    Item.where('_id').in(itemIds).exec(function (err, items) {
+    getItemsByCartItemId(cartItems, function (items) {
       res.send(items);
     });
-
   } else {
 
     Category.findById('551aa95e2ef086a169628b74')

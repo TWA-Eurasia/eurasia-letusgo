@@ -36,7 +36,8 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res, next) {
 
   Indent.create({
-    cartItems: ["551cc20e47a654d14a280e9b", "551cc20e47a654d14a280e9c", "551cc20e47a654d14a280e9d", "551cc20e47a654d14a280e9e"
+
+    cartItems: ['551cc20e47a654d14a280e9b', '551cc20e47a654d14a280e9c','551cc20e47a654d14a280e9d','551cc20e47a654d14a280e9e'
     ],
     createDate: 2015 - 4 - 1
   }, function (err, indent) {
