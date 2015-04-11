@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+
 var Item = require('../../model/item');
+var CartItem = require('../../model/cartItem');
 var Category = require('../../model/category');
 
 function getItemsByCartItemId(cartItems, callback) {
@@ -8,8 +10,10 @@ function getItemsByCartItemId(cartItems, callback) {
   var itemIds = [];
   cartItems.forEach(function (cartItem) {
 
-    itemIds.push(cartItem.item._id);
+    var cartItemModel = new CartItem();
+    itemIds.push(cartItemModel.getItemId(cartItem));
   });
+  
   Item.where('_id').in(itemIds).exec(function (err, items) {
     callback(items);
   });

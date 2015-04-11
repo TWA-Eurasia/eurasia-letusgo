@@ -21,4 +21,9 @@ function setPrice(num){
   return num.toFixed(2);
 }
 
+ItemSchema.methods.getId = function (item) {
+  console.log(item._id + "=============");
+  return item._id;
+};
+
 module.exports = mongoose.model('Item', ItemSchema);
