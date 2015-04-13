@@ -112,8 +112,6 @@ router.get('/:amount', function (req, res) {
       }, 0);
 
       res.send({amount: count});
-<<<<<<< HEAD
-=======
     });
 });
 
@@ -130,7 +128,6 @@ router.get('/cartItems/:id', function (req, res) {
         throw err
       }
       res.send({inventory: item.inventory});
->>>>>>> 10efbfb0ca166a9102add020a82b8113537f98f2
     });
   })
 });
