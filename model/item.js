@@ -22,7 +22,6 @@ function setPrice(num) {
 }
 
 ItemSchema.methods.getId = function (item) {
-  console.log(item._id + "=============");
   return item._id;
 };
 
