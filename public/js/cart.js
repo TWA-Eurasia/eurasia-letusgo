@@ -59,6 +59,30 @@ $(function () {
     return inputNumber > leftNumber
   }
 
+  function getCartItemInventory(jQ_DOM, callback) {
+    var id = jQ_DOM.closest('tr').data('id');
+
+    $.get('/cart/cartItems/' + id, function (data) {
+      callback(data);
+      return data;
+    });
+  }
+
+  function countCartAmount() {
+
+    $.ajax({
+      url: '/cart/:amount',
+      type: 'GET',
+
+      success: function (data) {
+        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+          data.amount = '99+';
+        }
+        $('#cart-amount').text(data.amount);
+      }
+    })
+  }
+
   $(document).on('cart-count-change', function (event, cartId) {
     $.ajax({
       url: 'cart' + cartId,
@@ -121,17 +145,19 @@ $(function () {
   });
 
   $('.increase').on('click', function () {
-
+    var self = this;
     var inputDom = $(this).closest('td').find('#number');
     var numberInput = parseInt(inputDom.val());
 
     var inventory = $('#leftNumber').text();
 
-    if (inventory > numberInput) {
-      inputDom.val(numberInput + 1);
-      changeTotal($(this));
-    }
-    countCartAmount();
+    getCartItemInventory($(this), function (data) {
+      if (data.inventory > numberInput) {
+        inputDom.val(numberInput + 1);
+        changeTotal($(self));
+      }
+      countCartAmount();
+    });
   });
 
   $('input').on('keyup', function () {
@@ -186,21 +212,5 @@ $(function () {
     content: $(this).prop("data-content")
   });
 
-
   countCartAmount();
-  function countCartAmount() {
-
-    $.ajax({
-      url: '/cart/:amount',
-      type: 'GET',
-
-      success: function (data) {
-        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
-          data.amount = '99+';
-        }
-        console.log(data.amount);
-        $('#cart-amount').text(data.amount);
-      }
-    })
-  }
 });

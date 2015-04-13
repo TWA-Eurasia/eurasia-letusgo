@@ -6,6 +6,20 @@ var CartItem = require('../../model/cartItem.js');
 var User = require('../../model/user.js');
 var _ = require('lodash');
 
+
+function getShortedCartItemName(cartItems) {
+
+  var shortedCartItemName = '';
+
+  cartItems.forEach(function(cartItem) {
+    if(cartItem.number > cartItem.item.inventory) {
+      shortedCartItemName += cartItem.item.name + '、'
+    }
+  });
+
+  return shortedCartItemName.substring(0, shortedCartItemName.length - 1);
+}
+
 router.get('/', function (req, res) {
 
   Indent.findById('551fd16975cd55ed0cfa5503')
@@ -36,18 +50,5 @@ router.get('/', function (req, res) {
         });
     });
 });
-
-function getShortedCartItemName(cartItems) {
-
-  var shortedCartItemName = '';
-
-  cartItems.forEach(function (cartItem) {
-    if (cartItem.number > cartItem.item.inventory) {
-      shortedCartItemName += cartItem.item.name + '、'
-    }
-  });
-
-  return shortedCartItemName.substring(0, shortedCartItemName.length - 1);
-}
 
 module.exports = router;

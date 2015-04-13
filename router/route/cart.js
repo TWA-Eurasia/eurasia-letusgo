@@ -118,4 +118,17 @@ router.get('/:amount', function (req, res) {
     });
 });
 
+router.get('/cartItems/:id', function (req, res) {
+  var id = req.params.id;
+
+  CartItem.findById(id, function (err, cartItem) {
+    if(err) { throw err}
+
+    Item.findById(cartItem.item, function (err, item) {
+      if(err) {throw err}
+      res.send({inventory: item.inventory});
+    });
+  })
+});
+
 module.exports = router;

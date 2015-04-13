@@ -24,19 +24,11 @@ router.get('/', function (req, res) {
     });
 });
 
-//router.get('/', function (req, res, next) {
-//
-//  User.findById('551fd2a9ecb148410c4c8048')
-//    .populate('indents')
-//    .exec(function (err, user) {
-//      res.send('user', {user: user});
-//    });
-//});
-
 router.post('/', function (req, res, next) {
 
   Indent.create({
-    cartItems: ["551cc20e47a654d14a280e9b", "551cc20e47a654d14a280e9c", "551cc20e47a654d14a280e9d", "551cc20e47a654d14a280e9e"
+
+    cartItems: ['551cc20e47a654d14a280e9b', '551cc20e47a654d14a280e9c','551cc20e47a654d14a280e9d','551cc20e47a654d14a280e9e'
     ],
     createDate: 2015 - 4 - 1
   }, function (err, indent) {

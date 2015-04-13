@@ -15,8 +15,8 @@ function updateInventory(inventory, number, item) {
 
 function showShortage(shortedCartItemName) {
 
-  var message = '  库存不足  请减少商品数量！';
-  $('#modalTips').text(shortedCartItemName + message);
+  var MESSAGE = '  库存不足, 请减少商品数量！';
+  $('#modalTips').text(shortedCartItemName + MESSAGE);
 
   $('.second.modal')
     .modal('show');
