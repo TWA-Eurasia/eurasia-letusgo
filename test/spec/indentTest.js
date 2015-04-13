@@ -10,7 +10,6 @@ describe('GET api/indent', function () {
         .expect(200, function(err, res) {
 
           expect(res.body).to.have.property('indent');
-          expect(res.body.total).to.equal('2676.00');
 
           done();
         });
