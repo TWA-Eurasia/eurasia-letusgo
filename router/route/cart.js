@@ -7,29 +7,28 @@ var Item = require('../../model/item.js');
 var CartItem = require('../../model/cartItem.js');
 
 router.get('/', function (req, res) {
-
   var cartId = "551cc282a6b79c584b59bc0f";
 
   Cart.findById(cartId)
     .populate('cartItems')
     .exec(function (err, cart) {
+      Item.populate(cart, 'cartItems.item', function (err) {
+        if (err) {
+          throw err
+        }
 
-      CartItem.find()
-        .populate('item')
-        .exec(function (err, cartItems) {
+        _.map(cart.cartItems, function (cartItem) {
+          cartItem.item.shortName = cartItem.item.name;
 
-          cartItems.forEach(function (cartItem) {
-            if (cartItem.item.name.length > 8) {
-              cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
-            } else {
-              cartItem.item.shortName = cartItem.item.name;
-            }
-          });
-
-          var total = cart.getTotal(cartItems);
-          res.render('cart', {cartItems: cartItems, total: total});
+          if (cartItem.item.name.length > 8) {
+            cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
+          }
         });
-    })
+
+        var total = cart.getTotal(cart.cartItems);
+        res.render('cart', {cartItems: cart.cartItems, total: total});
+      });
+    });
 });
 
 router.post('/:id', function (req, res) {
@@ -103,7 +102,6 @@ router.delete('/:cartItemId', function (req, res) {
 });
 
 router.get('/:amount', function (req, res) {
-
   var cartId = "551cc282a6b79c584b59bc0f";
 
   Cart.findById(cartId)
@@ -112,9 +110,8 @@ router.get('/:amount', function (req, res) {
       var count = _.reduce(cart.cartItems, function (count, cartItem) {
         return cartItem.number + count;
       }, 0);
+
       res.send({amount: count});
-
-
     });
 });
 
@@ -122,10 +119,14 @@ router.get('/cartItems/:id', function (req, res) {
   var id = req.params.id;
 
   CartItem.findById(id, function (err, cartItem) {
-    if(err) { throw err}
+    if (err) {
+      throw err
+    }
 
     Item.findById(cartItem.item, function (err, item) {
-      if(err) {throw err}
+      if (err) {
+        throw err
+      }
       res.send({inventory: item.inventory});
     });
   })
