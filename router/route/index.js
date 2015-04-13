@@ -152,7 +152,6 @@ router.get('/categories/:id/:pageNumber', function (req, res) {
       isCategory: true
     });
   });
-
 });
 
 
