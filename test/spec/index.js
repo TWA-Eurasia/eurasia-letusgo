@@ -83,7 +83,7 @@ describe('index', function() {
           specification: 'S',
           isRecommend: true
         })
-        .expect(500)
+        .expect(200)
         .end(function(err, res){
           done();
         })
