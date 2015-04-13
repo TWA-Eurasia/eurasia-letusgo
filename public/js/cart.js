@@ -67,17 +67,6 @@ $(function () {
     })
   }
 
-  $(document).on('cart-count-change', function (event, cartId) {
-    $.ajax({
-      url: 'cart' + cartId,
-      type: 'GET',
-
-      success: function (data) {
-        $(".nav-cart-count").text(data);
-      }
-    });
-  });
-
   $('img')
     .error(function () {
       $(this).attr('src', '/image/missing.jpg')
@@ -197,21 +186,4 @@ $(function () {
   });
 
   countCartAmount();
-<<<<<<< HEAD
-  function countCartAmount() {
-
-    $.ajax({
-      url: '/cart/:amount',
-      type: 'GET',
-
-      success: function (data) {
-        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
-          data.amount = '99+';
-        }
-        $('#cart-amount').text(data.amount);
-      }
-    })
-  }
-=======
->>>>>>> 10efbfb0ca166a9102add020a82b8113537f98f2
 });
