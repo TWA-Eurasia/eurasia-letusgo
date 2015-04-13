@@ -6,7 +6,7 @@ var _ = require('lodash');
 var Category = require('../../model/category');
 var Item = require('../../model/item');
 
-var PAGESIZE = 8;
+var PAGE_SIZE = 8;
 
 function initItems (query, start, pageSize, callback) {
 
@@ -64,7 +64,7 @@ router.get('/', function(req, res) {
 
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
 
-  initCategories({isRecommend: true}, 0, PAGESIZE, function (mainCategories, items, pageCount) {
+  initCategories({isRecommend: true}, 0, PAGE_SIZE, function (mainCategories, items, pageCount) {
 
     res.render('index', {
       mainCategories: mainCategories,
@@ -80,11 +80,11 @@ router.get('/', function(req, res) {
 router.get('/index/:pageNumber', function (req, res) {
 
   var pageNumber = req.params.pageNumber;
-  var start = (pageNumber - 1) * PAGESIZE;
+  var start = (pageNumber - 1) * PAGE_SIZE;
 
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
 
-  initCategories({isRecommend: true}, start, PAGESIZE, function (mainCategories, items, pageCount) {
+  initCategories({isRecommend: true}, start, PAGE_SIZE, function (mainCategories, items, pageCount) {
 
     res.render('index', {
       mainCategories: mainCategories,
@@ -111,7 +111,7 @@ router.get('/categories/:id', function (req, res) {
       currentCategory.isDisplay = true;
     });
 
-  initCategories({category: id}, 0, PAGESIZE, function (mainCategories, items, pageCount) {
+  initCategories({category: id}, 0, PAGE_SIZE, function (mainCategories, items, pageCount) {
 
     res.render('index', {
       mainCategories: mainCategories,
@@ -130,7 +130,7 @@ router.get('/categories/:id/:pageNumber', function (req, res) {
   var id = req.params.id;
 
   var pageNumber = req.params.pageNumber;
-  var start = (pageNumber - 1) * PAGESIZE;
+  var start = (pageNumber - 1) * PAGE_SIZE;
 
   var currentCategory;
   Category.findById(id)
@@ -141,7 +141,7 @@ router.get('/categories/:id/:pageNumber', function (req, res) {
       currentCategory.isDisplay = true;
     });
 
-  initCategories({category: id}, start, PAGESIZE, function (mainCategories, items, pageCount) {
+  initCategories({category: id}, start, PAGE_SIZE, function (mainCategories, items, pageCount) {
 
     res.render('index', {
       mainCategories: mainCategories,
