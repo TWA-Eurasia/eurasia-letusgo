@@ -156,22 +156,4 @@ router.get('/categories/:id/:pageNumber', function (req, res) {
 });
 
 
-router.post('/', function (req, res) {
-
-  Item.create({
-    name: '雪纺衫',
-    unit: '件',
-    price: 199,
-    image: 'image/georgette.jpg',
-    description: '这是件雪纺衫',
-    inventory: 100,
-    category: '5519881c0042a1db62223b09',
-    specification: 'S',
-    isRecommend: true
-  }, function (err, item) {
-
-    res.send(item);
-  });
-});
-
 module.exports = router;

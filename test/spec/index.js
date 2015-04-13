@@ -14,7 +14,7 @@ describe('index', function() {
         .get('/')
         .expect('Content-Type', /html/)
         .expect(200)
-        .end(function(err, res){
+        .end(function (err, res) {
           if (err) throw err;
           done();
         });
@@ -29,7 +29,7 @@ describe('index', function() {
         .get('/index/3')
         .expect('Content-Type', /html/)
         .expect(200)
-        .end(function(err, res){
+        .end(function (err, res) {
           if (err) throw err;
           done();
         });
@@ -44,7 +44,7 @@ describe('index', function() {
         .get('/categories/5523bc489294d58a8e06c38c')
         .expect('Content-Type', /html/)
         .expect(200)
-        .end(function(err, res){
+        .end(function (err, res) {
           if (err) throw err;
           done();
         });
@@ -59,23 +59,10 @@ describe('index', function() {
         .get('/categories/5523bc489294d58a8e06c38c/1')
         .expect('Content-Type', /html/)
         .expect(200)
-        .end(function(err, res){
+        .end(function (err, res) {
           if (err) throw err;
           done();
         });
-    });
-  });
-
-  describe('POST /', function () {
-
-    it('should return 200 OK', function (done) {
-
-      request(app)
-        .post('/')
-        .expect(200)
-        .end(function(err, res){
-          done();
-        })
     });
   });
 });
