@@ -59,7 +59,7 @@ $(function () {
     return inputNumber > leftNumber
   }
 
-  function getCartItemInventory (jQ_DOM, callback) {
+  function getCartItemInventory(jQ_DOM, callback) {
     var id = jQ_DOM.closest('tr').data('id');
 
     $.get('/cart/cartItems/' + id, function (data) {
@@ -82,6 +82,7 @@ $(function () {
       }
     })
   }
+
   $(document).on('cart-count-change', function (event, cartId) {
     $.ajax({
       url: 'cart' + cartId,

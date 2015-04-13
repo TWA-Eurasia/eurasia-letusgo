@@ -125,7 +125,7 @@ router.get('/cartItems/:id', function (req, res) {
 
     Item.findById(cartItem.item, function (err, item) {
 
-      res.send({inventory: item.inventory.toString()});
+      res.send({inventory: item.inventory});
     });
   })
 });
