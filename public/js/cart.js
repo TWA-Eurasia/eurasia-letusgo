@@ -59,6 +59,30 @@ $(function () {
     return inputNumber > leftNumber
   }
 
+  function getCartItemInvetory (jQ_DOM) {
+    var id = jQ_DOM.closest('tr').data('id');
+
+    $.get('/api/cartitems/' + id, function (data) {
+      console.log(data);
+      return data;
+    });
+  }
+
+  function countCartAmount() {
+
+    $.ajax({
+      url: '/cart/:amount',
+      type: 'GET',
+
+      success: function (data) {
+        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+          data.amount = '99+';
+        }
+        console.log(data.amount);
+        $('#cart-amount').text(data.amount);
+      }
+    })
+  }
   $(document).on('cart-count-change', function (event, cartId) {
     $.ajax({
       url: 'cart' + cartId,
@@ -126,7 +150,7 @@ $(function () {
     var numberInput = parseInt(inputDom.val());
 
     var inventory = $('#leftNumber').text();
-
+    inventory = getCartItemInvetory($(this));
     if (inventory > numberInput) {
       inputDom.val(numberInput + 1);
       changeTotal($(this));
@@ -186,21 +210,5 @@ $(function () {
     content: $(this).prop("data-content")
   });
 
-
   countCartAmount();
-  function countCartAmount() {
-
-    $.ajax({
-      url: '/cart/:amount',
-      type: 'GET',
-
-      success: function (data) {
-        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
-          data.amount = '99+';
-        }
-        console.log(data.amount);
-        $('#cart-amount').text(data.amount);
-      }
-    })
-  }
 });
