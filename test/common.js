@@ -13,5 +13,4 @@ var sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 
 var sinon = require('sinon');
-
 global.sinon = sinon;
