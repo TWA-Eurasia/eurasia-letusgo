@@ -4,6 +4,7 @@ var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
+var MAX_CART_AMOUNT = 99;
 
 $(function () {
 
