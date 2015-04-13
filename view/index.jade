@@ -1,97 +1,61 @@
-doctype html
-html
-  head
-    - var name = '来此购网上购物商城'
-    title= name
-    meta(charset="utf-8")
-    meta(name="viewport" content="width=device-width")
-    link(rel="stylesheet" type="text/css" href="/github/ziyiking/Semantic-UI@master/dist/semantic.css")
-    link(rel="styleSheet" type="text/css" href="/style/home.css")
-    script(type="text/javascript").
-      var application = application || {};
-      application.index = application.index ||{};
-      application.index.pageCount = #{pageCount};
-      application.index.currentPage = #{currentPage};
-      application.index.isCategory = #{isCategory};
-    script(src="/jspm_packages/system.js")
-    script(src="/config.js")
-    script.
-      System.import('js/index');
-      System.import('js/cart');
-  body#home
-    .container
-      header
-        .ui.grid.topBar
-          .one.wide.column &nbsp;
-          .nine.wide.column Hi，欢迎来到Let Us Go商城
-          .two.wide.column
-            a(href="#") 我的Let Us Go
-          .one.wide.column
-            a(href="#") 请登录
-          .one.wide.column
-            a(href="#") 免费注册
-        .ui.grid.logoAndSearch
-          .four.wide.column.myLogo
-            a(href="/")
-              img.myLogoImg(data-src= "/image/logo.png")
-          .twelve.wide.column.mySearch
-            .ui.fluid.category.search
-              .ui.icon.input.searchInput
-                input.prompt(type="text" placeholder="Search...")
-                i.search.icon
-              .results
-      .ui.grid.content
-        .one.wide.column &nbsp;
-        .three.wide.column
-          .ui.secondary.vertical.menu
-            .ui.dropdown.item#categoryTitle 商品服务分类
-            - each mainCategory in mainCategories
-              .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
-                i.dropdown.icon
-                .menu
-                  - each subCategory in mainCategory.subCategories
-                    a.item.secondMenu(data-id="#{subCategory._id}" href="/categories/#{subCategory._id}") #{subCategory.name}
-        .twelve.wide.column
-          .ui.twelve.column.grid
-            .ui.inverted.teal.menu
-              .left.menu
-                a.ui.active.link.item(href="/") Let Us Go
-              .right.menu
-                a.ui.link.item(href="/cart") 购物车
-                  i.cart.in.icon
-                  strong.ui.label#cart-amount 0
+extends ./navBar.jade
 
-          - var isDisplay = currentCategory.isDisplay
-          - var recommendDisplay = isDisplay ? 'none' : 'auto'
-          - var crumbDisplay = isDisplay ? 'auto' : 'none'
-          - var recommendStyle = {'style': 'display:' + recommendDisplay}
-          - var crumbStyle = {'style': 'display:' + crumbDisplay}
-          .ui.items.crumb&attributes(recommendStyle)
-            .item
-              .content
-                .header 推荐商品
-          .ui.large.breadcrumb.crumb&attributes(crumbStyle)
-            a.section(href="#") #{currentCategory.parent.name}
-             i.right.chevron.icon.ider
-            a.active.section(href="/categories/#{currentCategory._id}") #{currentCategory.name}
-          - var display = (items.length === 0 ? 'auto' : 'none')
-          - var style = {'style': 'display:' + display}
-          .section.notice&attributes(style) 此分类下暂无商品！
-          .ui.four.column.grid
-            - each item in items
-              .column.itemDiv
-                .ui.segment
-                  a(href="/items/#{item._id}")
-                    img.ui.fluid.image.itemImg(data-id="#{item._id}" data-src="/#{item.image}")
-                .info
-                  a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
-                  p.price #{item.price}元
-                  a.ui.red.button(href="/items/#{item._id}" data-id="#{item._id}") 立即购买
-          .pagination
+block css
+  link(rel="styleSheet" type="text/css" href="/style/home.css")
+  script(type="text/javascript").
+    var application = application || {};
+    application.index = application.index || {};
+    application.index.pageCount = #{pageCount};
+    application.index.currentPage = #{currentPage};
+    application.index.isCategory = #{isCategory};
+  script(src = "/jspm_packages/system.js")
+  script(src = "/config.js")
+  script.
+    System.import('js/index');
+    System.import('js/cart');
+block title
+  title 首页
+    
+block home
+  a.ui.active.link.item(href="/") Let Us Go
 
-      .ui.divider.horizontal 关于我们
-      footer
-        .ui.grid(style="text-align: center")
-          .sixteen.wide.column
-          .sixteen.wide.column
-            p copyright@letusgo All Rights Reserved
+block content
+  .ui.grid.content
+    .one.wide.column &nbsp;
+    .three.wide.column
+      .ui.secondary.vertical.menu
+        .ui.dropdown.item#categoryTitle 商品服务分类
+        - each mainCategory in mainCategories
+          .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
+            i.dropdown.icon
+            .menu
+              - each subCategory in mainCategory.subCategories
+                a.item.secondMenu(data-id="#{subCategory._id}" href="/categories/#{subCategory._id}") #{subCategory.name}
+    .twelve.wide.column
+      - var isDisplay = currentCategory.isDisplay
+      - var recommendDisplay = isDisplay ? 'none' : 'auto'
+      - var crumbDisplay = isDisplay ? 'auto' : 'none'
+      - var recommendStyle = {'style': 'display:' + recommendDisplay}
+      - var crumbStyle = {'style': 'display:' + crumbDisplay}
+      .ui.items.crumb&attributes(recommendStyle)
+        .item
+          .content
+            .header 推荐商品
+      .ui.large.breadcrumb.crumb&attributes(crumbStyle)
+        a.section(href="#") #{currentCategory.parent.name}
+          i.right.chevron.icon.ider
+        a.active.section(href="/categories/#{currentCategory._id}") #{currentCategory.name}
+      - var display = (items.length === 0 ? 'auto' : 'none')
+      - var style = {'style': 'display:' + display}
+      .section.notice&attributes(style) 此分类下暂无商品！
+      .ui.four.column.grid
+        - each item in items
+          .column.itemDiv
+            .ui.segment
+              a(href="/items/#{item._id}")
+                img.ui.fluid.image.itemImg(data-id="#{item._id}" data-src="/#{item.image}")
+            .info
+              a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
+              p.price #{item.price}元
+              a.ui.red.button(href="/items/#{item._id}" data-id="#{item._id}") 立即购买
+      .pagination
