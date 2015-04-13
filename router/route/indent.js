@@ -24,15 +24,6 @@ router.get('/', function (req, res) {
     });
 });
 
-//router.get('/', function (req, res, next) {
-//
-//  User.findById('551fd2a9ecb148410c4c8048')
-//    .populate('indents')
-//    .exec(function (err, user) {
-//      res.send('user', {user: user});
-//    });
-//});
-
 router.post('/', function (req, res, next) {
 
   Indent.create({
