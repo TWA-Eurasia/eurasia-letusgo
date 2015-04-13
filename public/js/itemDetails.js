@@ -72,10 +72,9 @@ $(document).ready(function () {
         if (MAX_CART_AMOUNT < parseInt(data.amount)) {
           data.amount = '99+';
         }
-        console.log(data.amount);
         $('#cart-amount').text(data.amount);
       }
-    })
+    });
   }
 
   $('.addToCart').on('click', function () {
@@ -90,23 +89,11 @@ $(document).ready(function () {
       success: function () {
         countCartAmount();
         $('.success').show();
-        function jump(count) {
 
-          window.setTimeout(function () {
-            count--;
-
-            if (count > 0) {
-              $('.success').show();
-              jump(count);
-            } else {
-              $('.success').hide();
-
-            }
-          }, 1000);
-        }
-
-        jump(1);
+        window.setTimeout(function () {
+        $('.success').hide();
+        },1000);        
       }
-    })
+    });
   });
 });
