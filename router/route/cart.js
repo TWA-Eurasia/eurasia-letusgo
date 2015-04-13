@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
     .exec(function (err, cart) {
       Item.populate(cart, 'cartItems.item', function (err) {
         if(err) {throw err}
-        
+
         _.map(cart.cartItems, function (cartItem) {
           if (cartItem.item.name.length > 8) {
               cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
@@ -100,7 +100,6 @@ router.delete('/:cartItemId', function (req, res) {
 });
 
 router.get('/:amount', function (req, res) {
-
   var cartId = "551cc282a6b79c584b59bc0f";
 
   Cart.findById(cartId)
@@ -109,9 +108,8 @@ router.get('/:amount', function (req, res) {
       var count = _.reduce(cart.cartItems, function (count, cartItem) {
         return cartItem.number + count;
       }, 0);
+
       res.send({amount: count});
-
-
     });
 });
 
