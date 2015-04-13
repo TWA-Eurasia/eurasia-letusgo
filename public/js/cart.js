@@ -4,25 +4,9 @@ var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
-var JUMP_TIME = 1;
 var MAX_CART_AMOUNT = 99;
 
 $(function () {
-
-  function jump(count, self) {
-
-    window.setTimeout(function () {
-      count--;
-
-      if (count > 0) {
-        jump(count, self);
-
-      } else {
-        $('.delete-massage').closest('tr').remove();
-      }
-
-    }, 1000);
-  }
 
   function changeTotal(jQ_DOM) {
     var id = jQ_DOM.closest('tr').data('id');
@@ -57,6 +41,30 @@ $(function () {
     var leftNumber = $('#leftNumber').text();
 
     return inputNumber > leftNumber
+  }
+
+  function getCartItemInventory(jQ_DOM, callback) {
+    var id = jQ_DOM.closest('tr').data('id');
+
+    $.get('/cart/cartItems/' + id, function (data) {
+      callback(data);
+      return data;
+    });
+  }
+
+  function countCartAmount() {
+
+    $.ajax({
+      url: '/cart/:amount',
+      type: 'GET',
+
+      success: function (data) {
+        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+          data.amount = '99+';
+        }
+        $('#cart-amount').text(data.amount);
+      }
+    })
   }
 
   $(document).on('cart-count-change', function (event, cartId) {
@@ -121,17 +129,19 @@ $(function () {
   });
 
   $('.increase').on('click', function () {
-
+    var self = this;
     var inputDom = $(this).closest('td').find('#number');
     var numberInput = parseInt(inputDom.val());
 
     var inventory = $('#leftNumber').text();
 
-    if (inventory > numberInput) {
-      inputDom.val(numberInput + 1);
-      changeTotal($(this));
-    }
-    countCartAmount();
+    getCartItemInventory($(this), function (data) {
+      if (data.inventory > numberInput) {
+        inputDom.val(numberInput + 1);
+        changeTotal($(self));
+      }
+      countCartAmount();
+    });
   });
 
   $('input').on('keyup', function () {
@@ -170,14 +180,15 @@ $(function () {
       type: 'DELETE',
 
       success: function (data) {
+        $('.delete-message').show();
+        $(delete_cartItem.closest('tr').remove());
 
-        $(delete_cartItem.closest('tr')).replaceWith(
-          "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
+        window.setTimeout(function () {
+          $('.delete-message').hide();
+        }, 1000);
 
         $("#total").text(data.total);
 
-        jump(JUMP_TIME, delete_cartItem);
-        countCartAmount();
       }
     })
   });
@@ -186,8 +197,8 @@ $(function () {
     content: $(this).prop("data-content")
   });
 
-
   countCartAmount();
+<<<<<<< HEAD
   function countCartAmount() {
 
     $.ajax({
@@ -202,4 +213,6 @@ $(function () {
       }
     })
   }
+=======
+>>>>>>> 10efbfb0ca166a9102add020a82b8113537f98f2
 });

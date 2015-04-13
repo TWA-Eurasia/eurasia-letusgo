@@ -33,6 +33,8 @@ block content
           //  input#allChecked(type="checkbox" name="checkedAllCartItem" checked)
           //  span 全选
         tbody.center
+          tr
+            td.ui.teal.message.delete-message.hidden(colspan='6') 删除成功
           - each cartItem in cartItems
             tr(data-id="#{cartItem._id}")
               td
