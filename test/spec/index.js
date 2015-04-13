@@ -72,17 +72,6 @@ describe('index', function() {
 
       request(app)
         .post('/')
-        .send({
-          name: '雪纺衫',
-          unit: '件',
-          price: 199,
-          image: 'image/georgette.jpg',
-          description: '这是件雪纺衫',
-          inventory: 100,
-          category: '5519881c0042a1db62223b09',
-          specification: 'S',
-          isRecommend: true
-        })
         .expect(200)
         .end(function(err, res){
           done();
