@@ -13,14 +13,16 @@ router.get('/', function (req, res) {
     .populate('cartItems')
     .exec(function (err, cart) {
       Item.populate(cart, 'cartItems.item', function (err) {
-        if(err) {throw err}
+        if (err) {
+          throw err
+        }
 
         _.map(cart.cartItems, function (cartItem) {
           cartItem.item.shortName = cartItem.item.name;
 
           if (cartItem.item.name.length > 8) {
-              cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
-            } 
+            cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
+          }
         });
 
         var total = cart.getTotal(cart.cartItems);
@@ -117,10 +119,14 @@ router.get('/cartItems/:id', function (req, res) {
   var id = req.params.id;
 
   CartItem.findById(id, function (err, cartItem) {
-    if(err) { throw err}
+    if (err) {
+      throw err
+    }
 
     Item.findById(cartItem.item, function (err, item) {
-      if(err) {throw err}
+      if (err) {
+        throw err
+      }
       res.send({inventory: item.inventory});
     });
   })
