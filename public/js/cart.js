@@ -59,11 +59,11 @@ $(function () {
     return inputNumber > leftNumber
   }
 
-  function getCartItemInvetory (jQ_DOM) {
+  function getCartItemInventory (jQ_DOM, callback) {
     var id = jQ_DOM.closest('tr').data('id');
 
-    $.get('/api/cartitems/' + id, function (data) {
-      console.log(data);
+    $.get('/cart/cartItems/' + id, function (data) {
+      callback(data);
       return data;
     });
   }
@@ -78,7 +78,6 @@ $(function () {
         if (MAX_CART_AMOUNT < parseInt(data.amount)) {
           data.amount = '99+';
         }
-        console.log(data.amount);
         $('#cart-amount').text(data.amount);
       }
     })
@@ -145,17 +144,19 @@ $(function () {
   });
 
   $('.increase').on('click', function () {
-
+    var self = this;
     var inputDom = $(this).closest('td').find('#number');
     var numberInput = parseInt(inputDom.val());
 
     var inventory = $('#leftNumber').text();
-    inventory = getCartItemInvetory($(this));
-    if (inventory > numberInput) {
-      inputDom.val(numberInput + 1);
-      changeTotal($(this));
-    }
-    countCartAmount();
+
+    getCartItemInventory($(this), function (data) {
+      if (data.inventory > numberInput) {
+        inputDom.val(numberInput + 1);
+        changeTotal($(self));
+      }
+      countCartAmount();
+    });
   });
 
   $('input').on('keyup', function () {
