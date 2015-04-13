@@ -48,22 +48,16 @@ $(function () {
 
     $.get('/cart/cartItems/' + id, function (data) {
       callback(data);
-      return data;
     });
   }
 
   function countCartAmount() {
-
-    $.ajax({
-      url: '/cart/:amount',
-      type: 'GET',
-
-      success: function (data) {
+    $.get('/cart/:amount',  function (data) {
         if (MAX_CART_AMOUNT < parseInt(data.amount)) {
           data.amount = '99+';
         }
+      
         $('#cart-amount').text(data.amount);
-      }
     })
   }
 
