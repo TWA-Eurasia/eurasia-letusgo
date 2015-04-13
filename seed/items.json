@@ -1,10 +1,10 @@
-{_id: ObjectId('5523cea79294d58a8e06c3bf'), name: '韩版短款针织衫', unit: '件', price: 199, image: 'image/200*200.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c38e'), specification: '100ml', isRecommend: true}
+{_id: ObjectId('5523cea79294d58a8e06c3bf'), name: '水溶C100功能饮料', unit: '瓶', price: 20, image: 'image/200*200.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c3a2'), specification: '100ml', isRecommend: true}
 
-{_id: ObjectId('5523cea79294d58a8e06c3c0'), name: '韩版短款雪纺衫', unit: '件', price: 209, image: 'image/600*600.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c38c'), specification: '100ml', isRecommend: true}
+{_id: ObjectId('5523cea79294d58a8e06c3c0'), name: 'Olevy澳利维', unit: '瓶', price: 109, image: 'image/600*600.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c3a2'), specification: '100ml', isRecommend: true}
 
 {_id: ObjectId('5523cea79294d58a8e06c3c1'), name: '2015欧美大牌春装新款 修身显瘦镂空蕾丝连衣裙中长款 夏短袖长裙', unit: '件', price: 368, image: 'image/14.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c38f'), specification: '100ml', isRecommend: true}
 
-{_id: ObjectId('5523cea79294d58a8e06c3c2'), name: 'Nestle雀巢(三合一)速溶咖啡180ml 罐装', unit: '瓶', price: 3.5, image: 'image/boom.png', inventory: 10, description: '这是......', category: ObjectId('5523bc489294d58a8e06c3a0'), specification: '100ml', isRecommend: true}
+{_id: ObjectId('5523cea79294d58a8e06c3c2'), name: 'Nestle雀巢(三合一)速溶咖啡180ml 罐装', unit: '瓶', price: 3.5, image: 'image/coffee.png', inventory: 10, description: '这是......', category: ObjectId('5523bc489294d58a8e06c3a0'), specification: '100ml', isRecommend: true}
 
 {_id: ObjectId('5523cea79294d58a8e06c3c3'), name: '海澜之家2015夏季男士POLO衫 短袖', unit: '件', price: 128, image: 'image/11.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c387'), specification: '100ml', isRecommend: true}
 {_id: ObjectId('5523cea79294d58a8e06c3c4'), name: 'AMH男装韩版夏季 修身时尚短袖', unit: '件', price: 142, image: 'image/12.jpg', inventory: 100, description: '这是......', category: ObjectId('5523bc489294d58a8e06c387'), specification: '100ml', isRecommend: true}

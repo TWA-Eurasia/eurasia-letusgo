@@ -4,25 +4,8 @@ var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
-var JUMP_TIME = 1;
-var MAX_CART_AMOUNT = 99;
 
 $(function () {
-
-  function jump(count, self) {
-
-    window.setTimeout(function () {
-      count--;
-
-      if (count > 0) {
-        jump(count, self);
-
-      } else {
-        $('.delete-massage').closest('tr').remove();
-      }
-
-    }, 1000);
-  }
 
   function changeTotal(jQ_DOM) {
     var id = jQ_DOM.closest('tr').data('id');
@@ -196,14 +179,15 @@ $(function () {
       type: 'DELETE',
 
       success: function (data) {
+        $('.delete-message').show();
+        $(delete_cartItem.closest('tr').remove());
 
-        $(delete_cartItem.closest('tr')).replaceWith(
-          "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
+        window.setTimeout(function () {
+          $('.delete-message').hide();
+        }, 1000);
 
         $("#total").text(data.total);
 
-        jump(JUMP_TIME, delete_cartItem);
-        countCartAmount();
       }
     })
   });
