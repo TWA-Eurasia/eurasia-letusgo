@@ -8,12 +8,12 @@ var MAX_CART_AMOUNT = 99;
 
 $(function () {
 
-  function changeTotal(jQ_DOM) {
-    var id = jQ_DOM.closest('tr').data('id');
-    var num = jQ_DOM.closest('td').find('.number').val();
-    var price = jQ_DOM.parents('td').prev().find('#price').text();
+  function changeTotal(jqDom) {
+    var id = jqDom.closest('tr').data('id');
+    var num = jqDom.closest('td').find('.number').val();
+    var price = jqDom.parents('td').prev().find('#price').text();
     var total = $('#total').text();
-    var input = jQ_DOM;
+    var input = jqDom;
 
     $.ajax({
       url: 'cart/' + id,
@@ -43,8 +43,8 @@ $(function () {
     return inputNumber > leftNumber
   }
 
-  function getCartItemInventory(jQ_DOM, callback) {
-    var id = jQ_DOM.closest('tr').data('id');
+  function getCartItemInventory(jqDom, callback) {
+    var id = jqDom.closest('tr').data('id');
 
     $.get('/cart/cartItems/' + id, function (data) {
       callback(data);
