@@ -4,24 +4,8 @@ var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var delete_cartItem;
-var JUMP_TIME = 1;
 
 $(function () {
-
-  function jump(count, self) {
-
-    window.setTimeout(function () {
-      count--;
-
-      if (count > 0) {
-        jump(count, self);
-
-      } else {
-        $('.delete-massage').closest('tr').remove();
-      }
-
-    }, 1000);
-  }
 
   function changeTotal(jQ_DOM) {
     var id = jQ_DOM.closest('tr').data('id');
@@ -42,7 +26,7 @@ $(function () {
     })
   }
 
-  function verifyNumber(number,input) {
+  function verifyNumber(number, input) {
 
     var reg = /^(0|[1-9][0-9]*)$/;
     if (!reg.exec(number)) {
@@ -70,14 +54,14 @@ $(function () {
   });
 
   $('img')
-    .error(function() {
+    .error(function () {
       $(this).attr('src', '/image/missing.jpg')
     })
-    .attr( 'src', function () {
+    .attr('src', function () {
       return $(this).data('src');
     });
 
-  $('#allChecked').on('change', function() {
+  $('#allChecked').on('change', function () {
 
     var checkboxes = $('input[name="checkedCartItem"]');
     for (var i = 0; i < checkboxes.length; i++) {
@@ -86,24 +70,24 @@ $(function () {
 
   });
 
-  $('.checkedCartItem').on('change', function() {
+  $('.checkedCartItem').on('change', function () {
 
     var isChecked = $(this).prop('checked');
-    if(!isChecked) {
+    if (!isChecked) {
       $('#allChecked').prop('checked', false);
     }
 
     var isAllChecked = true;
     var checkboxes = $('input[name="checkedCartItem"]');
 
-    for(var i = 0; i < checkboxes.length; i++) {
+    for (var i = 0; i < checkboxes.length; i++) {
       isAllChecked = checkboxes[i].checked;
-      if(!isAllChecked) {
+      if (!isAllChecked) {
         return;
       }
     }
 
-    if(isAllChecked) {
+    if (isAllChecked) {
       $('#allChecked').prop('checked', true);
     }
   });
@@ -141,7 +125,7 @@ $(function () {
     var number = numberInput.replace(/\b(0+)/gi, '');
     var input = $(this);
 
-    verifyNumber(number,input);
+    verifyNumber(number, input);
     changeTotal(input);
     if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
@@ -165,18 +149,19 @@ $(function () {
       type: 'DELETE',
 
       success: function (data) {
+        $('.delete-message').show();
+        $(delete_cartItem.closest('tr').remove());
 
-        $(delete_cartItem.closest('tr')).replaceWith(
-          "<tr><td colspan='7'> " + "<div class='ui teal message delete-massage'>" + "删除成功" + "</div></td></tr>");
+        window.setTimeout(function () {
+          $('.delete-message').hide();
+        }, 1000);
 
         $("#total").text(data.total);
-
-        jump(JUMP_TIME, delete_cartItem);
       }
     })
   });
 
-  $('.itemName').popup( {
+  $('.itemName').popup({
     content: $(this).prop("data-content")
   });
 
