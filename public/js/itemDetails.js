@@ -28,7 +28,7 @@ $(document).ready(function () {
     }
   });
 
-  $('#numberInput').on('mouseout', function () {
+  $('#numberInput').on('change', function () {
     $('#inputError').hide();
     var numberInput = $('#numberInput').val();
     var number = numberInput.replace(/\b(0+)/gi, '');
@@ -82,18 +82,27 @@ $(document).ready(function () {
     var itemId = $(this).data('id');
 
     var numberInput = parseInt($('#numberInput').val());
-    $.ajax({
-      url: '../cart/' + itemId,
-      type: 'POST',
-      data: {number: numberInput},
-      success: function () {
-        countCartAmount();
-        $('.success').show();
+    var inventory = parseInt($('#inventory').val);
 
-        window.setTimeout(function () {
-        $('.success').hide();
-        },1000);        
-      }
-    });
+    if(numberInput <= inventory) {
+      $.ajax({
+        url: '../cart/' + itemId,
+        type: 'POST',
+        data: {number: numberInput},
+        success: function () {
+          countCartAmount();
+          $('.success').show();
+
+          window.setTimeout(function () {
+            $('.success').hide();
+          },1000);
+        }
+      });
+    } else {
+      $('.inventory').show();
+      window.setTimeout(function () {
+        $('.inventory').hide();
+      },1000);
+    }
   });
 });

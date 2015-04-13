@@ -149,7 +149,6 @@ $(function () {
     $(this).closest('td').find('#inventory').hide();
 
     var numberInput = $(this).closest('td').find('#number').val();
-    //numberInput = numberInput.toString();
 
     var number = numberInput.replace(/\b(0+)/gi, '');
     var input = $(this);
