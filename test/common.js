@@ -1,5 +1,11 @@
 'use strict';
 
+var mongoose = require('mongoose');
+var express = require('express');
+
+var request = require('supertest');
+global.request = request;
+
 var chai = require('chai');
 global.expect = chai.expect;
 
