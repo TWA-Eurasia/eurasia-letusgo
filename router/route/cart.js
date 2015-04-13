@@ -113,8 +113,6 @@ router.get('/:amount', function (req, res) {
         return cartItem.number + count;
       }, 0);
       res.send({amount: count});
-
-
     });
 });
 
