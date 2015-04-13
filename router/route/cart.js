@@ -16,11 +16,11 @@ router.get('/', function (req, res) {
         if(err) {throw err}
 
         _.map(cart.cartItems, function (cartItem) {
+          cartItem.item.shortName = cartItem.item.name;
+
           if (cartItem.item.name.length > 8) {
               cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
-            } else {
-              cartItem.item.shortName = cartItem.item.name;
-            }
+            } 
         });
 
         var total = cart.getTotal(cart.cartItems);
