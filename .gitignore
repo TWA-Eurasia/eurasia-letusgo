@@ -6,3 +6,4 @@ jspm_packages
 .DS_Store
 npm-debug.log
 coverage
+target
