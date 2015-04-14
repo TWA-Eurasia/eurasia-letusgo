@@ -4,15 +4,31 @@
   border: 0px solid #000;
   border-bottom-width: 1px;
 }
+
 .filed {
-  padding: 10px;
+  margin-bottom: 14px;
 }
 
-#userName {
-  width: 50%;
+i.asterisk.icon {
+  height: 37px;
+  line-height: 37px;
+  padding-left: 10px;
+  color: darkred;
 }
 
-#userNameMessage {
+#userName,
+#password,
+#repeatPassword,
+#phoneNumber,
+#address,
+#email {
+  width: 70%;
+}
+
+#userNameMessage,
+#passwordMessage,
+#repeatPasswordMessage,
+#emailMessage {
   height: 30px;
   line-height: 30px;
   padding: 20px;
@@ -21,5 +37,5 @@
 }
 
 #buttonField {
-  text-align: right;
+  text-align: center;
 }
