@@ -95,6 +95,7 @@ $(function () {
     if (isAllChecked) {
       $('#allChecked').prop('checked', true);
     }
+
   });
 
   $('.reduce').on('click', function () {
