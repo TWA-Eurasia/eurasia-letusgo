@@ -1,0 +1,32 @@
+{
+  "node": true,
+  "browser": false,
+  "strict": true,
+  "globalstrict": true,         //抑制全局严格模式的使用
+  "esnext": true,               //ES6 的使用
+  "bitwise": true,              //禁止按位操作符
+  "camelcase": true,            //使用一种命名风格
+  "curly": true,                //总是要把花括号卸载循环和条件语句旁边
+  "eqeqeq": true,               //强制使用===和!==
+  "immed": true,                //
+  "indent": 2,                  //一个tab两个空格
+  "latedef": true,              //禁止变量未定义使用
+  "newcap": true,               //构造器函数首字母大写
+  "noarg": true,                //禁止使用.caller && .callee
+  "quotmark": "single",         //只能使用''或""
+  "undef": true,                //禁止使用未明确定义的
+  "unused": true,               //定义变量未使用会错
+  "expr": true,                 //
+  "maxparams": 4,
+  "maxdepth": 4,
+  "maxlen": 150,
+  "globals": {
+    /* MOCHA */
+    "describe": false,
+    "it": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false
+  }
+}
