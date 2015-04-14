@@ -1,3 +1,4 @@
+'use strict';
 describe('GET /', function () {
 
   var resMock = {};

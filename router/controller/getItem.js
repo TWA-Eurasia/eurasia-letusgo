@@ -1,4 +1,4 @@
-
+'use strict';
 var Item = require('../../model/item');
 var Category = require('../../model/category');
 
