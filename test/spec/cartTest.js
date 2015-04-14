@@ -19,4 +19,17 @@ describe('cart', function() {
         })
     });
   });
+
+  describe('POST /:id', function() {
+
+    it('should return ', function() {
+
+      request(app)
+        .post('/:id')
+        .expect(200)
+        .end(function(err) {
+          if(err) {throw err;}
+        })
+    });
+  });
 });
