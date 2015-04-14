@@ -1,7 +1,6 @@
 'use strict';
 
 var Indent = require('../../model/indent');
-var CartItem = require('../../model/cartItem');
 var Item = require('../../model/item');
 
 var getIndent = function (req, res) {
