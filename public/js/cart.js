@@ -71,10 +71,7 @@ $(function () {
 
   $('#allChecked').on('change', function () {
 
-    var checkboxes = $('input[name="checkedCartItem"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].checked = this.checked;
-    }
+    $('input[name="checkedCartItem"]').prop('checked',this.checked);
 
   });
 
