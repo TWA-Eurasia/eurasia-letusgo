@@ -82,27 +82,28 @@ $(document).ready(function () {
     var itemId = $(this).data('id');
 
     var numberInput = parseInt($('#numberInput').val());
-    var inventory = parseInt($('#inventory').val());
+    var inventory = parseInt($('#inventory').text());
 
-    if(numberInput <= inventory) {
-      $.ajax({
-        url: '../cart/' + itemId,
-        type: 'POST',
-        data: {number: numberInput},
-        success: function () {
-          countCartAmount();
-          $('.success').show();
-
-          window.setTimeout(function () {
-            $('.success').hide();
-          },1000);
-        }
-      });
-    } else {
+    if(numberInput > inventory) {
       $('.inventory').show();
-      window.setTimeout(function () {
-        $('.inventory').hide();
-      },1000);
+        window.setTimeout(function () {
+          $('.inventory').hide();
+        },1000);
+      return;
     }
+
+    $.ajax({
+      url: '/cart/' + itemId,
+      type: 'POST',
+      data: {number: numberInput},
+      success: function () {
+        countCartAmount();
+        $('.success').show();
+
+        window.setTimeout(function () {
+          $('.success').hide();
+        },1000);
+      }
+    });
   });
 });

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var _ = require('lodash');
 var CartItem = require('./cartItem');
 
 var CartSchema = new Schema({
