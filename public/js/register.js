@@ -11,7 +11,7 @@ $(function () {
     $('#userNameMessage').hide();
 
     var userName = $('#userName').val();
-    var userNameLength = userName.replace(/[^x00-xff]/g,"**").length;
+    var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
 
     if (userName === '') {
 
