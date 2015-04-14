@@ -8,22 +8,13 @@ describe('GET api/indent', function () {
         .expect(200, function(err, res) {
 
           expect(res.body).to.have.property('indent');
+          expect(res.body.total).to.equal('2676.00');
           done();
         });
   });
 
   afterEach(function(){
 
-    Item.remove();
-    CartItem.remove();
-    Cart.remove();
-    Category.remove();
-    Indent.remove();
-
-    Item.create(items);
-    CartItem.create(cartItems);
-    Cart.create(carts);
-    Category.create(categories);
-    Indent.create(indents);
+    reloadDatabase();
   });
 });

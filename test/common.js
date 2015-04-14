@@ -1,6 +1,5 @@
 'use strict';
 
-
 var express = require('express');
 
 var request = require('supertest');
@@ -29,33 +28,10 @@ mongoose.connect('mongodb://localhost/letusgoTest', function (err) {
   }
 });
 
-var Item = require('../model/item');
-global.Item = Item;
-var CartItem = require('../model/cartItem');
-global.CartItem = CartItem;
-var Cart = require('../model/cart');
-global.Cart = Cart;
-var Category = require('../model/category');
-global.Category = Category;
-var Indent = require('../model/indent');
-global.Indent = Indent;
+var reloadDatabase = require('./helper/reloadDatabase');
+global.reloadDatabase = reloadDatabase;
+
+reloadDatabase();
 
 
-var items = require('../seed/test/items');
-global.items = items;
-var cartItems = require('../seed/test/cartItems');
-global.cartItems = cartItems;
-var indents = require('../seed/test/indents');
-global.indents = indents;
-var categories = require('../seed/test/categories');
-global.categories = categories;
-var carts = require('../seed/test/carts');
-global.carts = carts;
-
-
-Item.create(items);
-CartItem.create(cartItems);
-Cart.create(carts);
-Category.create(categories);
-Indent.create(indents);
 
