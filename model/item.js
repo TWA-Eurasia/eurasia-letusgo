@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
+'use strict';
 
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ItemSchema = new Schema({
