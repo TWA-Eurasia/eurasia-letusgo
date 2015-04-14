@@ -132,7 +132,7 @@ $(function () {
 
     var number = numberInput.val().replace(/\b(0+)/gi, '');
     numberInput.val(number);
-    
+
     var input = $(this);
 
     verifyNumber(number, input);
@@ -171,7 +171,7 @@ $(function () {
         }, 1000);
 
         $("#total").text(data.total);
-
+        countCartAmount();
       }
     })
   });
