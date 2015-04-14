@@ -44,9 +44,8 @@ router.post('/:id', function (req, res) {
           throw  err;
         }
         var result = _.find(cart.cartItems, function (cartItem) {
-          return cartItem.item.toString() === id;
+          return cartItem.item._id.toString() === id;
         });
-
         if (result) {
           number = result.number + number;
           CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function (err) {
@@ -66,12 +65,6 @@ router.post('/:id', function (req, res) {
 
       })
     });
-  //CartItem.findOneAndUpdate({item: id}, {$set: {number: number}}, {upsert: true}, function (err, cartItem) {
-  //  if (err) {
-  //    throw err;
-  //  }
-  //  res.send(cartItem);
-  //});
 });
 router.put('/:id', function (req, res, next) {
 
