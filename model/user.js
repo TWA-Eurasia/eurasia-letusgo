@@ -7,7 +7,7 @@ var UserSchema = new Schema({
   password: String,
   address: String,
   Email: String,
-  phonenumber: String,
+  phoneNumber: Number,
   cart: {type: Schema.ObjectId, ref: 'Cart'},
   indents: [{
     indent: {type: Schema.ObjectId, ref: 'Indent'}
