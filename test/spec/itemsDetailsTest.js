@@ -1,14 +1,28 @@
 describe('GET /', function () {
 
-  afterEach(function(){
+  var resMock = {};
+  var reqMock = {};
 
-    reloadDatabase();
-  });
+  var getItem = require('../../router/controller/getItem');
 
-  it('it should return 200 ok', function (done){
-   request(app)
-   .get('/items/5523cea79294d58a8e06c3bf')
-     .expect(200,done);
+  it('it should return itemDetails', function (done) {
+    reqMock.params =  {
+      id : '5523cea79294d58a8e06c3bf'
+    };
+
+    resMock.render = function (view,object) {
+      expect(view).is.to.equal('itemDetails');
+      expect(object).to.have.property('itemDetails');
+
+      done();
+    };
+
+    getItem(reqMock, resMock);
+
+    afterEach(function () {
+
+      reloadDatabase();
+    });
 
   });
 });
