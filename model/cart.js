@@ -11,11 +11,9 @@ var CartSchema = new Schema({
 
 CartSchema.methods.getTotal = function (cartItems) {
 
-  var totalAmount = 0;
-  cartItems.forEach(function (cartItem) {
-    totalAmount += parseFloat(cartItem.getSubtotal());
-  });
-  return totalAmount.toFixed(2);
+  return _.reduce(cartItems, function (totalAmount, cartItem) {
+    return totalAmount + parseFloat(cartItem.getSubtotal());
+  }, 0);
 };
 
 module.exports = mongoose.model('Cart', CartSchema);
