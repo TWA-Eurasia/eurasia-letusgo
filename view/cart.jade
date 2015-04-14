@@ -48,7 +48,7 @@ block content
               td
                 .ui
                   i.minus.square.icon.pointer.reduce
-                  input(type="text" value="#{cartItem.number}" id="number")
+                  input.number(type="text" value="#{cartItem.number}")
                   i.add.square.icon.pointer.increase
                 .ui.negative.message.hidden#inventory 最多能购买
                   span#leftNumber #{cartItem.item.inventory}

@@ -10,7 +10,7 @@ $(function () {
 
   function changeTotal(jqDom) {
     var id = jqDom.closest('tr').data('id');
-    var num = jqDom.closest('td').find('#number').val();
+    var num = jqDom.closest('td').find('.number').val();
     var price = jqDom.parents('td').prev().find('#price').text();
     var total = $('#total').text();
     var input = jqDom;
@@ -37,7 +37,7 @@ $(function () {
 
   function isShorted(input) {
 
-    var inputNumber = parseInt(input.closest('td').find('#number').val());
+    var inputNumber = parseInt(input.closest('td').find('.number').val());
     var leftNumber = $('#leftNumber').text();
 
     return inputNumber > leftNumber
@@ -101,7 +101,7 @@ $(function () {
   });
 
   $('.reduce').on('click', function () {
-    var inputDom = $(this).closest('td').find('#number');
+    var inputDom = $(this).closest('td').find('.number');
     var numberInput = parseInt(inputDom.val());
 
     if (numberInput !== 1) {
@@ -113,7 +113,7 @@ $(function () {
 
   $('.increase').on('click', function () {
     var self = this;
-    var inputDom = $(this).closest('td').find('#number');
+    var inputDom = $(this).closest('td').find('.number');
     var numberInput = parseInt(inputDom.val());
 
     var inventory = $('#leftNumber').text();
@@ -127,11 +127,11 @@ $(function () {
     });
   });
 
-  $('input').on('keyup', function () {
+  $('input').on('change', function () {
 
     $(this).closest('td').find('#inventory').hide();
 
-    var numberInput = $(this).closest('td').find('#number').val();
+    var numberInput = $(this).closest('td').find('.number').val();
 
     var number = numberInput.replace(/\b(0+)/gi, '');
     var input = $(this);
