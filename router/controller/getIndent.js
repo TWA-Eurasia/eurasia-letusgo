@@ -2,6 +2,7 @@
 
 var Indent = require('../../model/indent');
 var CartItem = require('../../model/cartItem');
+var Item = require('../../model/item');
 
 var getIndent = function (req, res) {
 
@@ -9,13 +10,15 @@ var getIndent = function (req, res) {
     .populate('cartItems')
     .exec(function (err, indent) {
 
-      CartItem.find()
-        .populate('item')
-        .exec(function (err, cartItems) {
+      Item.populate(indent, 'cartItems.item', function(err){
 
-          var total = indent.getTotal(cartItems);
-          res.send({indent: indent, total: total});
-        });
+        if (err) {
+          throw err;
+        }
+
+        var total = indent.getTotal(indent.cartItems);
+        res.send({indent: indent, total: total});
+      });
     });
 };
 
