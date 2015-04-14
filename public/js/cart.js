@@ -116,8 +116,6 @@ $(function () {
     var inputDom = $(this).closest('td').find('.number');
     var numberInput = parseInt(inputDom.val());
 
-    var inventory = $('#leftNumber').text();
-
     getCartItemInventory($(this), function (data) {
       if (data.inventory > numberInput) {
         inputDom.val(numberInput + 1);
