@@ -35,7 +35,12 @@ router.post('/:id', function (req, res) {
 
   var number = parseInt(req.body.number);
   var id = req.params.id;
-
+  //CartItem.findOneAndUpdate({item: id}, {$set: {number: number}}, {upsert: true}, function (err, cartItem) {
+  //  if (err) {
+  //    throw err;
+  //  }
+  //  res.send(cartItem);
+  //});
   CartItem.find(function (err, cartItems) {
     var result = _.find(cartItems, function (cartItem) {
       return cartItem.item.toString() === id;
