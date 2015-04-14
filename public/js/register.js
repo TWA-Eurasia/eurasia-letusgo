@@ -91,45 +91,4 @@ $(function () {
     $('#address').val('');
     $('#email').val('');
   });
-
-  $('#submitButton').on('click', function (){
-
-    var user = {
-      userName: '',
-      password: '',
-      phoneNumber: '',
-      address: '',
-      email: ''
-    };
-
-    var userName = $('#userName').val();
-    var password = $('#password').val();
-    var repeatPassword = $('#repeatPassword').val();
-    var phoneNumber = $('#phoneNumber').val();
-    user.phoneNumber = phoneNumber;
-    var address = $('#address').val();
-    user.address = address;
-    var email = $('#email').val();
-    user.email = email;
-
-    if(repeatPassword === password) {
-      user.password = password;
-    } else {
-      console.log('false');
-    }
-
-    var userNameReg = /^(\w){6,13}$/;
-    if (userNameReg.exec(userName)) {
-      user.userName = userName;
-    } else {
-      $('#userNameMessage').show();
-    }
-
-
-    //if (emailReg.exec(email)) {
-    //}
-
-    console.log(user.userName + user.password + user.email);
-  });
-
 });
