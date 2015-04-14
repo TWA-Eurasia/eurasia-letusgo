@@ -68,20 +68,21 @@ describe('cart', function() {
     });
   });
 
-  //describe('PUT /:id', function() {
-  //
-  //  it('should return number', function (done) {
-  //
-  //    request(app)
-  //      .put('/cart/:551cc20e47a654d14a280e9c')
-  //      .send({number: 2, price: 10, total: 10})
-  //      .expect(200)
-  //      .expect('Content-Type', /json/)
-  //      .end(function(err, res) {
-  //        if(err) {throw err;}
-  //        expect(res.body.number).to.equal(2);
-  //        done();
-  //    })
-  //  });
-  //});
+  describe('PUT /:id', function() {
+
+    it('should return number', function (done) {
+
+      request(app)
+        .put('/cart/551cc20e47a654d14a280e9c')
+        .send({number: 2, price: 10, total:150})
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          if(err) {throw err;}
+          expect(res.body.subtotal).to.equal('20.00');
+          expect(res.body.total).to.equal('150.00');
+          done();
+      })
+    });
+  });
 });
