@@ -127,10 +127,12 @@ $(function () {
 
     $(this).closest('td').find('#inventory').hide();
 
-    var numberInput = $(this).closest('td').find('.number').val();
+    var numberInput = $(this).closest('td').find('.number');
     var leftNumber = $(this).closest('td').find('.leftNumber').text();
 
-    var number = numberInput.replace(/\b(0+)/gi, '');
+    var number = numberInput.val().replace(/\b(0+)/gi, '');
+    numberInput.val(number);
+    
     var input = $(this);
 
     verifyNumber(number, input);
