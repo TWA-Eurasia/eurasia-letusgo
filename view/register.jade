@@ -1,0 +1,39 @@
+extends ./navBar.jade
+block title
+  title 注册页面
+block css
+  script(src="/jspm_packages/system.js")
+  script(src="/config.js")
+  link(rel="styleSheet" type="text/css" href="/style/register.css")
+  script.
+    System.import('js/register')
+    //System.import('js/cart')
+block content
+  .ui.grid.centered
+    .eight.wide.column
+      .ui.form.segment
+        .ui.header#registerHeader 欢迎注册我的LetUsGo
+        .filed
+          input#userName(placeholder="用户名" type="text")
+          i.asterisk.icon
+          span#userNameMessage
+        .field
+          input#password(placeholder="密码" type="password")
+          i.asterisk.icon
+          sapn#passwordMessage
+        .field
+          input#repeatPassword(placeholder="重复密码" type="password")
+          i.asterisk.icon
+          span#repeatPasswordMessage
+        .field
+          input#phoneNumber(placeholder="手机" type="text")
+        .field
+          input#address(placeholder="地址" type="text")
+        .field
+          input#email(placeholder="邮箱" type="text")
+          i.asterisk.icon
+          span#emailMessage
+        .field#buttonField
+          .ui.positive.button#resetButton 重置
+          .ui.negative.button#submitButton 提交
+

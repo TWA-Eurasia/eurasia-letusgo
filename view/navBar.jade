@@ -12,15 +12,25 @@ html
       title 首页
   body
     .container
-      .ui.grid.center
-        .sixteen.wide.column
+      .ui.grid.topBar
+        .one.wide.column &nbsp;
+        .nine.wide.column Hi，欢迎来到Let Us Go商城
+        .two.wide.column
+          a(href="#") 我的Let Us Go
         .one.wide.column
-        .four.wide.column.mylogo
+          a(href="#") 请登录
+        .one.wide.column
+          a(href="/register") 免费注册
+      .ui.grid.myLogoAndSearch
+        .four.wide.column.myLogo
           a(href='/')
-            image(src= "/image/logo.png")
-        .ten.wide.column
-        .one.wide.column
-
+            image.myLogoImg(src= "/image/logo.png")
+        //.twelve.wide.column#mySearch
+        //  .ui.fluid.category.search
+        //    .ui.icon.input.searchInput
+        //      input.prompt(type="text" placeholder="Search...")
+        //      i.search.icon
+        //    .results
       .ui.grid.centered
         .fourteen.wide.column
           .ui.inverted.teal.menu

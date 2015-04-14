@@ -1,0 +1,41 @@
+#registerHeader {
+  color: teal;
+  padding: 10px;
+  border: 0px solid #000;
+  border-bottom-width: 1px;
+}
+
+.filed {
+  margin-bottom: 14px;
+}
+
+i.asterisk.icon {
+  height: 37px;
+  line-height: 37px;
+  padding-left: 10px;
+  color: darkred;
+}
+
+#userName,
+#password,
+#repeatPassword,
+#phoneNumber,
+#address,
+#email {
+  width: 65%;
+}
+
+#userNameMessage,
+#passwordMessage,
+#repeatPasswordMessage,
+#emailMessage {
+  height: 30px;
+  line-height: 30px;
+  padding: 20px;
+  color: darkred;
+  display: none;
+}
+
+#buttonField {
+  text-align: center;
+}

@@ -1,7 +1,6 @@
 'use strict';
 
 var app = require('../../app.js');
-
 var router = require('../../router/route/index');
 
 describe('index', function() {
