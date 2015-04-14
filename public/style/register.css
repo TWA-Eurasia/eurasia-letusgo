@@ -4,6 +4,21 @@
   border: 0px solid #000;
   border-bottom-width: 1px;
 }
+.filed {
+  padding: 10px;
+}
+
+#userName {
+  width: 50%;
+}
+
+#userNameMessage {
+  height: 30px;
+  line-height: 30px;
+  padding: 20px;
+  color: darkred;
+  display: none;
+}
 
 #buttonField {
   text-align: right;
