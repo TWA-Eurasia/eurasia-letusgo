@@ -1,11 +1,13 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 
-var Indent = require('../../model/indent.js');
-var Item = require('../../model/item.js');
-var CartItem = require('../../model/cartItem.js');
-var User = require('../../model/user.js');
-var _ = require('lodash');
+//var Indent = require('../../model/indent.js');
+//var Item = require('../../model/item.js');
+//var CartItem = require('../../model/cartItem.js');
+//var User = require('../../model/user.js');
+//var _ = require('lodash');
 
 var getIndent = require('../controller/getIndent');
 
