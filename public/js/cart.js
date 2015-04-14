@@ -169,6 +169,7 @@ $(function () {
           $('.delete-message').hide();
         }, 1000);
 
+        countCartAmount();
         $("#total").text(data.total);
 
       }
