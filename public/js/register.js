@@ -82,8 +82,15 @@ $(function () {
     }
   });
 
+  $('#resetButton').on('click', function() {
 
-
+    $('#userName').val('');
+    $('#password').val('');
+    $('#repeatPassword').val('');
+    $('#phoneNumber').val('');
+    $('#address').val('');
+    $('#email').val('');
+  });
 
   $('#submitButton').on('click', function (){
 
