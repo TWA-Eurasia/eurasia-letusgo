@@ -71,10 +71,7 @@ $(function () {
 
   $('#allChecked').on('change', function () {
 
-    var checkboxes = $('input[name="checkedCartItem"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].checked = this.checked;
-    }
+    $('input[name="checkedCartItem"]').prop('checked',this.checked);
 
   });
 
@@ -98,6 +95,7 @@ $(function () {
     if (isAllChecked) {
       $('#allChecked').prop('checked', true);
     }
+
   });
 
   $('.reduce').on('click', function () {
@@ -115,8 +113,6 @@ $(function () {
     var self = this;
     var inputDom = $(this).closest('td').find('.number');
     var numberInput = parseInt(inputDom.val());
-
-    var inventory = $('#leftNumber').text();
 
     getCartItemInventory($(this), function (data) {
       if (data.inventory > numberInput) {
