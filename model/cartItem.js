@@ -16,6 +16,7 @@ CartItemSchema.methods.getSubtotal = function () {
 };
 
 CartItemSchema.methods.getItemId = function(cartItem){
+
   return cartItem.item.getId();
 };
 
