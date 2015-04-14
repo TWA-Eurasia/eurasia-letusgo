@@ -1,6 +1,7 @@
 'use strict';
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
+var MESSAGE = ' 库存不足, 请减少商品数量！';
 
 function updateInventory(inventory, number, item) {
 
@@ -15,7 +16,6 @@ function updateInventory(inventory, number, item) {
 
 function showShortage(shortedCartItemName) {
 
-  var MESSAGE = '  库存不足, 请减少商品数量！';
   $('#modalTips').text(shortedCartItemName + MESSAGE);
 
   $('.second.modal')

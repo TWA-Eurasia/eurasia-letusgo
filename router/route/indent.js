@@ -7,21 +7,10 @@ var CartItem = require('../../model/cartItem.js');
 var User = require('../../model/user.js');
 var _ = require('lodash');
 
-router.get('/', function (req, res) {
+var getIndent = require('../controller/getIndent');
 
-  Indent.findById('551fd16975cd55ed0cfa5503')
-    .populate('cartItems')
-    .exec(function (err, indent) {
-
-      CartItem.find()
-        .populate('item')
-        .exec(function (err, cartItems) {
-
-          var total = indent.getTotal(cartItems);
-
-          res.send({indent: indent, total: total});
-        });
-    });
+router.get('/', function(req, res){
+  getIndent(req, res);
 });
 
 //router.post('/', function (req, res, next) {

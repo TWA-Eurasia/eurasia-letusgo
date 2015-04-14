@@ -17,9 +17,7 @@ CartItemSchema.methods.getSubtotal = function () {
 
 CartItemSchema.methods.getItemId = function(cartItem){
 
-  var item = new Item();
-
-  return item.getId(cartItem.item);
+  return cartItem.item.getId();
 };
 
 module.exports = mongoose.model('CartItem',CartItemSchema);
