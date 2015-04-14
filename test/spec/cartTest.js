@@ -11,7 +11,7 @@ describe('cart', function() {
     it('should return 200 ok', function(done) {
 
       request(app)
-        .get('/')
+        .get('/cart/')
         .expect('Content-Type', /html/)
         .expect(200)
         .end(function(err, res) {
@@ -21,12 +21,29 @@ describe('cart', function() {
     });
   });
 
-  describe('POST /:id', function() {
+  describe('GET /:id', function() {
 
-    it('should return ', function() {
+    it('should return correct inventory', function(done) {
 
       request(app)
-        .post('/:id')
+        .get('/cart/cartItems/551cc20e47a654d14a280e9c')
+        .send({inventory: 234})
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          if(err) {throw err;}
+          expect(res.body.inventory).to.equal(98);
+          done();
+        })
+    });
+  });
+
+  describe('POST /:id', function() {
+
+    it('should return 200 ok', function() {
+
+      request(app)
+        .post('/cart/:id')
         .expect(200)
         .end(function(err, res) {
           if(err) {throw err;}
@@ -40,13 +57,31 @@ describe('cart', function() {
 
       request(app)
         .get('/cart/:amount')
+        .send({amount: 5})
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           if(err) {throw err;}
-           expect(res.body.amount).to.equal(19550);
+          expect(res.body.amount).to.equal(5);
           done();
         })
     });
   });
+
+  //describe('PUT /:id', function() {
+  //
+  //  it('should return number', function (done) {
+  //
+  //    request(app)
+  //      .put('/cart/:551cc20e47a654d14a280e9c')
+  //      .send({number: 2, price: 10, total: 10})
+  //      .expect(200)
+  //      .expect('Content-Type', /json/)
+  //      .end(function(err, res) {
+  //        if(err) {throw err;}
+  //        expect(res.body.number).to.equal(2);
+  //        done();
+  //    })
+  //  });
+  //});
 });
