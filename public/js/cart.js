@@ -38,7 +38,7 @@ $(function () {
   function isShorted(input) {
 
     var inputNumber = parseInt(input.closest('td').find('.number').val());
-    var leftNumber = $('#leftNumber').text();
+    var leftNumber = input.closest('td').find('.leftNumber').text();
 
     return inputNumber > leftNumber
   }
@@ -75,7 +75,7 @@ $(function () {
 
   });
 
-  $('.checkedCartItem').on('change', function () {
+  $('.checkedCartItem').on('blur', function () {
 
     var isChecked = $(this).prop('checked');
     if (!isChecked) {
@@ -123,22 +123,27 @@ $(function () {
     });
   });
 
-  $('input').on('change', function () {
+  $('.number').on('change', function () {
 
     $(this).closest('td').find('#inventory').hide();
 
-    var numberInput = $(this).closest('td').find('.number').val();
+    var numberInput = $(this).closest('td').find('.number');
+    var leftNumber = $(this).closest('td').find('.leftNumber').text();
 
-    var number = numberInput.replace(/\b(0+)/gi, '');
+    var number = numberInput.val().replace(/\b(0+)/gi, '');
+    numberInput.val(number);
+
     var input = $(this);
 
     verifyNumber(number, input);
-    changeTotal(input);
+
     if (isShorted(input)) {
       $(this).closest('td').find('#inventory').show();
-    } else {
-      countCartAmount();
+      input.val(leftNumber);
     }
+    changeTotal(input);
+    countCartAmount();
+
   });
 
   $('.delete_cartItem').on('click', function () {
@@ -167,7 +172,7 @@ $(function () {
 
         countCartAmount();
         $("#total").text(data.total);
-
+        countCartAmount();
       }
     })
   });
