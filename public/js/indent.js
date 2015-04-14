@@ -39,7 +39,7 @@ $(document).ready(function () {
 
   $('#isPaid').on('click', function () {
 
-    var total = $(this).data('total');
+    //var total = $(this).data('total');
     var cartItems = $(this).data('cart');
 
     $.get('/api/item', {cartItems: cartItems}, function (items) {
@@ -69,12 +69,12 @@ $(document).ready(function () {
   });
 
   $('.itemName').popup({
-    content: $(this).prop("data-content")
+    content: $(this).prop('data-content')
   });
 
   $('img')
     .error(function () {
-      $(this).attr('src', '/image/missing.jpg')
+      $(this).attr('src', '/image/missing.jpg');
     })
     .attr('src', function () {
       return $(this).data('src');
