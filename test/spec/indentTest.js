@@ -1,3 +1,5 @@
+'use strict';
+
 describe('GET api/indent', function () {
 
   var resMock = {};
