@@ -82,7 +82,7 @@ $(document).ready(function () {
     var itemId = $(this).data('id');
 
     var numberInput = parseInt($('#numberInput').val());
-    var inventory = parseInt($('#inventory').val);
+    var inventory = parseInt($('#inventory').val());
 
     if(numberInput <= inventory) {
       $.ajax({
