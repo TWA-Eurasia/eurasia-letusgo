@@ -8,14 +8,15 @@ describe('cart', function() {
 
   describe('GET /', function() {
 
-    it('should return 200 ok', function() {
+    it('should return 200 ok', function(done) {
 
       request(app)
         .get('/')
         .expect('Content-Type', /html/)
         .expect(200)
-        .end(function(err) {
-          if(err) {throw err;}
+        .end(function(err, res) {
+          if(err) throw err;
+          done();
         })
     });
   });
@@ -27,8 +28,24 @@ describe('cart', function() {
       request(app)
         .post('/:id')
         .expect(200)
-        .end(function(err) {
+        .end(function(err, res) {
           if(err) {throw err;}
+        })
+    });
+  });
+
+  describe('GET /:amount', function() {
+
+    it('should return amount', function(done) {
+
+      request(app)
+        .get('/cart/:amount')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          if(err) {throw err;}
+           expect(res.body.amount).to.equal(19550);
+          done();
         })
     });
   });
