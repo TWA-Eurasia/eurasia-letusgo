@@ -8,49 +8,11 @@ var Cart = require('../../model/cart.js');
 var Item = require('../../model/item.js');
 var CartItem = require('../../model/cartItem.js');
 
-var getCart = require('../controller/getCart');
+var cartController = require('../controller/cart');
 
-router.get('/', function (req, res) {
+router.get('/', cartController.getCart);
+router.post('/', cartController.postCart);
 
-  getCart(req, res);
-
-});
-
-router.post('/:id', function (req, res) {
-  var cartId = "551cc282a6b79c584b59bc0f";
-  var number = parseInt(req.body.number);
-  var id = req.params.id;
-
-  Cart.findById(cartId)
-    .populate('cartItems')
-    .exec(function (err, cart) {
-      Item.populate(cart, 'cartItems.item', function (err) {
-        if(err) {
-          throw  err;
-        }
-        var result = _.find(cart.cartItems, function (cartItem) {
-          return cartItem.item._id.toString() === id;
-        });
-        if (result) {
-          number = result.number + number;
-          CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function (err) {
-            if (err) console.log(err);
-            res.sendStatus(200);
-          });
-
-        } else {
-          CartItem.create({item: id, number: number}, function (err, cartItem) {
-            cart.cartItems.push(cartItem._id);
-
-            cart.save(function (err, cart) {
-              res.send(cart);
-            })
-          });
-        }
-
-      })
-    });
-});
 router.put('/:id', function (req, res, next) {
 
   var cartItemId = req.params.id;
