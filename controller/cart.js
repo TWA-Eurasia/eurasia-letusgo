@@ -1,8 +1,8 @@
 'use strict';
 
-var Cart = require('../../model/cart');
-var Item = require('../../model/item');
-var CartItem = require('../../model/cartItem');
+var Cart = require('../model/cart');
+var Item = require('../model/item');
+var CartItem = require('../model/cartItem');
 
 var _ = require('lodash');
 
