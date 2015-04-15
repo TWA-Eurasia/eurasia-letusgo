@@ -14,6 +14,7 @@ describe('GET /', function () {
     resMock.render = function (view,object) {
       expect(view).is.to.equal('itemDetails');
       expect(object).to.have.property('itemDetails');
+      expect(object.itemDetails.item.name).to.equal('水溶C100功能饮料');
 
       done();
     };
