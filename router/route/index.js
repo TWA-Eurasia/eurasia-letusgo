@@ -11,18 +11,21 @@ var Item = require('../../model/item');
 var PAGE_SIZE = 8;
 var NAME_LENGTH = 16;
 
-function parseName(str, L) {
+function parseString(string, length) {
 
   var result = '';
-  var strlen = str.length;
-  var chrlen = str.replace(/[^\x00-\xff]/g,'**').length;
+  var stringLength = string.length;
+  var charLength = string.replace(/[^\x00-\xff]/g,'**').length;
 
-  if(chrlen<=L){return str;}
+  if(charLength <= length){
 
-  for(var i=0,j=0;i<strlen;i++) {
+    return string;
+  }
 
-    var chr = str.charAt(i);
-    if(/[\x00-\xff]/.test(chr)) {
+  for(var i = 0, j = 0; i < stringLength; i++) {
+
+    var char = string.charAt(i);
+    if(/[\x00-\xff]/.test(char)) {
 
       j++;
     }else{
@@ -30,9 +33,9 @@ function parseName(str, L) {
       j+=2;
     }
 
-    if(j<=L) {
+    if(j <= length) {
 
-      result += chr;
+      result += char;
     } else {
 
       return result + '...';
@@ -46,7 +49,7 @@ function initItems(query, start, pageSize, callback) {
 
     items.forEach(function(item) {
 
-      item.shortName = parseName(item.name, NAME_LENGTH);
+      item.shortName = parseString(item.name, NAME_LENGTH);
     });
 
     var newItems = _.take(_.drop(items, start), pageSize);

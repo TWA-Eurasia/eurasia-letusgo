@@ -8,36 +8,38 @@ var _ = require('lodash');
 
 var NAME_LENGTH = 16;
 
-function parseName(str, L) {
+function parseString(string, length) {
 
   var result = '';
-  var strlen = str.length;
-  var chrlen = str.replace(/[^\x00-\xff]/g, '**').length;
+  var stringLength = string.length;
+  var charLength = string.replace(/[^\x00-\xff]/g,'**').length;
 
-  if(chrlen <= L) {
-    return str;
+  if(charLength <= length){
+
+    return string;
   }
 
-  for(var i = 0, j = 0; i < strlen; i++) {
+  for(var i = 0, j = 0; i < stringLength; i++) {
 
-    var chr = str.charAt(i);
-    if(/[\x00-\xff]/.test(chr)) {
+    var char = string.charAt(i);
+    if(/[\x00-\xff]/.test(char)) {
 
       j++;
-    } else {
+    }else{
 
-      j += 2;
+      j+=2;
     }
 
-    if(j <= L) {
+    if(j <= length) {
 
-      result += chr;
+      result += char;
     } else {
 
       return result + '...';
     }
   }
 }
+
 
 function findCartById(cartId, done){
 
@@ -63,7 +65,7 @@ exports.getCart = function(req, res) {
 
     _.map(cart.cartItems, function(cartItem) {
 
-      cartItem.item.shortName = parseName(cartItem.item.name, NAME_LENGTH);
+      cartItem.item.shortName = parseString(cartItem.item.name, NAME_LENGTH);
     });
 
     var total = cart.getTotal(cart.cartItems);
