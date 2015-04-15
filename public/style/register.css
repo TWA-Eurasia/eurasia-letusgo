@@ -10,14 +10,11 @@
 }
 
 i.checkmark.icon {
-  color: green;
-}
-
-i.asterisk.icon {
   height: 37px;
   line-height: 37px;
   padding-left: 10px;
-  color: darkred;
+  color: green;
+  display: none;
 }
 
 #userName,

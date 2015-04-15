@@ -28,7 +28,7 @@ block content
             .menu
               - each subCategory in mainCategory.subCategories
                 a.item.secondMenu(data-id="#{subCategory._id}" href="/categories/#{subCategory._id}") #{subCategory.name}
-    .twelve.wide.column
+    .eleven.wide.column
       - var isDisplay = currentCategory.isDisplay
       - var recommendDisplay = isDisplay ? 'none' : 'auto'
       - var crumbDisplay = isDisplay ? 'auto' : 'none'

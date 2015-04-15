@@ -14,7 +14,8 @@
 
 .ui.grid.topBar
 {
-  height: 15px;
+  height: 35px;
+  background: #F2F2F2;
 }
 
 .ui.grid.topBar>.column
@@ -24,13 +25,9 @@
 }
 .ui.grid.myLogoAndSearch
 {
-  padding: 20px;
-}
-
-.ui.grid.myLogoAndSearch>.column,
-.ui.grid.content>.column
-{
-  padding: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 0;
 }
 
 .ui.grid.myLogoAndSearch
@@ -40,6 +37,7 @@
 
 .myLogo {
   text-align: center;
+  padding: 0;
 }
 
 .myLogoImg
