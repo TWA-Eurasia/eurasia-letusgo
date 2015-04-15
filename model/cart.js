@@ -6,8 +6,7 @@ var _ = require('lodash');
 
 var CartSchema = new Schema({
   user: {type: Schema.ObjectId, ref: 'User'},
-  cartItems: [{type: Schema.ObjectId, ref: 'CartItem'}
-  ]
+  cartItems: [{type: Schema.ObjectId, ref: 'CartItem'}]
 });
 
 CartSchema.methods.getTotal = function(cartItems) {
