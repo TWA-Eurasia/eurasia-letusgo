@@ -1,4 +1,5 @@
 'use strict';
+
 var express = require('express');
 var _ = require('lodash');
 var router = express.Router();
@@ -6,6 +7,38 @@ var router = express.Router();
 var Cart = require('../../model/cart.js');
 var Item = require('../../model/item.js');
 var CartItem = require('../../model/cartItem.js');
+
+var NAME_LENGTH = 16;
+
+function parseName(str, L) {
+
+  var result = '';
+  var strlen = str.length;
+  var chrlen = str.replace(/[^\x00-\xff]/g,'**').length;
+
+  if(chrlen<=L){return str;}
+
+  for(var i=0,j=0;i<strlen;i++) {
+
+    var chr = str.charAt(i);
+    if(/[\x00-\xff]/.test(chr)) {
+
+      j++;
+    }else{
+
+      j+=2;
+    }
+
+    if(j<=L) {
+
+      result += chr;
+    } else {
+
+      return result + '...';
+    }
+  }
+}
+
 
 router.get('/', function (req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';
@@ -15,15 +48,13 @@ router.get('/', function (req, res) {
     .exec(function (err, cart) {
       Item.populate(cart, 'cartItems.item', function (err) {
         if (err) {
+
           throw err;
         }
 
         _.map(cart.cartItems, function (cartItem) {
-          cartItem.item.shortName = cartItem.item.name;
 
-          if (cartItem.item.name.length > 8) {
-            cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
-          }
+          cartItem.item.shortName = parseName(cartItem.item.name, NAME_LENGTH);
         });
 
         var total = cart.getTotal(cart.cartItems);
