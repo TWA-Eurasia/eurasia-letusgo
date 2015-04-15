@@ -4,7 +4,7 @@ describe('GET /', function () {
   var resMock = {};
   var reqMock = {};
 
-  var getItem = require('../../router/controller/getItem');
+  var getItem = require('../../controller/getItem');
 
   it('it should return itemDetails', function (done) {
     reqMock.params =  {

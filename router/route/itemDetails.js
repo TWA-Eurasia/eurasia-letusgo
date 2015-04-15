@@ -5,7 +5,7 @@ var router = express.Router();
 
 var Item = require('../../model/item');
 var Category = require('../../model/category');
-var getItem = require('../controller/getItem.js');
+var getItem = require('../../controller/getItem.js');
 
 
 router.get('/:id', function (req, res) {

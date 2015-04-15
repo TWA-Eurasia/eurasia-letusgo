@@ -1,6 +1,6 @@
 'use strict';
-var Item = require('../../model/item');
-var Category = require('../../model/category');
+var Item = require('../model/item');
+var Category = require('../model/category');
 
 var getItem = function(req, res) {
   var id = req.params.id;

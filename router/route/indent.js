@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
-var getIndent = require('../controller/getIndent');
+var getIndent = require('../../controller/getIndent');
 
 router.get('/', function(req, res){
   getIndent(req, res);
