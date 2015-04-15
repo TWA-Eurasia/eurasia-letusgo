@@ -12,35 +12,35 @@ block content
   .ui.grid.centered
     .eight.wide.column
       .ui.form.segment
-        .ui.header#registerHeader 欢迎注册我的LetUsGo
+        .ui.header#register-header 欢迎注册我的LetUsGo
         .filed
-          input#userName(placeholder="用户名" type="text")
-          i.checkmark.icon#userNameCorrect
-          span#userNameMessage
+          input#user-name(placeholder="用户名" type="text")
+          i.checkmark.icon#user-name-correct
+          span#user-name-message
         .field
           input#password(placeholder="密码" type="password")
-          i.checkmark.icon#passwordCorrect
-          sapn#passwordMessage
+          i.checkmark.icon#password-correct
+          sapn#password-message
         .field
-          input#repeatPassword(placeholder="重复密码" type="password")
-          i.checkmark.icon#repeatPasswordCorrect
-          span#repeatPasswordMessage
+          input#repeat-password(placeholder="重复密码" type="password")
+          i.checkmark.icon#repeat-password-correct
+          span#repeat-password-message
         .field
-          input#phoneNumber(placeholder="手机" type="text")
+          input#phone-number(placeholder="手机" type="text")
         .field
           input#address(placeholder="地址" type="text")
         .field
           input#email(placeholder="邮箱" type="text")
-          i.checkmark.icon#emailCorrect
-          span#emailMessage
-        .field#buttonField
-          .ui.positive.reset.button#resetButton 重置
-          .ui.negative.submit.button#submitButton 提交
+          i.checkmark.icon#email-correct
+          span#email-message
+        .field#button-field
+          .ui.positive.reset.button#reset-button 重置
+          .ui.negative.submit.button#submit-button 提交
         .ui.second.small.coupled.modal.transition.hidden
           .header 注册成功
           .content
             .description
-              .p#modalTips 您已成功注册，点击确定返回.
+              .p 您已成功注册，点击确定返回.
           .actions
             a.primary.ui.button.confirm(href='/') 确定
 
