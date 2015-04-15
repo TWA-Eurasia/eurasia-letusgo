@@ -14,7 +14,8 @@ $(function () {
     $userNameCorrect.hide();
 
 
-    var userName = $('#userName').val();
+    var userName = $('#userName').val().trim('');
+    console.log(userName);
     var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
 
     if (userName === '') {
@@ -39,7 +40,7 @@ $(function () {
     $passwordCorrect.hide();
 
 
-    var password = $('#password').val();
+    var password = $('#password').val().trim('');
     var passwordReg = /^(\w){6,20}$/;
 
     if (password === '') {
@@ -63,8 +64,8 @@ $(function () {
     var $repeatPasswordCorrect = $('#repeatPasswordCorrect');
     $repeatPasswordCorrect.hide();
 
-    var password = $('#password').val();
-    var repeatPassword = $('#repeatPassword').val();
+    var password = $('#password').val().trim('');
+    var repeatPassword = $('#repeatPassword').val().trim('');
 
     if (repeatPassword === '') {
 
@@ -88,7 +89,7 @@ $(function () {
     var $emailCorrect = $('#emailCorrect');
     $emailCorrect.hide();
 
-    var email = $('#email').val();
+    var email = $('#email').val().trim('');
     var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
 
 
@@ -119,12 +120,12 @@ $(function () {
 
     var isCorrect = true;
 
-    //var userName = $('#userName').val();
-    //var password = $('#password').val();
-    //var repeatPassword = $('#repeatPassword').val();
-    //var phoneNumber = $('#phoneNumber').val();
-    //var address = $('#address').val();
-    //var email = $('#email').val();
+    var userName = $('#userName').val().trim('');
+    var password = $('#password').val().trim('');
+    var repeatPassword = $('#repeatPassword').val().trim('');
+    var phoneNumber = $('#phoneNumber').val().trim('');
+    var address = $('#address').val().trim('');
+    var email = $('#email').val().trim('');
 
     //$('#userNameMessage').hide();
     //
