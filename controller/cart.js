@@ -21,14 +21,10 @@ function parseName(str, L) {
   for(var i = 0, j = 0; i < strlen; i++) {
 
     var chr = str.charAt(i);
-    if(/[\x00-\xff]/.test(chr)) {
 
-      j++;
-    } else {
+    j += (/[\x00-\xff]/.test(chr) ? 1 : 2);
 
-      j += 2;
-    }
-
+		//result += (j<=L ? chr : '...');
     if(j <= L) {
 
       result += chr;
