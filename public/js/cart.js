@@ -110,11 +110,11 @@ $(function () {
   });
 
   $('.increase').on('click', function () {
-    var self = this;
-    var inputDom = $(this).closest('td').find('.number');
+    var self = $(this);
+    var inputDom = self.closest('td').find('.number');
     var numberInput = parseInt(inputDom.val());
 
-    getCartItemInventory($(this), function (data) {
+    getCartItemInventory(self, function (data) {
       if (data.inventory > numberInput) {
         inputDom.val(numberInput + 1);
         changeTotal($(self));
@@ -124,21 +124,21 @@ $(function () {
   });
 
   $('.number').on('change', function () {
+    var input = $(this);
+    input.closest('td').find('#inventory').hide();
 
-    $(this).closest('td').find('#inventory').hide();
-
-    var numberInput = $(this).closest('td').find('.number');
-    var leftNumber = $(this).closest('td').find('.leftNumber').text();
+    var numberInput = input.closest('td').find('.number');
+    var leftNumber = input.closest('td').find('.leftNumber').text();
 
     var number = numberInput.val().replace(/\b(0+)/gi, '');
     numberInput.val(number);
 
-    var input = $(this);
+
 
     verifyNumber(number, input);
 
     if (isShorted(input)) {
-      $(this).closest('td').find('#inventory').show();
+      input.closest('td').find('#inventory').show();
       input.val(leftNumber);
     }
     changeTotal(input);
