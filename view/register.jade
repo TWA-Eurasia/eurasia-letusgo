@@ -34,6 +34,13 @@ block content
           i.asterisk.icon
           span#emailMessage
         .field#buttonField
-          .ui.positive.button#resetButton 重置
-          .ui.negative.button#submitButton 提交
+          .ui.positive.reset.button#resetButton 重置
+          .ui.negative.submit.button#submitButton 提交
+        .ui.second.small.coupled.modal.transition.hidden
+          .header 注册成功
+          .content
+            .description
+              .p#modalTips 您已成功注册，点击确定返回
+          .actions
+            a.primary.ui.button.confirm(href='/cart') 确定
 
