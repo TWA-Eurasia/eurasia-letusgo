@@ -13,35 +13,7 @@ var cartController = require('../controller/cart');
 router.get('/', cartController.getCart);
 router.post('/', cartController.postCart);
 router.put('/:id', cartController.changeCartItem);
-
-router.delete('/:cartItemId', function (req, res) {
-  var cartItemId = req.params.cartItemId;
-  var cartId = '551cc282a6b79c584b59bc0f';
-
-  Cart.findById(cartId, function (err, cart) {
-    if (err) {
-      throw err;
-    }
-    cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
-      return cartItem.toString() !== cartItemId;
-    });
-
-    CartItem.remove({_id: cartItemId}, function () {
-
-      cart.save(function (err, cart) {
-        if (err) {
-          throw err;
-        }
-        CartItem.find()
-          .populate('item')
-          .exec(function (err, cartItems) {
-
-            res.send({cart: cart, total: cart.getTotal(cartItems)});
-          });
-      });
-    });
-  });
-});
+router.delete('/:cartItemId', cartController.removeCartItem);
 
 router.get('/:amount', function (req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';

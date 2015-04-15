@@ -83,3 +83,31 @@ exports.changeCartItem = function(req, res) {
   });
 };
 
+exports.removeCartItem = function(req, res) {
+  var cartItemId = req.params.cartItemId;
+  var cartId = '551cc282a6b79c584b59bc0f';
+
+  Cart.findById(cartId, function (err, cart) {
+    if (err) {
+      throw err;
+    }
+    cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
+      return cartItem.toString() !== cartItemId;
+    });
+
+    CartItem.remove({_id: cartItemId}, function () {
+
+      cart.save(function (err, cart) {
+        if (err) {
+          throw err;
+        }
+        CartItem.find()
+          .populate('item')
+          .exec(function (err, cartItems) {
+
+            res.send({cart: cart, total: cart.getTotal(cartItems)});
+          });
+      });
+    });
+  });
+};
