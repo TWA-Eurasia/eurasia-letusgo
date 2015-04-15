@@ -9,18 +9,21 @@ var getItem = function(req, res) {
     .populate('category')
     .exec(function (err, item) {
 
-      Category.findById(item.category._id)
-        .populate('parent')
-        .exec(function (err, category) {
-          var itemDetails = {
-            item: item,
-            category: category
-          };
+      Category.populate(item, 'category.parent', function(err){
 
-          res.render('itemDetails', {
-            itemDetails: itemDetails
-          });
+        if (err) {
+          throw err;
+        }
+
+        var itemDetails = {
+          item: item,
+          category: item.category
+        };
+
+        res.render('itemDetails', {
+          itemDetails: itemDetails
         });
+      });
     });
 };
 
