@@ -12,24 +12,7 @@ var cartController = require('../controller/cart');
 
 router.get('/', cartController.getCart);
 router.post('/', cartController.postCart);
-
-router.put('/:id', function (req, res) {
-
-  var cartItemId = req.params.id;
-  var num = req.body.number;
-  var price = req.body.price;
-  var total = req.body.total;
-
-  CartItem.findById(cartItemId, function (err, cartItem) {
-    var current = cartItem.number * price;
-    CartItem.update({_id: cartItemId}, {$set: {number: num}}, {upsert: true}, function () {
-      var subtotal = price * num;
-      total = total - current + subtotal;
-      res.send({subtotal: subtotal.toFixed(2), total: total.toFixed(2)});
-
-    });
-  });
-});
+router.put('/:id', cartController.changeCartItem);
 
 router.delete('/:cartItemId', function (req, res) {
   var cartItemId = req.params.cartItemId;

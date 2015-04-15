@@ -66,3 +66,20 @@ exports.postCart = function(req, res) {
     });
 };
 
+exports.changeCartItem = function(req, res) {
+  var cartItemId = req.params.id;
+  var num = req.body.number;
+  var price = req.body.price;
+  var total = req.body.total;
+
+  CartItem.findById(cartItemId, function (err, cartItem) {
+    var current = cartItem.number * price;
+    CartItem.update({_id: cartItemId}, {$set: {number: num}}, {upsert: true}, function () {
+      var subtotal = price * num;
+      total = total - current + subtotal;
+      res.send({subtotal: subtotal.toFixed(2), total: total.toFixed(2)});
+
+    });
+  });
+};
+
