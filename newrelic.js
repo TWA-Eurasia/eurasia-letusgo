@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * New Relic agent configuration.
  *
@@ -8,7 +10,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['My Application'],
+  app_name: ['letusgo'],
   /**
    * Your New Relic license key.
    */
@@ -21,4 +23,4 @@ exports.config = {
      */
     level: 'info'
   }
-}
+};
