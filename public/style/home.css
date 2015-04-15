@@ -5,14 +5,14 @@ body{
 
 .ui.vertical.menu
 {
-  width: 80%;
+  width: 90%;
   background-color: #161616;
   color: #ffffff;
   border-radius: 0.2857rem;
   text-align: center;
 }
 
-.ui.dropdown.item
+.ui.dropdown.item.firstMenu
 {
   color: #fff;
 }
@@ -32,12 +32,11 @@ body{
 .ui.dropdown.item:hover .menu
 {
   display: block;
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 1.00);
 }
 
 .ui.secondary.menu .dropdown.item .menu {
-  min-width: 0%;
-  max-width: 45%;
+  min-width: 45%;
 }
 
 .ui.four.column.grid
