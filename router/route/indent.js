@@ -3,12 +3,12 @@
 var express = require('express');
 var router = express.Router();
 
-var getIndent = require('../../controller/getIndent');
+var indentController = require('../../controller/indentController');
 
 router.get('/', function(req, res){
-  getIndent(req, res);
+  indentController.getIndent(req, res);
 });
-
+//router.get('/', indentController.getIndent);
 //router.post('/', function (req, res, next) {
 //
 //  Indent.create({

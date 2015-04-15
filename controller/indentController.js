@@ -21,4 +21,6 @@ var getIndent = function (req, res) {
     });
 };
 
-module.exports = getIndent;
+module.exports = {
+  getIndent: getIndent
+};
