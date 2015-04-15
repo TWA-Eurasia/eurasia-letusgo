@@ -125,7 +125,7 @@ $(function () {
 
   $('.number').on('change', function () {
     var $this = $(this);
-    $this.closest('td').find('#inventory').hide();
+    $this.closest('td').find('.inventory').hide();
 
     var numberInput = $this.closest('td').find('.number');
     var leftNumber = $this.closest('td').find('.leftNumber').text();
@@ -138,7 +138,7 @@ $(function () {
     verifyNumber(number, $this);
 
     if (isShorted($this)) {
-      $this.closest('td').find('#inventory').show();
+      $this.closest('td').find('.inventory').show();
       $this.val(leftNumber);
     }
     changeTotal($this);
