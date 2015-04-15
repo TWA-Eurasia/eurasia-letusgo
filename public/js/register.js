@@ -13,9 +13,7 @@ $(function () {
     var $userNameCorrect = $('#userNameCorrect');
     $userNameCorrect.hide();
 
-
     var userName = $('#userName').val().trim('');
-    console.log(userName);
     var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
 
     if (userName === '') {
@@ -200,7 +198,6 @@ $(function () {
     if(isCorrect) {
       $('.ui.second.modal')
         .modal('show');
-      console.log('success');
     }
 
   });
