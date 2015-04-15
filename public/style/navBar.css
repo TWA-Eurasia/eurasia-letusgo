@@ -2,11 +2,64 @@
 {
   background: #ffffff;
 }
-
-.mylogo img
+.ui.grid
 {
-  width: 310px;
-  height: 80px;
+  margin: 0;
+}
+
+.topBar>.column>a
+{
+  color: teal;
+}
+
+.ui.grid.topBar
+{
+  height: 15px;
+}
+
+.ui.grid.topBar>.column
+{
+  margin-left: 5px;
+  padding: 5px;
+}
+.ui.grid.myLogoAndSearch
+{
+  padding: 20px;
+}
+
+.ui.grid.myLogoAndSearch>.column,
+.ui.grid.content>.column
+{
+  padding: 20px;
+}
+
+.ui.grid.myLogoAndSearch
+{
+  background: #fff;
+}
+
+.myLogo {
+  text-align: center;
+}
+
+.myLogoImg
+{
+  width: 75%;
+  height: 75%;
+}
+
+.ui.grid.myLogoAndSearch>#mySearch
+{
+  padding-top: 25px;
+}
+
+.searchInput {
+  width: 50%;
+}
+
+.ui.search .prompt
+{
+  border: 2px solid #00B5AD;
 }
 
 .ui.divider.horizontal{

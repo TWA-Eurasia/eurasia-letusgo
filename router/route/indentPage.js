@@ -1,10 +1,9 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 var Indent = require('../../model/indent.js');
-var Item = require('../../model/item.js');
 var CartItem = require('../../model/cartItem.js');
-var User = require('../../model/user.js');
-var _ = require('lodash');
 
 
 function getShortedCartItemName(cartItems) {
@@ -13,7 +12,7 @@ function getShortedCartItemName(cartItems) {
 
   cartItems.forEach(function(cartItem) {
     if(cartItem.number > cartItem.item.inventory) {
-      shortedCartItemName += cartItem.item.name + '、'
+      shortedCartItemName += cartItem.item.name + '、';
     }
   });
 

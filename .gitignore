@@ -7,3 +7,5 @@ jspm_packages
 npm-debug.log
 coverage
 target
+*.xml
+newrelic_agent.log

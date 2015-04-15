@@ -1,9 +1,11 @@
+'use strict';
+
 describe('GET api/indent', function () {
 
   var resMock = {};
   var reqMock = {};
 
-  var getIndent = require('../../router/controller/getIndent');
+  var getIndent = require('../../controller/getIndent');
 
 
   it('should get total and indent', function(done){

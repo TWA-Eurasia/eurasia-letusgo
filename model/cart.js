@@ -1,7 +1,8 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var _ = require('lodash');
-var CartItem = require('./cartItem');
 
 var CartSchema = new Schema({
   user: {type: Schema.ObjectId, ref: 'User'},

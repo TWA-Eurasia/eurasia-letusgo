@@ -2,60 +2,6 @@ body{
   font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 15px;
 }
-.ui.grid
-{
-  margin: 0;
-}
-
-.ui.grid.topBar
-{
-  height: 15px;
-}
-
-.ui.grid.topBar>.column
-{
-  margin-left: 5px;
-  padding: 5px;
-}
-.ui.grid.logoAndSearch
-{
-  padding: 20px;
-}
-
-.ui.grid.logoAndSearch>.column,
-.ui.grid.content>.column
-{
-  padding: 20px;
-}
-
-.ui.grid.logoAndSearch
-{
-  background: #fff;
-}
-
-.myLogo {
-  text-align: center;
-}
-
-.myLogoImg
-{
-  width: 75%;
-  height: 75%;
-}
-
-.ui.grid.logoAndSearch>.mySearch
-{
-  padding-top: 30px;
-}
-
-.searchInput {
-  width: 50%;
-}
-
-.ui.search .prompt
-{
-  border: 2px solid #00B5AD;
-}
 
 .ui.vertical.menu
 {

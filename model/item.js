@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
+'use strict';
 
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ItemSchema = new Schema({
@@ -21,8 +22,8 @@ function setPrice(num) {
   return num.toFixed(2);
 }
 
-ItemSchema.methods.getId = function () {
-  return this._id;
+ItemSchema.methods.getId = function (item) {
+  return item._id;
 };
 
 module.exports = mongoose.model('Item', ItemSchema);

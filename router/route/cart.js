@@ -13,7 +13,7 @@ var cartController = require('../controller/cart');
 router.get('/', cartController.getCart);
 router.post('/', cartController.postCart);
 
-router.put('/:id', function (req, res, next) {
+router.put('/:id', function (req, res) {
 
   var cartItemId = req.params.id;
   var num = req.body.number;
@@ -61,7 +61,7 @@ router.delete('/:cartItemId', function (req, res) {
 });
 
 router.get('/:amount', function (req, res) {
-  var cartId = "551cc282a6b79c584b59bc0f";
+  var cartId = '551cc282a6b79c584b59bc0f';
 
   Cart.findById(cartId)
     .populate('cartItems')
@@ -79,16 +79,16 @@ router.get('/cartItems/:id', function (req, res) {
 
   CartItem.findById(id, function (err, cartItem) {
     if (err) {
-      throw err
+      throw err;
     }
 
     Item.findById(cartItem.item, function (err, item) {
       if (err) {
-        throw err
+        throw err;
       }
       res.send({inventory: item.inventory});
     });
-  })
+  });
 });
 
 module.exports = router;
