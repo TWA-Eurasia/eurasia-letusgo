@@ -9,6 +9,10 @@
   margin-bottom: 14px;
 }
 
+i.checkmark.icon {
+  color: green;
+}
+
 i.asterisk.icon {
   height: 37px;
   line-height: 37px;

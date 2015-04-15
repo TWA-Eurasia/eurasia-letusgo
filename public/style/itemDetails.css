@@ -4,6 +4,9 @@
   max-height: 350px;
 }
 
+.ui.breadcrumb a {
+  color: #000;
+}
 
 .image-preview {
   display:table-cell;
