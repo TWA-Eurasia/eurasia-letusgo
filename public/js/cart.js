@@ -110,38 +110,38 @@ $(function () {
   });
 
   $('.increase').on('click', function () {
-    var self = $(this);
-    var inputDom = self.closest('td').find('.number');
+    var $this = $(this);
+    var inputDom = $this.closest('td').find('.number');
     var numberInput = parseInt(inputDom.val());
 
-    getCartItemInventory(self, function (data) {
+    getCartItemInventory($this, function (data) {
       if (data.inventory > numberInput) {
         inputDom.val(numberInput + 1);
-        changeTotal($(self));
+        changeTotal($($this));
       }
       countCartAmount();
     });
   });
 
   $('.number').on('change', function () {
-    var input = $(this);
-    input.closest('td').find('#inventory').hide();
+    var $this = $(this);
+    $this.closest('td').find('#inventory').hide();
 
-    var numberInput = input.closest('td').find('.number');
-    var leftNumber = input.closest('td').find('.leftNumber').text();
+    var numberInput = $this.closest('td').find('.number');
+    var leftNumber = $this.closest('td').find('.leftNumber').text();
 
     var number = numberInput.val().replace(/\b(0+)/gi, '');
     numberInput.val(number);
 
 
 
-    verifyNumber(number, input);
+    verifyNumber(number, $this);
 
-    if (isShorted(input)) {
-      input.closest('td').find('#inventory').show();
-      input.val(leftNumber);
+    if (isShorted($this)) {
+      $this.closest('td').find('#inventory').show();
+      $this.val(leftNumber);
     }
-    changeTotal(input);
+    changeTotal($this);
     countCartAmount();
 
   });
