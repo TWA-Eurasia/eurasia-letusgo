@@ -12,7 +12,10 @@ function showMessage(value, valueReg, selector, message1, message2) {
   } else if (!valueReg.exec(value)) {
 
     $(selector).html(message2).show();
-  }
+  } else {
+
+    $(selector).html('<i class="ui checkmark icon">').show();
+}
 }
 
 $(function () {
@@ -31,6 +34,8 @@ $(function () {
     } else if (userNameLength < 6 || userNameLength > 20) {
 
       $('#userNameMessage').html('用户名至少为6-20位字符').show();
+    } else {
+      $('#userNameMessage').html('<i class="ui checkmark icon">').show();
     }
   });
 
@@ -48,6 +53,8 @@ $(function () {
     } else if (!passwordReg.exec(password)) {
 
       $('#passwordMessage').html('密码至少为6-20位字符').show();
+    } else {
+      $('#passwordMessage').html('<i class="ui checkmark icon">').show();
     }
   });
 
@@ -65,6 +72,9 @@ $(function () {
     } else if (repeatPassword !== password) {
 
       $('#repeatPasswordMessage').html('用户两次密码输入不一致').show();
+    } else {
+
+      $('#repeatPasswordMessage').html('<i class="ui checkmark icon">').show();
     }
   });
 
@@ -124,7 +134,10 @@ $(function () {
     //
     //  $('#userNameMessage').html('用户名至少为6-20位字符').show();
     //  isCorrect = false;
-    //}
+    //} else {
+
+  //  $('#userNameMessage').html('<i class="ui checkmark icon">').show();
+  //}
 
     //$('#passwordMessage').hide();
     //
@@ -139,7 +152,10 @@ $(function () {
     //
     //  $('#passwordMessage').html('密码至少为6-20位字符').show();
     //  isCorrect = false;
-    //}
+    //} else {
+
+  //  $('#passwordMessage').html('<i class="ui checkmark icon">').show();
+  //}
 
     //$('#repeatPasswordMessage').hide();
     //
@@ -152,7 +168,10 @@ $(function () {
     //
     //  $('#repeatPasswordMessage').html('用户两次密码输入不一致').show();
     //  isCorrect = false;
-    //}
+  //  //} else {
+  //
+  //  $('#repeatPasswordMessage').html('<i class="ui checkmark icon">').show();
+  //}
     //
     //$('#emailMessage').hide();
     //
@@ -167,7 +186,10 @@ $(function () {
     //
     //  $('#emailMessage').html('请填写正确邮箱的格式').show();
     //  isCorrect = false;
-    //}
+    //} else {
+
+  //  $('#emailMessage').html('<i class="ui checkmark icon">').show();
+  //}
 
     if(isCorrect) {
       $('.ui.second.modal')

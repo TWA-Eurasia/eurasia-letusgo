@@ -5,14 +5,10 @@ block css
   script(src="/jspm_packages/system.js")
   script(src="/config.js")
   link(rel="styleSheet" type="text/css" href="/style/itemDetails.css")
-
   script.
     System.import('js/itemDetails')
     System.import('js/cart')
-      
-
 block content
-
     .ui.grid.centered
       .sixteen.wide.column(style="margin-left: 100px")
         .ui.large.breadcrumb
@@ -20,8 +16,7 @@ block content
           i.right.chevron.icon.ider
           a.section(href="/categories/" + "#{itemDetails.category._id}") #{itemDetails.item.category.name}
           i.right.chevron.icon.ider
-          .active.section() #{itemDetails.item.name}
-
+          .active.section #{itemDetails.item.name}
     .ui.grid
       .three.wide.column
       .five.wide.column
@@ -57,7 +52,6 @@ block content
           i.right.chevron.icon
         .ui.teal.message.success(hidden='true' ) 添加成功
         .ui.teal.message.inventory(hidden='true' ) 请修改数量
-
     .ui.grid.centered
       .ten.wide.column
         .ui.message
