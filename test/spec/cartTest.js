@@ -1,3 +1,37 @@
+'use strict';
+
+describe('cart', function() {
+
+  afterEach(function(){
+
+    reloadDatabase();
+  });
+
+  describe('getCart', function() {
+
+    var resMock = {};
+    var reqMock = {};
+
+    var cartController = require('../../controller/cart');
+
+    it('shoulde return cart', function(done) {
+
+      resMock.render = function(view, object){
+
+        expect(view).to.equal('cart');
+        expect(object).to.have.property('cartItems');
+        expect(object).to.have.property('total');
+        expect(object.total).to.equal(3582);
+
+        done();
+      };
+
+      cartController.getCart(reqMock, resMock);
+    });
+  });
+});
+
+
 //'use strict';
 //
 //var app = require('../../app.js');
