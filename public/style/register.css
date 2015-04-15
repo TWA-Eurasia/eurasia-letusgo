@@ -1,4 +1,4 @@
-#registerHeader {
+#register-header {
   color: teal;
   padding: 10px;
   border: 0px solid #000;
@@ -17,19 +17,19 @@ i.checkmark.icon {
   display: none;
 }
 
-#userName,
+#user-name,
 #password,
-#repeatPassword,
-#phoneNumber,
+#repeat-password,
+#phone-number,
 #address,
 #email {
   width: 65%;
 }
 
-#userNameMessage,
-#passwordMessage,
-#repeatPasswordMessage,
-#emailMessage {
+#user-name-message,
+#password-message,
+#repeat-password-message,
+#email-message {
   height: 30px;
   line-height: 30px;
   padding: 20px;
@@ -37,6 +37,6 @@ i.checkmark.icon {
   display: none;
 }
 
-#buttonField {
+#button-field {
   text-align: center;
 }
