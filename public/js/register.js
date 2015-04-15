@@ -3,101 +3,106 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-function showMessage(value, valueReg, selector, message1, message2) {
-
-  if (value === '') {
-
-    $(selector).html(message1).show();
-
-  } else if (!valueReg.exec(value)) {
-
-    $(selector).html(message2).show();
-  } else {
-
-    $(selector).html('<i class="ui checkmark icon">').show();
-}
-}
-
 $(function () {
 
   $('#userName').on('blur', function () {
 
-    $('#userNameMessage').hide();
+    var $userNameMessage = $('#userNameMessage');
+    $userNameMessage.hide();
+
+    var $userNameCorrect = $('#userNameCorrect');
+    $userNameCorrect.hide();
+
 
     var userName = $('#userName').val();
     var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
 
     if (userName === '') {
 
-      $('#userNameMessage').html('用户名不能为空').show();
+      $userNameMessage.html('用户名不能为空').show();
 
     } else if (userNameLength < 6 || userNameLength > 20) {
 
-      $('#userNameMessage').html('用户名至少为6-20位字符').show();
+      $userNameMessage.html('用户名至少为6-20位字符').show();
     } else {
-      $('#userNameMessage').html('<i class="ui checkmark icon">').show();
+
+      $userNameCorrect.show();
     }
   });
 
   $('#password').on('blur', function (){
 
-    $('#passwordMessage').hide();
+    var $passwordMessage = $('#passwordMessage');
+    $passwordMessage.hide();
+
+    var $passwordCorrect = $('#passwordCorrect');
+    $passwordCorrect.hide();
+
 
     var password = $('#password').val();
     var passwordReg = /^(\w){6,20}$/;
 
     if (password === '') {
 
-      $('#passwordMessage').html('密码不能为空').show();
+      $passwordMessage.html('密码不能为空').show();
 
     } else if (!passwordReg.exec(password)) {
 
-      $('#passwordMessage').html('密码至少为6-20位字符').show();
+      $passwordMessage.html('密码至少为6-20位字符').show();
     } else {
-      $('#passwordMessage').html('<i class="ui checkmark icon">').show();
+
+      $passwordCorrect.show();
     }
   });
 
   $('#repeatPassword').on('blur', function (){
 
-    $('#repeatPasswordMessage').hide();
+    var $repeatPasswordMessage = $('#repeatPasswordMessage');
+    $repeatPasswordMessage.hide();
+
+    var $repeatPasswordCorrect = $('#repeatPasswordCorrect');
+    $repeatPasswordCorrect.hide();
 
     var password = $('#password').val();
     var repeatPassword = $('#repeatPassword').val();
 
     if (repeatPassword === '') {
 
-      $('#repeatPasswordMessage').html('重复密码不能为空').show();
+      $repeatPasswordMessage.html('重复密码不能为空').show();
 
     } else if (repeatPassword !== password) {
 
-      $('#repeatPasswordMessage').html('用户两次密码输入不一致').show();
+      $repeatPasswordMessage.html('用户两次密码输入不一致').show();
     } else {
 
-      $('#repeatPasswordMessage').html('<i class="ui checkmark icon">').show();
+      $repeatPasswordCorrect.show();
     }
   });
 
 
   $('#email').on('blur', function (){
 
-    $('#emailMessage').hide();
+    var $emailMessage = $('#emailMessage');
+    $emailMessage.hide();
+
+    var $emailCorrect = $('#emailCorrect');
+    $emailCorrect.hide();
 
     var email = $('#email').val();
     var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
-    var MESSAGE1 = '邮箱不能为空';
-    var MESSAGE2 = '请填写正确邮箱的格式';
 
-    showMessage(email, emailReg, '#emailMessage', MESSAGE1, MESSAGE2);
 
-    //if (email === '') {
-    //
-    //  $('#emailMessage').html('邮箱不能为空').show();
-    //
-    //} else if (!emailReg.exec(email)) {
-    //
-    //  $('#emailMessage').html('请填写正确邮箱的格式').show();
-    //}
+    if (email === '') {
+
+      $emailMessage.html('邮箱不能为空').show();
+
+    } else if (!emailReg.exec(email)) {
+
+      $emailMessage.html('请填写正确邮箱的格式').show();
+    } else {
+
+      $emailCorrect.show();
+    }
   });
 
   $('#resetButton').on('click', function() {

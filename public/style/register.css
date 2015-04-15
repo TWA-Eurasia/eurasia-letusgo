@@ -14,6 +14,7 @@ i.checkmark.icon {
   line-height: 37px;
   padding-left: 10px;
   color: green;
+  display: none;
 }
 
 #userName,
