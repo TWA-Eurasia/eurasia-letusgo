@@ -1,3 +1,5 @@
+'use strict';
+
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 var MAX_CART_AMOUNT = 99;
@@ -6,7 +8,7 @@ $(document).ready(function () {
 
   $('img')
     .error(function () {
-      $(this).attr('src', '/image/missing.jpg')
+      $(this).attr('src', '/image/missing.jpg');
     })
     .attr('src', function () {
       return $(this).data('src');

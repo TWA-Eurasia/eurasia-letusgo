@@ -24,7 +24,7 @@ $(function () {
         input.closest('tr').find('#subtotal').text(data.subtotal);
         $('#total').text(data.total);
       }
-    })
+    });
   }
 
   function verifyNumber(number, input) {
@@ -40,7 +40,7 @@ $(function () {
     var inputNumber = parseInt(input.closest('td').find('.number').val());
     var leftNumber = input.closest('td').find('.leftNumber').text();
 
-    return inputNumber > leftNumber
+    return inputNumber > leftNumber;
   }
 
   function getCartItemInventory(jqDom, callback) {
@@ -58,7 +58,7 @@ $(function () {
       }
 
       $('#cart-amount').text(data.amount);
-    })
+    });
   }
 
   $('img')
@@ -171,10 +171,10 @@ $(function () {
         }, 1000);
 
         countCartAmount();
-        $("#total").text(data.total);
+        $('#total').text(data.total);
         countCartAmount();
       }
-    })
+    });
   });
 
   $('.itemName').popup({
