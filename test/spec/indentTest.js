@@ -14,7 +14,7 @@ describe('GET api/indent', function () {
 
       expect(object).to.have.property('indent');
       expect(object).to.have.property('total');
-      expect(object.total).to.equal('3582.00');
+      expect(object.total).to.equal('3334.50');
 
       done();
     };
