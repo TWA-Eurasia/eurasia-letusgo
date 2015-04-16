@@ -88,20 +88,25 @@ function initCategories(query, start, pageSize, callback) {
   });
 }
 
+function rederIndex(res, mainCategories, currentCategory, items, pageCount, currentPage, isCategory){
+
+  res.render('index', {
+    mainCategories: mainCategories,
+    currentCategory: currentCategory,
+    items: items,
+    pageCount: pageCount,
+    currentPage: currentPage,
+    isCategory: isCategory
+  });
+}
+
 var getIndexInfo = function(req, res) {
 
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
 
   initCategories({isRecommend: true}, 0, PAGE_SIZE, function(mainCategories, items, pageCount) {
 
-    res.render('index', {
-      mainCategories: mainCategories,
-      currentCategory: currentCategory,
-      items: items,
-      pageCount: pageCount,
-      currentPage: 1,
-      isCategory: false
-    });
+    rederIndex(res, mainCategories, currentCategory, items, pageCount, 1, false);
   });
 };
 
@@ -114,14 +119,7 @@ var getRecommendItemsByPageNumber = function(req, res) {
 
   initCategories({isRecommend: true}, start, PAGE_SIZE, function(mainCategories, items, pageCount) {
 
-    res.render('index', {
-      mainCategories: mainCategories,
-      currentCategory: currentCategory,
-      items: items,
-      pageCount: pageCount,
-      currentPage: pageNumber,
-      isCategory: false
-    });
+    rederIndex(res, mainCategories, currentCategory, items, pageCount, pageNumber, false);
   });
 };
 
@@ -140,14 +138,7 @@ var getItemsByCategoryId = function(req, res) {
 
   initCategories({category: id}, 0, PAGE_SIZE, function(mainCategories, items, pageCount) {
 
-    res.render('index', {
-      mainCategories: mainCategories,
-      currentCategory: currentCategory,
-      items: items,
-      pageCount: pageCount,
-      currentPage: 1,
-      isCategory: true
-    });
+    rederIndex(res, mainCategories, currentCategory, items, pageCount, 1, true);
   });
 };
 
@@ -169,14 +160,7 @@ var getItemsByCategoryIdAndPageNumber = function(req, res) {
 
   initCategories({category: id}, start, PAGE_SIZE, function(mainCategories, items, pageCount) {
 
-    res.render('index', {
-      mainCategories: mainCategories,
-      currentCategory: currentCategory,
-      items: items,
-      pageCount: pageCount,
-      currentPage: pageNumber,
-      isCategory: true
-    });
+    rederIndex(res, mainCategories, currentCategory, items, pageCount, pageNumber, true);
   });
 };
 
@@ -187,5 +171,3 @@ module.exports = {
   getItemsByCategoryId: getItemsByCategoryId,
   getItemsByCategoryIdAndPageNumber: getItemsByCategoryIdAndPageNumber
 };
-
-
