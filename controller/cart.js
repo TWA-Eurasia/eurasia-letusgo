@@ -79,11 +79,11 @@ var addToCart = function(req, res) {
       number = result.number + number;
     }
 
-    CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function(err,cartItem) {
-      if(!result){
+    CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function(err, cartItem) {
+      if(!result) {
         cart.cartItems.push(cartItem.upserted[0]._id);
       }
-      cart.save(function(){
+      cart.save(function() {
         res.sendStatus(200);
       });
     });
@@ -92,14 +92,14 @@ var addToCart = function(req, res) {
 
 var changeCartItem = function(req, res) {
   var cartItemId = req.params.id;
-  var num = req.body.number;
+  var number = req.body.number;
   var price = req.body.price;
   var total = req.body.total;
 
   CartItem.findById(cartItemId, function(err, cartItem) {
     var current = cartItem.number * price;
-    CartItem.update({_id: cartItemId}, {$set: {number: num}}, {upsert: true}, function() {
-      var subtotal = price * num;
+    CartItem.update({_id: cartItemId}, {$set: {number: number}}, {upsert: true}, function() {
+      var subtotal = price * number;
       total = total - current + subtotal;
       res.send({subtotal: subtotal.toFixed(2), total: total.toFixed(2)});
 
