@@ -36,4 +36,18 @@ user.updateUser = function(req, res) {
   });
 };
 
+user.login = function(req, res) {
+
+  var message = '登陆成功！';
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findOne({'name': username}, function(err, user) {
+    if(!user || user.password !== password) {
+      message = '用户或密码错误！';
+    }
+    res.send({user: user, message: message});
+  });
+};
+
 module.exports = user;
