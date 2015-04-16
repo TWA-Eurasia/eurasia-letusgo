@@ -48,15 +48,15 @@ function initItems(query, start, pageSize, callback) {
   });
 }
 
-function getSubCategories(categories, mainCategories){
+function getSubCategories(categories, mainCategories) {
 
   _.forEach(categories, function(category) {
 
-    if (category.parent) {
+    if(category.parent) {
 
       _.forEach(mainCategories, function(mainCategory) {
 
-        if (category.parent.name === mainCategory.name) {
+        if(category.parent.name === mainCategory.name) {
 
           mainCategory.subCategories.push(category);
         }
@@ -88,7 +88,7 @@ function initCategories(query, start, pageSize, callback) {
   });
 }
 
-function rederIndex(res, mainCategories, currentCategory, items, pageCount, currentPage, isCategory){
+function rederIndex(res, mainCategories, currentCategory, items, pageCount, currentPage, isCategory) {
 
   res.render('index', {
     mainCategories: mainCategories,
@@ -130,7 +130,7 @@ var getItemsByCategoryId = function(req, res) {
 
   Category.findById(id)
     .populate('parent')
-    .exec(function (err, category) {
+    .exec(function(err, category) {
 
       currentCategory = category;
       currentCategory.isDisplay = true;
@@ -152,7 +152,7 @@ var getItemsByCategoryIdAndPageNumber = function(req, res) {
   var currentCategory;
   Category.findById(id)
     .populate('parent')
-    .exec(function (err, category) {
+    .exec(function(err, category) {
 
       currentCategory = category;
       currentCategory.isDisplay = true;
