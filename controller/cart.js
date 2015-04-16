@@ -8,48 +8,39 @@ var _ = require('lodash');
 
 var NAME_LENGTH = 16;
 
-function parseString(string, length) {
+function parseString(name, length) {
 
   var result = '';
-  var stringLength = string.length;
-  var charLength = string.replace(/[^\x00-\xff]/g,'**').length;
+  var nameLength = name.length;
+  var charLength = name.replace(/[^\x00-\xff]/g, '**').length;
 
-  if(charLength <= length){
+  if(charLength <= length) {
 
-    return string;
+    return name;
   }
 
-  for(var i = 0, j = 0; i < stringLength; i++) {
+  for(var i = 0, j = 0; i < nameLength; i++) {
 
-    var char = string.charAt(i);
-    if(/[\x00-\xff]/.test(char)) {
-
-      j++;
-    }else{
-
-      j+=2;
-    }
+    var char = name.charAt(i);
+    j += (/[\x00-\xff]/.test(char) ? 1 : 2);
 
     if(j <= length) {
-
       result += char;
     } else {
-
       return result + '...';
     }
   }
 }
 
-
-function findCartById(cartId, done){
+function findCartById(cartId, done) {
 
   Cart.findById(cartId)
     .populate('cartItems')
     .exec(function(err, cart) {
 
       Item.populate(cart, 'cartItems.item', function(err) {
-        if(err) {
 
+        if(err) {
           throw err;
         }
 
@@ -61,7 +52,7 @@ function findCartById(cartId, done){
 exports.getCart = function(req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';
 
-  findCartById(cartId, function(cart){
+  findCartById(cartId, function(cart) {
 
     _.map(cart.cartItems, function(cartItem) {
 
@@ -78,7 +69,7 @@ exports.addToCart = function(req, res) {
   var number = parseInt(req.body.number);
   var id = req.params.id;
 
-  findCartById(cartId, function(cart){
+  findCartById(cartId, function(cart) {
 
     var result = _.find(cart.cartItems, function(cartItem) {
       return cartItem.item._id.toString() === id;
