@@ -177,7 +177,7 @@ $(function () {
   });
 
   $('.itemName').popup({
-    content: $(this).prop("data-content")
+    content: $(this).prop('data-content')
   });
 
   countCartAmount();
