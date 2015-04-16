@@ -31,8 +31,7 @@ var getCart = function (req, res) {
 
   findCartById(cartId, function (cart) {
 
-    _.map(cart.cartItems, function (cartItem) {
-
+    _.forEach(cart.cartItems, function (cartItem) {
       cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
     });
 
