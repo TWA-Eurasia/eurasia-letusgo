@@ -8,34 +8,25 @@ var Item = require('../model/item');
 var PAGE_SIZE = 8;
 var NAME_LENGTH = 16;
 
-
-function parseString(string, length) {
+function parseString(name, length) {
 
   var result = '';
-  var stringLength = string.length;
-  var charLength = string.replace(/[^\x00-\xff]/g,'**').length;
+  var nameLength = name.length;
+  var charLength = name.replace(/[^\x00-\xff]/g, '**').length;
 
-  if(charLength <= length){
+  if(charLength <= length) {
 
-    return string;
+    return name;
   }
 
-  for(var i = 0, j = 0; i < stringLength; i++) {
+  for(var i = 0, j = 0; i < nameLength; i++) {
 
-    var char = string.charAt(i);
-    if(/[\x00-\xff]/.test(char)) {
-
-      j++;
-    }else{
-
-      j+=2;
-    }
+    var char = name.charAt(i);
+    j += (/[\x00-\xff]/.test(char) ? 1 : 2);
 
     if(j <= length) {
-
       result += char;
     } else {
-
       return result + '...';
     }
   }
