@@ -1,12 +1,11 @@
 'use strict';
 
-var Cart = require('../model/cart');
-var Item = require('../model/item');
-var CartItem = require('../model/cartItem');
-
 var _ = require('lodash');
 
 var FormatUtil = require('../util/formatUtil');
+var Cart = require('../model/cart');
+var Item = require('../model/item');
+var CartItem = require('../model/cartItem');
 
 var NAME_LENGTH = 16;
 
