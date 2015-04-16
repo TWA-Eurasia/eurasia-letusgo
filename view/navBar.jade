@@ -68,15 +68,16 @@ html
             p copyright@letusgo All Rights Reserved 版权所有LETUSGO商城
             p © 2015 LetUsGo, Inc.
 
-    .ui.second.small.coupled.modal.successLogin.hidden
-      .header 登陆成功
+    .ui.second.small.coupled.modal.LoginResult.hidden
+      .header 登陆结果
       .content
         .description
-          .p.positive 登陆成功！
+          span#loginResult
       .actions
-        a.primary.ui.button.confirm 确定
+        .primary.ui.button.confirm#confirm 重新登陆
+          i.right.arrow.icon
 
-    .ui.coupled.small.modal.userLogin.hidden
+    .ui.first.coupled.small.modal.userLogin.hidden
       .content
         .ui.grid.centered
           .ten.wide.column
@@ -87,8 +88,8 @@ html
                 span#user-name-message
               .field
                 input#password-login(placeholder="密码" type="password")
-                sapn#password-message
+                span#password-message
       .actions
         a.primary.ui.button.register(href='/register') 注册
         a.ui.positive.right.labeled.icon.button#userLogin 登陆
-          i.checkmark.icon
+          i.right.arrow.icon
