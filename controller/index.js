@@ -48,6 +48,25 @@ function initItems(query, start, pageSize, callback) {
   });
 }
 
+function getSubCategories(categories, mainCategories){
+
+  _.forEach(categories, function(category) {
+
+    if (category.parent) {
+
+      _.forEach(mainCategories, function(mainCategory) {
+
+        if (category.parent.name === mainCategory.name) {
+
+          mainCategory.subCategories.push(category);
+        }
+      });
+    }
+  });
+
+  return mainCategories;
+}
+
 function initCategories(query, start, pageSize, callback) {
 
   initItems(query, start, pageSize, function(items, pageCount) {
@@ -62,19 +81,20 @@ function initCategories(query, start, pageSize, callback) {
           return category.parent === null;
         });
 
-        _.forEach(categories, function(category) {
-
-          if (category.parent) {
-
-            _.forEach(mainCategories, function(mainCategory) {
-
-              if (category.parent.name === mainCategory.name) {
-
-                mainCategory.subCategories.push(category);
-              }
-            });
-          }
-        });
+        mainCategories = getSubCategories(categories, mainCategories);
+        //_.forEach(categories, function(category) {
+				//
+        //  if (category.parent) {
+				//
+        //    _.forEach(mainCategories, function(mainCategory) {
+				//
+        //      if (category.parent.name === mainCategory.name) {
+				//
+        //        mainCategory.subCategories.push(category);
+        //      }
+        //    });
+        //  }
+        //});
 
         callback(mainCategories, items, pageCount);
       });
