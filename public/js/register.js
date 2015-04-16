@@ -22,6 +22,23 @@ $(function () {
     });
   }
 
+  function verifyUserExisted(userName, messageSelector, correctSelector) {
+
+    getUsers(function(users) {
+
+      if (_.find(users, function (user) {
+
+          return user.name === userName;
+        })) {
+
+        messageSelector.html('当前用户名已被注册').show();
+      } else {
+
+        correctSelector.show();
+      }
+    });
+  }
+
   $('#user-name').on('blur', function () {
 
     var $userNameMessage = $('#user-name-message');
@@ -46,19 +63,7 @@ $(function () {
       $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
 
-      getUsers(function(users) {
-
-        if(_.find(users, function(user){
-
-            return user.name === userName;
-          })) {
-
-          $userNameMessage.html('当前用户名已被注册').show();
-        } else {
-
-          $userNameCorrect.show();
-        }
-      });
+      verifyUserExisted(userName, $userNameMessage, $userNameCorrect);
     }
   });
 
@@ -259,12 +264,12 @@ $(function () {
         url: '/api/user',
         type: 'POST',
         data: {
-            name: userName,
-            password: password,
-            address: address,
-            phoneNumber: phoneNumber,
-            active: true,
-            createDate: createDate
+          name: userName,
+          password: password,
+          address: address,
+          phoneNumber: phoneNumber,
+          active: true,
+          createDate: createDate,
         },
         success: function() {
 
