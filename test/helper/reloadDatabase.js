@@ -13,11 +13,13 @@ var categories = require('../../seed/test/categories');
 var carts = require('../../seed/test/carts');
 
 var reloadDatabase = function(){
-  Item.remove();
-  CartItem.remove();
-  Cart.remove();
-  Category.remove();
-  Indent.remove();
+  Item.remove({});
+  CartItem.remove({}, function(err, cartItem) {
+    if(err) {console.log(err);}
+  });
+  Cart.remove({});
+  Category.remove({});
+  Indent.remove({});
 
   Item.create(items);
   CartItem.create(cartItems);

@@ -73,7 +73,7 @@ exports.getCart = function(req, res) {
   });
 };
 
-exports.postCart = function(req, res) {
+exports.addToCart = function(req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';
   var number = parseInt(req.body.number);
   var id = req.params.id;
