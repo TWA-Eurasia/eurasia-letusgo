@@ -3,7 +3,7 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-var delete_cartItem;
+var deleteCartItem;
 var MAX_CART_AMOUNT = 99;
 
 $(function () {
@@ -63,7 +63,7 @@ $(function () {
 
   $('img')
     .error(function () {
-      $(this).attr('src', '/image/missing.jpg')
+      $(this).attr('src', '/image/missing.jpg');
     })
     .attr('src', function () {
       return $(this).data('src');
@@ -148,7 +148,7 @@ $(function () {
 
   $('.delete_cartItem').on('click', function () {
 
-    delete_cartItem = this;
+    deleteCartItem = this;
 
     $('.first.modal')
       .modal('show');
@@ -156,7 +156,7 @@ $(function () {
 
   $('.yes').on('click', function () {
 
-    var deleteId = delete_cartItem.closest('td').id;
+    var deleteId = deleteCartItem.closest('td').id;
 
     $.ajax({
       url: 'cart/' + deleteId,
@@ -164,7 +164,7 @@ $(function () {
 
       success: function (data) {
         $('.delete-message').show();
-        $(delete_cartItem.closest('tr').remove());
+        $(deleteCartItem.closest('tr').remove());
 
         window.setTimeout(function () {
           $('.delete-message').hide();
