@@ -14,7 +14,7 @@ function jump(jumpTime) {
       $('#sec').text(jumpTime);
       jump(jumpTime);
     } else {
-      location.href = "/";
+      location.href = '/';
     }
   }, 1000);
 }

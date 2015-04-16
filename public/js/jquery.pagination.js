@@ -19,7 +19,7 @@ Pagination.prototype.render = function () {
 
   $('<li />')
     .text('< 上一页')
-    .toggleClass('previous', this.currentPage == 1)
+    .toggleClass('previous', this.currentPage === 1)
     .on('click', function () {
       if (that.currentPage > 1) {
         that.emit(--that.currentPage);
@@ -30,7 +30,7 @@ Pagination.prototype.render = function () {
 
   $('<li />')
     .text('下一页 >')
-    .toggleClass('next', this.currentPage == range.pop())
+    .toggleClass('next', this.currentPage === range.pop())
     .on('click', function () {
       if (that.currentPage < that.options.pageCount) {
         that.emit(++that.currentPage);
@@ -50,15 +50,15 @@ Pagination.prototype.renderMiddle = function (ulContainer) {
         return range[i] !== -1 ? range[i] : '';
       })
       .addClass('pageNumber')
-      .toggleClass('current', range[i] == this.currentPage)
-      .toggleClass('ellipsis', range[i] == -1)
+      .toggleClass('current', range[i] === this.currentPage)
+      .toggleClass('ellipsis', range[i] === -1)
       .on('click', function (i) {
         return function () {
           if (i !== that.currentPage) {
             that.currentPage = i;
             that.emit(i);
           }
-        }
+        };
       }(range[i])).appendTo(ulContainer);
   }
 };
@@ -84,11 +84,11 @@ Pagination.prototype.getRange = function () {
     result.push(i);
   }
 
-  if (result[0] != 2 && result[0]) {
+  if (result[0] !== 2 && result[0]) {
     result.unshift(-1);
   }
 
-  if ((this.options.pageCount > 5) && result[result.length - 1] != this.options.pageCount - 1) {
+  if ((this.options.pageCount > 5) && result[result.length - 1] !== this.options.pageCount - 1) {
     result.push(-1);
   }
 
