@@ -52,7 +52,7 @@ $(function () {
   }
 
   function countCartAmount() {
-    $.get('/cart/:amount', function (data) {
+    $.get('/cart/amount', function (data) {
       if (MAX_CART_AMOUNT < parseInt(data.amount)) {
         data.amount = '99+';
       }
