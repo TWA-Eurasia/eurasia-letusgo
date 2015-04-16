@@ -25,7 +25,7 @@ router.get('/', function (req, res) {
     .populate('cartItems')
     .exec(function (err, indent) {
 
-      Item.populate(indent, 'cartItems.item', function (err, result) {
+      Item.populate(indent, 'cartItems.item', function (err) {
         if(err) {
           throw err;
         }
