@@ -8,7 +8,7 @@ var UserSchema = new Schema({
   password: String,
   address: String,
   email: String,
-  phoneNumber: Number,
+  phoneNumber: String,
   active: {type: Boolean, default: false},
   createDate: Date,
   cart: {type: Schema.ObjectId, ref: 'Cart'},
