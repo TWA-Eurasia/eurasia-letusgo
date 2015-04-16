@@ -4,7 +4,7 @@ var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 var MAX_CART_AMOUNT = 99;
 
-$(document).ready(function () {
+$(function () {
 
   function verifyNumber(number) {
     var reg = /^(0|[1-9][0-9]*)$/;
