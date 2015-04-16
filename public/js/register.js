@@ -2,9 +2,22 @@
 
 var $ = require('jquery');
 var moment = require('moment');
+var _ = require('lodash');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(function () {
+
+  function getUsers(callback) {
+
+    $.ajax({
+      url: '/api/user',
+      type: 'GET',
+      success: function (users) {
+
+        callback(users);
+      }
+    });
+  }
 
   $('#user-name').on('blur', function () {
 
@@ -16,6 +29,7 @@ $(function () {
 
     var userName = $('#user-name').val().trim('');
     var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
+    var userReg = new RegExp('[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b@]');
 
     if (userName === '') {
 
@@ -24,9 +38,24 @@ $(function () {
     } else if (userNameLength < 6 || userNameLength > 20) {
 
       $userNameMessage.html('用户名至少为6-20位字符').show();
+    } else if (userReg.exec(userName)) {
+
+      $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
 
-      $userNameCorrect.show();
+      getUsers(function(users) {
+
+        if(_.filter(users, function(user){
+
+            return user.name === userName;
+          })) {
+
+          $userNameMessage.html('当前用户名已被注册').show();
+        } else {
+
+          $userNameCorrect.show();
+        }
+      });
     }
   });
 
@@ -234,7 +263,7 @@ $(function () {
             active: true,
             createDate: createDate
         },
-        success: function (data) {
+        success: function() {
 
           $('.ui.second.modal')
             .modal('show');
