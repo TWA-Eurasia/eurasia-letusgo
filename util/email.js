@@ -23,7 +23,7 @@ var mailOptions = {
 
 
 // send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info){
+var sendMail = transporter.sendMail(mailOptions, function(error, info){
   if(error){
     console.log(error);
   }else{
@@ -31,3 +31,6 @@ transporter.sendMail(mailOptions, function(error, info){
   }
 });
 
+module.exports = {
+  sendMail: sendMail
+};
