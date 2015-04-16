@@ -71,7 +71,7 @@ $(function () {
 
   $('#allChecked').on('change', function () {
 
-    $('input[name="checkedCartItem"]').prop('checked',this.checked);
+    $('input[name="checkedCartItem"]').prop('checked', this.checked);
 
   });
 
