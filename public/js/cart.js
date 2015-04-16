@@ -71,7 +71,7 @@ $(function () {
 
   $('#allChecked').on('change', function () {
 
-    $('input[name="checkedCartItem"]').prop('checked',this.checked);
+    $('input[name="checkedCartItem"]').prop('checked', this.checked);
 
   });
 
@@ -128,19 +128,19 @@ $(function () {
     $this.closest('td').find('.inventory').hide();
 
     var numberInput = $this.closest('td').find('.number');
-    var leftNumber = $this.closest('td').find('.leftNumber').text();
 
-    var number = numberInput.val().replace(/\b(0+)/gi, '');
+    var number = parseInt(numberInput.val());
     numberInput.val(number);
-
-
 
     verifyNumber(number, $this);
 
     if (isShorted($this)) {
       $this.closest('td').find('.inventory').show();
-      $this.val(leftNumber);
+      $('#indent').addClass('disabled');
+      return;
     }
+    $('#indent').removeClass('disabled');
+
     changeTotal($this);
     countCartAmount();
 
