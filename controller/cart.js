@@ -27,7 +27,7 @@ function findCartById(cartId, done) {
     });
 }
 
-exports.getCart = function(req, res) {
+var getCart = function(req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';
 
   findCartById(cartId, function(cart) {
@@ -42,7 +42,7 @@ exports.getCart = function(req, res) {
   });
 };
 
-exports.addToCart = function(req, res) {
+var addToCart = function(req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';
   var number = parseInt(req.body.number);
   var id = req.params.id;
@@ -68,7 +68,7 @@ exports.addToCart = function(req, res) {
   });
 };
 
-exports.changeCartItem = function(req, res) {
+var changeCartItem = function(req, res) {
   var cartItemId = req.params.id;
   var num = req.body.number;
   var price = req.body.price;
@@ -85,7 +85,7 @@ exports.changeCartItem = function(req, res) {
   });
 };
 
-exports.removeCartItem = function(req, res) {
+var removeCartItem = function(req, res) {
   var cartItemId = req.params.cartItemId;
   var cartId = '551cc282a6b79c584b59bc0f';
 
@@ -114,7 +114,7 @@ exports.removeCartItem = function(req, res) {
   });
 };
 
-exports.getAmount = function(req, res) {
+var getAmount = function(req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';
 
   Cart.findById(cartId)
@@ -128,7 +128,7 @@ exports.getAmount = function(req, res) {
     });
 };
 
-exports.getInventory = function(req, res) {
+var getInventory = function(req, res) {
   var id = req.params.id;
 
   CartItem.findById(id, function(err, cartItem) {
@@ -143,4 +143,13 @@ exports.getInventory = function(req, res) {
       res.send({inventory: item.inventory});
     });
   });
+};
+
+module.exports = {
+  getCart: getCart,
+  addToCart: addToCart,
+  changeCartItem: changeCartItem,
+  removeCartItem: removeCartItem,
+  getAmount: getAmount,
+  getInventory: getInventory
 };
