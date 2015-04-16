@@ -128,23 +128,28 @@ $(function () {
     $this.closest('td').find('.inventory').hide();
 
     var numberInput = $this.closest('td').find('.number');
-    var leftNumber = $this.closest('td').find('.leftNumber').text();
 
     var number = parseInt(numberInput.val());
     numberInput.val(number);
-
-
 
     verifyNumber(number, $this);
 
     if (isShorted($this)) {
       $this.closest('td').find('.inventory').show();
-      $this.val(leftNumber);
+      return;
     }
     changeTotal($this);
     countCartAmount();
 
   });
+
+  $('#indent').on('click', function () {
+
+
+    $(this).attr('href','/indent');
+
+  });
+
 
   $('.delete_cartItem').on('click', function () {
 
