@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var moment = require('moment');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(function () {
@@ -219,8 +220,7 @@ $(function () {
 
     var address = $('#address').val().trim();
     var phoneNumber = $('#phone-number').val().trim();
-    var createDate = new Date();
-    console.log(createDate.getFullYear() + '-' + month + '-' + createDate.getDate());
+    var createDate = moment().format('YYYY-MM-DD');
 
     if(isCorrect) {
 
