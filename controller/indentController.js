@@ -9,7 +9,7 @@ var getIndent = function (req, res) {
     .populate('cartItems')
     .exec(function (err, indent) {
 
-      Item.populate(indent, 'cartItems.item', function(err){
+      Item.populate(indent, 'cartItems.item', function (err) {
 
         if (err) {
           throw err;
