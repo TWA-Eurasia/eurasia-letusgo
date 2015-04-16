@@ -270,6 +270,7 @@ $(function () {
           phoneNumber: phoneNumber,
           active: true,
           createDate: createDate,
+          email: email
         },
         success: function(data) {
           console.log(data.user._id);
