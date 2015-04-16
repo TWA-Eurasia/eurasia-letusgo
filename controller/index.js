@@ -44,6 +44,18 @@ function getSubCategories(categories, mainCategories) {
   return mainCategories;
 }
 
+function rederIndexPage(res, mainCategories, currentCategory, items, pageCount, currentPage, isCategory) {
+
+  res.render('index', {
+    mainCategories: mainCategories,
+    currentCategory: currentCategory,
+    items: items,
+    pageCount: pageCount,
+    currentPage: currentPage,
+    isCategory: isCategory
+  });
+}
+
 function initCategories(res, query, start, pageSize, currentCategory, pageNumber, isCategory) {
 
   initItems(query, start, pageSize, function(items, pageCount) {
@@ -59,20 +71,8 @@ function initCategories(res, query, start, pageSize, currentCategory, pageNumber
         });
         mainCategories = getSubCategories(categories, mainCategories);
 
-        rederIndex(res, mainCategories, currentCategory, items, pageCount, pageNumber, isCategory);
+        rederIndexPage(res, mainCategories, currentCategory, items, pageCount, pageNumber, isCategory);
       });
-  });
-}
-
-function rederIndex(res, mainCategories, currentCategory, items, pageCount, currentPage, isCategory) {
-
-  res.render('index', {
-    mainCategories: mainCategories,
-    currentCategory: currentCategory,
-    items: items,
-    pageCount: pageCount,
-    currentPage: currentPage,
-    isCategory: isCategory
   });
 }
 
