@@ -118,18 +118,132 @@ $(function () {
 
     var isCorrect = true;
 
-    var userName = $('#user-name').val().trim('');
-    var password = $('#password').val().trim('');
-    var repeatPassword = $('#repeat-password').val().trim('');
-    var phoneNumber = $('#phone-number').val().trim('');
-    var address = $('#address').val().trim('');
-    var email = $('#email').val().trim('');
+    var $userNameMessage = $('#user-name-message');
+    $userNameMessage.hide();
 
-    if(isCorrect) {
-      $('.ui.second.modal')
-        .modal('show');
+    var $userNameCorrect = $('#user-name-correct');
+    $userNameCorrect.hide();
+
+    var userName = $('#user-name').val().trim('');
+    var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
+
+    if (userName === '') {
+
+      $userNameMessage.html('用户名不能为空').show();
+      isCorrect = false;
+
+    } else if (userNameLength < 6 || userNameLength > 20) {
+
+      $userNameMessage.html('用户名至少为6-20位字符').show();
+      isCorrect = false;
+
+    } else {
+
+      $userNameCorrect.show();
     }
 
-  });
 
+    var $passwordMessage = $('#password-message');
+    $passwordMessage.hide();
+
+    var $passwordCorrect = $('#password-correct');
+    $passwordCorrect.hide();
+
+    var password = $('#password').val().trim('');
+    var passwordReg = /^(\w){6,20}$/;
+
+    if (password === '') {
+
+      $passwordMessage.html('密码不能为空').show();
+      isCorrect = false;
+
+    } else if (!passwordReg.exec(password)) {
+
+      $passwordMessage.html('密码至少为6-20位字符').show();
+      isCorrect = false;
+
+    } else {
+
+      $passwordCorrect.show();
+    }
+
+
+    var $repeatPasswordMessage = $('#repeat-password-message');
+    $repeatPasswordMessage.hide();
+
+    var $repeatPasswordCorrect = $('#repeat-password-correct');
+    $repeatPasswordCorrect.hide();
+
+    var repeatPassword = $('#repeat-password').val().trim('');
+
+    if (repeatPassword === '') {
+
+      $repeatPasswordMessage.html('重复密码不能为空').show();
+      isCorrect = false;
+
+
+    } else if (repeatPassword !== password) {
+
+      $repeatPasswordMessage.html('用户两次密码输入不一致').show();
+      isCorrect = false;
+
+    } else {
+
+      $repeatPasswordCorrect.show();
+    }
+
+
+    var $emailMessage = $('#email-message');
+    $emailMessage.hide();
+
+    var $emailCorrect = $('#email-correct');
+    $emailCorrect.hide();
+
+    var email = $('#email').val().trim('');
+    var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
+
+    if (email === '') {
+
+      $emailMessage.html('邮箱不能为空').show();
+      isCorrect = false;
+
+    } else if (!emailReg.exec(email)) {
+
+      $emailMessage.html('请填写正确邮箱的格式').show();
+      isCorrect = false;
+
+    } else {
+
+      $emailCorrect.show();
+    }
+
+    var address = $('#address').val().trim();
+    var phoneNumber = $('#phone-number').val().trim();
+    var createDate = new Date();
+    console.log(createDate.getFullYear() + '-' + month + '-' + createDate.getDate());
+
+    if(isCorrect) {
+
+      var user = {
+        name: userName,
+        password: password,
+        address: address,
+        phoneNumber: phoneNumber,
+        active: true,
+        createDate: createDate
+      };
+
+      $.ajax({
+        url: '/api/user',
+        type: 'POST',
+        data: {user: user},
+
+        success: function () {
+
+          $('.ui.second.modal')
+            .modal('show');
+        }
+      });
+    }
+  });
 });
