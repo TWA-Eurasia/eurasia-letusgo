@@ -220,25 +220,21 @@ $(function () {
 
     var address = $('#address').val().trim();
     var phoneNumber = $('#phone-number').val().trim();
-    var createDate = moment().format('YYYY-MM-DD');
+    var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
 
     if(isCorrect) {
-
-      var user = {
-        name: userName,
-        password: password,
-        address: address,
-        phoneNumber: phoneNumber,
-        active: true,
-        createDate: createDate
-      };
-
       $.ajax({
         url: '/api/user',
         type: 'POST',
-        data: {user: user},
-
-        success: function () {
+        data: {
+            name: userName,
+            password: password,
+            address: address,
+            phoneNumber: phoneNumber,
+            active: true,
+            createDate: createDate
+        },
+        success: function (data) {
 
           $('.ui.second.modal')
             .modal('show');
