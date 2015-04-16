@@ -12,18 +12,16 @@ $(function () {
 
   function getUsers(callback) {
 
-    $.ajax({
-      url: '/api/user',
-      type: 'GET',
-      success: function (users) {
+    $.get('/api/user')
+      .success(function(users) {
 
         callback(users);
-      }
-    });
+      });
   }
 
-  function verifyUserExisted(userName, messageSelector, correctSelector, isCorrect) {
+  function verifyUserExisted(userName, messageSelector, correctSelector) {
 
+    var isCorrect = true;
     getUsers(function(users) {
 
       if (_.find(users, function (user) {
@@ -38,21 +36,26 @@ $(function () {
         correctSelector.show();
       }
     });
+    return isCorrect;
   }
 
   function commonVerifyRegular(value, selectors, messages, condition) {
 
+    var isCorrect = true;
     if (value === '') {
 
       selectors[0].html(messages[0]).show();
+      isCorrect = false;
 
     } else if (condition) {
 
       selectors[0].html(messages[1]).show();
+      isCorrect = false;
     } else {
 
       selectors[1].show();
     }
+    return isCorrect;
   }
 
   $('#user-name').on('blur', function () {
@@ -79,8 +82,7 @@ $(function () {
       $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
 
-      var isCorrect = true;
-      verifyUserExisted(userName, $userNameMessage, $userNameCorrect, isCorrect);
+      verifyUserExisted(userName, $userNameMessage, $userNameCorrect);
     }
   });
 
@@ -99,8 +101,7 @@ $(function () {
     var passwordSelectors = [$passwordMessage, $passwordCorrect];
     var passwordMessages = ['密码不能为空', '密码至少为6-20位字符'];
 
-    var isCorrect = true;
-    commonVerifyRegular(password, passwordSelectors, passwordMessages, !passwordReg.exec(password), isCorrect);
+    commonVerifyRegular(password, passwordSelectors, passwordMessages, !passwordReg.exec(password));
   });
 
   $('#repeat-password').on('blur', function (){
@@ -117,8 +118,7 @@ $(function () {
     var repeatPasswordSelectors = [$repeatPasswordMessage, $repeatPasswordCorrect];
     var $repeatPasswordMessages = ['重复密码不能为空', '用户两次密码输入不一致'];
 
-    var isCorrect = true;
-    commonVerifyRegular(repeatPassword, repeatPasswordSelectors, $repeatPasswordMessages, repeatPassword !== password, isCorrect);
+    commonVerifyRegular(repeatPassword, repeatPasswordSelectors, $repeatPasswordMessages, repeatPassword !== password);
   });
 
 
@@ -136,8 +136,7 @@ $(function () {
     var emailSelectors = [$emailMessage, $emailCorrect];
     var emailMessages = ['邮箱不能为空', '请填写正确邮箱的格式'];
 
-    var isCorrect = true;
-    commonVerifyRegular(email, emailSelectors, emailMessages, !emailReg.exec(email), isCorrect);
+    commonVerifyRegular(email, emailSelectors, emailMessages, !emailReg.exec(email));
   });
 
   $('#reset-button').on('click', function() {
@@ -176,9 +175,8 @@ $(function () {
       $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
 
-      verifyUserExisted(userName, $userNameMessage, $userNameCorrect, isCorrect);
+      isCorrect = verifyUserExisted(userName, $userNameMessage, $userNameCorrect);
     }
-
 
     var $passwordMessage = $('#password-message');
     $passwordMessage.hide();
@@ -186,24 +184,14 @@ $(function () {
     var $passwordCorrect = $('#password-correct');
     $passwordCorrect.hide();
 
+
     var password = $('#password').val().trim('');
     var passwordReg = /^(\w){6,20}$/;
 
-    if (password === '') {
+    var passwordSelectors = [$passwordMessage, $passwordCorrect];
+    var passwordMessages = ['密码不能为空', '密码至少为6-20位字符'];
 
-      $passwordMessage.html('密码不能为空').show();
-      isCorrect = false;
-
-    } else if (!passwordReg.exec(password)) {
-
-      $passwordMessage.html('密码至少为6-20位字符').show();
-      isCorrect = false;
-
-    } else {
-
-      $passwordCorrect.show();
-    }
-
+    isCorrect = commonVerifyRegular(password, passwordSelectors, passwordMessages, !passwordReg.exec(password));
 
     var $repeatPasswordMessage = $('#repeat-password-message');
     $repeatPasswordMessage.hide();
@@ -213,22 +201,10 @@ $(function () {
 
     var repeatPassword = $('#repeat-password').val().trim('');
 
-    if (repeatPassword === '') {
+    var repeatPasswordSelectors = [$repeatPasswordMessage, $repeatPasswordCorrect];
+    var $repeatPasswordMessages = ['重复密码不能为空', '用户两次密码输入不一致'];
 
-      $repeatPasswordMessage.html('重复密码不能为空').show();
-      isCorrect = false;
-
-
-    } else if (repeatPassword !== password) {
-
-      $repeatPasswordMessage.html('用户两次密码输入不一致').show();
-      isCorrect = false;
-
-    } else {
-
-      $repeatPasswordCorrect.show();
-    }
-
+    isCorrect = commonVerifyRegular(repeatPassword, repeatPasswordSelectors, $repeatPasswordMessages, repeatPassword !== password);
 
     var $emailMessage = $('#email-message');
     $emailMessage.hide();
@@ -239,42 +215,30 @@ $(function () {
     var email = $('#email').val().trim('');
     var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
 
-    if (email === '') {
+    var emailSelectors = [$emailMessage, $emailCorrect];
+    var emailMessages = ['邮箱不能为空', '请填写正确邮箱的格式'];
 
-      $emailMessage.html('邮箱不能为空').show();
-      isCorrect = false;
-
-    } else if (!emailReg.exec(email)) {
-
-      $emailMessage.html('请填写正确邮箱的格式').show();
-      isCorrect = false;
-
-    } else {
-
-      $emailCorrect.show();
-    }
+    isCorrect = commonVerifyRegular(email, emailSelectors, emailMessages, !emailReg.exec(email));
 
     var address = $('#address').val().trim();
     var phoneNumber = $('#phone-number').val().trim();
     var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
 
     if(isCorrect) {
-      $.ajax({
-        url: '/api/user',
-        type: 'POST',
-        data: {
+
+      $.post('api/user',
+        {
           name: userName,
           password: password,
           address: address,
           phoneNumber: phoneNumber,
           active: true,
           createDate: createDate
-        },
-        success: function() {
+
+        }).success(function() {
 
           $('.ui.second.modal')
             .modal('show');
-        }
       });
     }
   });
