@@ -66,7 +66,7 @@ function getSubCategories(categories, mainCategories) {
   return mainCategories;
 }
 
-function initCategories(res, query, start, pageSize, currentCategory, pageNumber, isCategory){
+function initCategories(res, query, start, pageSize, currentCategory, pageNumber, isCategory) {
 
   initItems(query, start, pageSize, function(items, pageCount) {
 
@@ -85,7 +85,6 @@ function initCategories(res, query, start, pageSize, currentCategory, pageNumber
       });
   });
 }
-
 
 function rederIndex(res, mainCategories, currentCategory, items, pageCount, currentPage, isCategory) {
 
