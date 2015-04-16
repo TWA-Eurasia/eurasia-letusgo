@@ -268,7 +268,6 @@ $(function () {
           password: password,
           address: address,
           phoneNumber: phoneNumber,
-          active: true,
           createDate: createDate,
           email: email
         },
