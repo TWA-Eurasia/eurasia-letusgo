@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 var Indent = require('../../model/indent.js');
 var CartItem = require('../../model/cartItem.js');
-
+var Item = require('../../model/item.js');
 
 function getShortedCartItemName(cartItems) {
 
@@ -25,28 +25,29 @@ router.get('/', function (req, res) {
     .populate('cartItems')
     .exec(function (err, indent) {
 
-      CartItem.find()
-        .populate('item')
-        .exec(function (err, cartItems) {
+      Item.populate(indent, 'cartItems.item', function (err, result) {
+        if(err) {
+          throw err;
+        }
 
-          cartItems.forEach(function (cartItem) {
-            if (cartItem.item.name.length > 8) {
-              cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
-            } else {
-              cartItem.item.shortName = cartItem.item.name;
-            }
-          });
-
-          var total = indent.getTotal(cartItems);
-          var shortedCartItemName = getShortedCartItemName(cartItems);
-
-          res.render('indent', {
-            cartItems: cartItems,
-            total: total,
-            indent: indent,
-            shortedCartItemName: shortedCartItemName
-          });
+        indent.cartItems.forEach(function (cartItem) {
+          if (cartItem.item.name.length > 8) {
+            cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
+          } else {
+            cartItem.item.shortName = cartItem.item.name;
+          }
         });
+
+        var total = indent.getTotal(indent.cartItems);
+        var shortedCartItemName = getShortedCartItemName(indent.cartItems);
+
+        res.render('indent', {
+          cartItems: indent.cartItems,
+          total: total,
+          indent: indent,
+          shortedCartItemName: shortedCartItemName
+        });
+      });
     });
 });
 
