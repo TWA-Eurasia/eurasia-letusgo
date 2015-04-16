@@ -26,6 +26,16 @@ mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
     }
 });
 
+var passport = require('passport');
+var expressSession = require('express-session');
+
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+var initPassport = require('./util/passport/init');
+initPassport(passport);
+
 // development settings
 if (app.get('env') === 'development') {
 
