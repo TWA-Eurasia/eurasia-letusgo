@@ -71,7 +71,7 @@ $(function () {
       $('.addToCart').addClass('disabled');
       return;
     }
-      $('.addToCart').removeClass('disabled');
+    $('.addToCart').removeClass('disabled');
 
   });
 
@@ -82,7 +82,6 @@ $(function () {
     $('#itemPrice').text(price);
     $('#inventory').text(inventory);
   });
-
 
 
   $('.addToCart').on('click', function () {
@@ -101,7 +100,7 @@ $(function () {
 
         window.setTimeout(function () {
           $('.success').hide();
-        },1000);
+        }, 1000);
       }
     });
   });
