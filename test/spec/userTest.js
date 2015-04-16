@@ -19,8 +19,8 @@ describe('index', function() {
 
       resMock.send = function(object) {
 
-        expect(object).to.have.property('users');
-        expect(object.users[0].name).to.equal('Sofia');
+        //expect(object).to.have.property('users');
+        expect(object[0].name).to.equal('Sofia');
 
         done();
       };
@@ -45,8 +45,7 @@ describe('index', function() {
 
       resMock.send = function(object) {
 
-        expect(object).to.have.property('user');
-        expect(object.user.name).to.equal('Sofia');
+        expect(object.name).to.equal('Sofia');
 
         done();
       };
