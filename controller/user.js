@@ -10,7 +10,7 @@ user.getUsers = function(req, res) {
 
   User.find(function(err, users) {
 
-    res.send({users: users});
+    res.send(users);
   });
 };
 

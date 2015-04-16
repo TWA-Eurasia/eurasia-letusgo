@@ -22,7 +22,7 @@ $(function () {
     });
   }
 
-  function verifyUserExisted(userName, messageSelector, correctSelector) {
+  function verifyUserExisted(userName, messageSelector, correctSelector, isCorrect) {
 
     getUsers(function(users) {
 
@@ -32,11 +32,27 @@ $(function () {
         })) {
 
         messageSelector.html('当前用户名已被注册').show();
+        isCorrect = false;
       } else {
 
         correctSelector.show();
       }
     });
+  }
+
+  function commonVerifyRegular(value, selectors, messages, condition) {
+
+    if (value === '') {
+
+      selectors[0].html(messages[0]).show();
+
+    } else if (condition) {
+
+      selectors[0].html(messages[1]).show();
+    } else {
+
+      selectors[1].show();
+    }
   }
 
   $('#user-name').on('blur', function () {
@@ -63,7 +79,8 @@ $(function () {
       $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
 
-      verifyUserExisted(userName, $userNameMessage, $userNameCorrect);
+      var isCorrect = true;
+      verifyUserExisted(userName, $userNameMessage, $userNameCorrect, isCorrect);
     }
   });
 
@@ -79,17 +96,11 @@ $(function () {
     var password = $('#password').val().trim('');
     var passwordReg = /^(\w){6,20}$/;
 
-    if (password === '') {
+    var passwordSelectors = [$passwordMessage, $passwordCorrect];
+    var passwordMessages = ['密码不能为空', '密码至少为6-20位字符'];
 
-      $passwordMessage.html('密码不能为空').show();
-
-    } else if (!passwordReg.exec(password)) {
-
-      $passwordMessage.html('密码至少为6-20位字符').show();
-    } else {
-
-      $passwordCorrect.show();
-    }
+    var isCorrect = true;
+    commonVerifyRegular(password, passwordSelectors, passwordMessages, !passwordReg.exec(password), isCorrect);
   });
 
   $('#repeat-password').on('blur', function (){
@@ -103,17 +114,11 @@ $(function () {
     var password = $('#password').val().trim('');
     var repeatPassword = $('#repeat-password').val().trim('');
 
-    if (repeatPassword === '') {
+    var repeatPasswordSelectors = [$repeatPasswordMessage, $repeatPasswordCorrect];
+    var $repeatPasswordMessages = ['重复密码不能为空', '用户两次密码输入不一致'];
 
-      $repeatPasswordMessage.html('重复密码不能为空').show();
-
-    } else if (repeatPassword !== password) {
-
-      $repeatPasswordMessage.html('用户两次密码输入不一致').show();
-    } else {
-
-      $repeatPasswordCorrect.show();
-    }
+    var isCorrect = true;
+    commonVerifyRegular(repeatPassword, repeatPasswordSelectors, $repeatPasswordMessages, repeatPassword !== password, isCorrect);
   });
 
 
@@ -128,18 +133,11 @@ $(function () {
     var email = $('#email').val().trim('');
     var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
 
+    var emailSelectors = [$emailMessage, $emailCorrect];
+    var emailMessages = ['邮箱不能为空', '请填写正确邮箱的格式'];
 
-    if (email === '') {
-
-      $emailMessage.html('邮箱不能为空').show();
-
-    } else if (!emailReg.exec(email)) {
-
-      $emailMessage.html('请填写正确邮箱的格式').show();
-    } else {
-
-      $emailCorrect.show();
-    }
+    var isCorrect = true;
+    commonVerifyRegular(email, emailSelectors, emailMessages, !emailReg.exec(email), isCorrect);
   });
 
   $('#reset-button').on('click', function() {
@@ -164,20 +162,21 @@ $(function () {
 
     var userName = $('#user-name').val().trim('');
     var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
+    var userReg = new RegExp('[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b@]');
 
     if (userName === '') {
 
       $userNameMessage.html('用户名不能为空').show();
-      isCorrect = false;
 
     } else if (userNameLength < 6 || userNameLength > 20) {
 
       $userNameMessage.html('用户名至少为6-20位字符').show();
-      isCorrect = false;
+    } else if (userReg.exec(userName)) {
 
+      $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
 
-      $userNameCorrect.show();
+      verifyUserExisted(userName, $userNameMessage, $userNameCorrect, isCorrect);
     }
 
 
@@ -269,7 +268,7 @@ $(function () {
           address: address,
           phoneNumber: phoneNumber,
           active: true,
-          createDate: createDate,
+          createDate: createDate
         },
         success: function() {
 
