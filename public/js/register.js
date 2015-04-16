@@ -267,11 +267,11 @@ $(function () {
           password: password,
           address: address,
           phoneNumber: phoneNumber,
-          active: true,
-          createDate: createDate
+          createDate: createDate,
+          email: email
         },
-        success: function() {
-
+        success: function(data) {
+          console.log(data.user._id);
           $('.registerModal')
             .modal('show');
         }

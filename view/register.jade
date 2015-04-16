@@ -14,23 +14,23 @@ block content
       .ui.form.segment
         .ui.header#register-header 欢迎注册我的LetUsGo
         .filed
-          input#user-name(placeholder="用户名" type="text")
+          input#user-name(placeholder="用户名" type="text" value="hahahaha")
           i.checkmark.icon#user-name-correct
           span#user-name-message
         .field
-          input#password(placeholder="密码" type="password")
+          input#password(placeholder="密码" type="password" value='123456')
           i.checkmark.icon#password-correct
           sapn#password-message
         .field
-          input#repeat-password(placeholder="重复密码" type="password")
+          input#repeat-password(placeholder="重复密码" type="password" value="123456")
           i.checkmark.icon#repeat-password-correct
           span#repeat-password-message
         .field
           input#phone-number(placeholder="手机" type="text")
         .field
-          input#address(placeholder="地址" type="text")
+          input#address(placeholder="地址" type="text" value="12312")
         .field
-          input#email(placeholder="邮箱" type="text")
+          input#email(placeholder="邮箱" type="text" value="877975601@qq.com")
           i.checkmark.icon#email-correct
           span#email-message
         .field#button-field
@@ -40,7 +40,8 @@ block content
           .header 注册成功
           .content
             .description
-              .p 您已成功注册，点击确定返回.
+              .p 系统已经向该邮箱发送了一封验证激活邮件
+               .p 请查收邮件,进行验证激活！
           .actions
             a.primary.ui.button.confirm 确定
 

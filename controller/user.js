@@ -3,6 +3,7 @@
 var _ = require('lodash');
 
 var User = require('../model/user');
+var sendMail = require('../util/email');
 
 var user = {};
 
@@ -20,7 +21,8 @@ user.createUser = function(req, res) {
 
   User.create(currentUser, function(err, data) {
 
-    res.send(data);
+    sendMail.sendMail(data);
+    res.send({user: data});
 
   });
 };
