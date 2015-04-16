@@ -29,6 +29,8 @@
     "after": false,
     "afterEach": false,
     "expect": false,
-    "reloadDatabase": false
+    "reloadDatabase": false,
+    "location": false,
+    "document": false
   }
 }
