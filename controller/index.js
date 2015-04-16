@@ -82,28 +82,13 @@ function initCategories(query, start, pageSize, callback) {
         });
 
         mainCategories = getSubCategories(categories, mainCategories);
-        //_.forEach(categories, function(category) {
-				//
-        //  if (category.parent) {
-				//
-        //    _.forEach(mainCategories, function(mainCategory) {
-				//
-        //      if (category.parent.name === mainCategory.name) {
-				//
-        //        mainCategory.subCategories.push(category);
-        //      }
-        //    });
-        //  }
-        //});
 
         callback(mainCategories, items, pageCount);
       });
   });
 }
 
-var index = {};
-
-index.getIndexInfo = function(req, res) {
+var getIndexInfo = function(req, res) {
 
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
 
@@ -120,7 +105,7 @@ index.getIndexInfo = function(req, res) {
   });
 };
 
-index.getRecommendItemsByPageNumber = function(req, res) {
+var getRecommendItemsByPageNumber = function(req, res) {
 
   var pageNumber = req.params.pageNumber;
   var start = (pageNumber - 1) * PAGE_SIZE;
@@ -140,7 +125,7 @@ index.getRecommendItemsByPageNumber = function(req, res) {
   });
 };
 
-index.getItemsByCategoryId = function(req, res) {
+var getItemsByCategoryId = function(req, res) {
 
   var id = req.params.id;
   var currentCategory;
@@ -166,7 +151,7 @@ index.getItemsByCategoryId = function(req, res) {
   });
 };
 
-index.getItemsByCategoryIdAndPageNumber = function(req, res) {
+var getItemsByCategoryIdAndPageNumber = function(req, res) {
 
   var id = req.params.id;
 
@@ -195,5 +180,12 @@ index.getItemsByCategoryIdAndPageNumber = function(req, res) {
   });
 };
 
-module.exports = index;
+module.exports = {
+
+  getIndexInfo: getIndexInfo,
+  getRecommendItemsByPageNumber: getRecommendItemsByPageNumber,
+  getItemsByCategoryId: getItemsByCategoryId,
+  getItemsByCategoryIdAndPageNumber: getItemsByCategoryIdAndPageNumber
+};
+
 
