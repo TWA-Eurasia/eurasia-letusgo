@@ -77,22 +77,16 @@ exports.addToCart = function(req, res) {
 
     if(result) {
       number = result.number + number;
-      CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function(err) {
-        if(err) {
-          console.log(err);
-        }
+    }
+
+    CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function(err,cartItem) {
+      if(!result){
+        cart.cartItems.push(cartItem.upserted[0]._id);
+      }
+      cart.save(function(){
         res.sendStatus(200);
       });
-
-    } else {
-      CartItem.create({item: id, number: number}, function(err, cartItem) {
-        cart.cartItems.push(cartItem._id);
-
-        cart.save(function(err, cart) {
-          res.send(cart);
-        });
-      });
-    }
+    });
   });
 };
 
