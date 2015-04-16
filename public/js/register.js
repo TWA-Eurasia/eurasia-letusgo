@@ -7,6 +7,9 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(function () {
 
+  var previousUrl = document.referrer;
+  $('.confirm').attr('href', previousUrl);
+
   function getUsers(callback) {
 
     $.ajax({
@@ -45,7 +48,7 @@ $(function () {
 
       getUsers(function(users) {
 
-        if(_.filter(users, function(user){
+        if(_.find(users, function(user){
 
             return user.name === userName;
           })) {
