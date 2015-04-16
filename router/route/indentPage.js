@@ -3,8 +3,10 @@
 var express = require('express');
 var router = express.Router();
 var Indent = require('../../model/indent.js');
-var CartItem = require('../../model/cartItem.js');
 var Item = require('../../model/item.js');
+var FormatUtil = require('../../util/formatUtil.js');
+
+var NAME_LENGTH = 16;
 
 function getShortedCartItemName(cartItems) {
 
@@ -31,11 +33,7 @@ router.get('/', function (req, res) {
         }
 
         indent.cartItems.forEach(function (cartItem) {
-          if (cartItem.item.name.length > 8) {
-            cartItem.item.shortName = cartItem.item.name.substring(0, 8) + '..';
-          } else {
-            cartItem.item.shortName = cartItem.item.name;
-          }
+          cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
         });
 
         var total = indent.getTotal(indent.cartItems);
