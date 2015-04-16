@@ -5,6 +5,6 @@ var router = express.Router();
 
 var verificationController = require('../../controller/verification');
 
-router.post('/verification/:id', verificationController.updateActive);
+router.get('/:id', verificationController.updateActive);
 
 module.exports = router;
