@@ -12,7 +12,7 @@ user.createUser = function(req, res) {
 
   User.create(currentUser, function(err, data) {
 
-    res.send(data);
+    res.send({user: data});
 
   });
 };
