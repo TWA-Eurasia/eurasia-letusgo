@@ -3,7 +3,16 @@
 var _ = require('lodash');
 
 var User = require('../model/user');
-var SendMail = require('../util/email');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'Hotmail',
+  auth: {
+    user: 'fgcui@outlook.com',
+    pass: '19921204cfg'
+  }
+});
+
 
 var user = {};
 
@@ -20,7 +29,20 @@ user.createUser = function(req, res) {
   var currentUser = req.body;
 
   User.create(currentUser, function(err, data) {
-    SendMail.sendMail;
+
+
+    var html = '<p>'+data.name+',您好：<p/> <p>我们收到您在 Letusgo 的注册申请，请点击下面的链接激活帐户：</p> <a href="http://127.0.0.1:3000">请点击本链接激活帐号 </a>';
+
+    var mailOptions = {
+      from: 'letusgo@letusgo.com', // sender address
+      to: data.email, // list of receivers
+      subject: '[Letusgo] 账号激活邮件', // Subject line
+      text: '账号激活邮件', // plaintext body
+      html: html
+    };
+
+    transporter.sendMail(mailOptions);
+    //SendMail.sendMail;
     res.send({user: data});
 
   });
