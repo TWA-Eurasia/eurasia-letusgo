@@ -1,6 +1,8 @@
 'use strict';
+
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
+
 var MESSAGE = ' 库存不足, 请减少商品数量！';
 
 function updateInventory(inventory, number, item) {
@@ -55,12 +57,6 @@ $(document).ready(function () {
 
               $(location).attr('href', '/success');
               updateInventory(inventory, number, item);
-
-              //var indentId = '551fd16975cd55ed0cfa5503';
-              //$.post('/api/indent/' + indentId);
-              //
-              //var userId = '551fd2a9ecb148410c4c8048';
-              //$.post('/api/user/' + userId, {indentId: indentId});
             }
           }
         });
