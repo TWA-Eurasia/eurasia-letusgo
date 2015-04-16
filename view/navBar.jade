@@ -68,13 +68,22 @@ html
             p copyright@letusgo All Rights Reserved 版权所有LETUSGO商城
             p © 2015 LetUsGo, Inc.
 
-    .ui.second.small.coupled.modal.LoginResult.hidden
-      .header 登陆结果
+    .ui.second.small.coupled.modal.LoginFailure.hidden
+      .header 登陆失败
       .content
         .description
-          span#loginResult
+          span.loginResult
       .actions
-        .primary.ui.button.confirm#confirm 重新登陆
+        .primary.ui.button.confirm#again 重新登陆
+          i.right.arrow.icon
+
+    .ui.second.small.coupled.modal.LoginSuccess.hidden
+      .header
+      .content
+        .description
+          span.loginResult
+      .actions
+        a.primary.ui.button.shopping 我要去shopping！
           i.right.arrow.icon
 
     .ui.first.coupled.small.modal.userLogin.hidden
