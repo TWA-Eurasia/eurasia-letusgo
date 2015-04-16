@@ -6,31 +6,9 @@ var CartItem = require('../model/cartItem');
 
 var _ = require('lodash');
 
+var FormatUtil = require('../util/formatUtil');
+
 var NAME_LENGTH = 16;
-
-function parseString(name, length) {
-
-  var result = '';
-  var nameLength = name.length;
-  var charLength = name.replace(/[^\x00-\xff]/g, '**').length;
-
-  if(charLength <= length) {
-
-    return name;
-  }
-
-  for(var i = 0, j = 0; i < nameLength; i++) {
-
-    var char = name.charAt(i);
-    j += (/[\x00-\xff]/.test(char) ? 1 : 2);
-
-    if(j <= length) {
-      result += char;
-    } else {
-      return result + '...';
-    }
-  }
-}
 
 function findCartById(cartId, done) {
 
@@ -56,7 +34,7 @@ exports.getCart = function(req, res) {
 
     _.map(cart.cartItems, function(cartItem) {
 
-      cartItem.item.shortName = parseString(cartItem.item.name, NAME_LENGTH);
+      cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
     });
 
     var total = cart.getTotal(cart.cartItems);

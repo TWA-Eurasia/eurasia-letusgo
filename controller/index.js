@@ -5,32 +5,10 @@ var _ = require('lodash');
 var Category = require('../model/category');
 var Item = require('../model/item');
 
+var FormatUtil = require('../util/formatUtil');
+
 var PAGE_SIZE = 8;
 var NAME_LENGTH = 16;
-
-function parseString(name, length) {
-
-  var result = '';
-  var nameLength = name.length;
-  var charLength = name.replace(/[^\x00-\xff]/g, '**').length;
-
-  if(charLength <= length) {
-
-    return name;
-  }
-
-  for(var i = 0, j = 0; i < nameLength; i++) {
-
-    var char = name.charAt(i);
-    j += (/[\x00-\xff]/.test(char) ? 1 : 2);
-
-    if(j <= length) {
-      result += char;
-    } else {
-      return result + '...';
-    }
-  }
-}
 
 function initItems(query, start, pageSize, callback) {
 
@@ -38,7 +16,7 @@ function initItems(query, start, pageSize, callback) {
 
     items.forEach(function(item) {
 
-      item.shortName = parseString(item.name, NAME_LENGTH);
+      item.shortName = FormatUtil.parseString(item.name, NAME_LENGTH);
     });
 
     var newItems = _.take(_.drop(items, start), pageSize);
