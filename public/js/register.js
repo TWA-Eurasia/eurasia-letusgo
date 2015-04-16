@@ -272,7 +272,7 @@ $(function () {
         },
         success: function() {
 
-          $('.ui.second.modal')
+          $('.registerModal')
             .modal('show');
         }
       });

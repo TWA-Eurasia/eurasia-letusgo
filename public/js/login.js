@@ -18,17 +18,17 @@ $(function () {
     $.post('/api/user/login', {username: userName, password: password}, function(data) {
 
       if(data.user) {
-        $('#loginResult').html(data.message);
-        $('.LoginResult').modal('show');
+        $('.loginResult').html(data.message);
+        $('.LoginSuccess').modal('show');
       } else {
-        $('#loginResult').html(data.message);
-        $('.LoginResult').modal('show');
+        $('.loginResult').html(data.message);
+        $('.LoginFailure').modal('show');
       }
     });
   });
 
   $('#confirm').on('click', function() {
-    $('.LoginResult').hide();
+    $('.LoginFailure').hide();
     $('.userLogin').modal('show');
   });
 });
