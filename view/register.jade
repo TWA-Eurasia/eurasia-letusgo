@@ -7,7 +7,7 @@ block css
   link(rel="styleSheet" type="text/css" href="/style/register.css")
   script.
     System.import('js/register')
-    //System.import('js/cart')
+    System.import('js/cart')
 block content
   .ui.grid.centered
     .eight.wide.column
@@ -36,7 +36,7 @@ block content
         .field#button-field
           .ui.positive.reset.button#reset-button 重置
           .ui.negative.submit.button#submit-button 提交
-        .ui.second.small.coupled.modal.transition.registerModal.hidden
+        .ui.second.small.coupled.modal.transition.hidden#registermodal
           .header 注册成功
           .content
             .description

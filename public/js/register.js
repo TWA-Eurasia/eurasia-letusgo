@@ -281,7 +281,7 @@ $(function () {
 
         }).success(function() {
 
-          $('.registerModal')
+          $('#registermodal')
             .modal('show');
       });
     }

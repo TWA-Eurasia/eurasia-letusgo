@@ -8,11 +8,6 @@ html
     link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
     link(rel="stylesheet" type="text/css" href="/style/register.css")
 
-    script(src="jspm_packages/system.js")
-    script(src="config.js")
-    script.
-      System.import("js/login")
-
     block css
     block title
       title 首页
@@ -24,7 +19,7 @@ html
         .two.wide.column
           a(href="#") 我的Let Us Go
         .one.wide.column
-          a#login 请登录
+          a#login(href="#") 请登录
         .one.wide.column
           a(href="/register") 免费注册
       .ui.grid.myLogoAndSearch
