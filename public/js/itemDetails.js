@@ -65,20 +65,15 @@ $(document).ready(function () {
   }
 
   function countCartAmount() {
-
-    $.ajax({
-      url: '/cart/:amount',
-      type: 'GET',
-
-      success: function (data) {
-        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
-          data.amount = '99+';
-        }
-        $('#cart-amount').text(data.amount);
+    $.get('/cart/amount', function (data) {
+      if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+        data.amount = '99+';
       }
+
+      $('#cart-amount').text(data.amount);
     });
   }
-
+  
   $('.addToCart').on('click', function () {
 
     var itemId = $(this).data('id');
