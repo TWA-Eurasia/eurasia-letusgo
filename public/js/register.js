@@ -272,7 +272,6 @@ $(function () {
           email: email
         },
         success: function(data) {
-          console.log(data.user._id);
           $('.ui.second.modal')
             .modal('show');
         }
