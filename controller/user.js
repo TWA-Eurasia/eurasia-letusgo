@@ -6,6 +6,14 @@ var User = require('../model/user');
 
 var user = {};
 
+user.getUsers = function(req, res) {
+
+  User.find(function(err, users) {
+
+    res.send(users);
+  });
+};
+
 user.createUser = function(req, res) {
 
   var currentUser = req.body;
