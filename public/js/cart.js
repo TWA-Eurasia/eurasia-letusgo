@@ -130,7 +130,7 @@ $(function () {
     var numberInput = $this.closest('td').find('.number');
     var leftNumber = $this.closest('td').find('.leftNumber').text();
 
-    var number = numberInput.val().replace(/\b(0+)/gi, '');
+    var number = parseInt(numberInput.val());
     numberInput.val(number);
 
 
