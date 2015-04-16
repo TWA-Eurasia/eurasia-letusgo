@@ -136,20 +136,15 @@ $(function () {
 
     if (isShorted($this)) {
       $this.closest('td').find('.inventory').show();
+      $('#indent').addClass('disabled');
       return;
     }
+    $('#indent').removeClass('disabled');
+
     changeTotal($this);
     countCartAmount();
 
   });
-
-  $('#indent').on('click', function () {
-
-
-    $(this).attr('href','/indent');
-
-  });
-
 
   $('.delete_cartItem').on('click', function () {
 
