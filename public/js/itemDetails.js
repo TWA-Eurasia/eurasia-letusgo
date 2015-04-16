@@ -6,6 +6,34 @@ var MAX_CART_AMOUNT = 99;
 
 $(document).ready(function () {
 
+  function verifyNumber(number) {
+    var reg = /^(0|[1-9][0-9]*)$/;
+    if (!reg.exec(number)) {
+      $('#numberInput').val(1);
+    }
+  }
+
+  function isShorted() {
+    var inputNumber = parseInt($('#numberInput').val());
+    var inventory = $('#inventory').text();
+    return inputNumber > inventory;
+  }
+
+  function countCartAmount() {
+
+    $.ajax({
+      url: '/cart/:amount',
+      type: 'GET',
+
+      success: function (data) {
+        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+          data.amount = '99+';
+        }
+        $('#cart-amount').text(data.amount);
+      }
+    });
+  }
+
   $('img')
     .error(function () {
       $(this).attr('src', '/image/missing.jpg');
@@ -40,7 +68,11 @@ $(document).ready(function () {
 
     if (isShorted()) {
       $('#inputError').show();
+      $('.addToCart').addClass('disabled');
+      return;
     }
+      $('.addToCart').removeClass('disabled');
+
   });
 
   $('input.specification').on('click', function () {
@@ -51,48 +83,13 @@ $(document).ready(function () {
     $('#inventory').text(inventory);
   });
 
-  function verifyNumber(number) {
-    var reg = /^(0|[1-9][0-9]*)$/;
-    if (!reg.exec(number)) {
-      $('#numberInput').val(1);
-    }
-  }
 
-  function isShorted() {
-    var inputNumber = parseInt($('#numberInput').val());
-    var inventory = $('#inventory').text();
-    return inputNumber > inventory;
-  }
-
-  function countCartAmount() {
-
-    $.ajax({
-      url: '/cart/:amount',
-      type: 'GET',
-
-      success: function (data) {
-        if (MAX_CART_AMOUNT < parseInt(data.amount)) {
-          data.amount = '99+';
-        }
-        $('#cart-amount').text(data.amount);
-      }
-    });
-  }
 
   $('.addToCart').on('click', function () {
 
     var itemId = $(this).data('id');
 
     var numberInput = parseInt($('#numberInput').val());
-    var inventory = parseInt($('#inventory').text());
-
-    if(numberInput > inventory) {
-      $('.inventory').show();
-        window.setTimeout(function () {
-          $('.inventory').hide();
-        },1000);
-      return;
-    }
 
     $.ajax({
       url: '/cart/' + itemId,
