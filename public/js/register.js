@@ -271,8 +271,8 @@ $(function () {
           active: true,
           createDate: createDate,
         },
-        success: function() {
-
+        success: function(data) {
+          console.log(data.user._id);
           $('.ui.second.modal')
             .modal('show');
         }
