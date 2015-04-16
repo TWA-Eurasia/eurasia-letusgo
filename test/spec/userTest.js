@@ -12,9 +12,26 @@ describe('index', function() {
     reloadDatabase();
   });
 
-  describe('createUser', function () {
 
-    it('should create a user and save it to mongoDB', function (done) {
+  describe('getUsers', function() {
+
+    it('should get a collections of user', function(done) {
+
+      resMock.send = function(object) {
+
+        expect(object).to.have.property('users');
+        expect(object.users[0].name).to.equal('Sofia');
+
+        done();
+      };
+
+      userController.getUsers(reqMock, resMock);
+    });
+  });
+
+  describe('createUser', function() {
+
+    it('should create a user and save it to mongoDB', function(done) {
 
       reqMock.body = {
 
@@ -26,7 +43,7 @@ describe('index', function() {
         createDate: new Date()
       };
 
-      resMock.send = function(object){
+      resMock.send = function(object) {
 
         expect(object).to.have.property('user');
         expect(object.user.name).to.equal('Sofia');
@@ -37,4 +54,5 @@ describe('index', function() {
       userController.createUser(reqMock, resMock);
     });
   });
+
 });
