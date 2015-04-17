@@ -41,6 +41,7 @@
   "jspm": {
     "directories": {},
     "dependencies": {
+      "MD5": "npm:MD5@^1.2.1",
       "jquery": "github:components/jquery@^2.1.3",
       "lodash": "github:lodash/lodash@^3.6.0",
       "semantic-ui": "github:ziyiking/Semantic-UI@master"
