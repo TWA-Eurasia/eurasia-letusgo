@@ -5,8 +5,17 @@ block css
   script(src="/jspm_packages/system.js")
   script(src="/config.js")
   script.
-    System.import('js/register')
 block content
   .ui.grid.centered
-    .ten.wide.column.centered
-      h1(style="color: red") 注册成功
+    .fourteen.wide.column
+      h1.ui.header.centered
+        .content(style='color:red') 恭喜您，注册成功O(∩_∩)O
+    .fourteen.wide.column
+    .fourteen.wide.column
+      .ui.grid.centered
+        .eight.wide.column
+          h2(style='text-align:center')
+            a(href='/') GO商城首页
+        .eight.wide.column
+          h2(style='text-align:center')
+            a(href='/#') 我的Letusgo
