@@ -2,6 +2,14 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
+$('.modal')
+  .modal({
+    selector: {
+      close: 'icon.close'
+    }
+  })
+;
+
 $(function () {
 
   $('#login').on('click', function () {
@@ -19,18 +27,13 @@ $(function () {
     $.post('/api/user/login', {username: userName, password: password}, function (data) {
 
       if (data.user) {
-        $('.loginResult').html(data.message);
-        $('.LoginSuccess').modal('show');
+
+        $('#isUserName').html(data.user.name);
+        $('.userLogin').modal('hide');
       } else {
         $('#loginResult').html(data.message);
-        return false;
       }
     });
-  });
-
-  $('#confirm').on('click', function () {
-    $('.LoginFailure').hide();
-    $('.userLogin').modal('show');
   });
 });
 
