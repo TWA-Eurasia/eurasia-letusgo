@@ -8,7 +8,7 @@ var categories = [
   {_id: '5523bc489294d58a8e06c38a', name: '短袖衬衫', parent: '55196b3e0042a1db62223a05'},
   {_id: '5523bc489294d58a8e06c38b', name: '长袖衬衫', parent: '55196b3e0042a1db62223a05'},
 
-  {_id: '55196b3e0042a1db62223a06', name : '女装', parent: '55196b3e0042a1db62203a0a'},
+  {_id: '55196b3e0042a1db62223a06', name: '女装', parent: '55196b3e0042a1db62203a0a'},
   {_id: '5523bc489294d58a8e06c38c', name: '雪纺衫', parent: '55196b3e0042a1db62223a06'},
   {_id: '5523bc489294d58a8e06c38d', name: '蕾丝衫', parent: '55196b3e0042a1db62223a06'},
   {_id: '5523bc489294d58a8e06c38e', name: '针织衫', parent: '55196b3e0042a1db62223a06'},

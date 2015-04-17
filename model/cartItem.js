@@ -17,11 +17,11 @@ CartItemSchema.methods.getSubtotal = function () {
   return subtotal.toFixed(2);
 };
 
-CartItemSchema.methods.getItemId = function(cartItem){
+CartItemSchema.methods.getItemId = function (cartItem) {
 
   //console.log((cartItem.item).getId());
   var item = new Item();
   return item.getId(cartItem.item);
 };
 
-module.exports = mongoose.model('CartItem',CartItemSchema);
+module.exports = mongoose.model('CartItem', CartItemSchema);
