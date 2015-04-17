@@ -12,8 +12,8 @@ function getShortedCartItemName(cartItems) {
 
   var shortedCartItemName = '';
 
-  cartItems.forEach(function(cartItem) {
-    if(cartItem.number > cartItem.item.inventory) {
+  cartItems.forEach(function (cartItem) {
+    if (cartItem.number > cartItem.item.inventory) {
       shortedCartItemName += cartItem.item.name + '、';
     }
   });
@@ -28,8 +28,8 @@ router.get('/', function (req, res) {
     .exec(function (err, indent) {
       console.log(indent.cartItems);
 
-      Item.populate(indent, 'cartItems.item', function (err, result) {
-        if(err) {
+      Item.populate(indent, 'cartItems.item', function (err) {
+        if (err) {
           throw err;
         }
         console.log(result);
