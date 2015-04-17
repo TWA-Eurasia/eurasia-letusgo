@@ -8,6 +8,7 @@ $(function () {
 
     $('.userLogin')
       .modal('show');
+    $('#loginResult').html('');
   });
 
   $('#userLogin').on('click', function () {
@@ -17,12 +18,14 @@ $(function () {
 
     $.post('/api/user/login', {username: userName, password: password}, function (data) {
 
-      if (data.user) {
-        $('.loginResult').html(data.message);
-        $('.LoginSuccess').modal('show');
+      if(data.user) {
+
+        $('#isUserName').html(data.user.name);
+        showMessage(data.message);
+        $('#Tip').fadeOut(5000);
       } else {
-        $('.loginResult').html(data.message);
-        $('.LoginFailure').modal('show');
+        $('#loginResult').html(data.message);
+        return false;
       }
     });
   });

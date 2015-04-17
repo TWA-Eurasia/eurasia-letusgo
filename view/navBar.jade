@@ -13,7 +13,8 @@ html
     .container
       .ui.grid.topBar
         .one.wide.column &nbsp;
-        .nine.wide.column Hi，欢迎来到Let Us Go商城
+        .nine.wide.column Hi，
+          span#isUserName 欢迎来到Let Us Go商城
         .two.wide.column
           a(href="#") 我的Let Us Go
         .one.wide.column
@@ -58,22 +59,7 @@ html
           .sixteen.wide.column.copyright
             p copyright@letusgo All Rights Reserved 版权所有LETUSGO商城
             p © 2015 LetUsGo, Inc.
-    .ui.second.small.coupled.modal.LoginFailure.hidden
-      .header 登陆失败
-      .content
-        .description
-          span.loginResult
-      .actions
-        .primary.ui.button.confirm#again 重新登陆
-          i.right.arrow.icon
-    .ui.second.small.coupled.modal.LoginSuccess.hidden
-      .header
-      .content
-        .description
-          span.loginResult
-      .actions
-        a.primary.ui.button.shopping 我要去shopping！
-          i.right.arrow.icon
+
     .ui.first.coupled.small.modal.userLogin.hidden
       .content
         .ui.grid.centered
@@ -86,6 +72,8 @@ html
               .field
                 input#password-login(placeholder="密码" type="password")
                 span#password-message
+              .field
+                span#loginResult
       .actions
         a.primary.ui.button.register(href='/register') 注册
         a.ui.positive.right.labeled.icon.button#userLogin 登陆
