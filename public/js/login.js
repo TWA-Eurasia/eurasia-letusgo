@@ -30,7 +30,7 @@ $(function () {
 
         $('#isUserName').html(data.user.name);
         $('.userLogin').modal('hide');
-        
+
         $('#Tip').fadeOut(5000);
       } else {
         $('#loginResult').html(data.message);
