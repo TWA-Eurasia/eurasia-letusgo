@@ -3,6 +3,7 @@
 var $ = require('jquery');
 var moment = require('moment');
 var _ = require('lodash');
+var md5 = require('MD5');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var PASSWORD_MESSAGES = {
@@ -113,6 +114,7 @@ $(function () {
     $passwordCorrect.hide();
 
     var password = $('#password').val().trim('');
+
     var passwordReg = /^(\w){6,20}$/;
 
     var passwordSelectors = {
@@ -273,7 +275,7 @@ $(function () {
       $.post('api/user',
         {
           name: userName,
-          password: password,
+          password: md5(password),
           address: address,
           phoneNumber: phoneNumber,
           createDate: createDate,
