@@ -5,9 +5,14 @@ var User = require('../model/user');
 var updateActive = function (req, res) {
   var id = req.params.id;
 
-  User.findById(id, function (err, user) {
-      User.update({_id: id}, {$set: {active: true}}, function () {
+    User.update({_id: id}, {$set: {active: true}}, function() {
+      User.findById(id, function(err, user) {
+        if (err) {
+          throw err;
+        }
         res.render('verification',{user:user});
+        console.log(user);
+
       });
     });
 };
