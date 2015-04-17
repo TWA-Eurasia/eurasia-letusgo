@@ -7,9 +7,9 @@ describe('GET api/indent', function () {
 
   var indentController = require('../../controller/indentController');
 
-  it('should get total and indent', function(done){
+  it('should get total and indent', function (done) {
 
-    resMock.send = function(object){
+    resMock.send = function (object) {
 
       expect(object).to.have.property('indent');
       expect(object).to.have.property('total');
@@ -21,7 +21,7 @@ describe('GET api/indent', function () {
     indentController.getIndent(reqMock, resMock);
   });
 
-  afterEach(function(){
+  afterEach(function () {
 
     reloadDatabase();
   });
