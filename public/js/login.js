@@ -30,8 +30,14 @@ $(function () {
 
         $('#isUserName').html(data.user.name);
         $('.userLogin').modal('hide');
+        $('#tips').popup({
+          delay: {
+            show: 300,
+            hide: 1000
+          }
+        });
       } else {
-        $('#loginResult').html(data.message);
+        $('#loginResult').html(data.message).show();
       }
     });
   });

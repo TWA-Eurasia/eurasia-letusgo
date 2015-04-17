@@ -19,7 +19,7 @@ html
         .two.wide.column
           a(href="#") 我的Let Us Go
         .one.wide.column
-          span#login 请登录
+          a#login 请登录
         .one.wide.column
           a(href="/register") 免费注册
       .ui.grid.myLogoAndSearch
@@ -74,8 +74,13 @@ html
                 input#password-login(placeholder="密码" type="password")
                 span#password-message
               .field
-                .ui.red.message#loginResult
+                .ui.error.message.hidden#loginResult(style = 'display: none')
       .actions
         a.primary.ui.button.register(href='/register') 注册
         a.ui.positive.right.labeled.icon.button#userLogin 登陆
           i.right.arrow.icon
+      .ui.popup.top.center.loading.transition.visible#tips(style=" left: 50%")
+        .ui.success.message#loginSuccess
+
+
+
