@@ -5,9 +5,8 @@ var _ = require('lodash');
 var User = require('../model/user');
 var sendMail = require('../util/email');
 
-var user = {};
 
-user.getUsers = function(req, res) {
+var getUsers = function(req, res) {
 
   User.find(function(err, users) {
 
@@ -15,19 +14,19 @@ user.getUsers = function(req, res) {
   });
 };
 
-user.createUser = function(req, res) {
+var createUser = function(req, res) {
 
   var currentUser = req.body;
 
   User.create(currentUser, function(err, data) {
 
     sendMail.sendMail(data);
-    res.send({user: data});
+    res.send(data);
 
   });
 };
 
-user.updateUser = function(req, res) {
+var updateUser = function(req, res) {
 
   var userId = req.params.id;
   var indentId = req.body.indentId;
@@ -38,7 +37,7 @@ user.updateUser = function(req, res) {
   });
 };
 
-user.login = function(req, res) {
+var login = function(req, res) {
 
   var message = '登陆成功！';
   var username = req.body.username;
@@ -52,4 +51,9 @@ user.login = function(req, res) {
   });
 };
 
-module.exports = user;
+module.exports = {
+  getUsers: getUsers,
+  createUser: createUser,
+  updateUser: updateUser,
+  login: login
+};
