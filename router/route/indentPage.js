@@ -26,12 +26,14 @@ router.get('/', function (req, res) {
   Indent.findById('551fd16975cd55ed0cfa5503')
     .populate('cartItems')
     .exec(function (err, indent) {
+      console.log(indent.cartItems);
 
-      Item.populate(indent, 'cartItems.item', function (err) {
+      Item.populate(indent, 'cartItems.item', function (err, result) {
         if(err) {
           throw err;
         }
-
+        console.log(result);
+        console.log(indent.cartItems);
         indent.cartItems.forEach(function (cartItem) {
           cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
         });
