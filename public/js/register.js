@@ -276,14 +276,13 @@ $(function () {
           password: password,
           address: address,
           phoneNumber: phoneNumber,
-          active: true,
-          createDate: createDate
-
+          createDate: createDate,
+          email: email
         }).success(function() {
 
           $('#registermodal')
             .modal('show');
-      });
+        });
     }
   });
 });
