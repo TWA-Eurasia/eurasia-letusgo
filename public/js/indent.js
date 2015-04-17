@@ -34,7 +34,7 @@ $(document).ready(function () {
 
       showShortage(shortedCartItemName);
     } else {
-      $('.first.modal')
+      $('.confirmPay')
         .modal('show');
     }
   });

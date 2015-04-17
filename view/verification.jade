@@ -1,0 +1,12 @@
+extends ./navBar.jade
+block title
+  title 注册成功
+block css
+  script(src="/jspm_packages/system.js")
+  script(src="/config.js")
+  script.
+    System.import('js/register')
+block content
+  .ui.grid.centered
+    .ten.wide.column.centered
+      h1(style="color: red") 注册成功

@@ -2,9 +2,79 @@
 
 var $ = require('jquery');
 var moment = require('moment');
+var _ = require('lodash');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
+var PASSWORD_MESSAGES = {
+
+  REQUIRED: '密码不能为空',
+  RULE: '密码至少为6-20位字符'
+};
+
+var REPEAT_PASSWORD_MESSAGES = {
+
+  REQUIRED: '重复密码不能为空',
+  RULE: '用户两次密码输入不一致'
+};
+
+var EMAIL_MESSAGES = {
+
+  REQUIRED: '邮箱不能为空',
+  RULE: '请填写正确邮箱的格式'
+};
+
 $(function () {
+
+  var previousUrl = document.referrer;
+  $('.confirm').attr('href', previousUrl);
+
+  function getUsers(callback) {
+
+    $.get('/api/user')
+      .success(function(users) {
+
+        callback(users);
+      });
+  }
+
+  function verifyUserExisted(userName, messageSelector, correctSelector) {
+
+    var isCorrect = true;
+    getUsers(function(users) {
+
+      if (_.find(users, function (user) {
+
+          return user.name === userName;
+        })) {
+
+        messageSelector.html('当前用户名已被注册').show();
+        isCorrect = false;
+      } else {
+
+        correctSelector.show();
+      }
+    });
+    return isCorrect;
+  }
+
+  function commonVerifyRegular(value, selectors, messages, condition) {
+
+    var isCorrect = true;
+    if (value === '') {
+
+      selectors.message.html(messages.REQUIRED).show();
+      isCorrect = false;
+
+    } else if (condition) {
+
+      selectors.message.html(messages.RULE).show();
+      isCorrect = false;
+    } else {
+
+      selectors.correct.show();
+    }
+    return isCorrect;
+  }
 
   $('#user-name').on('blur', function () {
 
@@ -16,6 +86,7 @@ $(function () {
 
     var userName = $('#user-name').val().trim('');
     var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
+    var userReg = new RegExp('[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b@]');
 
     if (userName === '') {
 
@@ -24,9 +95,12 @@ $(function () {
     } else if (userNameLength < 6 || userNameLength > 20) {
 
       $userNameMessage.html('用户名至少为6-20位字符').show();
+    } else if (userReg.exec(userName)) {
+
+      $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
 
-      $userNameCorrect.show();
+      verifyUserExisted(userName, $userNameMessage, $userNameCorrect);
     }
   });
 
@@ -38,21 +112,16 @@ $(function () {
     var $passwordCorrect = $('#password-correct');
     $passwordCorrect.hide();
 
-
     var password = $('#password').val().trim('');
     var passwordReg = /^(\w){6,20}$/;
 
-    if (password === '') {
+    var passwordSelectors = {
 
-      $passwordMessage.html('密码不能为空').show();
+      message: $passwordMessage,
+      correct: $passwordCorrect
+    };
 
-    } else if (!passwordReg.exec(password)) {
-
-      $passwordMessage.html('密码至少为6-20位字符').show();
-    } else {
-
-      $passwordCorrect.show();
-    }
+    commonVerifyRegular(password, passwordSelectors, PASSWORD_MESSAGES, !passwordReg.exec(password));
   });
 
   $('#repeat-password').on('blur', function (){
@@ -66,17 +135,13 @@ $(function () {
     var password = $('#password').val().trim('');
     var repeatPassword = $('#repeat-password').val().trim('');
 
-    if (repeatPassword === '') {
+    var repeatPasswordSelectors = {
 
-      $repeatPasswordMessage.html('重复密码不能为空').show();
+      message: $repeatPasswordMessage,
+      correct: $repeatPasswordCorrect
+    };
 
-    } else if (repeatPassword !== password) {
-
-      $repeatPasswordMessage.html('用户两次密码输入不一致').show();
-    } else {
-
-      $repeatPasswordCorrect.show();
-    }
+    commonVerifyRegular(repeatPassword, repeatPasswordSelectors, REPEAT_PASSWORD_MESSAGES, repeatPassword !== password);
   });
 
 
@@ -91,18 +156,13 @@ $(function () {
     var email = $('#email').val().trim('');
     var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
 
+    var emailSelectors = {
 
-    if (email === '') {
+      message: $emailMessage,
+      correct: $emailCorrect
+    };
 
-      $emailMessage.html('邮箱不能为空').show();
-
-    } else if (!emailReg.exec(email)) {
-
-      $emailMessage.html('请填写正确邮箱的格式').show();
-    } else {
-
-      $emailCorrect.show();
-    }
+    commonVerifyRegular(email, emailSelectors, EMAIL_MESSAGES, !emailReg.exec(email));
   });
 
   $('#reset-button').on('click', function() {
@@ -113,6 +173,16 @@ $(function () {
     $('#phone-number').val('');
     $('#address').val('');
     $('#email').val('');
+
+    $('#user-name-correct').hide();
+    $('#password-correct').hide();
+    $('#repeat-password-correct').hide();
+    $('#email-correct').hide();
+
+    $('#user-name-message').hide();
+    $('#password-message').hide();
+    $('#repeat-password-message').hide();
+    $('#email-message').hide();
   });
 
   $('#submit-button').on('click', function() {
@@ -127,22 +197,22 @@ $(function () {
 
     var userName = $('#user-name').val().trim('');
     var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
+    var userReg = new RegExp('[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b@]');
 
     if (userName === '') {
 
       $userNameMessage.html('用户名不能为空').show();
-      isCorrect = false;
 
     } else if (userNameLength < 6 || userNameLength > 20) {
 
       $userNameMessage.html('用户名至少为6-20位字符').show();
-      isCorrect = false;
+    } else if (userReg.exec(userName)) {
 
+      $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
 
-      $userNameCorrect.show();
+      isCorrect = verifyUserExisted(userName, $userNameMessage, $userNameCorrect);
     }
-
 
     var $passwordMessage = $('#password-message');
     $passwordMessage.hide();
@@ -150,24 +220,16 @@ $(function () {
     var $passwordCorrect = $('#password-correct');
     $passwordCorrect.hide();
 
+
     var password = $('#password').val().trim('');
     var passwordReg = /^(\w){6,20}$/;
 
-    if (password === '') {
+    var passwordSelectors = {
 
-      $passwordMessage.html('密码不能为空').show();
-      isCorrect = false;
-
-    } else if (!passwordReg.exec(password)) {
-
-      $passwordMessage.html('密码至少为6-20位字符').show();
-      isCorrect = false;
-
-    } else {
-
-      $passwordCorrect.show();
-    }
-
+      message: $passwordMessage,
+      correct: $passwordCorrect
+    };
+    isCorrect = commonVerifyRegular(password, passwordSelectors, PASSWORD_MESSAGES, !passwordReg.exec(password));
 
     var $repeatPasswordMessage = $('#repeat-password-message');
     $repeatPasswordMessage.hide();
@@ -177,22 +239,13 @@ $(function () {
 
     var repeatPassword = $('#repeat-password').val().trim('');
 
-    if (repeatPassword === '') {
+    var repeatPasswordSelectors = {
 
-      $repeatPasswordMessage.html('重复密码不能为空').show();
-      isCorrect = false;
+      message: $repeatPasswordMessage,
+      correct: $repeatPasswordCorrect
+    };
 
-
-    } else if (repeatPassword !== password) {
-
-      $repeatPasswordMessage.html('用户两次密码输入不一致').show();
-      isCorrect = false;
-
-    } else {
-
-      $repeatPasswordCorrect.show();
-    }
-
+    isCorrect = commonVerifyRegular(repeatPassword, repeatPasswordSelectors, REPEAT_PASSWORD_MESSAGES, repeatPassword !== password);
 
     var $emailMessage = $('#email-message');
     $emailMessage.hide();
@@ -203,43 +256,33 @@ $(function () {
     var email = $('#email').val().trim('');
     var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
 
-    if (email === '') {
+    var emailSelectors = {
 
-      $emailMessage.html('邮箱不能为空').show();
-      isCorrect = false;
+      message: $emailMessage,
+      correct: $emailCorrect
+    };
 
-    } else if (!emailReg.exec(email)) {
-
-      $emailMessage.html('请填写正确邮箱的格式').show();
-      isCorrect = false;
-
-    } else {
-
-      $emailCorrect.show();
-    }
+    isCorrect = commonVerifyRegular(email, emailSelectors, EMAIL_MESSAGES, !emailReg.exec(email));
 
     var address = $('#address').val().trim();
     var phoneNumber = $('#phone-number').val().trim();
     var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
 
     if(isCorrect) {
-      $.ajax({
-        url: '/api/user',
-        type: 'POST',
-        data: {
-            name: userName,
-            password: password,
-            address: address,
-            phoneNumber: phoneNumber,
-            active: true,
-            createDate: createDate
-        },
-        success: function (data) {
 
-          $('.ui.second.modal')
+      $.post('api/user',
+        {
+          name: userName,
+          password: password,
+          address: address,
+          phoneNumber: phoneNumber,
+          createDate: createDate,
+          email: email
+        }).success(function() {
+
+          $('#registermodal')
             .modal('show');
-        }
-      });
+        });
     }
   });
 });

@@ -6,6 +6,7 @@ html
 
     link(rel="stylesheet" type="text/css" href="/style/navBar.css")
     link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
+    link(rel="stylesheet" type="text/css" href="/style/register.css")
 
     block css
     block title
@@ -18,7 +19,7 @@ html
         .two.wide.column
           a(href="#") 我的Let Us Go
         .one.wide.column
-          a(href="#") 请登录
+          a#login(href="#") 请登录
         .one.wide.column
           a(href="/register") 免费注册
       .ui.grid.myLogoAndSearch
@@ -61,3 +62,38 @@ html
           .sixteen.wide.column.copyright
             p copyright@letusgo All Rights Reserved 版权所有LETUSGO商城
             p © 2015 LetUsGo, Inc.
+
+    .ui.second.small.coupled.modal.LoginFailure.hidden
+      .header 登陆失败
+      .content
+        .description
+          span.loginResult
+      .actions
+        .primary.ui.button.confirm#again 重新登陆
+          i.right.arrow.icon
+
+    .ui.second.small.coupled.modal.LoginSuccess.hidden
+      .header
+      .content
+        .description
+          span.loginResult
+      .actions
+        a.primary.ui.button.shopping 我要去shopping！
+          i.right.arrow.icon
+
+    .ui.first.coupled.small.modal.userLogin.hidden
+      .content
+        .ui.grid.centered
+          .ten.wide.column
+            .ui.form.segment
+              .ui.header#login-header 登陆我的LetUsGo
+              .filed
+                input#user-name-login(placeholder="用户名" type="text")
+                span#user-name-message
+              .field
+                input#password-login(placeholder="密码" type="password")
+                span#password-message
+      .actions
+        a.primary.ui.button.register(href='/register') 注册
+        a.ui.positive.right.labeled.icon.button#userLogin 登陆
+          i.right.arrow.icon

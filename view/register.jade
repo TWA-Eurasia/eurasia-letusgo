@@ -7,7 +7,7 @@ block css
   link(rel="styleSheet" type="text/css" href="/style/register.css")
   script.
     System.import('js/register')
-    //System.import('js/cart')
+    System.import('js/cart')
 block content
   .ui.grid.centered
     .eight.wide.column
@@ -36,11 +36,12 @@ block content
         .field#button-field
           .ui.positive.reset.button#reset-button 重置
           .ui.negative.submit.button#submit-button 提交
-        .ui.second.small.coupled.modal.transition.hidden
+        .ui.second.small.coupled.modal.transition.hidden#registermodal
           .header 注册成功
           .content
             .description
-              .p 您已成功注册，点击确定返回.
+              .p 系统已经向该邮箱发送了一封验证激活邮件
+               .p 请查收邮件,进行验证激活！
           .actions
-            a.primary.ui.button.confirm(href='/') 确定
+            a.primary.ui.button.confirm 确定
 
