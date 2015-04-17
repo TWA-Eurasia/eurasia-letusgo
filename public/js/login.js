@@ -30,17 +30,10 @@ $(function () {
 
         $('#isUserName').html(data.user.name);
         $('.userLogin').modal('hide');
-
-        $('#Tip').fadeOut(5000);
       } else {
         $('#loginResult').html(data.message);
       }
     });
-  });
-
-  $('#confirm').on('click', function () {
-    $('.LoginFailure').hide();
-    $('.userLogin').modal('show');
   });
 });
 
