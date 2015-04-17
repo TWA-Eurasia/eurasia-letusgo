@@ -2,24 +2,25 @@
 
 var parseString = function (name, length) {
 
-
   var result = '';
   var nameLength = name.length;
   var charLength = name.replace(/[^\x00-\xff]/g, '**').length;
 
-  if(charLength <= length) {
+  if (charLength <= length) {
 
     return name;
   }
 
-  for(var i = 0, j = 0; i < nameLength; i++) {
+  for (var index = 0, visibleLength = 0; index < nameLength; index++) {
 
-    var char = name.charAt(i);
-    j += (/[\x00-\xff]/.test(char) ? 1 : 2);
+    var char = name.charAt(index);
+    visibleLength += (/[\x00-\xff]/.test(char) ? 1 : 2);
 
-    if(j <= length) {
+    if (visibleLength <= length) {
+
       result += char;
     } else {
+
       return result + '...';
     }
   }

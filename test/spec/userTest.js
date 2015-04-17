@@ -2,22 +2,22 @@
 
 var userController = require('../../controller/user');
 
-describe('index', function() {
+describe('index', function () {
 
   var reqMock = {};
   var resMock = {};
 
-  afterEach(function(){
+  afterEach(function () {
 
     reloadDatabase();
   });
 
 
-  describe('getUsers', function() {
+  describe('getUsers', function () {
 
-    it('should get a collections of user', function(done) {
+    it('should get a collections of user', function (done) {
 
-      resMock.send = function(object) {
+      resMock.send = function (object) {
 
         expect(object[0].name).to.equal('Sofia');
 
@@ -28,9 +28,9 @@ describe('index', function() {
     });
   });
 
-  describe('createUser', function() {
+  describe('createUser', function () {
 
-    it('should create a user and save it to mongoDB', function(done) {
+    it('should create a user and save it to mongoDB', function (done) {
 
       reqMock.body = {
 
@@ -42,7 +42,7 @@ describe('index', function() {
         createDate: new Date()
       };
 
-      resMock.send = function(object) {
+      resMock.send = function (object) {
 
         expect(object.name).to.equal('Sofia');
 

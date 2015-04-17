@@ -12,10 +12,12 @@ var indents = require('../../seed/test/indents');
 var categories = require('../../seed/test/categories');
 var carts = require('../../seed/test/carts');
 
-var reloadDatabase = function(){
+var reloadDatabase = function () {
   Item.remove({});
-  CartItem.remove({}, function(err, cartItem) {
-    if(err) {console.log(err);}
+  CartItem.remove({}, function (err, cartItem) {
+    if (err) {
+      console.log(err);
+    }
   });
   Cart.remove({});
   Category.remove({});

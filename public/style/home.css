@@ -1,10 +1,9 @@
-body{
+body {
   font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 15px;
 }
 
-.ui.vertical.menu
-{
+.ui.vertical.menu {
   width: 90%;
   background-color: #161616;
   color: #ffffff;
@@ -12,13 +11,11 @@ body{
   text-align: center;
 }
 
-.ui.dropdown.item.firstMenu
-{
+.ui.dropdown.item.firstMenu {
   color: #fff;
 }
 
-.ui.dropdown.item#categoryTitle
-{
+.ui.dropdown.item#categoryTitle {
   margin: 0;
   font-size: 15px;
   background: #C30000;
@@ -29,8 +26,7 @@ body{
   background: darkred;
 }
 
-.ui.dropdown.item:hover .menu
-{
+.ui.dropdown.item:hover .menu {
   display: block;
   background: rgba(255, 255, 255, 1.00);
 }
@@ -39,29 +35,24 @@ body{
   min-width: 45%;
 }
 
-.ui.four.column.grid
-{
+.ui.four.column.grid {
   padding-left: 0;
   padding-right: 20px;
 }
 
-.ui.inverted.teal.menu
-{
+.ui.inverted.teal.menu {
   padding: 0px;
 }
 
-.ui.segment>img
-{
+.ui.segment > img {
   cursor: pointer;
 }
 
-.ui.breadcrumb a
-{
+.ui.breadcrumb a {
   color: #000;
 }
 
-.notice
-{
+.notice {
   text-align: center;
   font-size: 2rem;
   height: 200px;
@@ -69,30 +60,25 @@ body{
   color: teal;
 }
 
-img.ui.fluid.image.itemImg
-{
+img.ui.fluid.image.itemImg {
   height: 185px;
 }
 
-.pagination
-{
+.pagination {
   padding-left: 565px;
   padding-top: 30px;
 }
 
-ul,li
-{
+ul, li {
   margin: 0;
   padding: 0;
 }
 
-.pagination ul
-{
+.pagination ul {
   -webkit-user-select: none;
 }
 
-.pagination li
-{
+.pagination li {
   display: inline-block;
   padding: 0.5em 0;
   background: #2EA69C;
@@ -105,43 +91,36 @@ ul,li
 }
 
 .pagination li:first-child,
-.pagination li:last-child
-{
+.pagination li:last-child {
   width: auto;
   padding: 0.5em 0.8em;
 }
 
-.pagination li.current
-{
+.pagination li.current {
   background: teal;
 }
 
-.pagination li.current:hover
-{
+.pagination li.current:hover {
   background: teal;
 }
 
-.pagination li:hover
-{
+.pagination li:hover {
   background: teal;
 }
 
 .pagination li.ellipsis,
-.pagination li.ellipsis:hover
-{
+.pagination li.ellipsis:hover {
   background: none;
   padding: 0;
   width: 1.2em;
 }
 
-.pagination li.ellipsis::after
-{
+.pagination li.ellipsis::after {
   content: "...";
   color: #000;
 }
 
 .pagination li.previous:hover,
-.pagination li.next:hover
-{
+.pagination li.next:hover {
   background: #2EA69C;
 }

@@ -14,8 +14,8 @@ block content
     .sixteen.wide.column
       h1.ui.header.centered
         .content
-         i.icon.browser
-         .content 商品清单
+          i.icon.browser
+          .content 商品清单
     .fourteen.wide.column.centered
       table.ui.large.table
         thead
@@ -28,16 +28,16 @@ block content
           th.three.wide.column 小计
         tbody
           -each cartItem in cartItems
-             tr
-               td
-                a(href='/items/#{cartItem.item.id}')
-                  img.ui.fluid.image.size(src="#{cartItem.item.image}")
-               td
-                a.itemName(data-content="#{cartItem.item.name}" href="/items/#{cartItem.item.id}") #{cartItem.item.shortName}
-               td #{cartItem.item.price} 元
-               td #{cartItem.item.unit}
-               td #{cartItem.number}
-               td #{cartItem.getSubtotal()} 元
+          tr
+            td
+              a(href='/items/#{cartItem.item.id}')
+                img.ui.fluid.image.size(src="#{cartItem.item.image}")
+            td
+              a.itemName(data-content="#{cartItem.item.name}" href="/items/#{cartItem.item.id}") #{cartItem.item.shortName}
+            td #{cartItem.item.price} 元
+            td #{cartItem.item.unit}
+            td #{cartItem.number}
+            td #{cartItem.getSubtotal()} 元
         tfoot.right
           tr
             th(colspan='7')
