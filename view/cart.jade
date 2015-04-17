@@ -1,13 +1,12 @@
 extends ./navBar.jade
 block css
+  link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
+  link(rel="styleSheet" type="text/css" href="/style/cart.css")
   script(src="jspm_packages/system.js")
   script(src="config.js")
   script.
-    System.import("js/login");
     System.import('js/cart');
-  link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
-  link(rel="styleSheet" type="text/css" href="/style/cart.css")
-
+    System.import("js/login");
 block title
   title 我的购物车
 block cart
@@ -55,7 +54,6 @@ block content
                   span.leftNumber #{cartItem.item.inventory}
                   span 件
                // .ui.negative.message#inventory(style = 'display: none') 库存仅剩#{cartItem.item.inventory}!
-
               td
                 span#subtotal #{cartItem.getSubtotal()}
                 span 元
@@ -63,7 +61,6 @@ block content
                 .ui.red.button.delete_cartItem 删除
               //td
               //  input.checkedCartItem(type="checkbox" name="checkedCartItem" checked)
-
         tfoot.right
           tr
            th(colspan='7')
@@ -71,7 +68,6 @@ block content
               h4.ui.black.header 总计：
                 span.total#total #{total}
                 span 元
-
        a.ui.teal.right.floated.right.labeled.icon.button#indent(href='/indent') 结算
         i.right.arrow.icon
     .ui.first.coupled.small.modal.transition
@@ -80,6 +76,5 @@ block content
           p 您确认要删除吗？
       .actions
         .primary.ui.button.no 取消
-
         a.ui.positive.right.labeled.icon.button.yes#yes 删除
           i.checkmark.icon
