@@ -53,8 +53,8 @@ $(function () {
 
         correctSelector.show();
       }
+      return isCorrect;
     });
-    return isCorrect;
   }
 
   function commonVerifyRegular(value, selectors, messages, condition) {
