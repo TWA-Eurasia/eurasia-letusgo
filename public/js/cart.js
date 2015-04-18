@@ -75,7 +75,7 @@ $(function () {
 
   });
 
-  $('.checkedCartItem').on('blur', function () {
+  $('.checkedCartItem').on('click', function () {
 
     var isChecked = $(this).prop('checked');
     if (!isChecked) {
