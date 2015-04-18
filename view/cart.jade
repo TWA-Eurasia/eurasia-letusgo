@@ -62,7 +62,7 @@ block content
               td(id ="#{cartItem._id}")
                 .ui.red.button.delete_cartItem 删除
               td
-                input.checkedCartItem(type="checkbox" name="checkedCartItem" checked)
+                input.checkedCartItem(id="#{cartItem._id}" type="checkbox" name="checkedCartItem" checked)
 
         tfoot.right
           tr
