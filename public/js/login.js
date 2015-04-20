@@ -27,12 +27,10 @@ $(function () {
     $.post('/api/user/login', {username: userName, password: password}, function (data) {
 
       if (data.user) {
-
         $('#isUserName').html(data.user.name);
         $('.userLogin').modal('hide');
         $('#loginSuccess').html(data.message);
         $('#tips').show().fadeOut(2000);
-
       } else {
         $('#loginResult').html(data.message).show();
       }
