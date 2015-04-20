@@ -9,6 +9,12 @@ var MAX_CART_AMOUNT = 99;
 
 $(function () {
 
+  if(sessionStorage.getItem('user')) {
+    $('#login').css('display', 'none');
+    $('#register').css('display', 'none');
+    $('#logout').css('display', 'block');
+  }
+
   function changeTotal(jqDom) {
     var id = jqDom.closest('tr').data('id');
     var num = jqDom.closest('td').find('.number').val();
@@ -240,4 +246,14 @@ $(function () {
 
     });
   });
+
+   $('#logout').on('click', function () {
+
+        console.log('hsdfakjdshakf');
+        sessionStorage.setItem('user', null);
+        $('#login').css('display', 'block');
+        $('#register').css('display', 'block');
+        $('#logout').css('display', 'none');
+        $('#current-user').html('').show();
+   });
 });
