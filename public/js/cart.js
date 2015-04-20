@@ -76,6 +76,21 @@ $(function () {
   });
 
   $('.checkedCartItem').on('click', function () {
+    var checkboxes = $('input[name="checkedCartItem"]');
+    var cartItemIds = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+      if(checkboxes[i].checked){
+        cartItemIds.push(checkboxes[i].id);
+      }
+    }
+
+    $.get( '/cart/total', {cartItemIds: cartItemIds}, function(){
+
+    }
+    );
+    console.log(cartItemIds);
+  });
+  $('.checkedCartItem').on('click', function () {
 
     var isChecked = $(this).prop('checked');
     if (!isChecked) {
