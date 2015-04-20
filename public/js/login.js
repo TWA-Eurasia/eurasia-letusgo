@@ -52,7 +52,6 @@ $(function () {
         $('#loginSuccess').html(data.message);
         $('#tips').show().fadeOut(2000);
 
-
       } else {
         $('#loginResult').html(data.message).show();
       }
