@@ -95,10 +95,10 @@ $(function () {
       data: {number: numberInput},
       success: function () {
         countCartAmount();
-        $('.success').show();
+        $('#add-success').show();
 
         window.setTimeout(function () {
-          $('.success').hide();
+          $('#add-success').hide();
         }, 1000);
       }
     });
