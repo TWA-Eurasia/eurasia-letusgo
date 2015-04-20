@@ -17,11 +17,11 @@ $(function () {
 
   $('#login').on('click', function () {
 
-    $('.userLogin')
+    $('.user-login')
       .modal('show');
   });
 
-  $('#userLogin').on('click', function () {
+  $('#user-login').on('click', function () {
 
     var userName = $('#user-name-login').val();
     var password = $('#password-login').val();
