@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
+'use strict';
 
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ItemSchema = new Schema({
@@ -11,12 +12,18 @@ var ItemSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Category'
   },
-  specification: [{
-    name: String,
-    price: Number,
-    inventory: Number
-  }],
+  specification: String,
+  price: {type: Number, get: setPrice},
+  inventory: Number,
   isRecommend: Boolean
 });
+
+function setPrice(num) {
+  return num.toFixed(2);
+}
+
+ItemSchema.methods.getId = function (item) {
+  return item._id;
+};
 
 module.exports = mongoose.model('Item', ItemSchema);

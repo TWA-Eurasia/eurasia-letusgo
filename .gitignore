@@ -4,3 +4,8 @@ node_modules
 eurasia-letusgo.iml
 jspm_packages
 .DS_Store
+npm-debug.log
+coverage
+target
+*.xml
+newrelic_agent.log

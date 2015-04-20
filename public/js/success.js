@@ -1,35 +1,32 @@
 'use strict';
+
 var $ = require('jquery');
-require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
+require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-function getParameterByName(name) {
-  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
-  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+var JUMP_TIME = 3;
+
+function jump(jumpTime) {
+
+  window.setTimeout(function () {
+    jumpTime--;
+
+    if (jumpTime > 0) {
+      $('#sec').text(jumpTime);
+      jump(jumpTime);
+    } else {
+      location.href = '/';
+    }
+  }, 1000);
 }
-
-var amount = getParameterByName('amount');
-$('#amount').text(amount);
 
 $(document).ready(function () {
 
-  function jump(count) {
+  $.get('/api/indent', function (data) {
 
-    window.setTimeout(function () {
-      count--;
+    var amount = data.total;
+    $('#amount').text(amount);
 
-      if (count > 0) {
-        $('#sec').text(count);
-        jump(count);
-      } else {
-        location.href = "/helloWorld";
-      }
-    }, 1000);
-  }
+    jump(JUMP_TIME);
 
-  jump(3);
+  });
 });
-
-
-

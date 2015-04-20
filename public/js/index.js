@@ -1,38 +1,43 @@
 'use strict';
 
-var _ = require('lodash');
 var $ = require('./jquery.pagination');
-require('github/Semantic-Org/Semantic-UI@1.11.6/dist/semantic');
+require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-$(document).ready(function () {
+$(function () {
 
-  if(application.index.pageCount > 1) {
+  if (application.index.pageCount > 1) {
+
     var visiblePageCount = 7;
     $('.pagination').pagination({
+
       pageCount: application.index.pageCount,
       currentPage: application.index.currentPage,
       visiblePageCount: visiblePageCount,
-      onPageChange: function(n) {
+      onPageChange: function (n) {
+
         var path = '/index/';
-        if(application.index.isCategory) {
+        if (application.index.isCategory) {
 
           var pathId = location.href.toString().split('/')[4];
-          path = '/' + location.href.toString().split('/')[3] + '/' + pathId + '/';
+          path = '/categories/' + pathId + '/';
         }
         location.href = path + n;
       }
     });
   }
 
-  var $firstMenu = $('.firstMenu');
-  $firstMenu.on('click', function() {
-    var id = $(this).data('id');
-    location.href = '/categoryView/' + id;
+  $('img')
+    .error(function () {
+      $(this).attr('src', '/image/missing.jpg');
+    })
+    .attr('src', function () {
+      return $(this).data('src');
+    });
+
+  var $itemName = $('.itemName');
+  $itemName.popup({
+
+    content: $(this).prop('data-content')
   });
 
-  var $image = $('.image');
-  $image.on('click', function() {
-    var id = $(this).data('id');
-    location.href = '/itemDetails/' + id;
-  });
 });

@@ -1,3 +1,7 @@
+'use strict';
+
+require('newrelic');
+
 var express = require('express');
 var path = require('path');
 
@@ -10,53 +14,58 @@ app.set('view engine', 'jade');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended:false
+  extended: false
 }));
 
 //connect to database
 mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
-    if (err) {
-        console.log('connection error', err);
-    } else {
-        console.log('connection successful');
-    }
+  if (err) {
+    console.log('connection error', err);
+  } else {
+    console.log('connection successful');
+  }
 });
 
 // development settings
 if (app.get('env') === 'development') {
 
-    app.use(express.static(path.join(__dirname, './public')));
-    app.use(express.static(path.join(__dirname, './.tmp')));
-    app.use(express.static(path.join(__dirname, './')));
-    app.use(express.static(path.join(__dirname, './jspm_packages')));
+  app.set('port', 3000);
+  app.use(express.static(path.join(__dirname, './public')));
+  app.use(express.static(path.join(__dirname, './.tmp')));
+  app.use(express.static(path.join(__dirname, './')));
+  app.use(express.static(path.join(__dirname, './jspm_packages')));
 
 
   // development error handler
-    // will print stacktrace
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+  // will print stacktrace
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
     });
+  });
 }
 
 // production settings
 if (app.get('env') === 'production') {
 
-    // changes it to use the optimized version for production
-    app.use(express.static(path.join(__dirname, '/dist')));
-
-    // production error handler
-    // no stacktraces leaked to user
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: {}
-        });
+  app.set('port', 80);
+  // changes it to use the optimized version for production
+  //app.use(express.static(path.join(__dirname, '/dist')));
+  app.use(express.static(path.join(__dirname, './public')));
+  app.use(express.static(path.join(__dirname, './.tmp')));
+  app.use(express.static(path.join(__dirname, './')));
+  app.use(express.static(path.join(__dirname, './jspm_packages')));
+  // production error handler
+  // no stacktraces leaked to user
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: {}
     });
+  });
 }
 
 // routes

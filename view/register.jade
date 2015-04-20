@@ -1,0 +1,47 @@
+extends ./navBar.jade
+block title
+  title 注册页面
+block css
+  link(rel="styleSheet" type="text/css" href="/style/register.css")
+  script(src="/jspm_packages/system.js")
+  script(src="/config.js")
+  script.
+    System.import('js/register')
+    System.import('js/cart')
+block content
+  .ui.grid.centered
+    .eight.wide.column
+      .ui.form.segment
+        .ui.header#register-header 欢迎注册我的LetUsGo
+        .filed
+          input#user-name(placeholder="用户名" type="text")
+          i.checkmark.icon#user-name-correct
+          span#user-name-message
+        .field
+          input#password(placeholder="密码" type="password")
+          i.checkmark.icon#password-correct
+          span#password-message
+        .field
+          input#repeat-password(placeholder="重复密码" type="password")
+          i.checkmark.icon#repeat-password-correct
+          span#repeat-password-message
+        .field
+          input#phone-number(placeholder="手机" type="text")
+        .field
+          input#address(placeholder="地址" type="text")
+        .field
+          input#email(placeholder="邮箱" type="text")
+          i.checkmark.icon#email-correct
+          span#email-message
+        .field#button-field
+          .ui.positive.reset.button#reset-button 重置
+          .ui.negative.submit.button#submit-button 提交
+        .ui.second.small.coupled.modal.transition.hidden#registermodal
+          .header 注册成功
+          .content
+            .description
+              .p 系统已经向该邮箱发送了一封验证激活邮件
+               .p 请查收邮件,进行验证激活！
+          .actions
+            a.primary.ui.button.confirm 确定
+

@@ -1,4 +1,7 @@
+'use strict';
+
 var mongoose = require('mongoose');
+var Item = require('./item');
 
 var Schema = mongoose.Schema;
 
@@ -7,12 +10,18 @@ var CartItemSchema = new Schema({
   number: Number
 });
 
-CartItemSchema.methods.getSubtotal = function() {
+CartItemSchema.methods.getSubtotal = function () {
 
-  var subtotal = 0;
-  subtotal =  this.item.price * this.number;
+  var subtotal = this.item.price * this.number;
 
-  return subtotal;
+  return subtotal.toFixed(2);
 };
 
-module.exports = mongoose.model('CartItem',CartItemSchema);
+CartItemSchema.methods.getItemId = function (cartItem) {
+
+  //console.log((cartItem.item).getId());
+  var item = new Item();
+  return item.getId(cartItem.item);
+};
+
+module.exports = mongoose.model('CartItem', CartItemSchema);

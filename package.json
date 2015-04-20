@@ -4,38 +4,54 @@
   "description": "",
   "main": "home.js",
   "scripts": {
-    "test": "mocha ./test/**",
+    "test": "istanbul cover _mocha ./test/**",
     "start": "nodemon ./bin/www"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.12.2",
     "browser-sync": "^2.4.0",
     "chai": "^2.1.2",
     "debug": "^2.1.3",
     "express": "^4.12.3",
+    "express-session": "^1.11.1",
+    "gulp-jshint": "^1.10.0",
+    "gulp-jshint-checkstyle-reporter": "^1.0.0",
     "gulp-less": "^3.0.2",
+    "istanbul": "^0.3.13",
     "jade": "^1.9.2",
     "jspm": "^0.15.0",
     "lodash": "^3.6.0",
     "mocha": "^2.2.1",
+    "moment": "^2.10.2",
     "mongoose": "^4.0.0",
+    "newrelic": "^1.18.2",
+    "nodemailer": "^1.3.4",
     "nodemon": "^1.3.7",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
     "path": "^0.11.14",
+    "shipit-deploy": "^1.3.1",
     "sinon": "^1.14.1",
-    "sinon-chai": "^2.7.0"
+    "sinon-chai": "^2.7.0",
+    "supertest": "^0.15.0"
   },
   "jspm": {
     "directories": {},
     "dependencies": {
+      "MD5": "npm:MD5@^1.2.1",
       "jquery": "github:components/jquery@^2.1.3",
       "lodash": "github:lodash/lodash@^3.6.0",
-      "semantic-ui": "github:Semantic-Org/Semantic-UI@^1.11.6"
+      "semantic-ui": "github:ziyiking/Semantic-UI@master"
     },
     "devDependencies": {
       "traceur": "github:jmcriffey/bower-traceur@0.0.87",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.87"
     }
+  },
+  "devDependencies": {
+    "gulp-jshint-checkstyle-reporter": "^1.0.0"
   }
 }
