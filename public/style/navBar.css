@@ -67,3 +67,7 @@
 #login:hover{
   cursor: pointer;
 }
+
+#loginResult {
+  color: red;
+}
