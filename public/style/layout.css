@@ -6,6 +6,15 @@
   margin: 0;
 }
 
+
+#current-user {
+  color: teal;
+}
+
+#logout {
+  display: none;
+}
+
 #my-account,
 #my-cart {
   padding: 10px;
@@ -73,3 +82,25 @@
   text-align: center;
 }
 
+#login:hover{
+  cursor: pointer;
+}
+
+#loginResult {
+  color: red;
+}
+#tips {
+  width:300px;
+  height: 100px;
+  font-size: 30px;
+  position: absolute;
+  padding:10px 0;
+  background: #00b5ad;
+  border:1px solid #f8efb0;
+  color:#fefcef;
+  margin: 300px auto 300px auto;
+  text-align: center;
+  top:10px;
+  left:600px;
+  z-index:1000;
+}

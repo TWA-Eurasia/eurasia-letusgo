@@ -13,6 +13,16 @@ var getUsers = function(req, res) {
   });
 };
 
+var getUserById = function(req,res) {
+
+  var id = req.params.id;
+
+  User.findById(id)
+    .exec(function(err, user) {
+
+      res.send({user: user});
+    });
+};
 var createUser = function(req, res) {
 
   var currentUser = req.body;
@@ -42,16 +52,25 @@ var login = function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({'name': username}, function (err, user) {
-    if (!user || user.password !== password) {
-      message = '用户或密码错误！';
+  User.findOne({'name': username, 'active': true}, function (err, user) {
+
+    if(!user) {
+      message = '用户不存在或未激活账户！';
+      return res.send({message: message});
     }
+
+    if(user.password !== password) {
+      message = '用户或密码错误！';
+      return res.send({message: message});
+    }
+
     res.send({user: user, message: message});
   });
 };
 
 module.exports = {
   getUsers: getUsers,
+  getUserById: getUserById,
   createUser: createUser,
   updateUser: updateUser,
   login: login
