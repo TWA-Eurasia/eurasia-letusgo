@@ -4,6 +4,17 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(function () {
 
+  if(sessionStorage.getItem('user')) {
+
+    var currentUserId = sessionStorage.getItem('user');
+
+    $.get('/api/user/' + currentUserId)
+      .success(function(data) {
+
+        $('#current-user').html(data.user.name).show();
+      });
+  }
+
   $('#login').on('click', function () {
 
     $('.userLogin')
