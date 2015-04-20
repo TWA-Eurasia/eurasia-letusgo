@@ -150,7 +150,7 @@ $(function () {
 
     deleteCartItem = this;
 
-    $('.first.modal')
+    $('.delete-modal')
       .modal('show');
   });
 
@@ -181,4 +181,46 @@ $(function () {
   });
 
   countCartAmount();
+
+  $('#indent').on('click', function() {
+
+    if(!sessionStorage.getItem('user')) {
+
+      $('.user-login')
+        .modal('show');
+    } else {
+
+      $.post('/api/user').success(function() {
+
+      });
+    }
+  });
+
+  $('#user-login').on('click', function () {
+
+    var userName = $('#user-name-login').val();
+    var password = $('#password-login').val();
+
+    $.post('/api/user/login', {username: userName, password: password}, function (data) {
+
+      if (data.user) {
+        $('.loginResult').html(data.message);
+        $('.LoginSuccess').modal('show');
+
+        sessionStorage.setItem('user', data.user._id);
+
+        var currentUserId = sessionStorage.getItem('user');
+
+        $.get('/api/user/' + currentUserId)
+          .success(function(data) {
+
+            $('#current-user').html(data.user.name).show();
+          });
+
+      } else {
+        $('.loginResult').html(data.message);
+        $('.LoginFailure').modal('show');
+      }
+    });
+  });
 });

@@ -39,5 +39,4 @@ $(function () {
 
     content: $(this).prop('data-content')
   });
-
 });

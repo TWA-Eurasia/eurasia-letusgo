@@ -2,15 +2,35 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
+$('.modal')
+  .modal({
+    selector: {
+      close: 'icon.close'
+    }
+  })
+;
+
 $(function () {
+
+  if(sessionStorage.getItem('user')) {
+
+    var currentUserId = sessionStorage.getItem('user');
+
+    $.get('/api/user/' + currentUserId)
+      .success(function(data) {
+
+        $('#current-user').html(data.user.name).show();
+      });
+  }
 
   $('#login').on('click', function () {
 
-    $('.userLogin')
+    $('.user-login')
       .modal('show');
+    $('#loginResult').html('');
   });
 
-  $('#userLogin').on('click', function () {
+  $('#user-login').on('click', function () {
 
     var userName = $('#user-name-login').val();
     var password = $('#password-login').val();
@@ -18,20 +38,23 @@ $(function () {
     $.post('/api/user/login', {username: userName, password: password}, function (data) {
 
       if (data.user) {
-        $('.loginResult').html(data.message);
-        $('.LoginSuccess').modal('show');
-        sessionStorage.setItem('user', data.user);
-        console.log(sessionStorage.getItem('user'));
+        sessionStorage.setItem('user', data.user._id);
+
+        var currentUserId = sessionStorage.getItem('user');
+
+        $.get('/api/user/' + currentUserId)
+          .success(function(data) {
+
+            $('#current-user').html(data.user.name).show();
+          });
+
+        $('.userLogin').modal('hide');
+        $('#loginSuccess').html(data.message);
+        $('#tips').show().fadeOut(2000);
       } else {
-        $('.loginResult').html(data.message);
-        $('.LoginFailure').modal('show');
+        $('#loginResult').html(data.message).show();
       }
     });
-  });
-
-  $('#confirm').on('click', function () {
-    $('.LoginFailure').hide();
-    $('.userLogin').modal('show');
   });
 });
 
