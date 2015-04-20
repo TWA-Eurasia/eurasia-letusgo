@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var moment = require('moment');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var deleteCartItem;
@@ -184,15 +185,30 @@ $(function () {
 
   $('#indent').on('click', function() {
 
-    if(!sessionStorage.getItem('user')) {
+    var sessionUser = sessionStorage.getItem('user');
+    if(!sessionUser) {
 
-      $('.user-login')
+      $('.user-login-modal')
         .modal('show');
+
+      $('#login-result').html('');
     } else {
 
-      $.post('/api/user').success(function() {
+      var cartItemIds = [];
+      var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
+      $.post('/api/indent',
+        {
+          user: sessionUser,
+          cartItems: cartItemIds,
+          createDate: createDate,
+          isPaid: false
+        }).success(function(err, data) {
 
-      });
+          if(data.status === 200){
+
+            location.href = '/indent';
+          }
+        });
     }
   });
 
@@ -204,9 +220,6 @@ $(function () {
     $.post('/api/user/login', {username: userName, password: password}, function (data) {
 
       if (data.user) {
-        $('.loginResult').html(data.message);
-        $('.LoginSuccess').modal('show');
-
         sessionStorage.setItem('user', data.user._id);
 
         var currentUserId = sessionStorage.getItem('user');
@@ -215,12 +228,16 @@ $(function () {
           .success(function(data) {
 
             $('#current-user').html(data.user.name).show();
+
+            $('.user-login-modal').modal('hide');
+            $('#login-success').html(data.message);
+            $('#tips').show().fadeOut(2000);
           });
 
       } else {
-        $('.loginResult').html(data.message);
-        $('.LoginFailure').modal('show');
+        $('#login-result').html(data.message).show();
       }
+
     });
   });
 });

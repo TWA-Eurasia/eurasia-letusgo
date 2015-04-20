@@ -44,7 +44,7 @@ block content
                   td
                     .ui
                       i.minus.square.icon.pointer.reduce
-                      input.number(type="text" value="#{cartItem.number}")
+                      input.number.number-input(type="text" value="#{cartItem.number}")
                       i.add.square.icon.pointer.increase
                     .ui.negative.message.hidden.inventory 最多能购买
                       span.leftNumber #{cartItem.item.inventory}
@@ -64,7 +64,7 @@ block content
                 h4.ui.black.header 总计：
                   span.total#total #{total}
                   span 元
-      a.ui.teal.right.floated.right.labeled.icon.button#indent(href='/indent') 结算
+      a.ui.teal.right.floated.right.labeled.icon.button#indent 结算
         i.right.arrow.icon
     .ui.first.coupled.small.modal.transition.delete-modal
       .content
