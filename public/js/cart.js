@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var moment = require('moment');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var deleteCartItem;
@@ -184,7 +185,8 @@ $(function () {
 
   $('#indent').on('click', function() {
 
-    if(!sessionStorage.getItem('user')) {
+    var sessionUser = sessionStorage.getItem('user');
+    if(!sessionUser) {
 
       $('.user-login-modal')
         .modal('show');
@@ -192,11 +194,21 @@ $(function () {
       $('#login-result').html('');
     } else {
 
-      $.post('/api/user').success(function() {
+      var cartItemIds = [];
+      var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
+      $.post('/api/indent',
+        {
+          user: sessionUser,
+          cartItems: cartItemIds,
+          createDate: createDate,
+          isPaid: false
+        }).success(function(err, data) {
 
-      });
+          if(data.status === 200){
 
-      location.href = '/indent';
+            location.href = '/indent';
+          }
+        });
     }
   });
 
