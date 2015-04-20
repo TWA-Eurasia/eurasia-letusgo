@@ -12,14 +12,26 @@ $('.modal')
 
 $(function () {
 
+  if(sessionStorage.getItem('user')) {
+
+    var currentUserId = sessionStorage.getItem('user');
+
+    $.get('/api/user/' + currentUserId)
+      .success(function(data) {
+
+        $('#current-user').html(data.user.name).show();
+      });
+  }
+
   $('#login').on('click', function () {
 
-    $('.userLogin')
+    $('.user-login-modal')
       .modal('show');
-    $('#loginResult').html('');
+
+    $('#login-result').html('');
   });
 
-  $('#userLogin').on('click', function () {
+  $('#user-login').on('click', function () {
 
     var userName = $('#user-name-login').val();
     var password = $('#password-login').val();
@@ -37,13 +49,12 @@ $(function () {
             $('#current-user').html(data.user.name).show();
           });
 
-        $('.userLogin').modal('hide');
-        $('#loginSuccess').html(data.message);
+        $('.user-login-modal').modal('hide');
+        $('#login-success').html(data.message);
         $('#tips').show().fadeOut(2000);
 
-
       } else {
-        $('#loginResult').html(data.message).show();
+        $('#login-result').html(data.message).show();
       }
     });
   });
