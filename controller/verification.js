@@ -10,13 +10,11 @@ var updateActive = function (req, res) {
         if (err) {
           throw err;
         }
-        res.render('verification',{user:user});
-        console.log(user);
-
+        res.render('verification',{user : user});
       });
     });
 };
 
 module.exports = {
-  updateActive : updateActive
+  updateActive : updateActive,
 };
