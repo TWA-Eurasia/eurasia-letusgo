@@ -16,5 +16,5 @@ var updateActive = function (req, res) {
 };
 
 module.exports = {
-  updateActive : updateActive,
+  updateActive : updateActive
 };
