@@ -15,8 +15,6 @@ block css
     System.import('js/cart');
 block title
   title 首页
-block home
-  a.ui.active.link.item(href="/") Let Us Go
 block content
   .ui.grid.content
     .one.wide.column &nbsp;
@@ -56,4 +54,4 @@ block content
               a.name.itemName(href="/items/#{item._id}" data-content="#{item.name}") #{item.shortName}
               p.price #{item.price}元
               a.ui.red.button(href="/items/#{item._id}" data-id="#{item._id}") 立即购买
-        .pagination
+      .pagination

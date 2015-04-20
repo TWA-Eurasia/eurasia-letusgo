@@ -13,11 +13,13 @@ html
     .container
       .ui.grid.topBar
         .one.wide.column &nbsp;
-        .nine.wide.column Hi，
-          span#isUserName
-          span 欢迎来到Let Us Go商城
-        .two.wide.column
-          a(href="#") 我的Let Us Go
+        .seven.wide.column Hi，
+          span#isUserName 欢迎来到Let Us Go商城
+        .three.wide.column
+          a#my-account(href="#") 我的Let Us Go
+          a#my-cart.ui.link.item(href="/cart") 购物车
+            i.cart.in.icon
+            strong.ui.label#cart-amount 0
         .one.wide.column
           a#login 请登录
         .one.wide.column
