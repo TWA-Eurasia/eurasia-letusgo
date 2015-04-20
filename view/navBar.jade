@@ -43,6 +43,8 @@ html
                 a.ui.link.item(href="/cart") 购物车
                   i.cart.in.icon
                   strong.ui.label#cart-amount 0
+      .ui.success.floating.message.hidden#tips
+        p#loginSuccess
       block content
       .ui.divider.horizontal 关于我们
       footer
@@ -79,8 +81,11 @@ html
         a.primary.ui.button.register(href='/register') 注册
         a.ui.positive.right.labeled.icon.button#userLogin 登陆
           i.right.arrow.icon
-      .ui.popup.top.center.loading.transition.visible#tips(style=" left: 50%")
-        .ui.success.message#loginSuccess
+
+
+
+
+
 
 
 
