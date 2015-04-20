@@ -27,10 +27,21 @@ $(function () {
     $.post('/api/user/login', {username: userName, password: password}, function (data) {
 
       if (data.user) {
-        $('#isUserName').html(data.user.name);
+        sessionStorage.setItem('user', data.user._id);
+
+        var currentUserId = sessionStorage.getItem('user');
+
+        $.get('/api/user/' + currentUserId)
+          .success(function(data) {
+
+            $('#current-user').html(data.user.name).show();
+          });
+
         $('.userLogin').modal('hide');
         $('#loginSuccess').html(data.message);
         $('#tips').show().fadeOut(2000);
+
+
       } else {
         $('#loginResult').html(data.message).show();
       }

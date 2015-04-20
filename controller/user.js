@@ -13,6 +13,16 @@ var getUsers = function(req, res) {
   });
 };
 
+var getUserById = function(req,res) {
+
+  var id = req.params.id;
+
+  User.findById(id)
+    .exec(function(err, user) {
+
+      res.send({user: user});
+    });
+};
 var createUser = function(req, res) {
 
   var currentUser = req.body;
@@ -60,6 +70,7 @@ var login = function(req, res) {
 
 module.exports = {
   getUsers: getUsers,
+  getUserById: getUserById,
   createUser: createUser,
   updateUser: updateUser,
   login: login

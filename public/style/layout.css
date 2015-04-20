@@ -6,6 +6,10 @@
   margin: 0;
 }
 
+#current-user {
+  color: teal;
+}
+
 #my-account,
 #my-cart {
   padding: 10px;

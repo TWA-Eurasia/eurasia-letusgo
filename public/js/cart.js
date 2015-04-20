@@ -150,7 +150,7 @@ $(function () {
 
     deleteCartItem = this;
 
-    $('.first.modal')
+    $('.delete-modal')
       .modal('show');
   });
 
