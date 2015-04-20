@@ -6,8 +6,13 @@
   margin: 0;
 }
 
+
 #current-user {
   color: teal;
+}
+
+#logout {
+  display: none;
 }
 
 #my-account,
