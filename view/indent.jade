@@ -1,26 +1,21 @@
 extends ./navBar.jade
-
 block css
-  script(src="jspm_packages/system.js")
-  script(src="config.js")
-
   link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
   link(rel="styleSheet" type="text/css" href="/style/cart.css")
-
+  script(src="jspm_packages/system.js")
+  script(src="config.js")
   script.
     System.import("js/indent");
     System.import("js/login");
-
 block title
   title 支付订单
-
 block content
   .ui.grid
     .sixteen.wide.column
       h1.ui.header.centered
         .content
-         i.icon.browser
-         .content 商品清单
+          i.icon.browser
+          .content 商品清单
     .fourteen.wide.column.centered
       table.ui.large.table
         thead
@@ -31,20 +26,18 @@ block content
           th.two.wide.column 单位
           th.two.wide.column 数量
           th.three.wide.column 小计
-
         tbody
           -each cartItem in cartItems
-             tr
-               td
+            tr
+              td
                 a(href='/items/#{cartItem.item.id}')
                   img.ui.fluid.image.size(src="#{cartItem.item.image}")
-               td
+              td
                 a.itemName(data-content="#{cartItem.item.name}" href="/items/#{cartItem.item.id}") #{cartItem.item.shortName}
-               td #{cartItem.item.price} 元
-               td #{cartItem.item.unit}
-               td #{cartItem.number}
-               td #{cartItem.getSubtotal()} 元
-
+              td #{cartItem.item.price} 元
+              td #{cartItem.item.unit}
+              td #{cartItem.number}
+              td #{cartItem.getSubtotal()} 元
         tfoot.right
           tr
             th(colspan='7')
@@ -56,7 +49,6 @@ block content
       a.ui.red.right.floated.right.labeled.icon.button#pay 支付
         i.right.arrow.icon
         span.ui.hidden#shortedCartItemName #{shortedCartItemName}
-
     .ui.first.coupled.small.modal.transition.confirmPay
       .content
         .description
@@ -65,7 +57,6 @@ block content
         .primary.ui.button.nopay 取消
         a.ui.positive.right.labeled.icon.button#isPaid(data-total= total, data-cart = cartItems, data-indentId = indent._id ) 支付
           i.right.arrow.icon
-
     .ui.second.small.coupled.modal.transition.hidden
       .header 支付失败
       .content

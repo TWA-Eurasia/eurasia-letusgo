@@ -12,8 +12,8 @@ function getShortedCartItemName(cartItems) {
 
   var shortedCartItemName = '';
 
-  cartItems.forEach(function(cartItem) {
-    if(cartItem.number > cartItem.item.inventory) {
+  cartItems.forEach(function (cartItem) {
+    if (cartItem.number > cartItem.item.inventory) {
       shortedCartItemName += cartItem.item.name + '、';
     }
   });
@@ -26,12 +26,12 @@ router.get('/', function (req, res) {
   Indent.findById('551fd16975cd55ed0cfa5503')
     .populate('cartItems')
     .exec(function (err, indent) {
+      console.log(indent.cartItems);
 
       Item.populate(indent, 'cartItems.item', function (err) {
-        if(err) {
+        if (err) {
           throw err;
         }
-
         indent.cartItems.forEach(function (cartItem) {
           cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
         });

@@ -5,7 +5,6 @@ var _ = require('lodash');
 var User = require('../model/user');
 var sendMail = require('../util/email');
 
-
 var getUsers = function(req, res) {
 
   User.find(function(err, users) {
@@ -18,7 +17,7 @@ var createUser = function(req, res) {
 
   var currentUser = req.body;
 
-  User.create(currentUser, function(err, data) {
+  User.create(currentUser, function (err, data) {
 
     sendMail.sendMail(data);
     res.send(data);
@@ -43,8 +42,8 @@ var login = function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({'name': username}, function(err, user) {
-    if(!user || user.password !== password) {
+  User.findOne({'name': username}, function (err, user) {
+    if (!user || user.password !== password) {
       message = '用户或密码错误！';
     }
     res.send({user: user, message: message});

@@ -25,7 +25,7 @@ gulp.task('serve', ['lessCompiler'], function () {
 
 });
 
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
   gulp.src(['router/**/*.js', 'public/**/*.js', 'test/**/*.js'])
     .pipe(jshint())
     .pipe(checkstyleReporter())
