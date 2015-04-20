@@ -186,13 +186,17 @@ $(function () {
 
     if(!sessionStorage.getItem('user')) {
 
-      $('.user-login')
+      $('.user-login-modal')
         .modal('show');
+
+      $('#login-result').html('');
     } else {
 
       $.post('/api/user').success(function() {
 
       });
+
+      location.href = '/indent';
     }
   });
 
@@ -204,9 +208,6 @@ $(function () {
     $.post('/api/user/login', {username: userName, password: password}, function (data) {
 
       if (data.user) {
-        $('.loginResult').html(data.message);
-        $('.LoginSuccess').modal('show');
-
         sessionStorage.setItem('user', data.user._id);
 
         var currentUserId = sessionStorage.getItem('user');
@@ -215,12 +216,16 @@ $(function () {
           .success(function(data) {
 
             $('#current-user').html(data.user.name).show();
+
+            $('.user-login-modal').modal('hide');
+            $('#login-success').html(data.message);
+            $('#tips').show().fadeOut(2000);
           });
 
       } else {
-        $('.loginResult').html(data.message);
-        $('.LoginFailure').modal('show');
+        $('#login-result').html(data.message).show();
       }
+
     });
   });
 });
