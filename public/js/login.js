@@ -25,9 +25,10 @@ $(function () {
 
   $('#login').on('click', function () {
 
-    $('.user-login')
+    $('.user-login-modal')
       .modal('show');
-    $('#loginResult').html('');
+
+    $('#login-result').html('');
   });
 
   $('#user-login').on('click', function () {
@@ -48,13 +49,12 @@ $(function () {
             $('#current-user').html(data.user.name).show();
           });
 
-        $('.userLogin').modal('hide');
-        $('#loginSuccess').html(data.message);
+        $('.user-login-modal').modal('hide');
+        $('#login-success').html(data.message);
         $('#tips').show().fadeOut(2000);
 
-
       } else {
-        $('#loginResult').html(data.message).show();
+        $('#login-result').html(data.message).show();
       }
     });
   });
