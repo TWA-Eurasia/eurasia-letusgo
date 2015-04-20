@@ -6,6 +6,15 @@
   margin: 0;
 }
 
+#my-account,
+#my-cart {
+  padding: 10px;
+}
+
+#cart-amount {
+  padding: 0;
+}
+
 .topBar > .column > a {
   color: teal;
 }

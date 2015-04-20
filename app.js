@@ -35,7 +35,12 @@ if (app.get('env') === 'development') {
   app.use(express.static(path.join(__dirname, './')));
   app.use(express.static(path.join(__dirname, './jspm_packages')));
 
-
+  //
+  //app.use(function(req, res, next) {
+  //  var err = new Error('Not Found');
+  //  err.status = 404;
+  //  next(err);
+  //});
   // development error handler
   // will print stacktrace
   app.use(function (err, req, res, next) {

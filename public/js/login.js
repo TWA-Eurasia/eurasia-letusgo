@@ -20,6 +20,8 @@ $(function () {
       if (data.user) {
         $('.loginResult').html(data.message);
         $('.LoginSuccess').modal('show');
+        sessionStorage.setItem('user', data.user);
+        console.log(sessionStorage.getItem('user'));
       } else {
         $('.loginResult').html(data.message);
         $('.LoginFailure').modal('show');

@@ -32,8 +32,6 @@ router.get('/', function (req, res) {
         if (err) {
           throw err;
         }
-        console.log(result);
-        console.log(indent.cartItems);
         indent.cartItems.forEach(function (cartItem) {
           cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
         });
