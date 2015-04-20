@@ -69,7 +69,7 @@ $(function () {
       return $(this).data('src');
     });
 
-  $('#allChecked').on('change', function () {
+  $('#allChecked').on('click', function () {
 
     $('input[name="checkedCartItem"]').prop('checked', this.checked);
 
@@ -93,24 +93,10 @@ $(function () {
 
   $('.checkedCartItem').on('click', function () {
 
-    var isChecked = $(this).prop('checked');
-    if (!isChecked) {
-      $('#allChecked').prop('checked', false);
-    }
+    var checkboxesSize = $('.checkedCartItem').length;
+    var checkedBoxesSize = $('.checkedCartItem:checked').length;
 
-    var isAllChecked = true;
-    var checkboxes = $('input[name="checkedCartItem"]');
-
-    for (var i = 0; i < checkboxes.length; i++) {
-      isAllChecked = checkboxes[i].checked;
-      if (!isAllChecked) {
-        return;
-      }
-    }
-
-    if (isAllChecked) {
-      $('#allChecked').prop('checked', true);
-    }
+    $('#allChecked').prop('checked', checkboxesSize === checkedBoxesSize);
 
   });
 
