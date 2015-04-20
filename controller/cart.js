@@ -9,7 +9,7 @@ var CartItem = require('../model/cartItem');
 
 var NAME_LENGTH = 16;
 
-function findCartById(cartId, done) {
+function findCartById(cartId, callback) {
 
   Cart.findById(cartId)
     .populate('cartItems')
@@ -21,7 +21,7 @@ function findCartById(cartId, done) {
           throw err;
         }
 
-        done(cart);
+        callback(cart);
       });
     });
 }
@@ -40,6 +40,30 @@ var getCart = function (req, res) {
   });
 };
 
+var getTotal = function (req, res) {
+
+  var cartId = '551cc282a6b79c584b59bc0f';
+  var cartItemIds = req.query.cartItemIds;
+
+  var cartItems = [];
+  var total = 0;
+
+  findCartById(cartId, function (cart) {
+
+    _.forEach(cartItemIds, function (cartItemId) {
+
+      CartItem.findById(cartItemId)
+        .populate('item')
+        .exec(function(err, cartItem){
+
+          cartItems.push(cartItem);
+          total = cart.getTotal(cartItems);
+
+        });
+    });
+  });
+
+};
 var addToCart = function (req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';
   var number = parseInt(req.body.number);
@@ -149,5 +173,6 @@ module.exports = {
   changeCartItem: changeCartItem,
   removeCartItem: removeCartItem,
   getAmount: getAmount,
-  getInventory: getInventory
+  getInventory: getInventory,
+  getTotal: getTotal
 };
