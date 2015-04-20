@@ -42,6 +42,9 @@ $(function () {
         sessionStorage.setItem('user', data.user._id);
 
         var currentUserId = sessionStorage.getItem('user');
+        $('#login').css('display', 'none');
+        $('#register').css('display', 'none');
+        $('#logout').css('display', 'block');
 
         $.get('/api/user/' + currentUserId)
           .success(function(data) {
