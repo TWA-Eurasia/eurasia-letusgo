@@ -26,13 +26,6 @@ mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
   }
 });
 
-app.set('port', 3000);
-app.use(express.static(path.join(__dirname, './public')));
-app.use(express.static(path.join(__dirname, './.tmp')));
-app.use(express.static(path.join(__dirname, './')));
-app.use(express.static(path.join(__dirname, './jspm_packages')));
-
-// production settings
 if (app.get('env') === 'production') {
   app.set('port', 80);
   // changes it to use the optimized version for production
@@ -43,12 +36,14 @@ if (app.get('env') === 'production') {
   app.use(express.static(path.join(__dirname, './jspm_packages')));
 }
 
-// routes
+app.set('port', 3000);
+app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, './.tmp')));
+app.use(express.static(path.join(__dirname, './')));
+app.use(express.static(path.join(__dirname, './jspm_packages')));
+
 
 var router = require('./router');
-
-
-
 router(app);
 
 // catch 404 and forward to error handler
@@ -56,14 +51,6 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
-});
-
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: err
-  });
 });
 
 // production settings
@@ -78,6 +65,14 @@ if (app.get('env') === 'production') {
     });
   });
 }
+
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: err
+  });
+});
 
 
 
