@@ -17,31 +17,39 @@ var findUser = function(req, res, next) {
 
   var name = req.query.name;
 
-  User.find({name: name}, function(err, user) {
+  User.find({name: name})
+    .exec()
+    .then(function(user) {
 
-    if(err) {
+      if(user.length === 1) {
+
+        res.send({isExisted: true, message: USER_EXISTED});
+      } else {
+
+        res.send({isExisted: false, message: USER_UNEXISTED});
+      }
+    })
+    .onReject(function(err) {
 
       next(err);
-    }
-
-    if(user.length === 1) {
-
-      res.send({isExisted: true, message: USER_EXISTED});
-    } else {
-
-      res.send({isExisted: false, message: USER_UNEXISTED});
-    }
-  });
+    });
 };
 
-var getUserById = function(req,res) {
+var getUserById = function(req, res, next) {
 
   var id = req.params.id;
+  console.log(id);
 
   User.findById(id)
-    .exec(function(err, user) {
+    .exec()
+    .then(function(user) {
 
+      user.password = '******';
       res.send({state: 200, user: user, message: FIND_SUCCESS});
+    })
+    .onReject(function(err) {
+
+      next(err);
     });
 };
 
@@ -49,31 +57,32 @@ var createUser = function(req, res, next) {
 
   var currentUser = req.body;
 
-  User.create(currentUser, function (err, user) {
+  User.create(currentUser)
+    .exec()
+    .then(function(user) {
 
-    if(err) {
+      sendMail.sendMail(user);
+
+      user.password = '******';
+      res.send({status: 200, data: user, message: CREATE_SUCCESS});
+    })
+    .onReject(function(err) {
 
       next(err);
-    }
+    });
 
-    sendMail.sendMail(user);
-
-    user.password = '******';
-    res.send({status: 200, data: user, message: CREATE_SUCCESS});
-
-  });
 };
-
-var updateUser = function(req, res) {
-
-  var userId = req.params.id;
-  var indentId = req.body.indentId;
-
-  User.update(userId, {$addToSet: {indents: indentId}}, function () {
-
-    res.send('add indent to user is successful');
-  });
-};
+//
+//var updateUser = function(req, res) {
+//
+//  var userId = req.params.id;
+//  var indentId = req.body.indentId;
+//
+//  User.update(userId, {$addToSet: {indents: indentId}}, function () {
+//
+//    res.send('add indent to user is successful');
+//  });
+//};
 
 var login = function(req, res) {
 
@@ -98,6 +107,6 @@ module.exports = {
   findUser: findUser,
   getUserById: getUserById,
   createUser: createUser,
-  updateUser: updateUser,
+  //updateUser: updateUser,
   login: login
 };
