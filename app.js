@@ -26,35 +26,7 @@ mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
   }
 });
 
-// development settings
-if (app.get('env') === 'development') {
-
-  app.set('port', 3000);
-  app.use(express.static(path.join(__dirname, './public')));
-  app.use(express.static(path.join(__dirname, './.tmp')));
-  app.use(express.static(path.join(__dirname, './')));
-  app.use(express.static(path.join(__dirname, './jspm_packages')));
-
-  //
-  //app.use(function(req, res, next) {
-  //  var err = new Error('Not Found');
-  //  err.status = 404;
-  //  next(err);
-  //});
-  // development error handler
-  // will print stacktrace
-  app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production settings
 if (app.get('env') === 'production') {
-
   app.set('port', 80);
   // changes it to use the optimized version for production
   //app.use(express.static(path.join(__dirname, '/dist')));
@@ -62,6 +34,27 @@ if (app.get('env') === 'production') {
   app.use(express.static(path.join(__dirname, './.tmp')));
   app.use(express.static(path.join(__dirname, './')));
   app.use(express.static(path.join(__dirname, './jspm_packages')));
+}
+
+app.set('port', 3000);
+app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, './.tmp')));
+app.use(express.static(path.join(__dirname, './')));
+app.use(express.static(path.join(__dirname, './jspm_packages')));
+
+
+var router = require('./router');
+router(app);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// production settings
+if (app.get('env') === 'production') {
   // production error handler
   // no stacktraces leaked to user
   app.use(function (err, req, res, next) {
@@ -73,8 +66,15 @@ if (app.get('env') === 'production') {
   });
 }
 
-// routes
-var router = require('./router')(app);
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: err
+  });
+});
+
+
 
 module.exports = app;
 

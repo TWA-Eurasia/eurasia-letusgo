@@ -1,16 +1,18 @@
 extends layout
 block css
-  link(rel="stylesheet" type="text/css" href="jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
-  link(rel="styleSheet" type="text/css" href="/style/success.css")
+  link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
+  link(rel="styleSheet" type="text/css" href="/style/cart.css")
   script(src="jspm_packages/system.js")
   script(src="config.js")
   script.
+    System.import("js/indent");
+    System.import("js/login");
 block title
   title 服务器出错
 block content
   .ui.grid.centered
     .ten.wide.column.centered
       h1 服务器挂掉了，程序员哥哥/姐姐正在修...
-        span#message(style="color: red")
-        span #{message}
-        span #{error}
+        h1= message
+        h2= error.status
+        pre #{error.stack}
