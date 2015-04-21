@@ -1,18 +1,15 @@
 extends layout
 block css
   link(rel="styleSheet" type="text/css" href="/style/home.css")
+block script
   script(type="text/javascript").
     var application = application || {};
     application.index = application.index || {};
     application.index.pageCount = #{pageCount};
     application.index.currentPage = #{currentPage};
     application.index.isCategory = #{isCategory};
-  script(src = "/jspm_packages/system.js")
-  script(src = "/config.js")
   script.
     System.import('js/index');
-    System.import("js/login");
-    System.import('js/cart');
 block title
   title 首页
 block content

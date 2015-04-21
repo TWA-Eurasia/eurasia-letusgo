@@ -1,13 +1,9 @@
 extends layout
-block title
-  title 注册成功
-block css
-  script(src="/jspm_packages/system.js")
-  script(src="/config.js")
+block script
   script.
     System.import('js/verification');
-    System.import('js/success');
-
+block title
+  title 注册成功
 block content
   .ui.grid.centered
     .fourteen.wide.column
