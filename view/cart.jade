@@ -31,34 +31,7 @@ block content
         tbody.center
           tr
             td.ui.teal.message.delete-message.hidden(colspan='6') 删除成功
-<<<<<<< HEAD
-              - each cartItem in cartItems
-                tr(data-id="#{cartItem._id}")
-                  td
-                    a(href='/items/#{cartItem.item.id}')
-                      img.ui.fluid.image.size(src="#{cartItem.item.image}")
-                  td
-                    a.itemName(data-content="#{cartItem.item.name}" href='/items/#{cartItem.item.id}') #{cartItem.item.shortName}
-                  td
-                    span#price #{cartItem.item.price}
-                    span 元
-                  td
-                    .ui
-                      i.minus.square.icon.pointer.reduce
-                      input.number.number-input(type="text" value="#{cartItem.number}")
-                      i.add.square.icon.pointer.increase
-                    .ui.negative.message.hidden.inventory 最多能购买
-                      span.leftNumber #{cartItem.item.inventory}
-                      span 件
-                  // .ui.negative.message#inventory(style = 'display: none') 库存仅剩#{cartItem.item.inventory}!
-                  td
-                    span#subtotal #{cartItem.getSubtotal()}
-                    span 元
-                  td(id ="#{cartItem._id}")
-                    .ui.red.button.delete_cartItem 删除
-                  //td
-                  //  input.checkedCartItem(type="checkbox" name="checkedCartItem" checked)
-=======
+
           - each cartItem in cartItems
             tr(data-id="#{cartItem._id}")
               td
@@ -87,7 +60,6 @@ block content
               td
                 input.checkedCartItem(id="#{cartItem._id}" type="checkbox" name="checkedCartItem" checked)
 
->>>>>>> code-review
         tfoot.right
           tr
             th(colspan='7')
