@@ -11,7 +11,7 @@ body {
   display: none;
 }
 
-input.number-input {
+input#input-number {
   text-align: center;
   height: 20%;
   width: 40%;
