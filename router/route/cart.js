@@ -11,8 +11,5 @@ router.put('/:id', cartController.changeCartItem);
 router.delete('/:cartItemId', cartController.removeCartItem);
 router.get('/amount', cartController.getAmount);
 router.get('/cartItems/:id', cartController.getInventory);
-router.get('/next', function(req, res, next) {
-  var err =  new Error('something broke!');
-  next(err);
-});
+
 module.exports = router;
