@@ -11,12 +11,18 @@ var LOGIN_SUCCESS = '登陆成功！';
 var LOGIN_FAILURE = '用户或密码错误！';
 var LOGIN_ACTIVE = '帐号未激活！';
 var FIND_SUCCESS = '用户信息查找成功！';
+var CREATE_SUCCESS = '用户创建成功';
 
-var findUser = function(req, res) {
+var findUser = function(req, res, next) {
 
   var name = req.query.name;
 
   User.find({name: name}, function(err, user) {
+
+    if(err) {
+
+      next(err);
+    }
 
     if(user.length === 1) {
 
@@ -38,14 +44,22 @@ var getUserById = function(req,res) {
       res.send({state: 200, user: user, message: FIND_SUCCESS});
     });
 };
-var createUser = function(req, res) {
+
+var createUser = function(req, res, next) {
 
   var currentUser = req.body;
 
-  User.create(currentUser, function (err, data) {
+  User.create(currentUser, function (err, user) {
 
-    sendMail.sendMail(data);
-    res.send(data);
+    if(err) {
+
+      next(err);
+    }
+
+    sendMail.sendMail(user);
+
+    user.password = '******';
+    res.send({status: 200, data: user, message: CREATE_SUCCESS});
 
   });
 };
