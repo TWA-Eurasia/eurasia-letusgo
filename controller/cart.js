@@ -36,34 +36,10 @@ var getCart = function (req, res) {
     });
 
     var total = cart.getTotal(cart.cartItems);
-    res.render('cart', {cartItems: cart.cartItems, total: total});
+    res.render('cart', {cartItems: cart.cartItems, total: total.toFixed(2)});
   });
 };
 
-var getTotal = function (req, res) {
-
-  var cartId = '551cc282a6b79c584b59bc0f';
-  var cartItemIds = req.query.cartItemIds;
-
-  var cartItems = [];
-  var total = 0;
-
-  findCartById(cartId, function (cart) {
-
-    _.forEach(cartItemIds, function (cartItemId) {
-
-      CartItem.findById(cartItemId)
-        .populate('item')
-        .exec(function(err, cartItem){
-
-          cartItems.push(cartItem);
-          total = cart.getTotal(cartItems);
-
-        });
-    });
-  });
-
-};
 var addToCart = function (req, res) {
   var cartId = '551cc282a6b79c584b59bc0f';
   var number = parseInt(req.body.number);
@@ -174,5 +150,4 @@ module.exports = {
   removeCartItem: removeCartItem,
   getAmount: getAmount,
   getInventory: getInventory,
-  getTotal: getTotal
 };
