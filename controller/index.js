@@ -63,7 +63,6 @@ function initCategories(res, query, start, pageSize, currentCategory, pageNumber
     Category.find()
       .populate('parent')
       .exec(function (err, categories) {
-
         var mainCategories = _.filter(categories, function (category) {
 
           category.subCategories = [];

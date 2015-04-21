@@ -5,6 +5,10 @@ var _ = require('lodash');
 var User = require('../model/user');
 var sendMail = require('../util/email');
 
+var LOGIN_SUCCESS = '登陆成功！';
+var LOGIN_FAILURE = '用户或密码错误！';
+var LOGIN_ACTIVE = '帐号未激活！';
+
 var getUsers = function(req, res) {
 
   User.find(function(err, users) {
@@ -48,23 +52,20 @@ var updateUser = function(req, res) {
 
 var login = function(req, res) {
 
-  var message = '登陆成功！';
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({'name': username, 'active': true}, function (err, user) {
+  User.findOne({'name': username}, function (err, user) {
 
-    if(!user) {
-      message = '用户不存在或未激活账户！';
-      return res.send({message: message});
+    if(user && user.active === false) {
+      return res.send({state: 401, data: {}, message: LOGIN_ACTIVE});
     }
 
-    if(user.password !== password) {
-      message = '用户或密码错误！';
-      return res.send({message: message});
+    if(!user || user.password !== password) {
+      return res.send({state: 401, data: {}, message: LOGIN_FAILURE});
     }
-
-    res.send({user: user, message: message});
+    user.password = '******';
+    res.send({state: 200, user: user, message: LOGIN_SUCCESS});
   });
 };
 
