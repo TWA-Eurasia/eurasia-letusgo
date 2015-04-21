@@ -29,26 +29,23 @@ $(function () {
   var previousUrl = document.referrer;
   $('.confirm').attr('href', previousUrl);
 
-  function getUsers(callback) {
+  function getUsers(name, callback) {
 
-    $.get('/api/user')
-      .success(function (users) {
+    $.get('/api/user', {name: name})
+      .success(function (data) {
 
-        callback(users);
+        callback(data);
       });
   }
 
   function verifyUserExisted(userName, messageSelector, correctSelector) {
 
     var isCorrect = true;
-    getUsers(function (users) {
+    getUsers(userName, function (data) {
 
-      if (_.find(users, function (user) {
+      if (data.isExisted) {
 
-          return user.name === userName;
-        })) {
-
-        messageSelector.html('当前用户名已被注册').show();
+        messageSelector.html(data.message).show();
         isCorrect = false;
       } else {
 
@@ -77,7 +74,7 @@ $(function () {
     return isCorrect;
   }
 
-  $('#user-name').on('blur', function () {
+  $('#user-name').on('change', function () {
 
     var $userNameMessage = $('#user-name-message');
     $userNameMessage.hide();
@@ -105,7 +102,7 @@ $(function () {
     }
   });
 
-  $('#password').on('blur', function () {
+  $('#password').on('change', function () {
 
     var $passwordMessage = $('#password-message');
     $passwordMessage.hide();
@@ -126,7 +123,7 @@ $(function () {
     commonVerifyRegular(password, passwordSelectors, PASSWORD_MESSAGES, !passwordReg.exec(password));
   });
 
-  $('#repeat-password').on('blur', function () {
+  $('#repeat-password').on('change', function () {
 
     var $repeatPasswordMessage = $('#repeat-password-message');
     $repeatPasswordMessage.hide();
@@ -147,7 +144,7 @@ $(function () {
   });
 
 
-  $('#email').on('blur', function () {
+  $('#email').on('change', function () {
 
     var $emailMessage = $('#email-message');
     $emailMessage.hide();

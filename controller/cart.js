@@ -9,7 +9,7 @@ var CartItem = require('../model/cartItem');
 
 var NAME_LENGTH = 16;
 
-function findCartById(cartId, done) {
+function findCartById(cartId, callback) {
 
   Cart.findById(cartId)
     .populate('cartItems')
@@ -21,7 +21,7 @@ function findCartById(cartId, done) {
           throw err;
         }
 
-        done(cart);
+        callback(cart);
       });
     });
 }
@@ -36,7 +36,7 @@ var getCart = function (req, res) {
     });
 
     var total = cart.getTotal(cart.cartItems);
-    res.render('cart', {cartItems: cart.cartItems, total: total});
+    res.render('cart', {cartItems: cart.cartItems, total: total.toFixed(2)});
   });
 };
 
@@ -149,5 +149,5 @@ module.exports = {
   changeCartItem: changeCartItem,
   removeCartItem: removeCartItem,
   getAmount: getAmount,
-  getInventory: getInventory
+  getInventory: getInventory,
 };

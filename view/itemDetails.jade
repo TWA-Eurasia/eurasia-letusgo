@@ -1,14 +1,11 @@
 extends layout
-block title
-  title 商品详情页
 block css
   link(rel="styleSheet" type="text/css" href="/style/itemDetails.css")
-  script(src="/jspm_packages/system.js")
-  script(src="/config.js")
+block script
   script.
     System.import("js/itemDetails")
-    System.import("js/login")
-    System.import("js/cart")
+block title
+  title 商品详情页
 block content
   .ui.grid.centered
     .sixteen.wide.column(style="margin-left: 100px")

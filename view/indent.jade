@@ -1,12 +1,9 @@
 extends layout
 block css
-  link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
   link(rel="styleSheet" type="text/css" href="/style/cart.css")
-  script(src="jspm_packages/system.js")
-  script(src="config.js")
+block script
   script.
     System.import("js/indent");
-    System.import("js/login");
 block title
   title 支付订单
 block content

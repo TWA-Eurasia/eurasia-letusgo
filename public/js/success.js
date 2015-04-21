@@ -38,8 +38,7 @@ $(document).ready(function () {
 
    $('#logout').on('click', function () {
 
-      console.log('hsdfakjdshakf');
-      sessionStorage.setItem('user', null);
+      sessionStorage.removeItem('user'); 
       $('#login').css('display', 'block');
       $('#register').css('display', 'block');
       $('#logout').css('display', 'none');

@@ -73,8 +73,7 @@ $(document).ready(function () {
 
   $('#logout').on('click', function () {
 
-    console.log('hsdfakjdshakf');
-    sessionStorage.setItem('user', null);
+    sessionStorage.removeItem('user');
     $('#login').css('display', 'block');
     $('#register').css('display', 'block');
     $('#logout').css('display', 'none');
@@ -87,11 +86,9 @@ $(document).ready(function () {
 
   $('img')
     .error(function () {
-      $(this).attr('src', '/image/missing.jpg');
+      $(this).attr('src', '/image/missing1.png');
     })
     .attr('src', function () {
       return $(this).data('src');
     });
 });
-
-

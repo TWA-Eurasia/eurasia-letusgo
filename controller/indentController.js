@@ -32,7 +32,6 @@ var createIndent = function(req, res) {
 
   var currentIndent = req.body;
 
-  console.log(currentIndent);
   Indent.create(currentIndent, function (err, indent) {
 
     var data = {};
