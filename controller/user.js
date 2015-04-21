@@ -11,7 +11,6 @@ var LOGIN_SUCCESS = '登陆成功！';
 var LOGIN_FAILURE = '用户或密码错误！';
 var LOGIN_ACTIVE = '帐号未激活！';
 var FIND_SUCCESS = '用户信息查找成功！';
-var FIND_ALL = '得到用户信息！';
 
 var findUser = function(req, res) {
 
@@ -26,8 +25,6 @@ var findUser = function(req, res) {
 
       res.send({isExisted: false, message: USER_UNEXISTED});
     }
-
-    res.send({state: 202, users: users, message: FIND_ALL});
   });
 };
 
