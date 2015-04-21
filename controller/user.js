@@ -8,14 +8,6 @@ var sendMail = require('../util/email');
 var LOGIN_SUCCESS = '登陆成功！';
 var LOGIN_FAILURE = '用户或密码错误！';
 var LOGIN_ACTIVE = '帐号未激活！';
-//
-//var getUsers = function(req, res) {
-//
-//  User.find(function(err, users) {
-//
-//    res.send(users);
-//  });
-//};
 
 var findUser = function(req, res) {
 
@@ -87,7 +79,6 @@ var login = function(req, res) {
 };
 
 module.exports = {
-  //getUsers: getUsers,
   findUser: findUser,
   getUserById: getUserById,
   createUser: createUser,
