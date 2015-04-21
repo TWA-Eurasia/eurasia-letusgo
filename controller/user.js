@@ -17,21 +17,22 @@ var findUser = function(req, res, next) {
 
   var name = req.query.name;
 
-  User.find({name: name}, function(err, user) {
+  User.find({name: name})
+    .exec()
+    .then(function(user) {
 
-    if(err) {
+      if(user.length === 1) {
+
+        res.send({isExisted: true, message: USER_EXISTED});
+      } else {
+
+        res.send({isExisted: false, message: USER_UNEXISTED});
+      }
+    })
+    .onReject(function(err) {
 
       next(err);
-    }
-
-    if(user.length === 1) {
-
-      res.send({isExisted: true, message: USER_EXISTED});
-    } else {
-
-      res.send({isExisted: false, message: USER_UNEXISTED});
-    }
-  });
+    });
 };
 
 var getUserById = function(req, res, next) {
@@ -50,37 +51,26 @@ var getUserById = function(req, res, next) {
 
       next(err);
     });
-
-  //User.findById(id)
-  //  .exec(function(err, user) {
-  //
-  //    res.send({state: 200, user: user, message: FIND_SUCCESS});
-  //  }).onReject(function(err) {
-  //
-  //    next(err);
-  //  }).onResolve(function() {
-  //
-  //    process.exit();
-  //  });
 };
 
 var createUser = function(req, res, next) {
 
   var currentUser = req.body;
 
-  User.create(currentUser, function (err, user) {
+  User.create(currentUser)
+    .exec()
+    .then(function(user) {
 
-    if(err) {
+      sendMail.sendMail(user);
+
+      user.password = '******';
+      res.send({status: 200, data: user, message: CREATE_SUCCESS});
+    })
+    .onReject(function(err) {
 
       next(err);
-    }
+    });
 
-    sendMail.sendMail(user);
-
-    user.password = '******';
-    res.send({status: 200, data: user, message: CREATE_SUCCESS});
-
-  });
 };
 //
 //var updateUser = function(req, res) {
