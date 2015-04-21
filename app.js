@@ -55,23 +55,40 @@ app.use(function(req, res, next) {
 
 // production settings
 if (app.get('env') === 'production') {
-  // production error handler
-  // no stacktraces leaked to user
   app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: {}
-    });
+    if(req.header('X-Requested-With')) {
+      res.send({
+        message: err.message,
+        status: err.status || 500,
+        err: {}
+      });
+    }else{
+
+      res.status(err.status || 500);
+      res.render('error', {
+        message: err.message,
+        error: {}
+      });
+    }
   });
 }
 
 app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: err
-  });
+  console.log(req.header('X-Requested-With'));
+  if(req.header('X-Requested-With')) {
+    res.send({
+      message: err.message,
+      status: err.status || 500,
+      error: err
+    });
+  }else{
+
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  }
 });
 
 module.exports = app;
