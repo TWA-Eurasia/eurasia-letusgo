@@ -51,7 +51,6 @@ $(function () {
           .success(function(data) {
 
             $('#current-user').html(data.user.name).show();
-
           });
 
         $('.user-login-modal').modal('hide');
@@ -64,4 +63,3 @@ $(function () {
     });
   });
 });
-
