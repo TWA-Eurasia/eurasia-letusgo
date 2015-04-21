@@ -26,6 +26,12 @@ function showShortage(shortedCartItemName) {
 
 $(document).ready(function () {
 
+   if(sessionStorage.getItem('user')) {
+      $('#login').css('display', 'none');
+      $('#register').css('display', 'none');
+      $('#logout').css('display', 'block');
+    }
+
   $('#pay').on('click', function () {
 
     var shortedCartItemName = $('#shortedCartItemName').text();
@@ -63,6 +69,17 @@ $(document).ready(function () {
       });
     });
   });
+
+
+  $('#logout').on('click', function () {
+
+    console.log('hsdfakjdshakf');
+    sessionStorage.setItem('user', null);
+    $('#login').css('display', 'block');
+    $('#register').css('display', 'block');
+    $('#logout').css('display', 'none');
+    $('#current-user').html('').show();
+   });
 
   $('.itemName').popup({
     content: $(this).prop('data-content')

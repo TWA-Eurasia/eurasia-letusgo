@@ -28,6 +28,34 @@ var getIndent = function (req, res) {
   });
 };
 
+var createIndent = function(req, res) {
+
+  var currentIndent = req.body;
+
+  console.log(currentIndent);
+  Indent.create(currentIndent, function (err, indent) {
+
+    var data = {};
+    if(err) {
+
+      data = {
+        status: 500,
+        data: indent,
+        message: '订单生成失败！'
+      };
+    }else {
+
+        data = {
+          status: 200,
+          data: indent,
+          message: '订单生成成功！'
+        };
+      }
+    res.send(data);
+  });
+};
+
 module.exports = {
-  getIndent: getIndent
+  getIndent: getIndent,
+  createIndent: createIndent
 };

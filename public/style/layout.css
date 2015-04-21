@@ -86,7 +86,7 @@
   cursor: pointer;
 }
 
-#loginResult {
+#login-result {
   color: red;
 }
 #tips {
@@ -103,4 +103,8 @@
   top:10px;
   left:600px;
   z-index:1000;
+}
+
+#findPassword {
+  margin-right: 150px;
 }

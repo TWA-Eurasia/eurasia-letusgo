@@ -15,17 +15,16 @@ html
         .one.wide.column &nbsp;
         .seven.wide.column
           span Hi，
-          span#current-user
-          span 欢迎来到Let Us Go商城
+          span#current-user 欢迎来到Let Us Go商城
         .three.wide.column
           a#my-account(href="#") 我的Let Us Go
           a#my-cart.ui.link.item(href="/cart") 购物车
             i.cart.in.icon
             strong.ui.label#cart-amount 0
         .one.wide.column
-          a#login 请登录
+          a(href="#")#login 请登录
         .one.wide.column
-          a(href="/register") 免费注册
+          a(href="/register")#register 免费注册
         .one.wide.column
           a(href="#")#logout 注销
       .ui.grid.myLogoAndSearch
@@ -39,7 +38,7 @@ html
         //      i.search.icon
         //    .results
       .ui.success.floating.message.hidden#tips
-        p#loginSuccess
+        p#login-success
       block content
       .ui.divider.horizontal 关于我们
       footer
@@ -57,23 +56,7 @@ html
           .sixteen.wide.column.copyright
             p copyright@letusgo All Rights Reserved 版权所有LETUSGO商城
             p © 2015 LetUsGo, Inc.
-    .ui.second.small.coupled.modal.LoginFailure.hidden
-      .header 登陆失败
-      .content
-        .description
-          span.loginResult
-      .actions
-        .primary.ui.button.confirm#again 重新登陆
-          i.right.arrow.icon
-    .ui.second.small.coupled.modal.LoginSuccess.hidden
-      .header
-      .content
-        .description
-          span.loginResult
-      .actions
-        a.primary.ui.button.shopping 我要去shopping！
-          i.right.arrow.icon
-    .ui.first.coupled.small.modal.user-login.hidden
+    .ui.first.coupled.small.modal.user-login-modal.hidden
       .content
         .ui.grid.centered
           .ten.wide.column
@@ -86,10 +69,11 @@ html
                 input#password-login(placeholder="密码" type="password")
                 span#password-message
               .field
-                .ui.error.message#loginResult(style = 'display: none')
+                .ui.error.message#login-result(style = 'display: none')
       .actions
+        a#findPassword(href='/retrievePassword') 忘记密码？
         a.primary.ui.button.register(href='/register') 注册
-        a.ui.positive.right.labeled.icon.button#userLogin 登陆
+        a.ui.positive.right.labeled.icon.button#user-login 登陆
           i.right.arrow.icon
 
 
