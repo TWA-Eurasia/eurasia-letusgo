@@ -118,5 +118,27 @@ describe('cart', function () {
       cartController.getAmount(reqMock, resMock);
     });
   });
+
+  describe('getInventory', function () {
+
+    var resMock = {};
+    var reqMock = {};
+
+    var cartController = require('../../controller/cart');
+
+    it('shoulde return correct total and subtotal', function (done) {
+
+      reqMock.params = {id: '551cc20e47a654d14a280e9b'};
+
+      resMock.send = function (object) {
+
+        expect(object).to.have.property('inventory');
+        expect(object.inventory).to.equal(100);
+
+        done();
+      };
+      cartController.getInventory(reqMock, resMock);
+    });
+  });
 });
 
