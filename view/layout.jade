@@ -3,25 +3,36 @@ html
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width")
-
-    link(rel="stylesheet" type="text/css" href="/style/navBar.css")
     link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
-    link(rel="stylesheet" type="text/css" href="/style/register.css")
-
+    link(rel="stylesheet" type="text/css" href="/style/layout.css")
+    script(src = "/jspm_packages/system.js")
+    script(src = "/config.js")
+    script.
+      System.import("js/login");
+      System.import('js/cart');
     block css
+    block script
     block title
       title 首页
   body
     .container
       .ui.grid.topBar
         .one.wide.column &nbsp;
-        .nine.wide.column Hi，欢迎来到Let Us Go商城
-        .two.wide.column
-          a(href="#") 我的Let Us Go
+
+        .seven.wide.column
+          span Hi，
+          span#current-user 欢迎来到Let Us Go商城
+        .three.wide.column
+          a#my-account(href="#") 我的Let Us Go
+          a#my-cart.ui.link.item(href="/cart") 购物车
+            i.cart.in.icon
+            strong.ui.label#cart-amount 0
         .one.wide.column
-          a#login(href="#") 请登录
+          a(href="#")#login 请登录
         .one.wide.column
-          a(href="/register") 免费注册
+          a(href="/register")#register 免费注册
+        .one.wide.column
+          a(href="#")#logout 注销
       .ui.grid.myLogoAndSearch
         .four.wide.column.myLogo
           a(href='/')
@@ -32,25 +43,14 @@ html
         //      input.prompt(type="text" placeholder="Search...")
         //      i.search.icon
         //    .results
-      .ui.grid.centered
-        .fourteen.wide.column
-          .ui.inverted.teal.menu
-            .left.menu
-              block home
-                a.ui.link.item(href="/") Let Us Go
-            .right.menu
-              block cart
-                a.ui.link.item(href="/cart") 购物车
-                  i.cart.in.icon
-                  strong.ui.label#cart-amount 0
+      .ui.success.floating.message.hidden#tips
+        p#login-success
       block content
-
       .ui.divider.horizontal 关于我们
       footer
         .ui.grid
           .sixteen.wide.column
           .seven.wide.column.group
-
             h4 LetUsgo 团队
             p TWA 学院
             p LetUsGo 计划组
@@ -62,38 +62,30 @@ html
           .sixteen.wide.column.copyright
             p copyright@letusgo All Rights Reserved 版权所有LETUSGO商城
             p © 2015 LetUsGo, Inc.
-
-    .ui.second.small.coupled.modal.LoginFailure.hidden
-      .header 登陆失败
-      .content
-        .description
-          span.loginResult
-      .actions
-        .primary.ui.button.confirm#again 重新登陆
-          i.right.arrow.icon
-
-    .ui.second.small.coupled.modal.LoginSuccess.hidden
-      .header
-      .content
-        .description
-          span.loginResult
-      .actions
-        a.primary.ui.button.shopping 我要去shopping！
-          i.right.arrow.icon
-
-    .ui.first.coupled.small.modal.userLogin.hidden
+    .ui.first.coupled.small.modal.user-login-modal.hidden
       .content
         .ui.grid.centered
           .ten.wide.column
             .ui.form.segment
-              .ui.header#login-header 登陆我的LetUsGo
+              .ui.header 登陆我的LetUsGo
               .filed
                 input#user-name-login(placeholder="用户名" type="text")
                 span#user-name-message
               .field
                 input#password-login(placeholder="密码" type="password")
                 span#password-message
+              .field
+                .ui.error.message#login-result(style = 'display: none')
       .actions
+        a#findPassword(href='/retrievePassword') 忘记密码？
         a.primary.ui.button.register(href='/register') 注册
-        a.ui.positive.right.labeled.icon.button#userLogin 登陆
+        a.ui.positive.right.labeled.icon.button#user-login 登陆
           i.right.arrow.icon
+
+
+
+
+
+
+
+

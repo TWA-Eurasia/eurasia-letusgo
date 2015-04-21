@@ -5,6 +5,12 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(function () {
 
+   if(sessionStorage.getItem('user')) {
+      $('#login').css('display', 'none');
+      $('#register').css('display', 'none');
+      $('#logout').css('display', 'block');
+    }
+
   if (application.index.pageCount > 1) {
 
     var visiblePageCount = 7;
@@ -40,4 +46,12 @@ $(function () {
     content: $(this).prop('data-content')
   });
 
+  $('#logout').on('click', function () {
+
+      sessionStorage.removeItem('user');
+      $('#login').css('display', 'block');
+      $('#register').css('display', 'block');
+      $('#logout').css('display', 'none');
+      $('#current-user').html('').show();
+   });
 });

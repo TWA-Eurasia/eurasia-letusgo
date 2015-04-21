@@ -9,9 +9,9 @@ var CartSchema = new Schema({
   cartItems: [{type: Schema.ObjectId, ref: 'CartItem'}]
 });
 
-CartSchema.methods.getTotal = function(cartItems) {
+CartSchema.methods.getTotal = function (cartItems) {
 
-  return _.reduce(cartItems, function(totalAmount, cartItem) {
+  return _.reduce(cartItems, function (totalAmount, cartItem) {
     return totalAmount + parseFloat(cartItem.getSubtotal());
   }, 0);
 };

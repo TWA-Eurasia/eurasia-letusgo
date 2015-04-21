@@ -63,7 +63,6 @@ function initCategories(res, query, start, pageSize, currentCategory, pageNumber
     Category.find()
       .populate('parent')
       .exec(function (err, categories) {
-
         var mainCategories = _.filter(categories, function (category) {
 
           category.subCategories = [];
@@ -76,7 +75,7 @@ function initCategories(res, query, start, pageSize, currentCategory, pageNumber
   });
 }
 
-var getIndexInfo = function(req, res) {
+var getIndexInfo = function (req, res) {
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
   initCategories(res, {isRecommend: true}, 0, PAGE_SIZE, currentCategory, 1, false);
 };

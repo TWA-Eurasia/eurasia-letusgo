@@ -9,3 +9,4 @@ coverage
 target
 *.xml
 newrelic_agent.log
+id_aliyun

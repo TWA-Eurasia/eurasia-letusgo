@@ -3,6 +3,7 @@
 var $ = require('jquery');
 var moment = require('moment');
 var _ = require('lodash');
+var md5 = require('MD5');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var PASSWORD_MESSAGES = {
@@ -28,26 +29,23 @@ $(function () {
   var previousUrl = document.referrer;
   $('.confirm').attr('href', previousUrl);
 
-  function getUsers(callback) {
+  function getUsers(name, callback) {
 
-    $.get('/api/user')
-      .success(function(users) {
+    $.get('/api/user', {name: name})
+      .success(function (data) {
 
-        callback(users);
+        callback(data);
       });
   }
 
   function verifyUserExisted(userName, messageSelector, correctSelector) {
 
     var isCorrect = true;
-    getUsers(function(users) {
+    getUsers(userName, function (data) {
 
-      if (_.find(users, function (user) {
+      if (data.isExisted) {
 
-          return user.name === userName;
-        })) {
-
-        messageSelector.html('当前用户名已被注册').show();
+        messageSelector.html(data.message).show();
         isCorrect = false;
       } else {
 
@@ -76,7 +74,7 @@ $(function () {
     return isCorrect;
   }
 
-  $('#user-name').on('blur', function () {
+  $('#user-name').on('change', function () {
 
     var $userNameMessage = $('#user-name-message');
     $userNameMessage.hide();
@@ -85,7 +83,7 @@ $(function () {
     $userNameCorrect.hide();
 
     var userName = $('#user-name').val().trim('');
-    var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
+    var userNameLength = userName.replace(/[^x00-xff]/g, '**').length;
     var userReg = new RegExp('[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b@]');
 
     if (userName === '') {
@@ -104,7 +102,7 @@ $(function () {
     }
   });
 
-  $('#password').on('blur', function (){
+  $('#password').on('change', function () {
 
     var $passwordMessage = $('#password-message');
     $passwordMessage.hide();
@@ -113,6 +111,7 @@ $(function () {
     $passwordCorrect.hide();
 
     var password = $('#password').val().trim('');
+
     var passwordReg = /^(\w){6,20}$/;
 
     var passwordSelectors = {
@@ -124,7 +123,7 @@ $(function () {
     commonVerifyRegular(password, passwordSelectors, PASSWORD_MESSAGES, !passwordReg.exec(password));
   });
 
-  $('#repeat-password').on('blur', function (){
+  $('#repeat-password').on('change', function () {
 
     var $repeatPasswordMessage = $('#repeat-password-message');
     $repeatPasswordMessage.hide();
@@ -145,7 +144,7 @@ $(function () {
   });
 
 
-  $('#email').on('blur', function (){
+  $('#email').on('change', function () {
 
     var $emailMessage = $('#email-message');
     $emailMessage.hide();
@@ -165,7 +164,7 @@ $(function () {
     commonVerifyRegular(email, emailSelectors, EMAIL_MESSAGES, !emailReg.exec(email));
   });
 
-  $('#reset-button').on('click', function() {
+  $('#reset-button').on('click', function () {
 
     $('#user-name').val('');
     $('#password').val('');
@@ -185,7 +184,7 @@ $(function () {
     $('#email-message').hide();
   });
 
-  $('#submit-button').on('click', function() {
+  $('#submit-button').on('click', function () {
 
     var isCorrect = true;
 
@@ -196,7 +195,7 @@ $(function () {
     $userNameCorrect.hide();
 
     var userName = $('#user-name').val().trim('');
-    var userNameLength = userName.replace(/[^x00-xff]/g,'**').length;
+    var userNameLength = userName.replace(/[^x00-xff]/g, '**').length;
     var userReg = new RegExp('[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b@]');
 
     if (userName === '') {
@@ -268,12 +267,12 @@ $(function () {
     var phoneNumber = $('#phone-number').val().trim();
     var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
 
-    if(isCorrect) {
+    if (isCorrect) {
 
       $.post('api/user',
         {
           name: userName,
-          password: password,
+          password: md5(password),
           address: address,
           phoneNumber: phoneNumber,
           createDate: createDate,
@@ -282,7 +281,7 @@ $(function () {
 
           $('#registermodal')
             .modal('show');
-        });
+      });
     }
   });
 });

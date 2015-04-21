@@ -21,6 +21,12 @@ function jump(jumpTime) {
 
 $(document).ready(function () {
 
+   if(sessionStorage.getItem('user')) {
+      $('#login').css('display', 'none');
+      $('#register').css('display', 'none');
+      $('#logout').css('display', 'block');
+    }
+
   $.get('/api/indent', function (data) {
 
     var amount = data.total;
@@ -29,4 +35,13 @@ $(document).ready(function () {
     jump(JUMP_TIME);
 
   });
+
+   $('#logout').on('click', function () {
+
+      sessionStorage.removeItem('user'); 
+      $('#login').css('display', 'block');
+      $('#register').css('display', 'block');
+      $('#logout').css('display', 'none');
+      $('#current-user').html('').show();
+   });
 });

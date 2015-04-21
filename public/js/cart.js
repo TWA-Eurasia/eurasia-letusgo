@@ -1,12 +1,19 @@
 'use strict';
 
 var $ = require('jquery');
+var moment = require('moment');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var deleteCartItem;
 var MAX_CART_AMOUNT = 99;
 
 $(function () {
+  var totalAmount = $('#total').text();
+  if (sessionStorage.getItem('user')) {
+    $('#login').css('display', 'none');
+    $('#register').css('display', 'none');
+    $('#logout').css('display', 'block');
+  }
 
   function changeTotal(jqDom) {
     var id = jqDom.closest('tr').data('id');
@@ -21,8 +28,11 @@ $(function () {
       data: {number: num, price: price, total: total},
 
       success: function (data) {
-        input.closest('tr').find('#subtotal').text(data.subtotal);
-        $('#total').text(data.total);
+        input.closest('tr').find('.subtotal').text(data.subtotal);
+        var isChecked = input.closest('td').next().next().next().find('.checkedCartItem').prop('checked');
+        if (isChecked) {
+          $('#total').text(data.total);
+        }
       }
     });
   }
@@ -69,33 +79,28 @@ $(function () {
       return $(this).data('src');
     });
 
-  $('#allChecked').on('change', function () {
+  $('#allChecked').on('click', function () {
 
     $('input[name="checkedCartItem"]').prop('checked', this.checked);
-
+    $('#total').text(this.checked ? totalAmount : 0);
   });
 
-  $('.checkedCartItem').on('blur', function () {
+  $('.checkedCartItem').on('click', function () {
+    var subtotal = $(this).closest('td').prev().prev().find('.subtotal').text();
+    var total = $('#total').text();
 
-    var isChecked = $(this).prop('checked');
-    if (!isChecked) {
-      $('#allChecked').prop('checked', false);
+
+    var checkboxesSize = $('.checkedCartItem').length;
+    var checkedBoxesSize = $('.checkedCartItem:checked').length;
+
+    $('#allChecked').prop('checked', checkboxesSize === checkedBoxesSize);
+
+    if ($(this).prop('checked')) {
+      total = parseInt(total) + parseInt(subtotal);
+    } else {
+      total = parseInt(total) - parseInt(subtotal);
     }
-
-    var isAllChecked = true;
-    var checkboxes = $('input[name="checkedCartItem"]');
-
-    for (var i = 0; i < checkboxes.length; i++) {
-      isAllChecked = checkboxes[i].checked;
-      if (!isAllChecked) {
-        return;
-      }
-    }
-
-    if (isAllChecked) {
-      $('#allChecked').prop('checked', true);
-    }
-
+    $('#total').text(total.toFixed(2));
   });
 
   $('.reduce').on('click', function () {
@@ -150,7 +155,7 @@ $(function () {
 
     deleteCartItem = this;
 
-    $('.first.modal')
+    $('.delete-modal')
       .modal('show');
   });
 
@@ -181,4 +186,73 @@ $(function () {
   });
 
   countCartAmount();
+
+  $('#indent').on('click', function () {
+
+    var sessionUser = sessionStorage.getItem('user');
+    if (!sessionUser) {
+
+      $('.user-login-modal')
+        .modal('show');
+
+      $('#login-result').html('');
+    } else {
+
+      var cartItemIds = [];
+      var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
+      $.post('/api/indent',
+        {
+          user: sessionUser,
+          cartItems: cartItemIds,
+          createDate: createDate,
+          isPaid: false
+        }).success(function (err, data) {
+
+          if (data.status === 200) {
+
+            location.href = '/indent';
+          }
+        });
+    }
+  });
+
+  $('#user-login').on('click', function () {
+
+    var userName = $('#user-name-login').val();
+    var password = $('#password-login').val();
+
+    $.post('/api/user/login', {username: userName, password: password}, function (data) {
+
+      if (data.user) {
+        sessionStorage.setItem('user', data.user._id);
+
+        var currentUserId = sessionStorage.getItem('user');
+
+        $.get('/api/user/' + currentUserId)
+          .success(function (data) {
+
+            if (!data.user.name) {
+              $('#current-user').html(data.user.name).show();
+            }
+
+            $('.user-login-modal').modal('hide');
+            $('#login-success').html(data.message);
+            $('#tips').show().fadeOut(2000);
+          });
+
+      } else {
+        $('#login-result').html(data.message).show();
+      }
+
+    });
+  });
+
+  $('#logout').on('click', function () {
+
+    sessionStorage.removeItem('user');
+    $('#login').css('display', 'block');
+    $('#register').css('display', 'block');
+    $('#logout').css('display', 'none');
+    $('#current-user').html('').show();
+  });
 });

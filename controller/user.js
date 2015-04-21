@@ -5,29 +5,66 @@ var _ = require('lodash');
 var User = require('../model/user');
 var sendMail = require('../util/email');
 
-var user = {};
+var USER_EXISTED = '当前用户名已被注册';
+var USER_UNEXISTED = '用户名可用';
+var LOGIN_SUCCESS = '登陆成功！';
+var LOGIN_FAILURE = '用户或密码错误！';
+var LOGIN_ACTIVE = '帐号未激活！';
+var FIND_SUCCESS = '用户信息查找成功！';
+var CREATE_SUCCESS = '用户创建成功';
 
-user.getUsers = function(req, res) {
+var findUser = function(req, res, next) {
 
-  User.find(function(err, users) {
+  var name = req.query.name;
 
-    res.send(users);
+  User.find({name: name}, function(err, user) {
+
+    if(err) {
+
+      next(err);
+    }
+
+    if(user.length === 1) {
+
+      res.send({isExisted: true, message: USER_EXISTED});
+    } else {
+
+      res.send({isExisted: false, message: USER_UNEXISTED});
+    }
   });
 };
 
-user.createUser = function(req, res) {
+var getUserById = function(req,res) {
+
+  var id = req.params.id;
+
+  User.findById(id)
+    .exec(function(err, user) {
+
+      res.send({state: 200, user: user, message: FIND_SUCCESS});
+    });
+};
+
+var createUser = function(req, res, next) {
 
   var currentUser = req.body;
 
-  User.create(currentUser, function(err, data) {
+  User.create(currentUser, function (err, user) {
 
-    sendMail.sendMail(data);
-    res.send({user: data});
+    if(err) {
+
+      next(err);
+    }
+
+    sendMail.sendMail(user);
+
+    user.password = '******';
+    res.send({status: 200, data: user, message: CREATE_SUCCESS});
 
   });
 };
 
-user.updateUser = function(req, res) {
+var updateUser = function(req, res) {
 
   var userId = req.params.id;
   var indentId = req.body.indentId;
@@ -38,18 +75,29 @@ user.updateUser = function(req, res) {
   });
 };
 
-user.login = function(req, res) {
+var login = function(req, res) {
 
-  var message = '登陆成功！';
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({'name': username}, function(err, user) {
-    if(!user || user.password !== password) {
-      message = '用户或密码错误！';
+  User.findOne({'name': username}, function (err, user) {
+
+    if(user && user.active === false) {
+      return res.send({state: 401, data: {}, message: LOGIN_ACTIVE});
     }
-    res.send({user: user, message: message});
+
+    if(!user || user.password !== password) {
+      return res.send({state: 401, data: {}, message: LOGIN_FAILURE});
+    }
+    user.password = '******';
+    res.send({state: 200, user: user, message: LOGIN_SUCCESS});
   });
 };
 
-module.exports = user;
+module.exports = {
+  findUser: findUser,
+  getUserById: getUserById,
+  createUser: createUser,
+  updateUser: updateUser,
+  login: login
+};

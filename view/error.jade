@@ -1,0 +1,10 @@
+extends layout
+block title
+  title 服务器出错
+block content
+  .ui.grid.centered
+    .ten.wide.column.centered
+      h1 服务器挂掉了，程序员哥哥/姐姐正在修...
+        h1= message
+        h2= error.status
+        pre #{error.stack}

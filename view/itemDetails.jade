@@ -1,59 +1,56 @@
-extends ./navBar.jade
-block title
-  title 商品详情页
+extends layout
 block css
-  script(src="/jspm_packages/system.js")
-  script(src="/config.js")
   link(rel="styleSheet" type="text/css" href="/style/itemDetails.css")
+block script
   script.
     System.import("js/itemDetails")
-    System.import("js/login")
-    System.import("js/cart")
+block title
+  title 商品详情页
 block content
-    .ui.grid.centered
-      .sixteen.wide.column(style="margin-left: 100px")
-        .ui.large.breadcrumb
-          .section #{itemDetails.category.parent.name}
-          i.right.chevron.icon.ider
-          a.section(href="/categories/" + "#{itemDetails.category._id}") #{itemDetails.item.category.name}
-          i.right.chevron.icon.ider
-          .active.section #{itemDetails.item.name}
-    .ui.grid
-      .three.wide.column
-      .five.wide.column
-        .image-preview
-          - var imageUrl = itemDetails.item.image
-          img.ui.image.item-image(data-src="/" + imageUrl)
-      .one.wide.column
-      .four.wide.column
-        h2.ui.floated.header.orange.backge #{itemDetails.item.name}
-        table.ui.definition.table
-          tbody
-            tr
-              td.five.wide.column 单价
-              td
-                span#itemPrice #{itemDetails.item.price}
-                span  元
-            tr
-              td 数量
-              td
-                i.minus.square.icon(style="cursor:pointer")
-                input(type="text" value=1 id="numberInput" style="text-align:center; width:50%")
-                i.add.square.icon(style="cursor:pointer")
-                .ui.negative.message#inputError(style = 'display: none') 您所填写的数量超过库存!
-            tr
-              td 库存
-              td
-                span#inventory #{itemDetails.item.inventory}
-                span  #{itemDetails.item.unit}
+  .ui.grid.centered
+    .sixteen.wide.column(style="margin-left: 100px")
+      .ui.large.breadcrumb
+        .section #{itemDetails.category.parent.name}
+        i.right.chevron.icon.ider
+        a.section(href="/categories/" + "#{itemDetails.category._id}") #{itemDetails.item.category.name}
+        i.right.chevron.icon.ider
+        .active.section #{itemDetails.item.name}
+  .ui.grid
+    .three.wide.column
+    .five.wide.column
+      .image-preview
+        - var imageUrl = itemDetails.item.image
+        img.ui.image.item-image(data-src="/" + imageUrl)
+    .one.wide.column
+    .four.wide.column
+      h2.ui.floated.header.orange.backge #{itemDetails.item.name}
+      table.ui.definition.table
+        tbody
+          tr
+            td.five.wide.column 单价
+            td
+              span#itemPrice #{itemDetails.item.price}
+              span  元
+          tr
+            td 数量
+            td
+              i.minus.square.icon(style="cursor:pointer")
+              input(type="text" value=1 id="numberInput" style="text-align:center; width:50%")
+              i.add.square.icon(style="cursor:pointer")
+              .ui.negative.message#inputError(style = 'display: none') 您所填写的数量超过库存!
+          tr
+            td 库存
+            td
+              span#inventory #{itemDetails.item.inventory}
+              span  #{itemDetails.item.unit}
 
-        .ui.primary.button.addToCart(data-id="#{itemDetails.item.id}")
-          i.cart.in.icon
-          span 添加到购物车
-          i.right.chevron.icon
-        .ui.teal.message.success(hidden='true' ) 添加成功
-    .ui.grid.centered
-      .ten.wide.column
-        .ui.message
-          .header 商品详情：
-          p #{itemDetails.item.description}
+      .ui.primary.button.addToCart(data-id="#{itemDetails.item.id}")
+        i.cart.in.icon
+        span 添加到购物车
+        i.right.chevron.icon
+      .ui.teal.message.success#add-success(hidden='true' ) 添加成功
+  .ui.grid.centered
+    .ten.wide.column
+      .ui.message
+        .header 商品详情：
+        p #{itemDetails.item.description}

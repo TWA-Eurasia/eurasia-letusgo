@@ -1,13 +1,11 @@
-extends ./navBar.jade
-block title
-  title 注册页面
+extends layout
 block css
-  script(src="/jspm_packages/system.js")
-  script(src="/config.js")
   link(rel="styleSheet" type="text/css" href="/style/register.css")
+block script
   script.
     System.import('js/register')
-    System.import('js/cart')
+block title
+  title 注册页面
 block content
   .ui.grid.centered
     .eight.wide.column

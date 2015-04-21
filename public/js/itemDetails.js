@@ -6,6 +6,12 @@ var MAX_CART_AMOUNT = 99;
 
 $(function () {
 
+   if(sessionStorage.getItem('user')) {
+      $('#login').css('display', 'none');
+      $('#register').css('display', 'none');
+      $('#logout').css('display', 'block');
+    }
+
   function verifyNumber(number) {
     var reg = /^(0|[1-9][0-9]*)$/;
     if (!reg.exec(number)) {
@@ -95,12 +101,21 @@ $(function () {
       data: {number: numberInput},
       success: function () {
         countCartAmount();
-        $('.success').show();
+        $('#add-success').show();
 
         window.setTimeout(function () {
-          $('.success').hide();
+          $('#add-success').hide();
         }, 1000);
       }
     });
   });
+
+   $('#logout').on('click', function () {
+
+      sessionStorage.removeItem('user');
+      $('#login').css('display', 'block');
+      $('#register').css('display', 'block');
+      $('#logout').css('display', 'none');
+      $('#current-user').html('').show();
+    });
 });

@@ -1,19 +1,11 @@
-extends ./navBar.jade
+extends layout
 block css
-  script(src="jspm_packages/system.js")
-  script(src="config.js")
-  script.
-    System.import("js/login");
-    System.import('js/cart');
-  link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
   link(rel="styleSheet" type="text/css" href="/style/cart.css")
-
+block script
+  script.
+    System.import('js/cart');
 block title
   title 我的购物车
-block cart
-  a.ui.active.link.item(href="/cart") 购物车
-    i.cart.in.icon
-    strong.ui.label#cart-amount 0
 block content
   .ui.grid.centered
     .sixteen.wide.column
@@ -30,12 +22,13 @@ block content
           th.three.wide 数量
           th.two.wide 小计
           th.two.wide
-          //th.two.wide
-          //  input#allChecked(type="checkbox" name="checkedAllCartItem" checked)
-          //  span 全选
+          th.two.wide
+            input#allChecked(type="checkbox" name="checkedAllCartItem" checked)
+            span 全选
         tbody.center
           tr
             td.ui.teal.message.delete-message.hidden(colspan='6') 删除成功
+
           - each cartItem in cartItems
             tr(data-id="#{cartItem._id}")
               td
@@ -49,37 +42,34 @@ block content
               td
                 .ui
                   i.minus.square.icon.pointer.reduce
-                  input.number(type="text" value="#{cartItem.number}")
+                  input.number.input-number(type="text" value="#{cartItem.number}")
                   i.add.square.icon.pointer.increase
                 .ui.negative.message.hidden.inventory 最多能购买
                   span.leftNumber #{cartItem.item.inventory}
                   span 件
-               // .ui.negative.message#inventory(style = 'display: none') 库存仅剩#{cartItem.item.inventory}!
 
               td
-                span#subtotal #{cartItem.getSubtotal()}
+                span.subtotal #{cartItem.getSubtotal()}
                 span 元
               td(id ="#{cartItem._id}")
                 .ui.red.button.delete_cartItem 删除
-              //td
-              //  input.checkedCartItem(type="checkbox" name="checkedCartItem" checked)
+              td
+                input.checkedCartItem(id="#{cartItem._id}" type="checkbox" name="checkedCartItem" checked)
 
         tfoot.right
           tr
-           th(colspan='7')
-            .ui.right.floated.small.primary.labeled.header
-              h4.ui.black.header 总计：
-                span.total#total #{total}
-                span 元
-
-       a.ui.teal.right.floated.right.labeled.icon.button#indent(href='/indent') 结算
+            th(colspan='7')
+              .ui.right.floated.small.primary.labeled.header
+                h4.ui.black.header 总计：
+                  span.total#total #{total}
+                  span 元
+      a.ui.teal.right.floated.right.labeled.icon.button#indent 结算
         i.right.arrow.icon
-    .ui.first.coupled.small.modal.transition
+    .ui.first.coupled.small.modal.transition.delete-modal
       .content
         .description
           p 您确认要删除吗？
       .actions
         .primary.ui.button.no 取消
-
         a.ui.positive.right.labeled.icon.button.yes#yes 删除
           i.checkmark.icon

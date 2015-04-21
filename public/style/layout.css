@@ -1,0 +1,110 @@
+.container {
+  background: #ffffff;
+}
+
+.ui.grid {
+  margin: 0;
+}
+
+
+#current-user {
+  color: teal;
+}
+
+#logout {
+  display: none;
+}
+
+#my-account,
+#my-cart {
+  padding: 10px;
+}
+
+#cart-amount {
+  padding: 0;
+}
+
+.topBar > .column > a {
+  color: teal;
+}
+
+.ui.grid.topBar {
+  height: 35px;
+  background: #F2F2F2;
+}
+
+.ui.grid.topBar > .column {
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.ui.grid.myLogoAndSearch {
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 0;
+}
+
+.ui.grid.myLogoAndSearch {
+  background: #fff;
+}
+
+.myLogo {
+  text-align: center;
+  padding: 0;
+}
+
+.myLogoImg {
+  width: 75%;
+  height: 75%;
+}
+
+.ui.grid.myLogoAndSearch > #mySearch {
+  padding-top: 25px;
+}
+
+.searchInput {
+  width: 50%;
+}
+
+.ui.search .prompt {
+  border: 2px solid #00B5AD;
+}
+
+.ui.divider.horizontal {
+  color: black;
+}
+
+.seven.wide.column.group {
+  text-align: right;
+}
+
+.sixteen.wide.column.copyright p {
+  text-align: center;
+}
+
+#login:hover{
+  cursor: pointer;
+}
+
+#login-result {
+  color: red;
+}
+#tips {
+  width:300px;
+  height: 100px;
+  font-size: 30px;
+  position: absolute;
+  padding:10px 0;
+  background: #00b5ad;
+  border:1px solid #f8efb0;
+  color:#fefcef;
+  margin: 300px auto 300px auto;
+  text-align: center;
+  top:10px;
+  left:600px;
+  z-index:1000;
+}
+
+#findPassword {
+  margin-right: 150px;
+}

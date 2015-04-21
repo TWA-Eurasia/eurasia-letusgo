@@ -9,10 +9,10 @@
 }
 
 .image-preview {
-  display:table-cell;
-  vertical-align:middle;
-  text-align:center;
-  width:400px;
-  height:350px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 400px;
+  height: 350px;
 }
 
