@@ -5,6 +5,8 @@ var _ = require('lodash');
 var User = require('../model/user');
 var sendMail = require('../util/email');
 
+var USER_EXISTED = '当前用户名已被注册';
+var USER_UNEXISTED = '用户名可用';
 var LOGIN_SUCCESS = '登陆成功！';
 var LOGIN_FAILURE = '用户或密码错误！';
 var LOGIN_ACTIVE = '帐号未激活！';
@@ -17,10 +19,10 @@ var findUser = function(req, res) {
 
     if(user.length === 1) {
 
-      res.send({isExisted: true});
+      res.send({isExisted: true, message: USER_EXISTED});
     } else {
 
-      res.send({isExisted: false});
+      res.send({isExisted: false, message: USER_UNEXISTED});
     }
 
   });

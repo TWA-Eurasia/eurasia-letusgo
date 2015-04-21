@@ -34,7 +34,7 @@ $(function () {
     $.get('/api/user', {name: name})
       .success(function (data) {
 
-        callback(data.isExisted);
+        callback(data);
       });
   }
 
@@ -43,9 +43,9 @@ $(function () {
     var isCorrect = true;
     getUsers(userName, function (data) {
 
-      if (data) {
+      if (data.isExisted) {
 
-        messageSelector.html('当前用户名已被注册').show();
+        messageSelector.html(data.message).show();
         isCorrect = false;
       } else {
 
