@@ -28,7 +28,7 @@ $(function () {
 
   $('img')
     .error(function () {
-      $(this).attr('src', '/image/missing.jpg');
+      $(this).attr('src', '/image/missing1.png');
     })
     .attr('src', function () {
       return $(this).data('src');
