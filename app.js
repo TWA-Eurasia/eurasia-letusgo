@@ -74,7 +74,6 @@ if (app.get('env') === 'production') {
 }
 
 app.use(function (err, req, res, next) {
-  console.log(req.header('X-Requested-With'));
   if(req.header('X-Requested-With')) {
     res.send({
       message: err.message,
