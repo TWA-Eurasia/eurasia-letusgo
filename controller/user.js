@@ -37,10 +37,8 @@ var findUser = function(req, res, next) {
 var getUserById = function(req, res, next) {
 
   var id = req.params.id;
-  console.log(id);
 
   User.findById(id)
-    .exec()
     .then(function(user) {
       user.password = '******';
       res.send({state: 200, user: user});
@@ -55,9 +53,9 @@ var createUser = function(req, res, next) {
   var currentUser = req.body;
 
   User.create(currentUser)
-    .exec()
     .then(function(user) {
 
+      console.log(user);
       sendMail.sendMail(user);
 
       user.password = '******';
