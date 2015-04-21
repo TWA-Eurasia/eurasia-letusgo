@@ -18,9 +18,9 @@ var findUser = function(req, res, next) {
   var name = req.query.name;
 
   User.find({name: name})
-    .exec()
     .then(function(user) {
 
+      console.log(user);
       if(user.length === 1) {
 
         res.send({isExisted: true, message: USER_EXISTED});
