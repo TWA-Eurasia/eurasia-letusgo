@@ -5,11 +5,19 @@ var _ = require('lodash');
 var User = require('../model/user');
 var sendMail = require('../util/email');
 
-var getUsers = function(req, res) {
+var getUserByName = function(req, res) {
 
-  User.find(function(err, users) {
+  var name = req.params.name;
 
-    res.send(users);
+  User.find({name: name}, function(err, user) {
+
+    if(user) {
+
+      res.send({isExisted: true});
+    } else {
+
+      res.send({isExisted: false});
+    }
   });
 };
 
@@ -23,6 +31,7 @@ var getUserById = function(req,res) {
       res.send({user: user});
     });
 };
+
 var createUser = function(req, res) {
 
   var currentUser = req.body;
@@ -69,7 +78,7 @@ var login = function(req, res) {
 };
 
 module.exports = {
-  getUsers: getUsers,
+  getUserByName: getUserByName,
   getUserById: getUserById,
   createUser: createUser,
   updateUser: updateUser,

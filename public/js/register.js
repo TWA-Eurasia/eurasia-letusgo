@@ -29,24 +29,21 @@ $(function () {
   var previousUrl = document.referrer;
   $('.confirm').attr('href', previousUrl);
 
-  function getUsers(callback) {
+  function getUsers(name, callback) {
 
-    $.get('/api/user')
-      .success(function (users) {
+    $.get('/api/user/' + name)
+      .success(function (data) {
 
-        callback(users);
+        callback(data.isExisted);
       });
   }
 
   function verifyUserExisted(userName, messageSelector, correctSelector) {
 
     var isCorrect = true;
-    getUsers(function (users) {
+    getUsers(userName, function (data) {
 
-      if (_.find(users, function (user) {
-
-          return user.name === userName;
-        })) {
+      if (data){
 
         messageSelector.html('当前用户名已被注册').show();
         isCorrect = false;
