@@ -7,8 +7,7 @@ $('.modal')
     selector: {
       close: 'icon.close'
     }
-  })
-;
+  });
 
 $(function () {
 
