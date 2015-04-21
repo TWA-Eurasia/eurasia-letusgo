@@ -16,7 +16,7 @@ block content
         .content
           i.icon.cart
           .content 购物车列表
-    .fourteen.wide.column
+    .sixteen.wide.column
       table.ui.large.table
         thead.center
           th.two.wide 图片
@@ -50,7 +50,6 @@ block content
                 .ui.negative.message.hidden.inventory 最多能购买
                   span.leftNumber #{cartItem.item.inventory}
                   span 件
-               // .ui.negative.message#inventory(style = 'display: none') 库存仅剩#{cartItem.item.inventory}!
 
               td
                 span.subtotal #{cartItem.getSubtotal()}
