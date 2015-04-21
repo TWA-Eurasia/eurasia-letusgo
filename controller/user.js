@@ -41,7 +41,7 @@ var getUserById = function(req,res) {
   User.findById(id)
     .exec(function(err, user) {
 
-      res.send({state: 200, user: user, message: FIND_SUCCESS});
+      res.send({state: 200, user: user});
     });
 };
 
