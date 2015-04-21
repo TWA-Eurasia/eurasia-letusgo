@@ -9,7 +9,7 @@ $(function() {
 
   $.post('/verification/' + userName)
     .success(function(data) {
-      console.log(data);
+
       $('#current-user').html(data.user.name).show();
       $('#login').hide();
       $('#register').hide();
