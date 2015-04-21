@@ -17,9 +17,9 @@ var findUser = function(req, res, next) {
   var name = req.query.name;
 
   User.find({name: name})
-    .exec()
     .then(function(user) {
 
+      console.log(user);
       if(user.length === 1) {
 
         res.send({isExisted: true, message: USER_EXISTED});
@@ -39,6 +39,7 @@ var getUserById = function(req, res, next) {
   var id = req.params.id;
 
   User.findById(id)
+    .exec()
     .then(function(user) {
       user.password = '******';
       res.send({state: 200, user: user});
