@@ -40,6 +40,7 @@ var getUserById = function(req, res, next) {
   var id = req.params.id;
 
   User.findById(id)
+    .exec()
     .then(function(user) {
 
       user.password = '******';
