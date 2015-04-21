@@ -38,7 +38,6 @@ var findUser = function(req, res, next) {
 var getUserById = function(req, res, next) {
 
   var id = req.params.id;
-  console.log(id);
 
   User.findById(id)
     .then(function(user) {
@@ -56,7 +55,6 @@ var createUser = function(req, res, next) {
 
   var currentUser = req.body;
 
-  console.log(currentUser);
   User.create(currentUser)
     .then(function(user) {
 
