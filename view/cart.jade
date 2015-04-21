@@ -13,7 +13,7 @@ block content
         .content
           i.icon.cart
           .content 购物车列表
-    .sixteen.wide.column
+    .fourteen.wide.column
       table.ui.large.table
         thead.center
           th.two.wide 图片
@@ -42,7 +42,7 @@ block content
               td
                 .ui
                   i.minus.square.icon.pointer.reduce
-                  input.number#input-number(type="text" value="#{cartItem.number}")
+                  input.number.input-number(type="text" value="#{cartItem.number}")
                   i.add.square.icon.pointer.increase
                 .ui.negative.message.hidden.inventory 最多能购买
                   span.leftNumber #{cartItem.item.inventory}

@@ -71,14 +71,14 @@ $(document).ready(function () {
   });
 
 
-  $('#logout').on('click', function () {
+ $('#logout').on('click', function () {
 
-    sessionStorage.removeItem('user');
-    $('#login').css('display', 'block');
-    $('#register').css('display', 'block');
-    $('#logout').css('display', 'none');
-    $('#current-user').html('').show();
-   });
+   sessionStorage.removeItem('user');
+   $('#login').css('display', 'block');
+   $('#register').css('display', 'block');
+   $('#logout').css('display', 'none');
+   $('#current-user').html('').show();
+  });
 
   $('.itemName').popup({
     content: $(this).prop('data-content')
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
   $('img')
     .error(function () {
-      $(this).attr('src', '/image/missing.jpg');
+      $(this).attr('src', '/image/missing1.png');
     })
     .attr('src', function () {
       return $(this).data('src');
