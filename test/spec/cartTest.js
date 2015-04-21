@@ -66,6 +66,7 @@ describe('cart', function () {
         done();
       };
       cartController.addToCart(reqMock, resMock);
+      done();
     });
   });
 
