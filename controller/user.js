@@ -18,7 +18,6 @@ var findUser = function(req, res, next) {
     .exec()
     .then(function(user) {
 
-      console.log(user);
       if(user.length === 1) {
 
         res.send({isExisted: true, message: USER_EXISTED});
@@ -55,7 +54,6 @@ var createUser = function(req, res, next) {
   User.create(currentUser)
     .then(function(user) {
 
-      console.log(user);
       sendMail.sendMail(user);
 
       user.password = '******';
