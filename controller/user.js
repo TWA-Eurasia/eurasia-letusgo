@@ -1,7 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
-
 var User = require('../model/user');
 var sendMail = require('../util/email');
 
