@@ -8,8 +8,8 @@ var deleteCartItem;
 var MAX_CART_AMOUNT = 99;
 
 $(function () {
-
-  if(sessionStorage.getItem('user')) {
+  var totalAmount = $('#total').text();
+  if (sessionStorage.getItem('user')) {
     $('#login').css('display', 'none');
     $('#register').css('display', 'none');
     $('#logout').css('display', 'block');
@@ -82,7 +82,7 @@ $(function () {
   $('#allChecked').on('click', function () {
 
     $('input[name="checkedCartItem"]').prop('checked', this.checked);
-
+    $('#total').text(this.checked ? totalAmount : 0);
   });
 
   $('.checkedCartItem').on('click', function () {
@@ -187,10 +187,10 @@ $(function () {
 
   countCartAmount();
 
-  $('#indent').on('click', function() {
+  $('#indent').on('click', function () {
 
     var sessionUser = sessionStorage.getItem('user');
-    if(!sessionUser) {
+    if (!sessionUser) {
 
       $('.user-login-modal')
         .modal('show');
@@ -206,9 +206,9 @@ $(function () {
           cartItems: cartItemIds,
           createDate: createDate,
           isPaid: false
-        }).success(function(err, data) {
+        }).success(function (err, data) {
 
-          if(data.status === 200){
+          if (data.status === 200) {
 
             location.href = '/indent';
           }
@@ -229,9 +229,9 @@ $(function () {
         var currentUserId = sessionStorage.getItem('user');
 
         $.get('/api/user/' + currentUserId)
-          .success(function(data) {
+          .success(function (data) {
 
-            if(!data.user.name) {
+            if (!data.user.name) {
               $('#current-user').html(data.user.name).show();
             }
 
@@ -247,12 +247,12 @@ $(function () {
     });
   });
 
-   $('#logout').on('click', function () {
+  $('#logout').on('click', function () {
 
-        sessionStorage.removeItem('user');
-        $('#login').css('display', 'block');
-        $('#register').css('display', 'block');
-        $('#logout').css('display', 'none');
-        $('#current-user').html('').show();
-   });
+    sessionStorage.removeItem('user');
+    $('#login').css('display', 'block');
+    $('#register').css('display', 'block');
+    $('#logout').css('display', 'none');
+    $('#current-user').html('').show();
+  });
 });
