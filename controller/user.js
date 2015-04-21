@@ -34,15 +34,34 @@ var findUser = function(req, res, next) {
   });
 };
 
-var getUserById = function(req,res) {
+var getUserById = function(req, res, next) {
 
   var id = req.params.id;
+  console.log(id);
 
   User.findById(id)
-    .exec(function(err, user) {
+    .exec()
+    .then(function(user) {
 
+      user.password = '******';
       res.send({state: 200, user: user, message: FIND_SUCCESS});
+    })
+    .onReject(function(err) {
+
+      next(err);
     });
+
+  //User.findById(id)
+  //  .exec(function(err, user) {
+  //
+  //    res.send({state: 200, user: user, message: FIND_SUCCESS});
+  //  }).onReject(function(err) {
+  //
+  //    next(err);
+  //  }).onResolve(function() {
+  //
+  //    process.exit();
+  //  });
 };
 
 var createUser = function(req, res, next) {
@@ -63,17 +82,17 @@ var createUser = function(req, res, next) {
 
   });
 };
-
-var updateUser = function(req, res) {
-
-  var userId = req.params.id;
-  var indentId = req.body.indentId;
-
-  User.update(userId, {$addToSet: {indents: indentId}}, function () {
-
-    res.send('add indent to user is successful');
-  });
-};
+//
+//var updateUser = function(req, res) {
+//
+//  var userId = req.params.id;
+//  var indentId = req.body.indentId;
+//
+//  User.update(userId, {$addToSet: {indents: indentId}}, function () {
+//
+//    res.send('add indent to user is successful');
+//  });
+//};
 
 var login = function(req, res) {
 
@@ -98,6 +117,6 @@ module.exports = {
   findUser: findUser,
   getUserById: getUserById,
   createUser: createUser,
-  updateUser: updateUser,
+  //updateUser: updateUser,
   login: login
 };
