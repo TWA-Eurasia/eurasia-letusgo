@@ -41,7 +41,6 @@ var getUserById = function(req, res, next) {
   console.log(id);
 
   User.findById(id)
-    .exec()
     .then(function(user) {
 
       user.password = '******';
@@ -57,10 +56,11 @@ var createUser = function(req, res, next) {
 
   var currentUser = req.body;
 
+  console.log(currentUser);
   User.create(currentUser)
-    .exec()
     .then(function(user) {
 
+      console.log(user);
       sendMail.sendMail(user);
 
       user.password = '******';
