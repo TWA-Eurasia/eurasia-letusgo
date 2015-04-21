@@ -63,6 +63,7 @@ describe('cart', function () {
       reqMock.params = {id: '551cc20e47a654d14a280e9b'};
 
       cartController.addToCart(reqMock, resMock);
+      done();
     });
   });
 
