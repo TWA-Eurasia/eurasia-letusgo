@@ -11,9 +11,8 @@ describe('GET api/indent', function () {
 
     resMock.send = function (object) {
 
-      expect(object).to.have.property('indent');
-      expect(object).to.have.property('total');
-      expect(object.total).to.equal('3334.50');
+      expect(object).to.have.property('cartItems');
+      expect(object).to.have.property('isPaid');
 
       done();
     };
