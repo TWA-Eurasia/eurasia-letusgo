@@ -30,7 +30,7 @@ $(function () {
     $('.user-login-modal')
       .modal('show');
 
-    $('#login-result').html('');
+    $('#login-result').hide();
   });
 
   $('#user-login').on('click', function () {

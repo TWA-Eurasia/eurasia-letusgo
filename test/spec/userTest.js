@@ -2,7 +2,7 @@
 
 var userController = require('../../controller/user');
 
-describe('index', function () {
+describe('user', function () {
 
   var reqMock = {};
   var resMock = {};
@@ -12,21 +12,28 @@ describe('index', function () {
     reloadDatabase();
   });
 
-
-  describe('getUsers', function () {
-
-    it('should get a collections of user', function (done) {
-
-      resMock.send = function (object) {
-
-        expect(object[0].name).to.equal('Sofia');
-
-        done();
-      };
-
-      userController.getUsers(reqMock, resMock);
-    });
-  });
+  //describe('findUser', function () {
+  //
+  //  it('should verify if the user is Existed before and return boolean', function (done) {
+  //
+  //    reqMock.query = {
+  //
+  //      name: 'Sofia'
+  //    };
+  //
+  //    resMock.send = function (object) {
+  //
+  //      expect(object).to.have.property('isExisted');
+  //      expect(object).to.have.property('message');
+  //      expect(object.isExisted).to.equal(false);
+  //      expect(object.message).to.equal('用户名可用');
+  //
+  //      done();
+  //    };
+  //
+  //    userController.findUser(reqMock, resMock);
+  //  });
+  //});
 
   describe('createUser', function () {
 
@@ -44,7 +51,11 @@ describe('index', function () {
 
       resMock.send = function (object) {
 
-        expect(object.name).to.equal('Sofia');
+        expect(object).to.have.property('status');
+        expect(object).to.have.property('data');
+        expect(object).to.have.property('message');
+        expect(object.data.password).to.equal('******');
+        expect(object.data.name).to.equal('Sofia');
 
         done();
       };
