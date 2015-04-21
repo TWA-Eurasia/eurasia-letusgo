@@ -4,8 +4,16 @@ var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(function() {
-  $('#login').hide();
-  $('#register').hide();
-  $('#logout').show();
+
+  var userName = $('#user-name').text();
+
+  $.post('/verification/' + userName)
+    .success(function(data) {
+      console.log(data);
+      $('#current-user').html(data.user.name).show();
+      $('#login').hide();
+      $('#register').hide();
+      $('#logout').show();
+    });
 
 });
