@@ -8,12 +8,14 @@ var sendMail = require('../util/email');
 var LOGIN_SUCCESS = '登陆成功！';
 var LOGIN_FAILURE = '用户或密码错误！';
 var LOGIN_ACTIVE = '帐号未激活！';
+var FIND_SUCCESS = '用户信息查找成功！';
+var FIND_ALL = '得到用户信息！';
 
 var getUsers = function(req, res) {
 
   User.find(function(err, users) {
 
-    res.send(users);
+    res.send({state: 202, users: users, message: FIND_ALL});
   });
 };
 
@@ -24,7 +26,7 @@ var getUserById = function(req,res) {
   User.findById(id)
     .exec(function(err, user) {
 
-      res.send({user: user});
+      res.send({state: 200, user: user, message: FIND_SUCCESS});
     });
 };
 var createUser = function(req, res) {
