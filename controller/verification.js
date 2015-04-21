@@ -31,4 +31,5 @@ var getUser = function (req, res) {
 module.exports = {
   updateActive : updateActive,
   getUser : getUser
+
 };

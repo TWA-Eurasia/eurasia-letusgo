@@ -28,8 +28,11 @@ $(function () {
       data: {number: num, price: price, total: total},
 
       success: function (data) {
-        input.closest('tr').find('#subtotal').text(data.subtotal);
-        $('#total').text(data.total);
+        input.closest('tr').find('.subtotal').text(data.subtotal);
+        var isChecked = input.closest('td').next().next().next().find('.checkedCartItem').prop('checked');
+        if (isChecked) {
+          $('#total').text(data.total);
+        }
       }
     });
   }
@@ -76,33 +79,28 @@ $(function () {
       return $(this).data('src');
     });
 
-  $('#allChecked').on('change', function () {
+  $('#allChecked').on('click', function () {
 
     $('input[name="checkedCartItem"]').prop('checked', this.checked);
 
   });
 
-  $('.checkedCartItem').on('blur', function () {
+  $('.checkedCartItem').on('click', function () {
+    var subtotal = $(this).closest('td').prev().prev().find('.subtotal').text();
+    var total = $('#total').text();
 
-    var isChecked = $(this).prop('checked');
-    if (!isChecked) {
-      $('#allChecked').prop('checked', false);
+
+    var checkboxesSize = $('.checkedCartItem').length;
+    var checkedBoxesSize = $('.checkedCartItem:checked').length;
+
+    $('#allChecked').prop('checked', checkboxesSize === checkedBoxesSize);
+
+    if ($(this).prop('checked')) {
+      total = parseInt(total) + parseInt(subtotal);
+    } else {
+      total = parseInt(total) - parseInt(subtotal);
     }
-
-    var isAllChecked = true;
-    var checkboxes = $('input[name="checkedCartItem"]');
-
-    for (var i = 0; i < checkboxes.length; i++) {
-      isAllChecked = checkboxes[i].checked;
-      if (!isAllChecked) {
-        return;
-      }
-    }
-
-    if (isAllChecked) {
-      $('#allChecked').prop('checked', true);
-    }
-
+    $('#total').text(total.toFixed(2));
   });
 
   $('.reduce').on('click', function () {
