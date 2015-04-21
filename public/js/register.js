@@ -77,7 +77,7 @@ $(function () {
     return isCorrect;
   }
 
-  $('#user-name').on('blur', function () {
+  $('#user-name').on('change', function () {
 
     var $userNameMessage = $('#user-name-message');
     $userNameMessage.hide();
@@ -105,7 +105,7 @@ $(function () {
     }
   });
 
-  $('#password').on('blur', function () {
+  $('#password').on('change', function () {
 
     var $passwordMessage = $('#password-message');
     $passwordMessage.hide();
@@ -126,7 +126,7 @@ $(function () {
     commonVerifyRegular(password, passwordSelectors, PASSWORD_MESSAGES, !passwordReg.exec(password));
   });
 
-  $('#repeat-password').on('blur', function () {
+  $('#repeat-password').on('change', function () {
 
     var $repeatPasswordMessage = $('#repeat-password-message');
     $repeatPasswordMessage.hide();
@@ -147,7 +147,7 @@ $(function () {
   });
 
 
-  $('#email').on('blur', function () {
+  $('#email').on('change', function () {
 
     var $emailMessage = $('#email-message');
     $emailMessage.hide();

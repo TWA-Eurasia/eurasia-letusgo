@@ -73,7 +73,6 @@ $(document).ready(function () {
 
   $('#logout').on('click', function () {
 
-    console.log('hsdfakjdshakf');
     sessionStorage.setItem('user', null);
     $('#login').css('display', 'block');
     $('#register').css('display', 'block');
@@ -93,5 +92,3 @@ $(document).ready(function () {
       return $(this).data('src');
     });
 });
-
-

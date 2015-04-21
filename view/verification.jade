@@ -5,11 +5,19 @@ block css
   script(src="/jspm_packages/system.js")
   script(src="/config.js")
   script.
+    System.import('js/verification');
+    System.import('js/success');
+
 block content
   .ui.grid.centered
     .fourteen.wide.column
-      h1.ui.header.centered
-        .content(style='color:red') 恭喜您，注册成功O(∩_∩)O
+      h1.ui.header.centered.red
+        .content
+        span 恭喜
+        span#user-name #{userName}
+        span ，注册成功O(∩_∩)O
+        span#sec &nbsp;3
+        span 秒后跳回首页。。。
     .fourteen.wide.column
     .fourteen.wide.column
       .ui.grid.centered
@@ -19,3 +27,4 @@ block content
         .eight.wide.column
           h2(style='text-align:center')
             a(href='/#') 我的Letusgo
+

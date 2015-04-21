@@ -56,7 +56,6 @@ $(function () {
         $('.user-login-modal').modal('hide');
         $('#login-success').html(data.message);
         $('#tips').show().fadeOut(2000);
-
       } else {
         $('#login-result').html(data.message).show();
       }

@@ -1,10 +1,2 @@
-{
-  "name": "Jacob KANG",
-  "password": "123456789",
-  "address": "",
-  "email": "123@163.com",
-  "phoneNumber": "",
-  "active": false,
-  "date": "2015-4-15"
-}
+{"name": "Jacob KANG", "password": "123456789", "address": "", "email": "123@163.com", "phoneNumber": "", "active": false, "date": "2015-4-15"}
 
