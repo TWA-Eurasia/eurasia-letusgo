@@ -38,7 +38,7 @@ $(document).ready(function () {
 
    $('#logout').on('click', function () {
 
-      sessionStorage.setItem('user', null);
+      sessionStorage.removeItem('user'); 
       $('#login').css('display', 'block');
       $('#register').css('display', 'block');
       $('#logout').css('display', 'none');

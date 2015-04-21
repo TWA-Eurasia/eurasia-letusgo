@@ -231,7 +231,9 @@ $(function () {
         $.get('/api/user/' + currentUserId)
           .success(function(data) {
 
-            $('#current-user').html(data.user.name).show();
+            if(!data.user.name) {
+              $('#current-user').html(data.user.name).show();
+            }
 
             $('.user-login-modal').modal('hide');
             $('#login-success').html(data.message);
@@ -247,7 +249,7 @@ $(function () {
 
    $('#logout').on('click', function () {
 
-        sessionStorage.setItem('user', null);
+        sessionStorage.removeItem('user');
         $('#login').css('display', 'block');
         $('#register').css('display', 'block');
         $('#logout').css('display', 'none');
