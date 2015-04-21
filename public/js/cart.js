@@ -8,7 +8,7 @@ var deleteCartItem;
 var MAX_CART_AMOUNT = 99;
 
 $(function () {
-
+  var totalAmount = $('#total').text();
   if (sessionStorage.getItem('user')) {
     $('#login').css('display', 'none');
     $('#register').css('display', 'none');
@@ -82,7 +82,7 @@ $(function () {
   $('#allChecked').on('click', function () {
 
     $('input[name="checkedCartItem"]').prop('checked', this.checked);
-
+    $('#total').text(this.checked ? totalAmount : 0);
   });
 
   $('.checkedCartItem').on('click', function () {
