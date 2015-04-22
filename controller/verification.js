@@ -2,11 +2,14 @@
 
 var User = require('../model/user');
 var FIND_SUCCESS = '用户信息存在！！';
+
 var updateActive = function (req, res) {
   var id = req.params.id;
 
   User.update({_id: id}, {$set: {active: true}}, function() {
+
     User.findById(id, function(err, user) {
+
       if (err) {
         throw err;
       }
