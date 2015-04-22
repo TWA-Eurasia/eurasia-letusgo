@@ -77,17 +77,6 @@ var createUser = function(req, res, next) {
     });
 
 };
-//
-//var updateUser = function(req, res) {
-//
-//  var userId = req.params.id;
-//  var indentId = req.body.indentId;
-//
-//  User.update(userId, {$addToSet: {indents: indentId}}, function () {
-//
-//    res.send('add indent to user is successful');
-//  });
-//};
 
 var login = function(req, res) {
 
@@ -120,6 +109,5 @@ module.exports = {
   findUser: findUser,
   getUserById: getUserById,
   createUser: createUser,
-  //updateUser: updateUser,
   login: login
 };
