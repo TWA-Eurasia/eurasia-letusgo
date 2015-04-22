@@ -20,7 +20,7 @@ $(function () {
     $.get('/api/user/' + currentUserId)
       .success(function(data) {
 
-        $('#current-user').html(data.user.name).show();
+        $('#current-user').html(data.data.name).show();
 
       });
   }

@@ -63,8 +63,13 @@ var createUser = function(req, res, next) {
 
       sendMail.sendMail(user);
 
-      user.password = '******';
-      res.send({status: 200, data: user, message: CREATE_SUCCESS});
+      var currentUser = {
+
+        id: user._id,
+        name: user.name
+      };
+
+      res.send({status: 200, data: currentUser, message: CREATE_SUCCESS});
     })
     .onReject(function(err) {
 
