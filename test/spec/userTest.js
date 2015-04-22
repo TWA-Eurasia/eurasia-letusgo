@@ -12,28 +12,26 @@ describe('user', function () {
     reloadDatabase();
   });
 
-  //describe('findUser', function () {
-  //
-  //  it('should verify if the user is Existed before and return boolean', function (done) {
-  //
-  //    reqMock.query = {
-  //
-  //      name: 'Sofia'
-  //    };
-  //
-  //    resMock.send = function (object) {
-  //
-  //      expect(object).to.have.property('isExisted');
-  //      expect(object).to.have.property('message');
-  //      expect(object.isExisted).to.equal(false);
-  //      expect(object.message).to.equal('用户名可用');
-  //
-  //      done();
-  //    };
-  //
-  //    userController.findUser(reqMock, resMock);
-  //  });
-  //});
+  describe('findUser', function () {
+
+    it('should verify if the user is Existed before and return boolean', function (done) {
+
+      reqMock.query = {
+
+        name: 'Jacob KANG'
+      };
+
+      resMock.send = function (object) {
+
+        expect(object.isExisted).to.equal(false);
+        expect(object.message).to.equal('用户名可用');
+
+        done();
+      };
+
+      userController.findUser(reqMock, resMock);
+    });
+  });
 
   describe('createUser', function () {
 
@@ -52,7 +50,6 @@ describe('user', function () {
       resMock.send = function (object) {
 
         expect(object).to.have.property('status');
-        expect(object).to.have.property('data');
         expect(object).to.have.property('message');
         expect(object.data.password).to.equal('******');
         expect(object.data.name).to.equal('Sofia');
