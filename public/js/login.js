@@ -13,18 +13,6 @@ $('.modal')
 
 $(function () {
 
-  if(sessionStorage.getItem('user')) {
-
-    var currentUserId = sessionStorage.getItem('user');
-
-    $.get('/api/user/' + currentUserId)
-      .success(function(data) {
-
-        $('#current-user').html(data.data.name).show();
-
-      });
-  }
-
   $('#login').on('click', function () {
 
     $('.user-login-modal')
@@ -40,25 +28,19 @@ $(function () {
 
     $.post('/api/user/login', {username: userName, password: md5(password)}, function (data) {
 
-      if (data.data) {
+      if (data.status === 200) {
 
-        sessionStorage.setItem('user', data.user._id);
-
-        var currentUserId = sessionStorage.getItem('user');
         $('#login').css('display', 'none');
         $('#register').css('display', 'none');
         $('#logout').css('display', 'block');
 
-        $.get('/api/user/' + currentUserId)
-          .success(function(data) {
-
-            $('#current-user').html(data.data.name).show();
-          });
+        $('#current-user').html(data.data).show();
 
         $('.user-login-modal').modal('hide');
         $('#login-success').html(data.message);
         $('#tips').show().fadeOut(2000);
       } else {
+
         $('#login-result').html(data.message).show();
       }
     });
