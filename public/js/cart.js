@@ -85,6 +85,19 @@ $(function () {
     $('#total').text(this.checked ? totalAmount : 0);
   });
 
+  function getCheckedIds() {
+    var checkboxes = $('.checkedCartItem');
+    var cartItemIds = [];
+
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        cartItemIds.push(checkboxes[i].id);
+      }
+    }
+
+    return cartItemIds;
+  }
+
   $('.checkedCartItem').on('click', function () {
     var subtotal = $(this).closest('td').prev().prev().find('.subtotal').text();
     var total = $('#total').text();
@@ -171,7 +184,7 @@ $(function () {
 
         $('.delete-modal').modal('hide');
         $('.delete-message').show();
-        
+
         $(deleteCartItem.closest('tr').remove());
 
         window.setTimeout(function () {
@@ -200,9 +213,9 @@ $(function () {
 
       $('#login-result').html('');
     } else {
-
-      var cartItemIds = [];
+      var cartItemIds = getCheckedIds();
       var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
+
       $.post('/api/indent',
         {
           user: sessionUser,
