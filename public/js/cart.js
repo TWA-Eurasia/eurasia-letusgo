@@ -168,7 +168,10 @@ $(function () {
       type: 'DELETE',
 
       success: function (data) {
+
+        $('.delete-modal').modal('hide');
         $('.delete-message').show();
+        
         $(deleteCartItem.closest('tr').remove());
 
         window.setTimeout(function () {
