@@ -12,4 +12,4 @@ $(function () {
     $('#logout').css('display', 'none');
     $('#current-user').html('').show();
   });
-})
+});
