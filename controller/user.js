@@ -104,8 +104,15 @@ var login = function(req, res) {
     if(!user || user.password !== password) {
       return res.send({state: 401, data: {}, message: LOGIN_FAILURE});
     }
+
+    var currentUser = {
+
+      id: user._id,
+      name: user.name
+    };
+
     session.user = user;
-    res.send({state: 200, user: user, message: LOGIN_SUCCESS});
+    res.send({state: 200, data: currentUser, message: LOGIN_SUCCESS});
   });
 };
 

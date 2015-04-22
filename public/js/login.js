@@ -40,7 +40,7 @@ $(function () {
 
     $.post('/api/user/login', {username: userName, password: md5(password)}, function (data) {
 
-      if (data.user) {
+      if (data.data) {
 
         sessionStorage.setItem('user', data.user._id);
 
