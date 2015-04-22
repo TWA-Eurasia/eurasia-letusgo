@@ -38,9 +38,10 @@ $(function () {
     var userName = $('#user-name-login').val();
     var password = $('#password-login').val();
 
-    $.post('/api/user/login', {username: userName, password: md5(password)}, function (data) {
+    $.post('/api/user/login', {username: userName, password: password}, function (data) {
 
       if (data.user) {
+
         sessionStorage.setItem('user', data.user._id);
 
         var currentUserId = sessionStorage.getItem('user');

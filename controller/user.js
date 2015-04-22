@@ -4,11 +4,12 @@ var User = require('../model/user');
 var sendMail = require('../util/email');
 
 var USER_EXISTED = '当前用户名已被注册';
-var USER_UNEXISTED = '用户名可用';
+var USER_NOT_EXISTED = '用户名可用';
 var LOGIN_SUCCESS = '登陆成功！';
 var LOGIN_FAILURE = '用户或密码错误！';
 var LOGIN_ACTIVE = '帐号未激活！';
 var CREATE_SUCCESS = '用户创建成功';
+var FIND_USER_BY_ID = '成功找到用户';
 
 var findUser = function(req, res, next) {
 
@@ -20,10 +21,10 @@ var findUser = function(req, res, next) {
 
       if(user.length === 1) {
 
-        res.send({isExisted: true, message: USER_EXISTED});
+        res.send({status: 200, data: true, message: USER_EXISTED});
       } else {
 
-        res.send({isExisted: false, message: USER_UNEXISTED});
+        res.send({status: 200, data: false, message: USER_NOT_EXISTED});
       }
     })
     .onReject(function(err) {
@@ -39,8 +40,14 @@ var getUserById = function(req, res, next) {
   User.findById(id)
     .exec()
     .then(function(user) {
-      user.password = '******';
-      res.send({state: 200, user: user});
+
+      var currentUser = {
+
+        id: user._id,
+        name: user.name
+      };
+
+      res.send({state: 200, data: currentUser, message: FIND_USER_BY_ID});
     })
     .onReject(function(err) {
       next(err);
@@ -81,8 +88,9 @@ var login = function(req, res) {
 
   var username = req.body.username;
   var password = req.body.password;
+  var session = req.session;
 
-  User.findOne({'name': username}, function (err, user) {
+  User.findOne({name: username}, function (err, user) {
 
     if(user && user.active === false) {
       return res.send({state: 401, data: {}, message: LOGIN_ACTIVE});
@@ -91,7 +99,7 @@ var login = function(req, res) {
     if(!user || user.password !== password) {
       return res.send({state: 401, data: {}, message: LOGIN_FAILURE});
     }
-    user.password = '******';
+    session.user = user;
     res.send({state: 200, user: user, message: LOGIN_SUCCESS});
   });
 };

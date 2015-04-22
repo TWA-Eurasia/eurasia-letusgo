@@ -43,9 +43,9 @@ $(function () {
     var isCorrect = true;
     getUsers(userName, function (data) {
 
-      if (data.isExisted) {
+      if (data.data) {
 
-        messageSelector.html(data.message).show();
+        messageSelector.html('用户名已存在').show();
         isCorrect = false;
       } else {
 
