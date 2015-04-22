@@ -24,7 +24,7 @@ app.use(session({
   secret: 'LetUsGo',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }));
 
 //connect to database

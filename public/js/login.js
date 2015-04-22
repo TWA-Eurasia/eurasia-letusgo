@@ -28,15 +28,16 @@ $(function () {
 
     $.post('/api/user/login', {username: userName, password: md5(password)}, function (data) {
 
-      if (data.status === 200) {
+      if (data.data) {
 
         $('#login').css('display', 'none');
         $('#register').css('display', 'none');
         $('#logout').css('display', 'block');
 
-        $('#current-user').html(data.data).show();
 
         $('.user-login-modal').modal('hide');
+        $('#current-user').html(data.data).show();
+
         $('#login-success').html(data.message);
         $('#tips').show().fadeOut(2000);
       } else {
