@@ -3,7 +3,7 @@
 var User = require('../model/user');
 var FIND_SUCCESS = '用户信息存在！！';
 
-var updateActive = function (req, res) {
+var updateActive = function (req, res, next) {
   var id = req.params.id;
 
   User.findOne(id)
@@ -11,8 +11,10 @@ var updateActive = function (req, res) {
     .then(function(user) {
       user.active = true;
 
-      var userName = user.name;
-      res.render('verification',{userName : userName});
+      req.session.currentUserName = user.name;
+
+      var currentUserName = req.session.currentUserName;
+      res.render('verification',{currentUserName: currentUserName, userName : currentUserName});
     })
     .onReject(function(err) {
 
@@ -20,7 +22,7 @@ var updateActive = function (req, res) {
     });
 };
 
-var getUser = function (req, res) {
+var getUser = function (req, res, next) {
   var userName = req.params.userName;
 
   User.findOne({name : userName})
@@ -36,7 +38,7 @@ var getUser = function (req, res) {
 };
 
 module.exports = {
+
   updateActive : updateActive,
   getUser : getUser
-
 };
