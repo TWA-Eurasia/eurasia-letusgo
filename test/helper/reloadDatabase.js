@@ -16,7 +16,7 @@ var users = require('../../seed/test/users');
 
 var reloadDatabase = function () {
   Item.remove({});
-  CartItem.remove({}, function (err, cartItem) {
+  CartItem.remove({}, function (err) {
     if (err) {
       console.log(err);
     }
@@ -24,7 +24,10 @@ var reloadDatabase = function () {
   Cart.remove({});
   Category.remove({});
   Indent.remove({});
-  User.remove({});
+  User.remove({}, function (err) {
+    if (err) {
+      console.log(err);}
+    });
 
   Item.create(items);
   CartItem.create(cartItems);

@@ -2,7 +2,7 @@
 
 var userController = require('../../controller/user');
 
-describe('user', function () {
+describe('user', function() {
 
   var reqMock = {};
   var resMock = {};
@@ -58,6 +58,24 @@ describe('user', function () {
       };
 
       userController.createUser(reqMock, resMock);
+    });
+  });
+
+  describe('getUserById', function () {
+
+    it('should send 200 and correct user', function (done) {
+
+      reqMock.params = {id: '531888e2719cd8056307fd6'};
+
+      resMock.send = function (object) {
+        console.log(object);
+        expect(object.status).to.equal(200);
+        expect(object.user.name).to.equal('Jacob KANG');
+
+        done();
+      };
+
+      userController.getUserById(reqMock, resMock);
     });
   });
 

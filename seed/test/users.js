@@ -11,3 +11,5 @@ var users = [
     active: false,
     date: '2015-4-15'}
 ];
+
+module.exports = users;
