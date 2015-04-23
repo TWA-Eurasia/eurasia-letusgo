@@ -74,4 +74,31 @@ describe('user', function() {
       userController.getUserById(reqMock, resMock);
     });
   });
+
+  describe('createUser', function() {
+
+    it('should create user and return success message!', function(done) {
+
+      reqMock.body = {
+        name: 'yangmingkun',
+        password: '123456789',
+        address: '',
+        email: '123@163.com',
+        phoneNumber: '',
+        active: false,
+        date: '2015-4-15'
+      };
+
+      resMock.send = function(object) {
+
+        expect(object.state).to.equal(200);
+        expect(object.data.name).to.equal('yangmingkun');
+        expect(object.message).to.equal('用户创建成功');
+
+        done();
+      };
+
+      userController.createUser(reqMock, resMock);
+    });
+  });
 });
