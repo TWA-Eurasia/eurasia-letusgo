@@ -39,8 +39,8 @@ describe('user', function() {
 
       reqMock.body = {
 
-        name: 'Sofia',
-        password: '9311220',
+        name: 'kjkopliyu',
+        password: '000000',
         address: '',
         phoneNumber: '',
         active: true,
@@ -51,8 +51,7 @@ describe('user', function() {
 
         expect(object).to.have.property('status');
         expect(object).to.have.property('message');
-        expect(object.data.password).to.equal('******');
-        expect(object.data.name).to.equal('Sofia');
+        expect(object.data.name).to.equal('kjkopliyu');
 
         done();
       };

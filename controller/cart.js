@@ -36,7 +36,7 @@ var getCart = function (req, res) {
     });
 
     var total = cart.getTotal(cart.cartItems);
-    res.render('cart', {cartItems: cart.cartItems, total: total.toFixed(2)});
+    res.render('cart', {currentUserName: req.session.currentUserName, cartItems: cart.cartItems, total: total.toFixed(2)});
   });
 };
 

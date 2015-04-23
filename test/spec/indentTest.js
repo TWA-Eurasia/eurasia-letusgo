@@ -5,7 +5,7 @@ describe('GET api/indent', function () {
   var resMock = {};
   var reqMock = {};
 
-  var indentController = require('../../controller/indentController');
+  var indentController = require('../../controller/indent');
 
   it('should get total and indent', function (done) {
 
@@ -17,7 +17,7 @@ describe('GET api/indent', function () {
       done();
     };
 
-    indentController.getIndent(reqMock, resMock);
+    indent.getIndent(reqMock, resMock);
   });
 
   afterEach(function () {

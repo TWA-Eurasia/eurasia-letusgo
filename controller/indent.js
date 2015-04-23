@@ -32,6 +32,7 @@ var createIndent = function(req, res) {
 
   var currentIndent = req.body;
 
+  currentIndent.cartItems = currentIndent['cartItems[]'];
   Indent.create(currentIndent, function (err, indent) {
 
     var data = {};
@@ -50,6 +51,7 @@ var createIndent = function(req, res) {
           message: '订单生成成功！'
         };
       }
+
     res.send(data);
   });
 };

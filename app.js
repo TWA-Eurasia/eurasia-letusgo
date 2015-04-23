@@ -4,6 +4,7 @@ require('newrelic');
 
 var express = require('express');
 var path = require('path');
+var session = require('express-session');
 
 var app = express();
 var mongoose = require('mongoose');
@@ -15,6 +16,15 @@ app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
+}));
+
+//express-session configure
+//app.set('trust proxy', 1);// trust first proxy
+app.use(session({
+  secret: 'LetUsGo',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
 }));
 
 //connect to database

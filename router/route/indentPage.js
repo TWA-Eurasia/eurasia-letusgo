@@ -40,6 +40,7 @@ router.get('/', function (req, res) {
         var shortedCartItemName = getShortedCartItemName(indent.cartItems);
 
         res.render('indent', {
+          currentUserName: req.session.currentUserName,
           cartItems: indent.cartItems,
           total: total,
           indent: indent,
