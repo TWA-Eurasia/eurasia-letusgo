@@ -15,23 +15,67 @@ var carts = require('../../seed/test/carts');
 var users = require('../../seed/test/users');
 
 var reloadDatabase = function () {
-  Item.remove({});
+  Item.remove({}, function (err, item) {
+    if (err) {
+      console.log(err);
+    }
+  });
   CartItem.remove({}, function (err, cartItem) {
     if (err) {
       console.log(err);
     }
   });
-  Cart.remove({});
-  Category.remove({});
-  Indent.remove({});
-  User.remove({});
+  Cart.remove({}, function (err, cart) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  Category.remove({}, function (err, category) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  Indent.remove({}, function (err, ident) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  User.remove({}, function (err, user) {
+    if (err) {
+      console.log(err);
+    }
+  });
 
-  Item.create(items);
-  CartItem.create(cartItems);
-  Cart.create(carts);
-  Category.create(categories);
-  Indent.create(indents);
-  User.create(users);
+  Item.create(items, function (err, itemArray) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  CartItem.create(cartItems, function (err, cartItemArray) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  Cart.create(carts, function (err, cartArray) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  Category.create(categories, function (err, categoryArray) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  Indent.create(indents, function (err, indentArray) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  User.create(users, function (err, userArray) {
+    if (err) {
+      console.log(err);
+    }
+  });
 };
 
 module.exports = reloadDatabase;
