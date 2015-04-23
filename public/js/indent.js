@@ -26,12 +26,6 @@ function showShortage(shortedCartItemName) {
 
 $(document).ready(function () {
 
-   if(sessionStorage.getItem('user')) {
-      $('#login').css('display', 'none');
-      $('#register').css('display', 'none');
-      $('#logout').css('display', 'block');
-    }
-
   $('#pay').on('click', function () {
 
     var shortedCartItemName = $('#shortedCartItemName').text();
