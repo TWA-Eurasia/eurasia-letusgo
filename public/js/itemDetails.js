@@ -6,12 +6,6 @@ var MAX_CART_AMOUNT = 99;
 
 $(function () {
 
-   if(sessionStorage.getItem('user')) {
-      $('#login').css('display', 'none');
-      $('#register').css('display', 'none');
-      $('#logout').css('display', 'block');
-    }
-
   function verifyNumber(number) {
     var reg = /^(0|[1-9][0-9]*)$/;
     if (!reg.exec(number)) {
