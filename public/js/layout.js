@@ -5,6 +5,7 @@ var md5 = require('MD5');
 
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
+var LOGOUT_SUCCESS = '退出成功';
 $('.modal')
   .modal({
     selector: {
@@ -14,7 +15,20 @@ $('.modal')
 
 $(function () {
 
-  $('#login').on('click', function () {
+  var currentUserName = $('#current-user').text();
+
+  var $login = $('#login');
+  var $logout = $('#logout');
+  var $register = $('#register');
+
+  if(currentUserName !== '') {
+
+    $login.hide();
+    $register.hide();
+    $logout.show();
+  }
+
+  $login.on('click', function () {
 
     $('.user-login-modal')
       .modal('show');
@@ -31,16 +45,15 @@ $(function () {
 
       if (data.data) {
 
-        $('#login').css('display', 'none');
-        $('#register').css('display', 'none');
-        $('#logout').css('display', 'block');
-
+        $login.hide();
+        $register.hide();
+        $logout.show();
 
         $('.user-login-modal').modal('hide');
         $('#current-user').html(data.data).show();
 
         $('#login-success').html(data.message);
-        $('#tips').show().fadeOut(2000);
+        $('#login-tips').show().fadeOut(2000);
       } else {
 
         $('#login-result').html(data.message).show();
@@ -49,18 +62,22 @@ $(function () {
   });
 
 
-  $('#logout').on('click', function () {
+  $logout.on('click', function () {
     $.ajax({
       url: '/api/sessions',
       type: 'DELETE',
       success: function(data){
-        console.log(data);
+
+        if(data.message) {
+          $('#logout-success').html(LOGOUT_SUCCESS).show();
+          $('#logout-tips').show().fadeOut(2000);
+        }
       }
     });
 
-    $('#login').css('display', 'block');
-    $('#register').css('display', 'block');
-    $('#logout').css('display', 'none');
+    $login.show();
+    $register.show();
+    $logout.hide();
     $('#current-user').html('').show();
   });
 });
