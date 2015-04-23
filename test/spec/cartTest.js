@@ -13,8 +13,9 @@ describe('cart', function () {
     cartController = require('../../controller/cart');
   });
 
-  afterEach(function () {
+  afterEach(function (done) {
     reloadDatabase();
+    done();
   });
 
   describe('getCart', function () {

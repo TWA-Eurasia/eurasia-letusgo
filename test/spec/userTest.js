@@ -13,8 +13,9 @@ describe('user', function() {
     userController = require('../../controller/user');
   });
 
-  afterEach(function () {
+  afterEach(function (done) {
     reloadDatabase();
+    done();
   });
 
   describe('findUser', function() {
@@ -64,6 +65,7 @@ describe('user', function() {
       resMock.send = function(object) {
 
         expect(object.state).to.equal(200);
+        expect(object.data.name).to.equal('Jacob KANG');
         expect(object.message).to.equal('成功找到用户');
 
         done();
