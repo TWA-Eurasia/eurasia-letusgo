@@ -1,10 +1,31 @@
 'use strict';
 
 var Indent = require('../model/indent');
-
+var Item = require('../model/item');
 var CREATE_INDENT_SUCCESS = '订单生成成功';
 
-var createIndent = function(req, res, next) {
+var getIndent = function (req, res) {
+
+  var indentId = req.session.currentIndent;
+
+  Indent.findById(indentId)
+
+    .populate('cartItems')
+    .exec(function (err, indent) {
+
+      Item.populate(indent, 'cartItems.item', function (err) {
+
+        if (err) {
+          throw err;
+        }
+
+        var total = indent.getTotal(indent.cartItems);
+        res.send({total: total});
+      });
+    });
+};
+
+var createIndent = function(req, res) {
 
   var currentIndent = req.body;
   var currentUserId = req.session.currentUserId;
@@ -12,18 +33,32 @@ var createIndent = function(req, res, next) {
   currentIndent.cartItems = currentIndent['cartItems[]'];
   currentIndent.user = currentUserId;
 
-  Indent.create(currentIndent)
-    .then(function(indent) {
+  Indent.create(currentIndent, function (err, indent) {
 
-      req.session.currentIndent = indent._id;
-      res.send({state: 200, data: indent, message: CREATE_INDENT_SUCCESS});
-    })
-    .onReject(function(err) {
+    var data = {};
+    if(err) {
 
-      next(err);
-    });
+      data = {
+        status: 500,
+        data: indent,
+        message: '订单生成失败！'
+      };
+    }else {
+
+      data = {
+        status: 200,
+        data: indent,
+        message: '订单生成成功！'
+      };
+    }
+
+    req.session.currentIndent = indent._id;
+    res.send(data);
+  });
 };
 
+
 module.exports = {
-  createIndent: createIndent
+  createIndent: createIndent,
+  getIndent: getIndent
 };
