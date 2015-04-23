@@ -1,78 +1,71 @@
 'use strict';
 
-var userController = require('../../controller/user');
-
 describe('user', function() {
+  var reqMock;
+  var resMock;
+  var userController;
 
-  var reqMock = {};
-  var resMock = {};
+  beforeEach(function() {
+    reqMock = {};
+    resMock = {};
 
-  afterEach(function () {
-
-    reloadDatabase();
+    userController = require('../../controller/user');
   });
 
-  //describe('findUser', function () {
-  //
-  //  it('should verify if the user is Existed before and return boolean', function (done) {
-  //
-  //    reqMock.query = {
-  //
-  //      name: 'pppppppp'
-  //    };
-  //
-  //    resMock.send = function (object) {
-  //
-  //      expect(object).to.have.property('data');
-  //      expect(object).to.have.property('message');
-  //      expect(object.data).to.equal(true);
-  //      expect(object.message).to.equal('用户名已存在');
-  //
-  //      done();
-  //    };
-  //
-  //    userController.findUser(reqMock, resMock);
-  //  });
-  //});
+  afterEach(function (done) {
+    reloadDatabase();
+    done();
+  });
 
-  describe('createUser', function () {
+  describe('findUser', function() {
 
-    it('should create a user and save it to mongoDB', function (done) {
+    it('should find correct user and return right message!', function(done) {
 
-      reqMock.body = {
+      reqMock.query = {name: 'Jacob KANG'};
 
-        name: 'kjkopliyu',
-        password: '000000',
-        address: '',
-        phoneNumber: '',
-        active: true,
-        createDate: new Date()
-      };
+      resMock.send = function(object) {
 
-      resMock.send = function (object) {
-
-        expect(object).to.have.property('status');
-        expect(object).to.have.property('data');
-        expect(object).to.have.property('message');
-        expect(object.data.name).to.equal('kjkopliyu');
+        expect(object.state).to.equal(200);
+        expect(object.data).to.equal(true);
+        expect(object.message).to.equal('当前用户名已被注册');
 
         done();
       };
 
-      userController.createUser(reqMock, resMock);
+      userController.findUser(reqMock, resMock);
     });
   });
 
-  describe('getUserById', function () {
+  describe('findUser', function() {
 
-    it('should send 200 and correct user', function (done) {
+    it('should cant find user and return useful message!', function(done) {
 
-      reqMock.params = {id: '531888e2719cd8056307fd6'};
+      reqMock.query = {name: 'Jacob'};
 
-      resMock.send = function (object) {
-        console.log(object);
-        expect(object.status).to.equal(200);
-        expect(object.user.name).to.equal('Jacob KANG');
+      resMock.send = function(object) {
+
+        expect(object.state).to.equal(200);
+        expect(object.data).to.equal(false);
+        expect(object.message).to.equal('用户名可用');
+
+        done();
+      };
+
+      userController.findUser(reqMock, resMock);
+    });
+  });
+
+  describe('getUserById', function() {
+
+    it('should get user and return right message!', function(done) {
+
+      reqMock.params = {id: '5523cea79294d58a8e06c3c9'};
+
+      resMock.send = function(object) {
+
+        expect(object.state).to.equal(200);
+        expect(object.data.name).to.equal('Jacob KANG');
+        expect(object.message).to.equal('成功找到用户');
 
         done();
       };
@@ -81,4 +74,30 @@ describe('user', function() {
     });
   });
 
+  describe('createUser', function() {
+
+    it('should create user and return success message!', function(done) {
+
+      reqMock.body = {
+        name: 'yangmingkun',
+        password: '123456789',
+        address: '',
+        email: '123@163.com',
+        phoneNumber: '',
+        active: false,
+        date: '2015-4-15'
+      };
+
+      resMock.send = function(object) {
+
+        expect(object.state).to.equal(200);
+        expect(object.data.name).to.equal('yangmingkun');
+        expect(object.message).to.equal('用户创建成功');
+
+        done();
+      };
+
+      userController.createUser(reqMock, resMock);
+    });
+  });
 });

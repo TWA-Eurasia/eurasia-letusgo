@@ -15,6 +15,7 @@ var carts = require('../../seed/test/carts');
 var users = require('../../seed/test/users');
 
 var reloadDatabase = function () {
+
   Item.remove({}, function (err, item) {
     if (err) {
       console.log(err);
@@ -25,6 +26,7 @@ var reloadDatabase = function () {
       console.log(err);
     }
   });
+
   Cart.remove({}, function (err, cart) {
     if (err) {
       console.log(err);
