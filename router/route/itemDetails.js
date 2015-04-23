@@ -3,12 +3,8 @@
 var express = require('express');
 var router = express.Router();
 
-var getItem = require('../../controller/getItem.js');
+var itemDetailsController = require('../../controller/itemDetails.js');
 
 
-router.get('/:id', function (req, res) {
-
-  getItem(req, res);
-});
-
+router.get('/:id', itemDetailsController.getItemDetails);
 module.exports = router;

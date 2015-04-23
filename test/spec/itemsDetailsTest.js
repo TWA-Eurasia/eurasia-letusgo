@@ -4,7 +4,7 @@ describe('GET /', function () {
   var resMock = {};
   var reqMock = {};
 
-  var getItem = require('../../controller/getItem');
+  var getItem = require('../../controller/itemDetails');
 
   it('it should return itemDetails', function (done) {
     reqMock.params = {
@@ -19,7 +19,7 @@ describe('GET /', function () {
       done();
     };
 
-    getItem(reqMock, resMock);
+    itemDetails(reqMock, resMock);
 
     afterEach(function () {
 
