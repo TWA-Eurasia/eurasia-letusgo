@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('itemsDetails', function () {
+describe('itemsDetails', function () {
   beforeEach(function () {
     reloadDatabase();
   });
