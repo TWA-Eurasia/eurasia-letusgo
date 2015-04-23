@@ -21,6 +21,7 @@ var getItem = function (req, res) {
         };
 
         res.render('itemDetails', {
+          currentUserName: req.session.currentUserName,
           itemDetails: itemDetails
         });
       });
