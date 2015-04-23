@@ -9,11 +9,6 @@ var MAX_CART_AMOUNT = 99;
 
 $(function () {
   var totalAmount = $('#total').text();
-  if (sessionStorage.getItem('user')) {
-    $('#login').css('display', 'none');
-    $('#register').css('display', 'none');
-    $('#logout').css('display', 'block');
-  }
 
   function changeTotal(jqDom) {
     var id = jqDom.closest('tr').data('id');
@@ -99,9 +94,9 @@ $(function () {
   }
 
   $('.checkedCartItem').on('click', function () {
+
     var subtotal = $(this).closest('td').prev().prev().find('.subtotal').text();
     var total = $('#total').text();
-
 
     var checkboxesSize = $('.checkedCartItem').length;
     var checkedBoxesSize = $('.checkedCartItem:checked').length;
@@ -113,10 +108,12 @@ $(function () {
     } else {
       total = parseInt(total) - parseInt(subtotal);
     }
+
     $('#total').text(total.toFixed(2));
   });
 
   $('.reduce').on('click', function () {
+
     var inputDom = $(this).closest('td').find('.number');
     var numberInput = parseInt(inputDom.val());
 
@@ -124,24 +121,30 @@ $(function () {
       inputDom.val(numberInput - 1);
       changeTotal($(this));
     }
+
     countCartAmount();
   });
 
   $('.increase').on('click', function () {
+
     var $this = $(this);
     var inputDom = $this.closest('td').find('.number');
     var numberInput = parseInt(inputDom.val());
 
     getCartItemInventory($this, function (data) {
+
       if (data.inventory > numberInput) {
+
         inputDom.val(numberInput + 1);
         changeTotal($($this));
       }
+
       countCartAmount();
     });
   });
 
   $('.number').on('change', function () {
+
     var $this = $(this);
     $this.closest('td').find('.inventory').hide();
 
@@ -153,15 +156,16 @@ $(function () {
     verifyNumber(number, $this);
 
     if (isShorted($this)) {
+
       $this.closest('td').find('.inventory').show();
       $('#indent').addClass('disabled');
       return;
     }
+
     $('#indent').removeClass('disabled');
 
     changeTotal($this);
     countCartAmount();
-
   });
 
   $('.delete_cartItem').on('click', function () {
@@ -188,6 +192,7 @@ $(function () {
         $(deleteCartItem.closest('tr').remove());
 
         window.setTimeout(function () {
+
           $('.delete-message').hide();
         }, 1000);
 
@@ -205,14 +210,15 @@ $(function () {
 
   $('#indent').on('click', function () {
 
-    var sessionUser = sessionStorage.getItem('user');
-    if (!sessionUser) {
+    var currentUserName = $('#current-user').text();
+    if (currentUserName === '') {
 
       $('.user-login-modal')
         .modal('show');
 
       $('#login-result').html('');
     } else {
+
       var cartItemIds = getCheckedIds();
       var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
 
