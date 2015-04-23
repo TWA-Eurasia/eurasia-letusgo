@@ -210,30 +210,20 @@ $(function () {
 
   $('#indent').on('click', function () {
 
-    var currentUserName = $('#current-user').text();
-    if (currentUserName === '') {
+    var cartItemIds = getCheckedIds();
+    var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
 
-      $('.user-login-modal')
-        .modal('show');
+    $.post('/api/indent',
+      {
+        user: '',
+        cartItems: cartItemIds,
+        createDate: createDate,
+        isPaid: false
+      }).success(function (err, data) {
 
-      $('#login-result').html('');
-    } else {
-
-      var cartItemIds = getCheckedIds();
-      var createDate = moment().format('YYYY-MM-DD HH:mm:ss');
-
-      $.post('/api/indent',
-        {
-          user: '',
-          cartItems: cartItemIds,
-          createDate: createDate,
-          isPaid: false
-        }).success(function (err, data) {
-
-          if (data) {
-            location.href = '/indent';
-          }
-        });
-    }
+        if (data) {
+          location.href = '/indent';
+        }
+    });
   });
 });
