@@ -31,8 +31,11 @@ var getIndent = function (req, res) {
 var createIndent = function(req, res) {
 
   var currentIndent = req.body;
+  var currentUserId = req.session.currentUserId;
 
   currentIndent.cartItems = currentIndent['cartItems[]'];
+  currentIndent.user = currentUserId;
+
   Indent.create(currentIndent, function (err, indent) {
 
     var data = {};
