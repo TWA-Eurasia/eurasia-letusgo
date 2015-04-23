@@ -21,12 +21,6 @@ function jump(jumpTime) {
 
 $(document).ready(function () {
 
-   if(sessionStorage.getItem('user')) {
-      $('#login').css('display', 'none');
-      $('#register').css('display', 'none');
-      $('#logout').css('display', 'block');
-    }
-
   $.get('/api/indent', function (data) {
 
     var amount = data.total;
