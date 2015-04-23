@@ -5,6 +5,7 @@ var User = require('../model/user');
 var LOGIN_SUCCESS = '登陆成功！';
 var LOGIN_FAILURE = '用户或密码错误！';
 var LOGIN_ACTIVE = '帐号未激活！';
+var LOGOUT_SUCCESS = '成功退出';
 
 var login = function(req, res) {
 
@@ -29,23 +30,13 @@ var login = function(req, res) {
 
 var logout = function(req, res) {
 
-  var username = req.body.username;
-  var password = req.body.password;
-  var session = req.session;
+  req.session.currentUserName = null;
 
-  User.findOne({name: username}, function (err, user) {
+  //req.session.destroy(function() {
 
-    if(user && user.active === false) {
-      return res.send({state: 401, data: {}, message: LOGIN_ACTIVE});
-    }
-
-    if(!user || user.password !== password) {
-      return res.send({state: 401, data: {}, message: LOGIN_FAILURE});
-    }
-
-    session.currentUserName = user.name;
-    res.send({state: 200, data: user.name, message: LOGIN_SUCCESS});
-  });
+  console.log(req.session.currentUserName);
+    res.send({state: 200, data: {}, message: LOGOUT_SUCCESS});
+   //});
 };
 
 module.exports = {

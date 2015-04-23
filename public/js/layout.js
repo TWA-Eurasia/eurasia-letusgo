@@ -50,8 +50,14 @@ $(function () {
 
 
   $('#logout').on('click', function () {
+    $.ajax({
+      url: '/api/sessions/',
+      type: 'DELETE',
+      success: function(data){
+        console.log(data);
+      }
+    });
 
-    sessionStorage.removeItem('user');
     $('#login').css('display', 'block');
     $('#register').css('display', 'block');
     $('#logout').css('display', 'none');

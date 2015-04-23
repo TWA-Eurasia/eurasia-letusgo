@@ -18,10 +18,10 @@ var findUser = function(req, res, next) {
 
       if(user.length === 1) {
 
-        res.send({status: 200, data: true, message: USER_EXISTED});
+        res.send({state: 200, data: true, message: USER_EXISTED});
       } else {
 
-        res.send({status: 200, data: false, message: USER_NOT_EXISTED});
+        res.send({state: 200, data: false, message: USER_NOT_EXISTED});
       }
     })
     .onReject(function(err) {
@@ -66,7 +66,7 @@ var createUser = function(req, res, next) {
         name: user.name
       };
 
-      res.send({status: 200, data: currentUser, message: CREATE_SUCCESS});
+      res.send({state: 200, data: currentUser, message: CREATE_SUCCESS});
     })
     .onReject(function(err) {
 
