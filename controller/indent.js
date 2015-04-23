@@ -1,10 +1,10 @@
 'use strict';
 
 var Indent = require('../model/indent');
-var Item = require('../model/item');
-var CartItem = require('../model/cartItem');
 
-var createIndent = function(req, res) {
+var CREATE_INDENT_SUCCESS = '订单生成成功';
+
+var createIndent = function(req, res, next) {
 
   var currentIndent = req.body;
   var currentUserId = req.session.currentUserId;
@@ -12,28 +12,16 @@ var createIndent = function(req, res) {
   currentIndent.cartItems = currentIndent['cartItems[]'];
   currentIndent.user = currentUserId;
 
-  Indent.create(currentIndent, function (err, indent) {
+  Indent.create(currentIndent)
+    .then(function(indent) {
 
-    var data = {};
-    if(err) {
+      req.session.currentIndent = indent._id;
+      res.send({state: 200, data: indent, message: CREATE_INDENT_SUCCESS});
+    })
+    .onReject(function(err) {
 
-      data = {
-        status: 500,
-        data: indent,
-        message: '订单生成失败！'
-      };
-    }else {
-
-        data = {
-          status: 200,
-          data: indent,
-          message: '订单生成成功！'
-        };
-      }
-
-    req.session.currentIndent = indent._id;
-    res.send(data);
-  });
+      next(err);
+    });
 };
 
 module.exports = {
