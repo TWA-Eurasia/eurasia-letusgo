@@ -2,7 +2,7 @@
 
 var User = require('../model/user');
 var FIND_SUCCESS = '用户信息存在！！';
-var updateActive = function (req, res) {
+var updateActive = function (req, res, next) {
   var id = req.params.id;
 
   User.findOne(id)
@@ -19,7 +19,7 @@ var updateActive = function (req, res) {
     });
 };
 
-var getUser = function (req, res) {
+var getUser = function (req, res, next) {
   var userName = req.params.userName;
 
   User.findOne({name : userName})
