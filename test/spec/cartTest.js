@@ -2,16 +2,22 @@
 
 describe('cart', function () {
 
+  var resMock;
+  var reqMock;
+  var cartController;
+
+  beforeEach(function() {
+    resMock = {};
+    reqMock = {};
+
+    cartController = require('../../controller/cart');
+  });
+
   afterEach(function () {
     reloadDatabase();
   });
 
   describe('getCart', function () {
-
-    var resMock = {};
-    var reqMock = {};
-
-    var cartController = require('../../controller/cart');
 
     it('shoulde return cart', function (done) {
       reqMock.session = {
@@ -34,11 +40,6 @@ describe('cart', function () {
 
   describe('addToCart', function () {
 
-    var resMock = {};
-    var reqMock = {};
-
-    var cartController = require('../../controller/cart');
-
     it('shoulde return 200 ok', function (done) {
 
       reqMock.body = {number: 12};
@@ -55,11 +56,6 @@ describe('cart', function () {
 
   describe('addToCart', function () {
 
-    var resMock = {};
-    var reqMock = {};
-
-    var cartController = require('../../controller/cart');
-
     it('shoulde can branch', function (done) {
 
       reqMock.body = {number: 12};
@@ -75,11 +71,6 @@ describe('cart', function () {
   });
 
   describe('changeCartItem', function () {
-
-    var resMock = {};
-    var reqMock = {};
-
-    var cartController = require('../../controller/cart');
 
     it('shoulde return correct total and subtotal', function (done) {
 
@@ -100,11 +91,6 @@ describe('cart', function () {
 
   describe('removeCartItem', function () {
 
-    var resMock = {};
-    var reqMock = {};
-
-    var cartController = require('../../controller/cart');
-
     it('shoulde return correct total and subtotal', function (done) {
 
       reqMock.params = {id: '551cc20e47a654d14a280e9b'};
@@ -123,11 +109,6 @@ describe('cart', function () {
 
   describe('getAmount', function () {
 
-    var resMock = {};
-    var reqMock = {};
-
-    var cartController = require('../../controller/cart');
-
     it('shoulde return correct total and subtotal', function (done) {
 
       resMock.send = function (object) {
@@ -142,11 +123,6 @@ describe('cart', function () {
   });
 
   describe('getInventory', function () {
-
-    var resMock = {};
-    var reqMock = {};
-
-    var cartController = require('../../controller/cart');
 
     it('shoulde return correct total and subtotal', function (done) {
 
