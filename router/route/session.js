@@ -6,6 +6,6 @@ var router = express.Router();
 var sessionController = require('../../controller/session');
 
 router.post('/', sessionController.login);
-router.delete('/:userName', sessionController.logout);
+router.delete('/', sessionController.logout);
 
 module.exports = router;

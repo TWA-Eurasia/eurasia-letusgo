@@ -32,11 +32,8 @@ var logout = function(req, res) {
 
   req.session.currentUserName = null;
 
-  //req.session.destroy(function() {
-
-  console.log(req.session.currentUserName);
-    res.send({state: 200, data: {}, message: LOGOUT_SUCCESS});
-   //});
+  req.flash('success', '登出成功');
+  res.redirect('/');
 };
 
 module.exports = {
