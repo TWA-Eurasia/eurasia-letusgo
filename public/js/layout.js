@@ -51,7 +51,7 @@ $(function () {
 
   $('#logout').on('click', function () {
     $.ajax({
-      url: '/api/sessions/',
+      url: '/api/sessions',
       type: 'DELETE',
       success: function(data){
         console.log(data);
