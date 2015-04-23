@@ -43,8 +43,10 @@ html
         //      input.prompt(type="text" placeholder="Search...")
         //      i.search.icon
         //    .results
-      .ui.success.floating.message.hidden#tips
+      .ui.success.floating.message.hidden#login-tips
         p#login-success
+      .ui.error.floating.message.hidden#logout-tips
+        p#logout-success
       block content
       .ui.divider.horizontal 关于我们
       footer
@@ -75,7 +77,7 @@ html
                 input#password-login(placeholder="密码" type="password")
                 span#password-message
               .field
-                .ui.error.message#login-result(style = 'display: none')
+                .ui.error.message#login-result
       .actions
         a#findPassword(href='/retrievePassword') 忘记密码？
         a.primary.ui.button.register(href='/register') 注册
