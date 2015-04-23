@@ -24,6 +24,10 @@
   padding: 10px;
 }
 
+#my-cart {
+  display: none;
+}
+
 #cart-amount {
   padding: 0;
 }
@@ -84,6 +88,9 @@
 
 .sixteen.wide.column.copyright p {
   text-align: center;
+}
+#login {
+  margin-right: 20px;
 }
 
 #login:hover{

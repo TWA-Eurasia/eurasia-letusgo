@@ -86,21 +86,27 @@ $(function () {
   $('.addToCart').on('click', function () {
 
     var itemId = $(this).data('id');
-
     var numberInput = parseInt($('#numberInput').val());
 
-    $.ajax({
-      url: '/cart/' + itemId,
-      type: 'POST',
-      data: {number: numberInput},
-      success: function () {
-        countCartAmount();
-        $('#add-success').show();
+    var currentUserName = $('#current-user').text();
+    if (currentUserName === '') {
 
-        window.setTimeout(function () {
-          $('#add-success').hide();
-        }, 1000);
-      }
-    });
+      $('.user-login-modal')
+        .modal('show');
+
+      $('#login-result').html('');
+    } else {
+
+      $.post('/cart/' + itemId, {data: {number: numberInput}})
+        .success(function() {
+
+          countCartAmount();
+          $('#add-success').show();
+
+          window.setTimeout(function () {
+            $('#add-success').hide();
+          }, 1000);
+      });
+    }
   });
 });
