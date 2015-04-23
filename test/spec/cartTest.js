@@ -1,7 +1,6 @@
 'use strict';
 
 describe('cart', function () {
-
   var resMock;
   var reqMock;
   var cartController;
@@ -13,9 +12,8 @@ describe('cart', function () {
     cartController = require('../../controller/cart');
   });
 
-  afterEach(function (done) {
+  afterEach(function () {
     reloadDatabase();
-    done();
   });
 
   describe('getCart', function () {
@@ -124,6 +122,7 @@ describe('cart', function () {
   });
 
   describe('getInventory', function () {
+
 
     it('shoulde return correct total and subtotal', function (done) {
 
