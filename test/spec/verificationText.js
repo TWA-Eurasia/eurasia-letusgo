@@ -40,9 +40,11 @@ describe('verification', function () {
 
       resMock.send = function (object) {
         expect(object.state).to.equal(200);
-        //expect(object.user).to.have.property('user');
-        done();
+        expect(object).to.have.property('user');
+        expect(object.user.name).to.equal('Jacob KANG');
+        expect(object.user.email).to.equal('123@163.com');
 
+        done();
       };
       verification.getUser(reqMock,resMock);
     });
