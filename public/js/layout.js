@@ -20,12 +20,14 @@ $(function () {
   var $login = $('#login');
   var $logout = $('#logout');
   var $register = $('#register');
+  var $myCart = $('#my-cart');
 
   if(currentUserName !== '') {
 
     $login.hide();
     $register.hide();
     $logout.show();
+    $myCart.show();
   }
 
   $login.on('click', function () {
@@ -48,6 +50,7 @@ $(function () {
         $login.hide();
         $register.hide();
         $logout.show();
+        $myCart.show();
 
         $('.user-login-modal').modal('hide');
         $('#current-user').html(data.data).show();
@@ -78,6 +81,7 @@ $(function () {
     $login.show();
     $register.show();
     $logout.hide();
+    $myCart.hide();
     $('#current-user').html('').show();
   });
 });
