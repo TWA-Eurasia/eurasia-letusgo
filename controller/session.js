@@ -5,7 +5,7 @@ var User = require('../model/user');
 var LOGIN_SUCCESS = '登陆成功！';
 var LOGIN_FAILURE = '用户或密码错误！';
 var LOGIN_ACTIVE = '帐号未激活！';
-var LOGOUT_SUCCESS = '成功退出';
+var LOGOUT_SUCCESS = '退出成功';
 
 var login = function(req, res) {
 
@@ -34,8 +34,7 @@ var logout = function(req, res) {
 
   req.session.currentUserName = null;
 
-  req.flash('success', '登出成功');
-  res.redirect('/');
+  res.send({state: 200, data: {}, message: LOGOUT_SUCCESS});
 };
 
 module.exports = {

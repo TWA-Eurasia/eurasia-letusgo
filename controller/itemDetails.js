@@ -32,5 +32,6 @@ var getItemDetails = function (req, res, next) {
 };
 
 module.exports = {
+
   getItemDetails: getItemDetails
 };
