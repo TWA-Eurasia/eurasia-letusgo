@@ -44,9 +44,11 @@ function getSubCategories(categories, mainCategories) {
   return mainCategories;
 }
 
-function rederIndexPage(res, mainCategories, currentCategory, items, pageCount, currentPage, isCategory) {
+function rederIndexPage(req, res, mainCategories, currentCategory, items, pageCount, currentPage, isCategory) {
 
+  var currentUserName = req.session.currentUserName;
   res.render('index', {
+    currentUserName: currentUserName,
     mainCategories: mainCategories,
     currentCategory: currentCategory,
     items: items,
@@ -56,7 +58,7 @@ function rederIndexPage(res, mainCategories, currentCategory, items, pageCount, 
   });
 }
 
-function initCategories(res, query, start, pageSize, currentCategory, pageNumber, isCategory) {
+function initCategories(req, res, query, start, pageSize, currentCategory, pageNumber, isCategory) {
 
   initItems(query, start, pageSize, function (items, pageCount) {
 
@@ -70,14 +72,14 @@ function initCategories(res, query, start, pageSize, currentCategory, pageNumber
         });
         mainCategories = getSubCategories(categories, mainCategories);
 
-        rederIndexPage(res, mainCategories, currentCategory, items, pageCount, pageNumber, isCategory);
+        rederIndexPage(req, res, mainCategories, currentCategory, items, pageCount, pageNumber, isCategory);
       });
   });
 }
 
 var getIndexInfo = function (req, res) {
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
-  initCategories(res, {isRecommend: true}, 0, PAGE_SIZE, currentCategory, 1, false);
+  initCategories(req, res, {isRecommend: true}, 0, PAGE_SIZE, currentCategory, 1, false);
 };
 
 var getRecommendItemsByPageNumber = function (req, res) {
@@ -86,7 +88,7 @@ var getRecommendItemsByPageNumber = function (req, res) {
   var start = (pageNumber - 1) * PAGE_SIZE;
   var currentCategory = {isDisplay: false, name: '', parent: {name: ''}};
 
-  initCategories(res, {isRecommend: true}, start, PAGE_SIZE, currentCategory, pageNumber, false);
+  initCategories(req, res, {isRecommend: true}, start, PAGE_SIZE, currentCategory, pageNumber, false);
 };
 
 var getItemsByCategoryId = function (req, res) {
@@ -101,7 +103,7 @@ var getItemsByCategoryId = function (req, res) {
       currentCategory = category;
       currentCategory.isDisplay = true;
 
-      initCategories(res, {category: id}, 0, PAGE_SIZE, currentCategory, 1, true);
+      initCategories(req, res, {category: id}, 0, PAGE_SIZE, currentCategory, 1, true);
     });
 };
 
@@ -120,7 +122,7 @@ var getItemsByCategoryIdAndPageNumber = function (req, res) {
       currentCategory = category;
       currentCategory.isDisplay = true;
 
-      initCategories(res, {category: id}, start, PAGE_SIZE, currentCategory, pageNumber, true);
+      initCategories(req, res, {category: id}, start, PAGE_SIZE, currentCategory, pageNumber, true);
     });
 };
 
