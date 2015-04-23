@@ -13,10 +13,6 @@ describe('verification', function () {
     var verification = require('../../controller/verification');
 
     it('it should return userName', function (done) {
-      //var next = function(err) {
-      //  return err;
-      //};
-
       reqMock.params = {
         _id: '5523cea79294d58a8e06c3c9'
       };
@@ -45,7 +41,7 @@ describe('verification', function () {
 
       resMock.send = function (object) {
         expect(object.state).to.equal(200);
-        //expect(object.user.name).to.have.property('user');
+        expect(object.user.name).to.have.property('user');
         done();
 
       };
