@@ -23,7 +23,9 @@ var login = function(req, res) {
       return res.send({state: 401, data: {}, message: LOGIN_FAILURE});
     }
 
+    session.currentUserId  = user._id;
     session.currentUserName = user.name;
+
     res.send({state: 200, data: user.name, message: LOGIN_SUCCESS});
   });
 };
