@@ -6,6 +6,14 @@
   margin: 0;
 }
 
+.filed {
+  margin-bottom: 14px;
+}
+
+#login-header {
+  border: 0px solid #000;
+  border-bottom-width: 1px;
+}
 
 #current-user {
   color: teal;
