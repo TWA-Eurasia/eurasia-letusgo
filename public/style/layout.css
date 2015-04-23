@@ -15,6 +15,10 @@
   display: none;
 }
 
+#login-result {
+  display: none;
+}
+
 #my-account,
 #my-cart {
   padding: 10px;
@@ -89,7 +93,8 @@
 #login-result {
   color: red;
 }
-#tips {
+#login-tips,
+#logout-tips {
   width:300px;
   height: 100px;
   font-size: 30px;
