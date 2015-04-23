@@ -51,7 +51,7 @@ var sendRetrieveMail = function(data) {
       console.log('Message sent: ' + info.response);
     }
   });
-}
+};
 
 module.exports = {
   sendMail: sendMail,
