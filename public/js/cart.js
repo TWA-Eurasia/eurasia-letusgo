@@ -247,8 +247,8 @@ $(function () {
         $.get('/api/user/' + currentUserId)
           .success(function (data) {
 
-            if (!data.user.name) {
-              $('#current-user').html(data.user.name).show();
+            if (!data.data.name) {
+              $('#current-user').html(data.data.name).show();
             }
 
             $('.user-login-modal').modal('hide');

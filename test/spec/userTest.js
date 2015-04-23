@@ -18,15 +18,15 @@ describe('user', function () {
   //
   //    reqMock.query = {
   //
-  //      name: 'Sofia'
+  //      name: 'pppppppp'
   //    };
   //
   //    resMock.send = function (object) {
   //
-  //      expect(object).to.have.property('isExisted');
+  //      expect(object).to.have.property('data');
   //      expect(object).to.have.property('message');
-  //      expect(object.isExisted).to.equal(false);
-  //      expect(object.message).to.equal('用户名可用');
+  //      expect(object.data).to.equal(true);
+  //      expect(object.message).to.equal('用户名已存在');
   //
   //      done();
   //    };
@@ -41,8 +41,8 @@ describe('user', function () {
 
       reqMock.body = {
 
-        name: 'Sofia',
-        password: '9311220',
+        name: 'kjkopliyu',
+        password: '000000',
         address: '',
         phoneNumber: '',
         active: true,
@@ -54,8 +54,7 @@ describe('user', function () {
         expect(object).to.have.property('status');
         expect(object).to.have.property('data');
         expect(object).to.have.property('message');
-        expect(object.data.password).to.equal('******');
-        expect(object.data.name).to.equal('Sofia');
+        expect(object.data.name).to.equal('kjkopliyu');
 
         done();
       };
