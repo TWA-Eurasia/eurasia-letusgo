@@ -26,7 +26,7 @@ $(function () {
     var userName = $('#user-name-login').val();
     var password = $('#password-login').val();
 
-    $.post('/api/user/login', {username: userName, password: md5(password)}, function (data) {
+    $.post('/api/sessions/new', {username: userName, password: md5(password)}, function (data) {
 
       if (data.data) {
 
