@@ -23,10 +23,11 @@ function getShortedCartItemName(cartItems) {
 
 router.get('/', function (req, res) {
 
-  Indent.findById('551fd16975cd55ed0cfa5503')
+  var currentIndent = req.session.currentIndent;
+
+  Indent.findById(currentIndent)
     .populate('cartItems')
     .exec(function (err, indent) {
-      console.log(indent.cartItems);
 
       Item.populate(indent, 'cartItems.item', function (err) {
         if (err) {
