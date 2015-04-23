@@ -2,7 +2,6 @@
 
 var Indent = require('../model/indent');
 var Item = require('../model/item');
-var CREATE_INDENT_SUCCESS = '订单生成成功';
 
 var getIndent = function (req, res) {
 
