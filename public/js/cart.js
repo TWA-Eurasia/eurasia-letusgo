@@ -224,8 +224,7 @@ $(function () {
           isPaid: false
         }).success(function (err, data) {
 
-          if (data.status === 200) {
-
+          if (data) {
             location.href = '/indent';
           }
         });
