@@ -17,11 +17,10 @@ describe('verification', function () {
         _id: '5523cea79294d58a8e06c3c9'
       };
 
-
       resMock.render = function (view, object) {
-        expect(view).is.to.property('verification');
-        //expect(object).to.have.property('userName');
-        //expect(object.userName).to.equal('Jacob KANG');
+        expect(view).is.to.equal('verification');
+        expect(object).to.have.property('userName');
+        expect(object.userName).to.equal('Jacob KANG');
 
         done();
       };
@@ -41,7 +40,7 @@ describe('verification', function () {
 
       resMock.send = function (object) {
         expect(object.state).to.equal(200);
-        expect(object.user.name).to.have.property('user');
+        //expect(object.user).to.have.property('user');
         done();
 
       };
