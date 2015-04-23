@@ -1,4 +1,5 @@
 'use strict';
+
 describe('verification', function () {
   afterEach(function () {
     reloadDatabase();
@@ -20,9 +21,7 @@ describe('verification', function () {
       };
 
       resMock.render = function (view, object) {
-        expect(view).to.equal('verification');
-        expect(object).to.have.property('currentUserName');
-        expect(object).to.have.property('userName');
+        expect(view).is.to.equal('verification');
         expect(object.userName).to.equal('Jacob KANG');
 
         done();

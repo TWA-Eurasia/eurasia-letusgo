@@ -1,31 +1,39 @@
 'use strict';
-describe('GET /', function () {
 
-  var resMock = {};
-  var reqMock = {};
+describe('itemsDetails', function () {
+  beforeEach(function () {
+    reloadDatabase();
+  });
 
-  var getItem = require('../../controller/itemDetails');
+  afterEach(function () {
+    reloadDatabase();
+  });
 
-  it('it should return itemDetails', function (done) {
+
+  describe('getItemDetails', function () {
+    var resMock = {};
+    var reqMock = {};
+    var itemDetails = require('../../controller/itemDetails');
     reqMock.params = {
       id: '5523cea79294d58a8e06c3bf'
     };
 
-    resMock.render = function (view, object) {
-      expect(view).is.to.equal('itemDetails');
-      expect(object).to.have.property('itemDetails');
-      expect(object.itemDetails.item.name).to.equal('水溶C100功能饮料');
-
-      done();
+    reqMock.session = {
+      currentUserName: 'Jacob KANG'
     };
 
-    itemDetails(reqMock, resMock);
+    it('it should return about item message', function (done) {
+      resMock.render = function (view, object) {
+        expect(view).to.equal('itemDetails');
+        expect(object.currentUserName).to.equal('Jacob KANG');
+        expect(object.itemDetails.item.name).to.equal('水溶C100功能饮料');
 
-    afterEach(function () {
-
-      reloadDatabase();
+        done();
+      };
+      itemDetails.getItemDetails(reqMock, resMock);
     });
-
   });
+
 });
+
 
