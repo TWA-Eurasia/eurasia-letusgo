@@ -5,9 +5,6 @@ var sendMail = require('../util/email');
 
 var USER_EXISTED = '当前用户名已被注册';
 var USER_NOT_EXISTED = '用户名可用';
-var LOGIN_SUCCESS = '登陆成功！';
-var LOGIN_FAILURE = '用户或密码错误！';
-var LOGIN_ACTIVE = '帐号未激活！';
 var CREATE_SUCCESS = '用户创建成功';
 var FIND_USER_BY_ID = '成功找到用户';
 
@@ -21,10 +18,10 @@ var findUser = function(req, res, next) {
 
       if(user.length === 1) {
 
-        res.send({status: 200, data: true, message: USER_EXISTED});
+        res.send({state: 200, data: true, message: USER_EXISTED});
       } else {
 
-        res.send({status: 200, data: false, message: USER_NOT_EXISTED});
+        res.send({state: 200, data: false, message: USER_NOT_EXISTED});
       }
     })
     .onReject(function(err) {
@@ -69,7 +66,7 @@ var createUser = function(req, res, next) {
         name: user.name
       };
 
-      res.send({status: 200, data: currentUser, message: CREATE_SUCCESS});
+      res.send({state: 200, data: currentUser, message: CREATE_SUCCESS});
     })
     .onReject(function(err) {
 
@@ -78,30 +75,9 @@ var createUser = function(req, res, next) {
 
 };
 
-var login = function(req, res) {
-
-  var username = req.body.username;
-  var password = req.body.password;
-  var session = req.session;
-
-  User.findOne({name: username}, function (err, user) {
-
-    if(user && user.active === false) {
-      return res.send({state: 401, data: {}, message: LOGIN_ACTIVE});
-    }
-
-    if(!user || user.password !== password) {
-      return res.send({state: 401, data: {}, message: LOGIN_FAILURE});
-    }
-
-    session.currentUserName = user.name;
-    res.send({state: 200, data: user.name, message: LOGIN_SUCCESS});
-  });
-};
-
 module.exports = {
+
   findUser: findUser,
   getUserById: getUserById,
-  createUser: createUser,
-  login: login
+  createUser: createUser
 };
