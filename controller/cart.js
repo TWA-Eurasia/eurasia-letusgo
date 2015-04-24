@@ -65,14 +65,6 @@ var addToCart = function (req, res) {
 
   Cart.findOne({user: userId})
     .exec()
-    .then(function (cart) {
-
-      if (cart === null) {
-        Cart.create({user: userId});
-      }
-
-      return cart.id;
-    })
     .then(function (cartId) {
 
       findCartById(cartId, function (cart) {
@@ -124,6 +116,7 @@ var changeCartItem = function (req, res) {
 };
 
 var removeCartItem = function (req, res) {
+
   var cartItemId = req.params.cartItemId;
   var userId = req.session.currentUserId;
 
@@ -143,6 +136,7 @@ var removeCartItem = function (req, res) {
         if (err) {
           throw err;
         }
+        
         cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
           return cartItem.toString() !== cartItemId;
         });
@@ -168,19 +162,8 @@ var removeCartItem = function (req, res) {
 var getAmount = function (req, res) {
   var userId = req.session.currentUserId;
 
-  if (userId === undefined) {
-    res.send({amount: 0});
-  } else {
     Cart.findOne({user: userId})
       .exec()
-      .then(function (cart) {
-
-        if (cart === null) {
-          Cart.create({user: userId});
-        }
-
-        return cart.id;
-      })
       .then(function (cartId) {
         Cart.findById(cartId)
           .populate('cartItems')
@@ -192,7 +175,6 @@ var getAmount = function (req, res) {
             res.send({amount: count});
           });
       });
-  }
 };
 
 var getInventory = function (req, res) {
