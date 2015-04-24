@@ -18,7 +18,10 @@ var getIndent = function (req, res) {
           throw err;
         }
 
-        var total = indent.getTotal(indent.cartItems);
+        if(indent) {
+          var total = indent.getTotal(indent.cartItems);
+        }
+
         res.send({total: total});
       });
     });
