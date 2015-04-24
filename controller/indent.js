@@ -1,30 +1,61 @@
 'use strict';
 
-var Indent = require('../model/indent');
 var Item = require('../model/item');
+var Indent = require('../model/indent');
+var FormatUtil = require('../util/formatUtil.js');
 
-var getIndent = function (req, res) {
+var NAME_LENGTH = 16;
+var CREATE_INDENT_SUCCESS = '订单生成成功';
 
-  var indentId = req.session.currentIndent;
+function getShortedCartItemName(cartItems) {
 
-  Indent.findById(indentId)
+  var shortedCartItemName = '';
 
+  cartItems.forEach(function (cartItem) {
+    if (cartItem.number > cartItem.item.inventory) {
+      shortedCartItemName += cartItem.item.name + '、';
+    }
+  });
+
+  return shortedCartItemName.substring(0, shortedCartItemName.length - 1);
+}
+
+var getIndentInfo = function(req, res, next) {
+
+  var currentIndent = req.session.currentIndent;
+
+  Indent.findById(currentIndent)
     .populate('cartItems')
-    .exec(function (err, indent) {
+    .exec()
+    .then(function(indent) {
 
-      Item.populate(indent, 'cartItems.item', function (err) {
+      return Item.populate(indent, 'cartItems.item');
+    })
+    .then(function(indent) {
 
-        if (err) {
-          throw err;
-        }
+      indent.cartItems.forEach(function(cartItem) {
 
-        var total = indent.getTotal(indent.cartItems);
-        res.send({total: total});
+        cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
       });
+
+      var total = indent.getTotal(indent.cartItems);
+      var shortedCartItemName = getShortedCartItemName(indent.cartItems);
+
+      res.render('indent', {
+        currentUserName: req.session.currentUserName,
+        cartItems: indent.cartItems,
+        total: total,
+        indent: indent,
+        shortedCartItemName: shortedCartItemName
+      });
+    })
+    .onReject(function(err) {
+
+      next(err);
     });
 };
 
-var createIndent = function(req, res) {
+var createIndent = function(req, res, next) {
 
   var currentIndent = req.body;
   var currentUserId = req.session.currentUserId;
@@ -58,6 +89,7 @@ var createIndent = function(req, res) {
 
 
 module.exports = {
-  createIndent: createIndent,
-  getIndent: getIndent
+
+  getIndentInfo: getIndentInfo,
+  createIndent: createIndent
 };

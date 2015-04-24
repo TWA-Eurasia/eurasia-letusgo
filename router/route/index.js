@@ -5,7 +5,6 @@ var router = express.Router();
 
 var indexController = require('../../controller/index');
 
-
 router.get('/', indexController.getIndexInfo);
 router.get('/index/:pageNumber', indexController.getRecommendItemsByPageNumber);
 router.get('/categories/:id', indexController.getItemsByCategoryId);
