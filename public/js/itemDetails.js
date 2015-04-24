@@ -97,7 +97,7 @@ $(function () {
       $('#login-result').html('');
     } else {
 
-      $.post('/cart/' + itemId, {data: {number: numberInput}})
+      $.post('/cart/' + itemId, {number: numberInput})
         .success(function() {
 
           countCartAmount();
