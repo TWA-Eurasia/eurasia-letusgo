@@ -8,9 +8,8 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 var LOGOUT_SUCCESS = '退出成功';
 $('.modal')
   .modal({
-    selector: {
-      close: 'icon.close'
-    }
+    selector: {close: '.close'},
+    closable: false
   });
 
 $(function () {
@@ -44,21 +43,18 @@ $(function () {
     var password = $('#password-login').val();
 
     $.post('/api/sessions', {username: userName, password: md5(password)}, function (data) {
-
-      if (data.data) {
+      if (data.state === 200) {
 
         $login.hide();
         $register.hide();
         $logout.show();
         $myCart.show();
-
         $('.user-login-modal').modal('hide');
         $('#current-user').html(data.data).show();
 
         $('#login-success').html(data.message);
         $('#login-tips').show().fadeOut(2000);
       } else {
-
         $('#login-result').html(data.message).show();
       }
     });
