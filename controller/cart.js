@@ -36,7 +36,7 @@ var getCart = function (req, res) {
       if (cart === null) {
         Cart.create({user: userId});
       }
-      
+
       return cart.id;
     })
     .then(function (cartId) {
@@ -57,7 +57,6 @@ var getCart = function (req, res) {
     });
 };
 
-
 var addToCart = function (req, res) {
 
   var userId = req.session.currentUserId;
@@ -77,7 +76,6 @@ var addToCart = function (req, res) {
     .then(function (cartId) {
 
       findCartById(cartId, function (cart) {
-
         var result = _.find(cart.cartItems, function (cartItem) {
           return cartItem.item._id.toString() === id;
         });
@@ -86,7 +84,8 @@ var addToCart = function (req, res) {
 
           number = parseInt(result.number) + number;
 
-          CartItem.findOneAndUpdate({item: id}, {$set: {number: number}}, function () {
+          CartItem.update({item: id}, {$set: {number: number}}, function () {
+
             res.sendStatus(200);
           });
         } else {
@@ -168,27 +167,32 @@ var removeCartItem = function (req, res) {
 var getAmount = function (req, res) {
   var userId = req.session.currentUserId;
 
-  Cart.findOne({user: userId})
-    .exec()
-    .then(function (cart) {
+  if (userId === undefined) {
+    res.send({amount: 0});
+  } else {
+    Cart.findOne({user: userId})
+      .exec()
+      .then(function (cart) {
 
-      if (cart === null) {
-        Cart.create({user: userId});
-      }
+        if (cart === null) {
+          Cart.create({user: userId});
+        }
 
-      return cart.id;
-    })
-    .then(function (cartId) {
-      Cart.findById(cartId)
-        .populate('cartItems')
-        .exec(function (err, cart) {
-          var count = _.reduce(cart.cartItems, function (count, cartItem) {
-            return cartItem.number + count;
-          }, 0);
+        return cart.id;
+      })
+      .then(function (cartId) {
+        Cart.findById(cartId)
+          .populate('cartItems')
+          .exec(function (err, cart) {
+            var count = _.reduce(cart.cartItems, function (count, cartItem) {
+              return cartItem.number + count;
+            }, 0);
 
-          res.send({amount: count});
-        });
-    });
+            res.send({amount: count});
+          });
+      });
+  }
+
 };
 
 var getInventory = function (req, res) {
