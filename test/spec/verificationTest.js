@@ -1,8 +1,9 @@
 'use strict';
 
 describe('verification', function () {
-  afterEach(function () {
-    reloadDatabase();
+
+  afterEach(function (done) {
+    reloadDatabase(done);
   });
 
   describe('updateActive', function () {

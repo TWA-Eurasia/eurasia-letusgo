@@ -1,19 +1,19 @@
 'use strict';
 
+
 describe('cart', function () {
   var resMock;
   var reqMock;
-  var cartController;
+  var cartController = require('../../controller/cart');
+
 
   beforeEach(function() {
     resMock = {};
     reqMock = {};
-
-    cartController = require('../../controller/cart');
   });
 
-  afterEach(function () {
-    reloadDatabase();
+  afterEach(function (done) {
+    reloadDatabase(done);
   });
 
   describe('getCart', function () {

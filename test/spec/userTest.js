@@ -4,18 +4,15 @@ describe('user', function() {
 
   var reqMock;
   var resMock;
-  var userController;
+  var userController = require('../../controller/user');
 
   beforeEach(function() {
     reqMock = {};
     resMock = {};
-
-    userController = require('../../controller/user');
   });
 
   afterEach(function (done) {
-    reloadDatabase();
-    done();
+    reloadDatabase(done);
   });
 
   describe('findUser', function() {

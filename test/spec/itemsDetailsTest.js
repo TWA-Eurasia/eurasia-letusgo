@@ -1,12 +1,9 @@
 'use strict';
 
 describe('itemsDetails', function () {
-  beforeEach(function () {
-    reloadDatabase();
-  });
 
-  afterEach(function () {
-    reloadDatabase();
+  afterEach(function (done) {
+    reloadDatabase(done);
   });
 
 
