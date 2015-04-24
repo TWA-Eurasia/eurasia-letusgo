@@ -20,4 +20,4 @@ global.request = require('supertest');
 global.sinon = require('sinon');
 global.reloadDatabase = require('./helper/reloadDatabase');
 
-reloadDatabase();
+
