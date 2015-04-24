@@ -50,7 +50,6 @@ var getIndentInfo = function(req, res, next) {
       });
     })
     .onReject(function(err) {
-
       next(err);
     });
 };
@@ -62,31 +61,20 @@ var createIndent = function(req, res, next) {
 
   currentIndent.cartItems = currentIndent['cartItems[]'];
   currentIndent.user = currentUserId;
-
-  Indent.create(currentIndent, function (err, indent) {
-
-    var data = {};
-    if(err) {
-
-      data = {
-        status: 500,
-        data: indent,
-        message: '订单生成失败！'
-      };
-    }else {
-
+  var data = {};
+  Indent.create(currentIndent)
+    .then(function(indent) {
       data = {
         status: 200,
         data: indent,
-        message: '订单生成成功！'
-      };
-    }
-
-    req.session.currentIndent = indent._id;
-    res.send(data);
-  });
+        message: '订单生成成功！'};
+      req.session.currentIndent = indent._id;
+      res.send(data);
+    })
+    .onReject(function(err) {
+      next(err);
+    });
 };
-
 
 module.exports = {
 

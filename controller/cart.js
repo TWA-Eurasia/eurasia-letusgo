@@ -27,43 +27,83 @@ function findCartById(cartId, callback) {
 }
 
 var getCart = function (req, res) {
-  var cartId = '551cc282a6b79c584b59bc0f';
+  var userId = req.session.currentUserId;
 
-  findCartById(cartId, function (cart) {
+  Cart.findOne({user: userId})
+    .exec()
+    .then(function (cart) {
 
-    _.forEach(cart.cartItems, function (cartItem) {
-      cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
+      if (cart === null) {
+        Cart.create({user: userId});
+      }
+      return cart.id;
+    })
+    .then(function (cartId) {
+
+      findCartById(cartId, function (cart) {
+
+        _.forEach(cart.cartItems, function (cartItem) {
+          cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
+        });
+
+        var total = cart.getTotal(cart.cartItems);
+        res.render('cart', {
+          currentUserName: req.session.currentUserName,
+          cartItems: cart.cartItems,
+          total: total.toFixed(2)
+        });
+      });
     });
-
-    var total = cart.getTotal(cart.cartItems);
-    res.render('cart', {currentUserName: req.session.currentUserName, cartItems: cart.cartItems, total: total.toFixed(2)});
-  });
 };
 
+
 var addToCart = function (req, res) {
-  var cartId = '551cc282a6b79c584b59bc0f';
+
+  var userId = req.session.currentUserId;
   var number = parseInt(req.body.number);
   var id = req.params.id;
 
-  findCartById(cartId, function (cart) {
+  Cart.findOne({user: userId})
+    .exec()
+    .then(function (cart) {
 
-    var result = _.find(cart.cartItems, function (cartItem) {
-      return cartItem.item._id.toString() === id;
-    });
-
-    if (result) {
-      number = result.number + number;
-    }
-
-    CartItem.update({item: id}, {$set: {number: number}}, {upsert: true}, function (err, cartItem) {
-      if (!result) {
-        cart.cartItems.push(cartItem.upserted[0]._id);
+      if (cart === null) {
+        Cart.create({user: userId});
       }
-      cart.save(function () {
-        res.sendStatus(200);
+
+      return cart.id;
+    })
+    .then(function (cartId) {
+
+      findCartById(cartId, function (cart) {
+
+        var result = _.find(cart.cartItems, function (cartItem) {
+          return cartItem.item._id.toString() === id;
+        });
+
+        if (result) {
+
+          number = parseInt(result.number) + number;
+
+          CartItem.update({item: id}, {$set: {number: number}}, function () {
+
+            res.sendStatus(200);
+          });
+        } else {
+
+          var cartItem = new CartItem({item: id, number: number});
+
+          cartItem.save(function () {
+
+            cart.cartItems.push(cartItem.id);
+
+            cart.save(function () {
+              res.sendStatus(200);
+            });
+          });
+        }
       });
     });
-  });
 };
 
 var changeCartItem = function (req, res) {
@@ -85,45 +125,74 @@ var changeCartItem = function (req, res) {
 
 var removeCartItem = function (req, res) {
   var cartItemId = req.params.cartItemId;
-  var cartId = '551cc282a6b79c584b59bc0f';
+  var userId = req.session.currentUserId;
 
-  Cart.findById(cartId, function (err, cart) {
-    if (err) {
-      throw err;
-    }
-    cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
-      return cartItem.toString() !== cartItemId;
-    });
+  Cart.findOne({user: userId})
+    .exec()
+    .then(function (cart) {
 
-    CartItem.remove({_id: cartItemId}, function () {
+      if (cart === null) {
+        Cart.create({user: userId});
+      }
 
-      cart.save(function (err, cart) {
+      return cart.id;
+    })
+    .then(function (cartId) {
+
+      Cart.findById(cartId, function (err, cart) {
         if (err) {
           throw err;
         }
-        CartItem.find()
-          .populate('item')
-          .exec(function (err, cartItems) {
+        cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
+          return cartItem.toString() !== cartItemId;
+        });
 
-            res.send({cart: cart, total: cart.getTotal(cartItems)});
+        CartItem.remove({_id: cartItemId}, function () {
+
+          cart.save(function (err, cart) {
+            if (err) {
+              throw err;
+            }
+            CartItem.find()
+              .populate('item')
+              .exec(function (err, cartItems) {
+
+                res.send({cart: cart, total: cart.getTotal(cartItems)});
+              });
           });
+        });
       });
     });
-  });
 };
 
 var getAmount = function (req, res) {
-  var cartId = '551cc282a6b79c584b59bc0f';
+  var userId = req.session.currentUserId;
 
-  Cart.findById(cartId)
-    .populate('cartItems')
-    .exec(function (err, cart) {
-      var count = _.reduce(cart.cartItems, function (count, cartItem) {
-        return cartItem.number + count;
-      }, 0);
+  if (userId === undefined) {
+    res.send({amount: 0});
+  } else {
+    Cart.findOne({user: userId})
+      .exec()
+      .then(function (cart) {
 
-      res.send({amount: count});
-    });
+        if (cart === null) {
+          Cart.create({user: userId});
+        }
+
+        return cart.id;
+      })
+      .then(function (cartId) {
+        Cart.findById(cartId)
+          .populate('cartItems')
+          .exec(function (err, cart) {
+            var count = _.reduce(cart.cartItems, function (count, cartItem) {
+              return cartItem.number + count;
+            }, 0);
+
+            res.send({amount: count});
+          });
+      });
+  }
 };
 
 var getInventory = function (req, res) {
@@ -149,5 +218,5 @@ module.exports = {
   changeCartItem: changeCartItem,
   removeCartItem: removeCartItem,
   getAmount: getAmount,
-  getInventory: getInventory,
+  getInventory: getInventory
 };
