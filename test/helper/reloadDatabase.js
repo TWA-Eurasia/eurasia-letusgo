@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('lodash');
+
 var Item = require('../../model/item');
 var CartItem = require('../../model/cartItem');
 var Cart = require('../../model/cart');
@@ -14,69 +16,42 @@ var categories = require('../../seed/test/categories');
 var carts = require('../../seed/test/carts');
 var users = require('../../seed/test/users');
 
-var reloadDatabase = function () {
+var tasks = [{operate: Item, seed: {}},
+  {operate: CartItem, seed: {}},
+  {operate: Cart, seed: {}},
+  {operate: Category, seed: {}},
+  {operate: Indent, seed: {}},
+  {operate: User, seed: {}}]
 
-  Item.remove({}, function (err, item) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  CartItem.remove({}, function (err, cartItem) {
-    if (err) {
-      console.log(err);
-    }
-  });
+var createTasks = [
+  {operate: Item, seed: items},
+  {operate: CartItem, seed: cartItems},
+  {operate: Cart, seed: carts},
+  {operate: Category, seed: categories},
+  {operate: Indent, seed: indents},
+  {operate: User, seed: users}];
 
-  Cart.remove({}, function (err, cart) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  Category.remove({}, function (err, category) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  Indent.remove({}, function (err, ident) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  User.remove({}, function (err, user) {
-    if (err) {
-      console.log(err);
-    }
-  });
+var reloadDatabase = function (done) {
+  var taskLen = tasks.length;
+  var createTaskLen = createTasks.length;
 
-  Item.create(items, function (err, itemArray) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  CartItem.create(cartItems, function (err, cartItemArray) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  Cart.create(carts, function (err, cartArray) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  Category.create(categories, function (err, categoryArray) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  Indent.create(indents, function (err, indentArray) {
-    if (err) {
-      console.log(err);
-    }
-  });
-  User.create(users, function (err, userArray) {
-    if (err) {
-      console.log(err);
-    }
+  tasks.forEach(function(task) {
+
+    task.operate.remove(task.seed, function() {
+
+      if(0 === --taskLen) {
+
+        createTasks.forEach(function(task) {
+
+          task.operate.create(task.seed, function() {
+
+            if(0 === --createTaskLen) {
+              done();
+            }
+          });
+        });
+      }
+    });
   });
 };
 
