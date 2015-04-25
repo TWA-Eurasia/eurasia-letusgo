@@ -47,11 +47,12 @@ block content
         i.right.arrow.icon
         span.ui.hidden#shortedCartItemName #{shortedCartItemName}
     .ui.first.coupled.small.modal.transition.confirmPay
+      i.icon.close
       .content
         .description
           p 您确认要支付吗？
       .actions
-        .primary.ui.button.nopay 取消
+        .ui.primary.close.cancel.button.nopay 取消
         a.ui.positive.right.labeled.icon.button#isPaid(data-total= total, data-cart = cartItems, data-indentId = indent._id ) 支付
           i.right.arrow.icon
     .ui.second.small.coupled.modal.transition.hidden
