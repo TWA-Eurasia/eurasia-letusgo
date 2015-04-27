@@ -33,16 +33,11 @@ var getCart = function (req, res) {
     .exec()
     .then(function (cart) {
 
-      if (cart === null) {
-        Cart.create({user: userId});
-      }
-
       return cart.id;
     })
     .then(function (cartId) {
 
       findCartById(cartId, function (cart) {
-
         _.forEach(cart.cartItems, function (cartItem) {
           cartItem.item.shortName = FormatUtil.parseString(cartItem.item.name, NAME_LENGTH);
         });
@@ -66,6 +61,10 @@ var addToCart = function (req, res) {
 
   Cart.findOne({user: userId})
     .exec()
+    .then(function (cart) {
+
+      return cart.id;
+    })
     .then(function (cartId) {
 
       findCartById(cartId, function (cart) {
@@ -128,10 +127,6 @@ var removeCartItem = function (req, res) {
     .exec()
     .then(function (cart) {
 
-      if (cart === null) {
-        Cart.create({user: userId});
-      }
-
       return cart.id;
     })
     .then(function (cartId) {
@@ -172,6 +167,10 @@ var getAmount = function (req, res) {
 
     Cart.findOne({user: userId})
       .exec()
+      .then(function (cart) {
+
+        return cart.id;
+      })
       .then(function (cartId) {
 
         Cart.findById(cartId)
