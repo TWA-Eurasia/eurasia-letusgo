@@ -53,6 +53,30 @@ var getIndentInfo = function(req, res, next) {
       next(err);
     });
 };
+var getSuccessInfo = function(req, res, next) {
+
+  var currentIndent = req.session.currentIndent;
+
+  Indent.findById(currentIndent)
+    .populate('cartItems')
+    .exec()
+    .then(function(indent) {
+
+      return Item.populate(indent, 'cartItems.item');
+    })
+    .then(function(indent) {
+
+      var total = indent.getTotal(indent.cartItems);
+
+      res.render('success', {
+        currentUserName: req.session.currentUserName,
+        total: total
+      });
+    })
+    .onReject(function(err) {
+      next(err);
+    });
+};
 
 var createIndent = function(req, res, next) {
 
@@ -79,5 +103,6 @@ var createIndent = function(req, res, next) {
 module.exports = {
 
   getIndentInfo: getIndentInfo,
+  getSuccessInfo: getSuccessInfo,
   createIndent: createIndent
 };
