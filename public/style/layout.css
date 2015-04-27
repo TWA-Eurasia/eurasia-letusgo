@@ -2,6 +2,10 @@
   background: #ffffff;
 }
 
+.itemImg{
+  height:30px;
+}
+
 .ui.grid {
   margin: 0;
 }
