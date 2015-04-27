@@ -32,7 +32,6 @@ var getCart = function (req, res) {
   Cart.findOne({user: userId})
     .exec()
     .then(function (cart) {
-
       return cart.id;
     })
     .then(function (cartId) {

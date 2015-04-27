@@ -1,16 +1,11 @@
 'use strict';
 
 
-xdescribe('cart', function () {
-  var resMock;
-  var reqMock;
+describe('cart', function () {
+  var session;
+  var resMock = {};
+  var reqMock = {};
   var cartController = require('../../controller/cart');
-
-
-  //beforeEach(function() {
-  //  resMock = {};
-  //  reqMock = {};
-  //});
 
   afterEach(function (done) {
     reloadDatabase(done);
@@ -19,18 +14,17 @@ xdescribe('cart', function () {
   describe('getCart', function () {
 
     it('should return cart', function (done) {
-      reqMock.session = {
-        currentUserName: 'Jacob KANG',
-        currentUserId : '5523cea79294d58a8e06c3c9'
 
-      };
+      session = {currentUserId: '5523cea79294d58a8e06c3c9',
+                 currentUserName: 'Jacob KANG'};
+      reqMock.session = session;
 
       resMock.render = function (view, object) {
 
         expect(view).to.equal('cart');
         expect(object).to.have.property('cartItems');
         expect(object.total).to.equal('3334.50');
-        //expect(object.currentUserName).to.equal('Jacob KANG');
+        expect(object.currentUserName).to.equal('Jacob KANG');
 
         done();
       };
