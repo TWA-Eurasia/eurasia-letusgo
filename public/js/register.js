@@ -41,9 +41,9 @@ $(function () {
   function verifyUserExisted(userName, messageSelector, correctSelector) {
 
     var isCorrect = true;
-    getUsers(userName, function (data) {
+    getUsers(userName, function (resp) {
 
-      if (data.data) {
+      if (resp.data) {
 
         messageSelector.html('用户名已存在').show();
         isCorrect = false;
