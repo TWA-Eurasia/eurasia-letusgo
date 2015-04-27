@@ -10,7 +10,7 @@ describe('itemsDetails', function () {
   describe('getItemDetails', function () {
     var resMock = {};
     var reqMock = {};
-    var itemDetails = require('../../controller/itemDetails');
+    var itemDetails = require('../../controller/item');
     reqMock.params = {
       id: '5523cea79294d58a8e06c3bf'
     };
