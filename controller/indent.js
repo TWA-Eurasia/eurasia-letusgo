@@ -1,6 +1,7 @@
 'use strict';
 
 var Item = require('../model/item');
+var User = require('../model/user');
 var Indent = require('../model/indent');
 var FormatUtil = require('../util/formatUtil.js');
 
@@ -57,11 +58,10 @@ var getSuccessInfo = function(req, res, next) {
 
   var currentIndent = req.session.currentIndent;
 
-  Indent.findById(currentIndent)
+  Indent.findByIdAndUpdate(currentIndent, {$set: {isPaid : true}})
     .populate('cartItems')
     .exec()
     .then(function(indent) {
-
       return Item.populate(indent, 'cartItems.item');
     })
     .then(function(indent) {
@@ -91,7 +91,7 @@ var createIndent = function(req, res, next) {
       data = {
         status: 200,
         data: indent,
-        message: '订单生成成功！'};
+        message: CREATE_INDENT_SUCCESS};
       req.session.currentIndent = indent._id;
       res.send(data);
     })
