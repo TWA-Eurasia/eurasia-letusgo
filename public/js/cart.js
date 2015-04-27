@@ -66,14 +66,6 @@ $(function () {
     });
   }
 
-  $('img')
-    .error(function () {
-      $(this).attr('src', '/image/missing1.png');
-    })
-    .attr('src', function () {
-      return $(this).data('src');
-    });
-
   $('#allChecked').on('click', function () {
 
     $('input[name="checkedCartItem"]').prop('checked', this.checked);
@@ -226,4 +218,13 @@ $(function () {
         }
     });
   });
+
+  $('img')
+    .error(function () {
+      $(this).attr('src', '/image/missing1.png');
+    })
+    .attr('src', function () {
+      return $(this).data('src');
+    });
+
 });
