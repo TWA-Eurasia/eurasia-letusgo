@@ -166,6 +166,10 @@ var removeCartItem = function (req, res) {
 var getAmount = function (req, res) {
   var userId = req.session.currentUserId;
 
+  if(userId === undefined){
+    res.send({amount: 0});
+  }else{
+
     Cart.findOne({user: userId})
       .exec()
       .then(function (cartId) {
@@ -173,7 +177,7 @@ var getAmount = function (req, res) {
         Cart.findById(cartId)
           .populate('cartItems')
           .exec(function (err, cart) {
-            
+
             var count = _.reduce(cart.cartItems, function (count, cartItem) {
               return cartItem.number + count;
             }, 0);
@@ -181,6 +185,7 @@ var getAmount = function (req, res) {
             res.send({amount: count});
           });
       });
+  }
 };
 
 var getInventory = function (req, res) {
