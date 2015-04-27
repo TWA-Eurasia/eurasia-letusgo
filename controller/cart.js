@@ -36,6 +36,7 @@ var getCart = function (req, res) {
       if (cart === null) {
         Cart.create({user: userId});
       }
+
       return cart.id;
     })
     .then(function (cartId) {
@@ -48,6 +49,7 @@ var getCart = function (req, res) {
 
         var total = cart.getTotal(cart.cartItems);
         res.render('cart', {
+
           currentUserName: req.session.currentUserName,
           cartItems: cart.cartItems,
           total: total.toFixed(2)
@@ -55,7 +57,6 @@ var getCart = function (req, res) {
       });
     });
 };
-
 
 var addToCart = function (req, res) {
 
@@ -65,14 +66,6 @@ var addToCart = function (req, res) {
 
   Cart.findOne({user: userId})
     .exec()
-    .then(function (cart) {
-
-      if (cart === null) {
-        Cart.create({user: userId});
-      }
-
-      return cart.id;
-    })
     .then(function (cartId) {
 
       findCartById(cartId, function (cart) {
@@ -107,23 +100,27 @@ var addToCart = function (req, res) {
 };
 
 var changeCartItem = function (req, res) {
+
   var cartItemId = req.params.id;
   var number = req.body.number;
   var price = req.body.price;
   var total = req.body.total;
 
   CartItem.findById(cartItemId, function (err, cartItem) {
+
     var current = cartItem.number * price;
+
     CartItem.update({_id: cartItemId}, {$set: {number: number}}, {upsert: true}, function () {
+
       var subtotal = price * number;
       total = total - current + subtotal;
       res.send({subtotal: subtotal.toFixed(2), total: total.toFixed(2)});
-
     });
   });
 };
 
 var removeCartItem = function (req, res) {
+
   var cartItemId = req.params.cartItemId;
   var userId = req.session.currentUserId;
 
@@ -143,6 +140,7 @@ var removeCartItem = function (req, res) {
         if (err) {
           throw err;
         }
+
         cart.cartItems = _.remove(cart.cartItems, function (cartItem) {
           return cartItem.toString() !== cartItemId;
         });
@@ -168,23 +166,14 @@ var removeCartItem = function (req, res) {
 var getAmount = function (req, res) {
   var userId = req.session.currentUserId;
 
-  if (userId === undefined) {
-    res.send({amount: 0});
-  } else {
     Cart.findOne({user: userId})
       .exec()
-      .then(function (cart) {
-
-        if (cart === null) {
-          Cart.create({user: userId});
-        }
-
-        return cart.id;
-      })
       .then(function (cartId) {
+
         Cart.findById(cartId)
           .populate('cartItems')
           .exec(function (err, cart) {
+            
             var count = _.reduce(cart.cartItems, function (count, cartItem) {
               return cartItem.number + count;
             }, 0);
@@ -192,7 +181,6 @@ var getAmount = function (req, res) {
             res.send({amount: count});
           });
       });
-  }
 };
 
 var getInventory = function (req, res) {
