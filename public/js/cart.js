@@ -66,6 +66,26 @@ $(function () {
     });
   }
 
+  $('img')
+    .error(function () {
+      $(this).attr('src', '/image/missing1.png');
+    })
+    .attr('src', function () {
+      return $(this).data('src');
+    });
+
+
+  $('#allChecked').ready(function () {
+    var checkboxesSize = $('.checkedCartItem').length;
+
+    if (checkboxesSize == 0) {
+      $('#allChecked').prop('checked','');
+    } else {
+      $('#allChecked').prop('checked','true');
+    }
+
+  });
+
   $('#allChecked').on('click', function () {
 
     $('input[name="checkedCartItem"]').prop('checked', this.checked);
