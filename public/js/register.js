@@ -2,7 +2,6 @@
 
 var $ = require('jquery');
 var moment = require('moment');
-var _ = require('lodash');
 var md5 = require('MD5');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
