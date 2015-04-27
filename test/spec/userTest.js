@@ -1,7 +1,6 @@
 'use strict';
 
 describe('user', function() {
-
   var reqMock;
   var resMock;
   var userController = require('../../controller/user');
