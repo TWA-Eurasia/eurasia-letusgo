@@ -2,30 +2,28 @@
 
 var indexController = require('../../controller/index');
 
-xdescribe('index', function () {
-
+describe('index', function () {
+  var session;
   var reqMock = {};
   var resMock = {};
 
-  afterEach(function () {
+  afterEach(function (done) {
 
-    reloadDatabase();
+    reloadDatabase(done);
   });
 
   describe('getIndexInfo', function () {
 
     it('should return index page with data contains of mainCategories, items, pageCount and so on', function (done) {
 
+      session = {currentUserName: 'Jacob KANG'};
+      reqMock.session = session;
+
       resMock.render = function (view, object) {
 
         expect(view).to.equal('index');
-        expect(object).to.have.property('mainCategories');
-        expect(object).to.have.property('currentCategory');
-        expect(object).to.have.property('items');
-        expect(object).to.have.property('pageCount');
-        expect(object).to.have.property('currentPage');
-        expect(object).to.have.property('isCategory');
 
+        expect(object.currentUserName).to.equal('Jacob KANG');
         expect(object.mainCategories.length).to.equal(10);
         expect(object.items.length).to.equal(8);
         expect(object.pageCount).to.equal(2);

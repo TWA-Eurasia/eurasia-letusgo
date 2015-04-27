@@ -86,7 +86,7 @@ describe('cart', function () {
 
   describe('removeCartItem', function () {
 
-    it('shoulde return correct total and subtotal', function (done) {
+    it('shoulde return correct cart view and total', function (done) {
 
       reqMock.params = {id: '551cc20e47a654d14a280e9b'};
 
@@ -104,7 +104,7 @@ describe('cart', function () {
 
   describe('getAmount', function () {
 
-    it('shoulde return correct total and subtotal', function (done) {
+    it('shoulde return correct amount', function (done) {
 
       resMock.send = function (object) {
 
@@ -120,7 +120,7 @@ describe('cart', function () {
   describe('getInventory', function () {
 
 
-    it('shoulde return correct total and subtotal', function (done) {
+    it('shoulde return correct inventory', function (done) {
 
       reqMock.params = {id: '551cc20e47a654d14a280e9b'};
 
