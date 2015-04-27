@@ -33,7 +33,7 @@ describe('cart', function () {
     });
   });
 
-  xdescribe('addToCart', function () {
+  describe('addToCart', function () {
 
     it('shoulde return 200 ok', function (done) {
 
@@ -49,7 +49,7 @@ describe('cart', function () {
     });
   });
 
-  xdescribe('addToCart', function () {
+  describe('addToCart', function () {
 
     it('shoulde can branch', function (done) {
 
@@ -65,7 +65,7 @@ describe('cart', function () {
     });
   });
 
-  xdescribe('changeCartItem', function () {
+  describe('changeCartItem', function () {
 
     it('shoulde return correct total and subtotal', function (done) {
 
@@ -84,7 +84,7 @@ describe('cart', function () {
     });
   });
 
-  xdescribe('removeCartItem', function () {
+  describe('removeCartItem', function () {
 
     it('shoulde return correct total and subtotal', function (done) {
 
@@ -102,7 +102,7 @@ describe('cart', function () {
     });
   });
 
-  xdescribe('getAmount', function () {
+  describe('getAmount', function () {
 
     it('shoulde return correct total and subtotal', function (done) {
 
@@ -117,7 +117,7 @@ describe('cart', function () {
     });
   });
 
-  xdescribe('getInventory', function () {
+  describe('getInventory', function () {
 
 
     it('shoulde return correct total and subtotal', function (done) {
