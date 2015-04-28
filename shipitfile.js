@@ -16,7 +16,7 @@ module.exports = function (shipit) {
       shallowClone: true
     },
     staging: {
-      servers: 'root@120.26.45.145'
+      servers: 'root@120.25.232.68'
     }
   });
 };
