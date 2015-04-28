@@ -32,28 +32,6 @@ var sendMail = function(data){
   });
 };
 
-var sendRetrieveMail = function(data) {
-  var html = '<p>'+data.name+',您好：<p/> <p>我们收到您在 Letusgo 的找回密码申请，请点击下面的链接找回密码：</p> '+
-    '<a href="http://127.0.0.1:3000/retrievePassword/'+ data._id+'">请点击本链接找回密码 </a>';
-
-  var mailOptions = {
-    from: 'letusgo@letusgo.com',
-    to: data.email,
-    subject: '[Letusgo] 找回密码邮件',
-    text: '找回密码邮件',
-    html: html
-  };
-
-  transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-      console.log(error);
-    }else{
-      console.log('Message sent: ' + info.response);
-    }
-  });
-};
-
 module.exports = {
   sendMail: sendMail,
-  sendRetrieveMail: sendRetrieveMail
 };

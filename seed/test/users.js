@@ -8,7 +8,7 @@ var users = [
     address: '',
     email: '123@163.com',
     phoneNumber: '',
-    active: false,
+    active: true,
     date: '2015-4-15',
     __v: 0
   }
