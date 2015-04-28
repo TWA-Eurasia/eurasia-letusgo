@@ -11,26 +11,28 @@ block content
     .eight.wide.column
       .ui.form.segment
         .ui.header#register-header 欢迎注册我的LetUsGo
-        .filed
+        .field
           input#user-name(placeholder="用户名" type="text")
           i.checkmark.icon#user-name-correct
-          span#user-name-message
+          input#user-name-message
         .field
           input#password(placeholder="密码" type="password")
           i.checkmark.icon#password-correct
-          span#password-message
+          input#password-message
         .field
           input#repeat-password(placeholder="重复密码" type="password")
           i.checkmark.icon#repeat-password-correct
-          span#repeat-password-message
+          input#repeat-password-message
         .field
           input#phone-number(placeholder="手机" type="text")
+          input#phone-number-message
         .field
           input#address(placeholder="地址" type="text")
+          input#address-message
         .field
           input#email(placeholder="邮箱" type="text")
           i.checkmark.icon#email-correct
-          span#email-message
+          input#email-message
         .field#button-field
           .ui.positive.reset.button#reset-button 重置
           .ui.negative.submit.button#submit-button 提交

@@ -43,11 +43,11 @@ $(function () {
     getUsers(userName, function (resp) {
 
       if (resp.data) {
-
-        messageSelector.html('用户名已存在').show();
+        messageSelector.val('用户名已存在').show();
+        correctSelector.hide();
         isCorrect = false;
-      } else {
 
+      } else {
         correctSelector.show();
       }
       return isCorrect;
@@ -58,16 +58,16 @@ $(function () {
 
     var isCorrect = true;
     if (value === '') {
-
-      selectors.message.html(messages.REQUIRED).show();
+      selectors.message.val(messages.REQUIRED).show();
+      selectors.correct.hide();
       isCorrect = false;
 
     } else if (condition) {
-
-      selectors.message.html(messages.RULE).show();
+      selectors.message.val(messages.RULE).show();
+      selectors.correct.hide();
       isCorrect = false;
-    } else {
 
+    } else {
       selectors.correct.show();
     }
     return isCorrect;
@@ -76,10 +76,10 @@ $(function () {
   $('#user-name').on('change', function () {
 
     var $userNameMessage = $('#user-name-message');
-    $userNameMessage.hide();
+    $userNameMessage.val('');
 
     var $userNameCorrect = $('#user-name-correct');
-    $userNameCorrect.hide();
+    $userNameCorrect.val('');
 
     var userName = $('#user-name').val().trim('');
     var userNameLength = userName.replace(/[^x00-xff]/g, '**').length;
@@ -87,14 +87,14 @@ $(function () {
 
     if (userName === '') {
 
-      $userNameMessage.html('用户名不能为空').show();
+      $userNameMessage.val('用户名不能为空').show();
 
     } else if (userNameLength < 6 || userNameLength > 20) {
 
-      $userNameMessage.html('用户名至少为6-20位字符').show();
+      $userNameMessage.val('用户名至少为6-20位字符').show();
     } else if (userReg.exec(userName)) {
 
-      $userNameMessage.html('请输入正确格式的用户名').show();
+      $userNameMessage.val('请输入正确格式的用户名').show();
     } else {
 
       verifyUserExisted(userName, $userNameMessage, $userNameCorrect);
@@ -104,7 +104,7 @@ $(function () {
   $('#password').on('change', function () {
 
     var $passwordMessage = $('#password-message');
-    $passwordMessage.hide();
+    $passwordMessage.val('');
 
     var $passwordCorrect = $('#password-correct');
     $passwordCorrect.hide();
@@ -125,10 +125,10 @@ $(function () {
   $('#repeat-password').on('change', function () {
 
     var $repeatPasswordMessage = $('#repeat-password-message');
-    $repeatPasswordMessage.hide();
+    $repeatPasswordMessage.val('');
 
     var $repeatPasswordCorrect = $('#repeat-password-correct');
-    $repeatPasswordCorrect.hide();
+    $repeatPasswordCorrect.val('');
 
     var password = $('#password').val().trim('');
     var repeatPassword = $('#repeat-password').val().trim('');
@@ -146,10 +146,10 @@ $(function () {
   $('#email').on('change', function () {
 
     var $emailMessage = $('#email-message');
-    $emailMessage.hide();
+    $emailMessage.val('');
 
     var $emailCorrect = $('#email-correct');
-    $emailCorrect.hide();
+    $emailCorrect.show();
 
     var email = $('#email').val().trim('');
     var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
@@ -172,15 +172,15 @@ $(function () {
     $('#address').val('');
     $('#email').val('');
 
-    $('#user-name-correct').hide();
-    $('#password-correct').hide();
-    $('#repeat-password-correct').hide();
-    $('#email-correct').hide();
+    $('#user-name-correct').show();
+    $('#password-correct').show();
+    $('#repeat-password-correct').show();
+    $('#email-correct').show();
 
-    $('#user-name-message').hide();
-    $('#password-message').hide();
-    $('#repeat-password-message').hide();
-    $('#email-message').hide();
+    $('#user-name-message').val('');
+    $('#password-message').val('');
+    $('#repeat-password-message').val('');
+    $('#email-message').val('');
   });
 
   $('#submit-button').on('click', function () {
@@ -188,35 +188,36 @@ $(function () {
     var isCorrect = true;
 
     var $userNameMessage = $('#user-name-message');
-    $userNameMessage.hide();
+    $userNameMessage.val('');
 
     var $userNameCorrect = $('#user-name-correct');
-    $userNameCorrect.hide();
+
 
     var userName = $('#user-name').val().trim('');
     var userNameLength = userName.replace(/[^x00-xff]/g, '**').length;
     var userReg = new RegExp('[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b@]');
 
     if (userName === '') {
-
-      $userNameMessage.html('用户名不能为空').show();
+      $userNameMessage.val('用户名不能为空').show();
+      $userNameCorrect.hide();
 
     } else if (userNameLength < 6 || userNameLength > 20) {
+      $userNameMessage.val('用户名至少为6-20位字符').show();
+      $userNameCorrect.hide();
 
-      $userNameMessage.html('用户名至少为6-20位字符').show();
     } else if (userReg.exec(userName)) {
+      $userNameMessage.val('请输入正确格式的用户名').show();
+      $userNameCorrect.hide();
 
-      $userNameMessage.html('请输入正确格式的用户名').show();
     } else {
-
       isCorrect = verifyUserExisted(userName, $userNameMessage, $userNameCorrect);
     }
 
     var $passwordMessage = $('#password-message');
-    $passwordMessage.hide();
+    $passwordMessage.val('');
 
     var $passwordCorrect = $('#password-correct');
-    $passwordCorrect.hide();
+    $passwordCorrect.show();
 
 
     var password = $('#password').val().trim('');
@@ -230,10 +231,10 @@ $(function () {
     isCorrect = commonVerifyRegular(password, passwordSelectors, PASSWORD_MESSAGES, !passwordReg.exec(password));
 
     var $repeatPasswordMessage = $('#repeat-password-message');
-    $repeatPasswordMessage.hide();
+    $repeatPasswordMessage.val('');
 
     var $repeatPasswordCorrect = $('#repeat-password-correct');
-    $repeatPasswordCorrect.hide();
+    $repeatPasswordCorrect.show();
 
     var repeatPassword = $('#repeat-password').val().trim('');
 
@@ -246,10 +247,10 @@ $(function () {
     isCorrect = commonVerifyRegular(repeatPassword, repeatPasswordSelectors, REPEAT_PASSWORD_MESSAGES, repeatPassword !== password);
 
     var $emailMessage = $('#email-message');
-    $emailMessage.hide();
+    $emailMessage.val('');
 
     var $emailCorrect = $('#email-correct');
-    $emailCorrect.hide();
+
 
     var email = $('#email').val().trim('');
     var emailReg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
