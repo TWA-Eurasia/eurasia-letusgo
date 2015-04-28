@@ -48,16 +48,31 @@ describe('indent', function () {
       resMock.send = function (object) {
         expect(object.status).to.equal(200);
         expect(object.message).to.equal('订单生成成功');
-        //expect(object.total).to.equal('3334.50');
-        //expect(object).to.have.property('currentUserName');
-        //expect(object.currentUserName).to.equal('Jacob KANG');
-        //expect(object).to.have.property('cartItems');
-        //expect(object).to.have.property('shortedCartItemName');
 
         done();
       };
 
       indentController.createIndent(reqMock, resMock);
+    });
+  });
+
+  describe('getSuccessInfo', function () {
+    it('should return success', function (done) {
+
+      session = {currentUserName : 'yangmingkun',
+        currentIndent: '551fd16975cd55ed0cfa5503'};
+
+      reqMock.session = session;
+
+      resMock.render = function (view, object) {
+        expect(view).to.equal('success');
+        expect(object.currentUserName).to.equal('yangmingkun');
+        expect(object.total).to.equal('3334.50');
+
+        done();
+      };
+
+      indentController.getSuccessInfo(reqMock, resMock);
     });
   });
 });
