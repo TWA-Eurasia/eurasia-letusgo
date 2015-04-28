@@ -5,8 +5,7 @@
   "main": "home.js",
   "scripts": {
     "test": "istanbul cover _mocha ./test/**",
-    "start": "nodemon ./bin/www",
-    "cover": "istanbul cover --report cobertura _mocha ./test/**"
+    "start": "nodemon ./bin/www"
   },
   "author": "",
   "license": "ISC",
