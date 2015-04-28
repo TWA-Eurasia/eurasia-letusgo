@@ -26,13 +26,13 @@ $(function () {
     });
   }
 
-  //$('img')
-  //  .error(function () {
-  //    $(this).attr('src', '/image/missing1.png');
-  //  })
-  //  .attr('src', function () {
-  //    return $(this).data('src');
-  //  });
+  $('img')
+    .error(function () {
+      $(this).attr('src', '/image/missing1.png');
+    })
+    .attr('src', function () {
+      return $(this).data('src');
+    });
 
   var $itemName = $('.itemName');
   $itemName.popup({

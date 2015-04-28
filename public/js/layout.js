@@ -6,6 +6,8 @@ var md5 = require('MD5');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var LOGOUT_SUCCESS = '退出成功';
+var MAX_CART_AMOUNT = 99;
+
 $('.modal')
   .modal({
     selector: {close: '.close'},
@@ -13,6 +15,16 @@ $('.modal')
   });
 
 $(function () {
+
+  function countCartAmount() {
+    $.get('/cart/amount', function (data) {
+      if (MAX_CART_AMOUNT < parseInt(data.amount)) {
+        data.amount = '99+';
+      }
+
+      $('#cart-amount').text(data.amount);
+    });
+  }
 
   var currentUserName = $('#current-user').text();
 
@@ -49,9 +61,10 @@ $(function () {
         $register.hide();
         $logout.show();
         $myCart.show();
+
+        countCartAmount();
         $('.user-login-modal').modal('hide');
         $('#current-user').html(data.data).show();
-
         $('#login-success').html(data.message);
         $('#login-tips').show().fadeOut(2000);
       } else {

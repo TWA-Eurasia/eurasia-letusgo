@@ -22,7 +22,6 @@ html
           a(href='/')
             img.ui.fluid.image.itemImg(data-src="/image/smalllogo.png" style="height:25px")
         .six.wide.column
-          //img.ui.fluid.image.itemImg(data-id="#{item._id}" data-src="/#{item.image}")
           span Hi，
           span#current-user #{currentUserName}
           span 欢迎来到Let Us Go商城
@@ -30,22 +29,12 @@ html
           span#my-account 我的Let Us Go
           a#my-cart.ui.link.item(href="/cart") 购物车
             i.cart.in.icon
-            strong.ui.label#cart-amount 0
+            strong.ui.label#cart-amount
         .two.wide.column
           a(href="#")#login 请登录
           a(href="/register")#register 免费注册
         .one.wide.column
           a(href="#")#logout 注销
-      //.ui.grid.myLogoAndSearch
-      //  .four.wide.column.myLogo
-      //    a(href='/')
-      //      image.myLogoImg(src= "/image/logo.png")
-        //.twelve.wide.column#mySearch
-        //  .ui.fluid.category.search
-        //    .ui.icon.input.searchInput
-        //      input.prompt(type="text" placeholder="Search...")
-        //      i.search.icon
-        //    .results
       .ui.success.floating.message.hidden#login-tips
         p#login-success
       .ui.error.floating.message.hidden#logout-tips
@@ -83,7 +72,6 @@ html
               .field
                 .ui.error.message#login-result
       .actions
-        //a#findPassword(href='/retrievePassword') 忘记密码？
         a.primary.ui.button.register(href='/register') 注册
         a.ui.positive.right.labeled.icon.button#user-login 登陆
           i.right.arrow.icon
