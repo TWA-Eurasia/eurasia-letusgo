@@ -93,7 +93,6 @@ describe('cart', function () {
       resMock.send = function (object) {
 
         expect(object).to.have.property('cart');
-        expect(object).to.have.property('total');
         expect(object.cart).to.have.property('cartItems');
         expect(object.total).to.equal(3334.50);
         done();
@@ -108,7 +107,6 @@ describe('cart', function () {
 
       resMock.send = function (object) {
 
-        expect(object).to.have.property('amount');
         expect(object.amount).to.equal(31);
 
         done();

@@ -49,12 +49,6 @@ describe('index', function () {
       resMock.render = function (view, object) {
 
         expect(view).to.equal('index');
-        expect(object).to.have.property('mainCategories');
-        expect(object).to.have.property('currentCategory');
-        expect(object).to.have.property('items');
-        expect(object).to.have.property('pageCount');
-        expect(object).to.have.property('currentPage');
-        expect(object).to.have.property('isCategory');
 
         expect(object.mainCategories.length).to.equal(10);
         expect(object.items.length).to.equal(3);
@@ -81,12 +75,6 @@ describe('index', function () {
       resMock.render = function (view, object) {
 
         expect(view).to.equal('index');
-        expect(object).to.have.property('mainCategories');
-        expect(object).to.have.property('currentCategory');
-        expect(object).to.have.property('items');
-        expect(object).to.have.property('pageCount');
-        expect(object).to.have.property('currentPage');
-        expect(object).to.have.property('isCategory');
 
         expect(object.mainCategories.length).to.equal(10);
         expect(object.items.length).to.equal(4);
@@ -115,12 +103,6 @@ describe('index', function () {
       resMock.render = function (view, object) {
 
         expect(view).to.equal('index');
-        expect(object).to.have.property('mainCategories');
-        expect(object).to.have.property('currentCategory');
-        expect(object).to.have.property('items');
-        expect(object).to.have.property('pageCount');
-        expect(object).to.have.property('currentPage');
-        expect(object).to.have.property('isCategory');
 
         expect(object.mainCategories.length).to.equal(10);
         expect(object.items.length).to.equal(0);

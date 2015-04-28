@@ -20,7 +20,6 @@ describe('indent', function () {
 
       resMock.render = function (view,object) {
         expect(view).to.equal('indent');
-        expect(object).to.have.property('total');
         expect(object.total).to.equal('3334.50');
         expect(object.currentUserName).to.equal('Jacob KANG');
         expect(object).to.have.property('cartItems');
