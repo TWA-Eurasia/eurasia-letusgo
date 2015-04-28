@@ -6,8 +6,8 @@
   text-align: center;
 }
 
-.filed {
-  margin-bottom: 14px;
+.field {
+  padding-left: 120px;
 }
 
 i.checkmark.icon {
@@ -30,12 +30,15 @@ i.checkmark.icon {
 #user-name-message,
 #password-message,
 #repeat-password-message,
+#phone-number-message,
+#address-message,
 #email-message {
   height: 30px;
   line-height: 30px;
   padding: 20px;
   color: darkred;
-  display: none;
+  type: hidden;
+  border: 0px;
 }
 
 #button-field {
