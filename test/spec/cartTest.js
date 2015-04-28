@@ -117,6 +117,25 @@ describe('cart', function () {
     });
   });
 
+  describe('getAmount', function () {
+
+    it('shoulde return amount = 0', function (done) {
+
+      session = {currentUserId: undefined};
+
+      reqMock.session = session;
+
+      resMock.send = function (object) {
+
+        expect(object).to.have.property('amount');
+        expect(object.amount).to.equal(0);
+
+        done();
+      };
+      cartController.getAmount(reqMock, resMock);
+    });
+  });
+
   describe('getInventory', function () {
 
 
