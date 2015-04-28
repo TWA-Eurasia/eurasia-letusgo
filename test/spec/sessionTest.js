@@ -1,16 +1,16 @@
 'use strict';
 
 describe('session', function () {
+  var session = {};
+  var resMock = {};
+  var reqMock = {};
+  var sessionController = require('../../controller/session');
 
   afterEach(function (done) {
     reloadDatabase(done);
   });
 
   describe('login', function() {
-    var session = {};
-    var resMock = {};
-    var reqMock = {};
-    var sessionController = require('../../controller/session');
 
     it('should return login success', function(done) {
 
@@ -64,6 +64,19 @@ describe('session', function () {
       };
       sessionController.login(reqMock, resMock);
     });
+  });
 
+  describe('logout', function() {
+
+    it('should correct logout', function(done) {
+
+      resMock.send = function (object) {
+        expect(object.state).to.equal(200);
+        expect(object.message).to.equal('退出成功');
+
+        done();
+      };
+      sessionController.logout(reqMock, resMock);
+    });
   });
 });
