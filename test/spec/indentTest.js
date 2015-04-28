@@ -1,7 +1,7 @@
 'use strict';
 
 describe('indent', function () {
-
+  var session;
   var resMock = {};
   var reqMock = {};
   var indentController = require('../../controller/indent');
@@ -22,7 +22,6 @@ describe('indent', function () {
         expect(view).to.equal('indent');
         expect(object).to.have.property('total');
         expect(object.total).to.equal('3334.50');
-        expect(object).to.have.property('currentUserName');
         expect(object.currentUserName).to.equal('Jacob KANG');
         expect(object).to.have.property('cartItems');
         expect(object).to.have.property('shortedCartItemName');
@@ -34,26 +33,31 @@ describe('indent', function () {
     });
   });
 
-  //describe('createIndent', function () {
-  //  it('should return success', function () {
-  //    reqMock.body = {};
-  //    reqMock.session = {
-  //      currentUserId : '5523cea79294d58a8e06c3c9',
-  //      currentIndent : '551fd16975cd55ed0cfa5503'
-  //    };
-  //
-  //    resMock.send = function (object) {
-  //      expect(object).to.have.property('data');
-  //      //expect(object.total).to.equal('3334.50');
-  //      //expect(object).to.have.property('currentUserName');
-  //      //expect(object.currentUserName).to.equal('Jacob KANG');
-  //      //expect(object).to.have.property('cartItems');
-  //      //expect(object).to.have.property('shortedCartItemName');
-  //
-  //      done();
-  //    };
-  //
-  //    indentController.create(reqMock, resMock);
-  //  });
-  //});
+  describe('createIndent', function () {
+    it('should return success', function (done) {
+      reqMock.body = {user: '',
+                      'cartItems[]':'551cc20e47a654d14a280e9e',
+                      createDate: '',
+                      isPaid: false};
+
+      session = {currentUserId : '5523cea79294d58a8e06c3c9',
+        currentIndent: ''};
+
+      reqMock.session = session;
+
+      resMock.send = function (object) {
+        expect(object.status).to.equal(200);
+        expect(object.message).to.equal('订单生成成功');
+        //expect(object.total).to.equal('3334.50');
+        //expect(object).to.have.property('currentUserName');
+        //expect(object.currentUserName).to.equal('Jacob KANG');
+        //expect(object).to.have.property('cartItems');
+        //expect(object).to.have.property('shortedCartItemName');
+
+        done();
+      };
+
+      indentController.createIndent(reqMock, resMock);
+    });
+  });
 });
