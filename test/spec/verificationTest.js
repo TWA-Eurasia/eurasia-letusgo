@@ -22,7 +22,7 @@ describe('verification', function () {
       };
 
       resMock.render = function (view, object) {
-        expect(view).is.to.equal('verification');
+        expect(view).to.equal('verification');
         expect(object.userName).to.equal('Jacob KANG');
 
         done();
