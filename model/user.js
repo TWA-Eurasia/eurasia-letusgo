@@ -12,8 +12,6 @@ var UserSchema = new Schema({
   active: {type: Boolean, default: false},
   createDate: Date,
   cart: {type: Schema.ObjectId, ref: 'Cart'},
-  indents: [{
-    indent: {type: Schema.ObjectId, ref: 'Indent'}
-  }]
+  indents: [{type: Schema.ObjectId, ref: 'Indent'}]
 });
 module.exports = mongoose.model('User', UserSchema);
