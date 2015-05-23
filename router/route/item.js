@@ -76,22 +76,13 @@ router.post('/:id', function (req, res) {
 });
 
 
-router.delete('/:id', function(){
+router.delete('/:id', function(req, res){
   var id = req.params.id;
 
-  Item.remove(id).exec()
-    .then(function(){
-      res.send({
-        status: 200
-      })
+  Item.remove({_id: id}, function(){
+    res.send({
+      status: 200
     })
-    .onReject(function(err){
-
-    });
-  Item.remove(id, function(){
-      res.send(
-
-      );
   });
 });
 

@@ -37,7 +37,7 @@ block content
               td #{item.price}
               td
                 img.ui.fluid.image.size(src="#{item.image}")
-              td
+              td(id="#{item._id}")
                 .ui.red.button.delete_item 删除
               td
                 a.ui.green.button(href="/itemsMangement/#{item._id}")  修改

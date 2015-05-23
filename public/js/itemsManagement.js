@@ -25,7 +25,9 @@ $('.yes').on('click', function () {
     url: '/api/item/' + deleteId,
     type: 'DELETE',
 
-    success: function () {
+    success: function (data) {
+      var i_data = data;
+      console.log(i_data);
 
       $('.delete-modal').modal('hide');
       $('.delete-message').show();
@@ -36,9 +38,6 @@ $('.yes').on('click', function () {
 
         $('.delete-message').hide();
       }, 1000);
-
-      //$('#total').text(data.total);
-      //countCartAmount();
     }
   });
 });
