@@ -1,6 +1,5 @@
 'use strict';
 
-
 describe('cart', function () {
   var session;
   var resMock = {};
@@ -136,7 +135,6 @@ describe('cart', function () {
 
   describe('getInventory', function () {
 
-
     it('shoulde return correct inventory', function (done) {
 
       reqMock.params = {id: '551cc20e47a654d14a280e9b'};
@@ -151,4 +149,3 @@ describe('cart', function () {
     });
   });
 });
-

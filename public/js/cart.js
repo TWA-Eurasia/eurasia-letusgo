@@ -77,7 +77,7 @@ $(function () {
   $('#allChecked').ready(function () {
     var checkboxesSize = $('.checkedCartItem').length;
 
-    if (checkboxesSize == 0) {
+    if (checkboxesSize === 0) {
       $('#allChecked').prop('checked','');
     } else {
       $('#allChecked').prop('checked','true');
