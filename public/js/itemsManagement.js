@@ -28,8 +28,6 @@ $(function(){
       type: 'DELETE',
 
       success: function (data) {
-        var i_data = data;
-        console.log(i_data);
 
         $('.delete-modal').modal('hide');
         $('.delete-message').show();
