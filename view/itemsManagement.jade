@@ -40,7 +40,7 @@ block content
               td(id="#{item._id}")
                 .ui.red.button.delete_item 删除
               td
-                a.ui.green.button(href="/itemsMangement/#{item._id}")  修改
+                a.ui.green.button.modify_item(href="/itemsManagement/#{item._id}")  修改
 
         .ui.first.coupled.small.modal.transition.delete-modal
           .content
