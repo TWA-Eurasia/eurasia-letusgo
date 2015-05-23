@@ -29,7 +29,7 @@ block content
           tr
             td.ui.teal.message.delete-message.hidden(colspan='7') 删除成功
 
-          - each item in data.items
+          - each item in data
             tr(data-id="#{item._id}")
               td.itemName(data-content="#{item.name}") #{item.shortName}
               td #{item.unit}
