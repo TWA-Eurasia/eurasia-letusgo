@@ -27,7 +27,6 @@ var getItemById = function(req, res){
   var id = req.params.id;
 
   Item.findById(id, function(err, item){
-    console.log(item);
     res.render('itemModifyPage', {
       status: 200,
       data: item
