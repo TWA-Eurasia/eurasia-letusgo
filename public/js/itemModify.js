@@ -21,7 +21,7 @@ $(function(){
     } else {
       if(inputsIsRight(name, unit, price, inventory)){
 
-        updateItem(id, name, unit, price);
+        updateItem(id, name, unit, price, inventory);
 
       }else{
 
@@ -65,17 +65,17 @@ $(function(){
   }
 
 
-  function updateItem(id, name, unit, price) {
+  function updateItem(id, name, unit, price, inventory) {
 
     $.ajax({
 
-      url: '/api/item/' + id,
-      type: 'PUT',
-      data: {_id: id, name: name, unit: unit, price: price},
+      url: '/itemsManagement/' + id,
+      type: 'POST',
+      data: {name: name, unit: unit, price: price, inventory: inventory},
 
       success: function (data) {
         if (200 == data.status) {
-          $(location).attr('href', '/shopManagement')
+          $(location).attr('href', '/itemsManagement')
         }
       }
     });

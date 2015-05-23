@@ -36,7 +36,7 @@ var getItemById = function(req, res){
 
 var removeItemById = function(req, res){
   var id = req.params.id;
-console.log("-----------");
+
   Item.remove({_id: id}, function(){
     res.send({
       status: 200
@@ -44,8 +44,28 @@ console.log("-----------");
   });
 };
 
+var updateItemById = function(req, res){
+
+  var id = req.params.id;
+
+  Item.update({_id: id}, {
+    $set: {
+
+      name: req.body.name,
+      unit: req.body.unit,
+      price: req.body.price,
+      inventory: req.body.inventory
+    }
+  }, function(){
+
+    res.send({status: 200});
+  })
+};
+
 module.exports = {
+
   getItemsManagementPage: getItemsManagementPage,
   getItemById: getItemById,
-  removeItemById: removeItemById
+  removeItemById: removeItemById,
+  updateItemById: updateItemById
 };
