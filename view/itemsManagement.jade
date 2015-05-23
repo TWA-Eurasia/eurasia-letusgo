@@ -31,7 +31,7 @@ block content
 
           - each item in items
             tr(data-id="#{item._id}")
-              td #{item.shortName}
+              td.itemName(data-content="#{item.name}") #{item.shortName}
               td #{item.unit}
               td #{item.inventory}
               td #{item.price}
