@@ -16,11 +16,25 @@ var getItemsManagementPage = function (req, res) {
       });
 
       res.render('itemsManagement', {
-        items: items
+        status: 200,
+        data: items
       });
     });
 };
 
+var getItemById = function(req, res){
+
+  var id = req.params.id;
+
+  Item.findItemById(id, function(item){
+    res.send({
+      status: 200,
+      data: item
+    })
+  })
+};
+
 module.exports = {
-  getItemsManagementPage: getItemsManagementPage
+  getItemsManagementPage: getItemsManagementPage,
+  getItemById: getItemById
 };
