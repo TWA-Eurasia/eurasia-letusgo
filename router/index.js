@@ -15,4 +15,6 @@ module.exports = function (app) {
   app.use('/api/user', require('./route/user'));
   app.use('/api/indent', require('./route/indent'));
   app.use('/api/sessions', require('./route/session'));
+
+  app.use('/admin', require('./route/admin'));
 };
