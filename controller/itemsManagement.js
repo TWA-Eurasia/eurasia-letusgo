@@ -34,7 +34,18 @@ var getItemById = function(req, res){
   })
 };
 
+var removeItemById = function(req, res){
+  var id = req.params.id;
+console.log("-----------");
+  Item.remove({_id: id}, function(){
+    res.send({
+      status: 200
+    })
+  });
+};
+
 module.exports = {
   getItemsManagementPage: getItemsManagementPage,
-  getItemById: getItemById
+  getItemById: getItemById,
+  removeItemById: removeItemById
 };

@@ -20,9 +20,9 @@ $('.delete_item').on('click', function () {
 $('.yes').on('click', function () {
 
   var deleteId = deleteCartItem.closest('td').id;
-
+console.log(deleteId);
   $.ajax({
-    url: '/api/item/' + deleteId,
+    url: '/itemsManagement/' + deleteId,
     type: 'DELETE',
 
     success: function (data) {
