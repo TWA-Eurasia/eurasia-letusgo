@@ -1,7 +1,6 @@
 'use strict';
 
 var $ = require('jquery');
-var md5 = require('MD5');
 
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
@@ -54,8 +53,13 @@ $(function () {
     var userName = $('#user-name-login').val();
     var password = $('#password-login').val();
 
-    $.post('/api/sessions', {username: userName, password: md5(password)}, function (data) {
-      if (data.state === 200) {
+    $.post('/api/sessions', {username: userName, password: password}, function (resp) {
+
+      if(resp.state === 401) {
+        $('#login-result').html(resp.message).show();
+      } else if(resp.data.role === 'admin') {
+        location.href = '/admin/index';
+      } else {
 
         $login.hide();
         $register.hide();
@@ -64,15 +68,12 @@ $(function () {
 
         countCartAmount();
         $('.user-login-modal').modal('hide');
-        $('#current-user').html(data.data).show();
-        $('#login-success').html(data.message);
+        $('#current-user').html(resp.data).show();
+        $('#login-success').html(resp.message);
         $('#login-tips').show().fadeOut(2000);
-      } else {
-        $('#login-result').html(data.message).show();
       }
     });
   });
-
 
   $logout.on('click', function () {
     $.ajax({
