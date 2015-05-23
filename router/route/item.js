@@ -75,4 +75,24 @@ router.post('/:id', function (req, res) {
   });
 });
 
+
+router.delete('/:id', function(){
+  var id = req.params.id;
+
+  Item.remove(id).exec()
+    .then(function(){
+      res.send({
+        status: 200
+      })
+    })
+    .onReject(function(err){
+
+    });
+  Item.remove(id, function(){
+      res.send(
+
+      );
+  });
+});
+
 module.exports = router;

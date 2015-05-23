@@ -38,6 +38,15 @@ block content
               td
                 img.ui.fluid.image.size(src="#{item.image}")
               td
-                .ui.red.button 删除
+                .ui.red.button.delete_item 删除
               td
                 a.ui.green.button(href="/itemsMangement/#{item._id}")  修改
+
+        .ui.first.coupled.small.modal.transition.delete-modal
+          .content
+            .description
+              p 您确认要删除吗？
+          .actions
+            .primary.ui.button.no 取消
+            a.ui.positive.right.labeled.icon.button.yes#yes 删除
+              i.checkmark.icon
