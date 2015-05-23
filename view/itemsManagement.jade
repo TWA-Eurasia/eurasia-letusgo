@@ -26,6 +26,9 @@ block content
           th.two.wide 修改
           th.two.wide 删除
         tbody.center
+          tr
+            td.ui.teal.message.delete-message.hidden(colspan='7') 删除成功
+
           - each item in items
             tr(data-id="#{item._id}")
               td #{item.shortName}
