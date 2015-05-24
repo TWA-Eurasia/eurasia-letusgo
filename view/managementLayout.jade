@@ -21,13 +21,10 @@ html
         .six.wide.column
           span Hi，Admin!
           span &nbsp;欢迎来到 Let Us Go 商城
-        .three.wide.column
-          a#my-cart.ui.link.item(href="/itemManagement") 商品管理
-            i.cart.in.icon
-            strong.ui.label#cart-amount
-        .three.wide.column
-          a#my-cart.ui.link.item(href="/userManagement") 用户管理
-            i.cart.in.icon
+        .two.wide.column
+          a(href="/itemManagement") 商品管理
+        .two.wide.column
+          a(href="/userManagement") 用户管理
       .ui.success.floating.message.hidden#login-tips
         p#login-success
       .ui.error.floating.message.hidden#logout-tips
