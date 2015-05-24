@@ -4,6 +4,18 @@ var $ = require('jquery');
 
 $(function(){
 
+  $('input#itemImage').on('change', function(){
+
+    $('.imageSrc').hide();
+
+    var imageSrc = $(this).val();
+    console.log(imageSrc);
+    if(imageSrc){
+      $('.imageSrc').attr('src', '/image/' + imageSrc + '.jpg');
+      $('.imageSrc').show();
+    }
+  });
+
   $('a#save').on('click', function () {
 
     initBorder();

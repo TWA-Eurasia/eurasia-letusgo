@@ -40,6 +40,13 @@ block content
             label 商品库存:
               div.ui.input.error
                 input#itemInventory(placeholder='请输入商品库存', type='text', style="border: grey 1px solid")
+          .eight.wide.centered.column
+          .eight.wide.centered.column
+            label 商品图片:
+              div.ui.input.error
+                input#itemImage(placeholder='请输入图片名称', type='text', style="border: grey 1px solid")
+          .three.wide.centered.column
+            img.ui.fluid.image.size.hidden.imageSrc()
           .five.wide.column
           .three.wide.column
             a.ui.blue.submit.button#cancel(href="/admin/itemsManagement   ") 关闭
