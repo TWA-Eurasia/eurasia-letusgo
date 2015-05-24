@@ -11,10 +11,13 @@ block title
 block content
   .ui.grid.centered
     .sixteen.wide.column
+    .sixteen.wide.column
       h1.ui.header.centered
         .content
           i.icon.cart
           .content 商品管理列表
+    .thirteen.wide.column
+      a.ui.green.button(href="/itemsManagement/addItem") + 添 加 新 商 品
     .fourteen.wide.column
       table.ui.large.table
         thead.center
@@ -40,7 +43,7 @@ block content
               td(id="#{item._id}")
                 .ui.red.button.delete_item 删除
               td
-                a.ui.green.button.modify_item(href="/itemsManagement/#{item._id}")  修改
+                a.ui.green.button.modify_item(href="/itemsManagement/modifyItem/#{item._id}")  修改
 
         .ui.first.coupled.small.modal.transition.delete-modal
           .content

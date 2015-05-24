@@ -1,0 +1,39 @@
+extends managementLayout
+
+block title
+  title 添加新商品
+block content
+  .ui.grid(class="ui grid")
+    .eight.wide.centered.column
+      .ui.negative.message#emptyError(style='display: none')
+        i.close.icon
+        .header 请输入完整信息
+      .ui.negative.message#inputError(style='display: none')
+        i.close.icon
+        .header 请输入正确的信息格式
+      .ui.form.red.segment
+        .ui.grid
+          .eight.wide.centered.column
+            label 商品名称:
+              .ui.input.error
+                input#itemName(placeholder='商品名称', type='text', style="border: grey 1px solid")
+          .eight.wide.centered.column
+          .eight.wide.centered.column
+            label 商品单位:
+              .ui.input.error
+                input#itemUnit(placeholder='商品单位', type='text', style="border: grey 1px solid")
+          .eight.wide.centered.column
+          .eight.wide.centered.column
+            label 商品单价:
+              div.ui.input.error
+                input#itemPrice(placeholder='请输入商品单价', type='text', style="border: grey 1px solid")
+          .eight.wide.centered.column
+          .eight.wide.centered.column
+            label 商品库存:
+              div.ui.input.error
+                input#itemInventory(placeholder='请输入商品库存', type='text', style="border: grey 1px solid")
+          .five.wide.column
+          .three.wide.column
+            a.ui.blue.submit.button#cancel(href="/shopManagement") 关闭
+          .three.wide.column
+            a.ui.green.submit.button#save 保存

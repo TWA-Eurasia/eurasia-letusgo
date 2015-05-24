@@ -62,10 +62,19 @@ var updateItemById = function(req, res){
   })
 };
 
+var addNewItemPage = function(req, res){
+  console.log("------------");
+
+  res.render('addNewItemPage', {
+    status: 200
+  });
+};
+
 module.exports = {
 
   getItemsManagementPage: getItemsManagementPage,
   getItemById: getItemById,
   removeItemById: removeItemById,
-  updateItemById: updateItemById
+  updateItemById: updateItemById,
+  addNewItemPage: addNewItemPage
 };
