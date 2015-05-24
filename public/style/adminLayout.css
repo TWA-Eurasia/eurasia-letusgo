@@ -1,0 +1,47 @@
+.container {
+  background: #ffffff;
+}
+
+.itemImg{
+  height:30px;
+}
+
+.ui.grid {
+  margin: 0;
+}
+
+.filed {
+  margin-bottom: 14px;
+}
+
+#login-header {
+  border: 0px solid #000;
+  border-bottom-width: 1px;
+}
+
+#current-admin {
+  color: teal;
+}
+
+.ui.grid.topBar {
+  height: 35px;
+  background: #F2F2F2;
+}
+
+.ui.grid.topBar > .column {
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.ui.divider.horizontal {
+  color: black;
+}
+
+.seven.wide.column.group {
+  text-align: right;
+}
+
+.sixteen.wide.column.copyright p {
+  text-align: center;
+}
+
