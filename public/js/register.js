@@ -198,14 +198,17 @@ $(function () {
     var userReg = new RegExp('[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b@]');
 
     if (userName === '') {
+      isCorrect = false;
       $userNameMessage.val('用户名不能为空').show();
       $userNameCorrect.hide();
 
     } else if (userNameLength < 6 || userNameLength > 20) {
+      isCorrect = false;
       $userNameMessage.val('用户名至少为6-20位字符').show();
       $userNameCorrect.hide();
 
     } else if (userReg.exec(userName)) {
+      isCorrect = false;
       $userNameMessage.val('请输入正确格式的用户名').show();
       $userNameCorrect.hide();
 
