@@ -39,6 +39,8 @@ var login = function(req, res) {
 var logout = function(req, res) {
 
   req.session.currentUserName = null;
+  req.session.currentUserId = null;
+  req.session.currentAdminName = null;
 
   res.send({state: 200, data: {}, message: LOGOUT_SUCCESS});
 };

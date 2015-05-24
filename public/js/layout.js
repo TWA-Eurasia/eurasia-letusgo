@@ -83,6 +83,19 @@ $(function () {
     });
   });
 
+  $('#admin-logout').on('click', function() {
+    $.ajax({
+      url: '/api/sessions',
+      type: 'DELETE',
+      success: function(data){
+
+        if(data.state === 200) {
+          location.href = '/';
+        }
+      }
+    });
+  });
+
   $logout.on('click', function () {
     $.ajax({
       url: '/api/sessions',
