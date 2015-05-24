@@ -1,1 +1,10 @@
 extends adminLayout
+block admin-home
+  a#admin-home.ui.link.active.item(href="/admin/index") 主页
+  i.home.icon
+block content
+  .ui.grid.content-grid
+    .two.wide.column &nbsp;
+    .twelve.wide.column.centered.welcome-admin-message
+      span 亲爱的管理员欢迎您。
+    .two.wide.column &nbsp;
