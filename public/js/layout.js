@@ -40,6 +40,14 @@ $(function () {
     $myCart.show();
   }
 
+  $('img')
+    .error(function () {
+      $(this).attr('src', '/image/missing1.png');
+    })
+    .attr('src', function () {
+      return $(this).data('src');
+    });
+
   $login.on('click', function () {
 
     $('.user-login-modal')
