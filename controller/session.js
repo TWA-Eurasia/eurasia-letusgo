@@ -2,11 +2,11 @@
 
 var User = require('../model/user');
 
-var USER_LOGIN_SUCCESS = '用户登陆成功！';
-var ADMIN_LOGIN_SUCCESS = '管理员登陆成功';
-var LOGIN_FAILURE = '用户或密码错误！';
-var LOGIN_ACTIVE = '帐号未激活！';
-var LOGOUT_SUCCESS = '退出成功';
+var USER_LOGIN_SUCCESS = '用户登陆成功!';
+var ADMIN_LOGIN_SUCCESS = '管理员登陆成功!';
+var LOGIN_FAILURE = '用户或密码错误!';
+var LOGIN_ACTIVE = '帐号未激活!';
+var LOGOUT_SUCCESS = '退出成功!';
 
 var login = function(req, res) {
 
@@ -17,6 +17,7 @@ var login = function(req, res) {
   User.findOne({name: username}, function (err, user) {
 
     if(user && user.name === 'letusgoAdmin'){
+      console.log('hhah');
       return res.send({state: 200, data: {name: user.name, role: 'admin'}, message: ADMIN_LOGIN_SUCCESS});
     }
 
