@@ -3,8 +3,13 @@ extends adminLayout
 block script
   script.
     System.import('js/addNewItem');
+
 block title
   title 添加新商品
+
+block items-management
+  a.ui.link.item.active(href="/admin/itemsManagement") 商品管理
+
 block content
   .ui.grid(class="ui grid")
     .eight.wide.centered.column
