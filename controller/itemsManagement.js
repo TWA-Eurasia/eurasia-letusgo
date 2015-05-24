@@ -63,7 +63,6 @@ var updateItemById = function(req, res){
 };
 
 var addNewItemPage = function(req, res){
-  console.log("------------");
 
   res.render('addNewItemPage', {
     status: 200
