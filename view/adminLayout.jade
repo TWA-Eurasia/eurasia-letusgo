@@ -12,7 +12,7 @@ html
     block css
     block script
     block title
-      title 首页
+      title 管理员首页
   body
     .container
       .ui.grid.topBar
@@ -27,6 +27,21 @@ html
           span 欢迎来到Let Us Go商城
         .one.wide.column
           a(href="/")#admin-logout 注销
+      .ui.grid
+        .row
+          div.twelve.wide.column.centered
+            div.ui.inverted.teal.menu
+              div.left.menu
+                a.ui.item LetUsGo
+                block admin-home
+                  a#admin-home.ui.link.item(href="/admin/index") 主页
+                  i.home.icon
+                block category-management
+                  a.ui.link.item(href="/admin/categoryManagement") 分类管理
+                block item-management
+                  a.ui.link.item(href="/admin/itemManagement") 商品管理
+                block user-management
+                  a.ui.link.item(href="/admin/userManagement")
       block content
       .ui.divider.horizontal 关于我们
       footer
