@@ -22,7 +22,7 @@ $(function(){
   $('.yes').on('click', function () {
 
     var deleteId = deleteCartItem.closest('td').id;
-    console.log(deleteId);
+
     $.ajax({
       url: '/itemsManagement/' + deleteId,
       type: 'DELETE',
