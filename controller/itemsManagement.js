@@ -94,7 +94,6 @@ var addNewItemPage = function(req, res){
       });
 
       mainCategories = getSubCategories(categories, mainCategories);
-      console.log(mainCategories[0].subCategories);
 
       res.render('addNewItemPage', {
         status: 200,
