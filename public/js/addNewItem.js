@@ -4,12 +4,15 @@ var $ = require('jquery');
 
 $(function(){
 
-  $('input#itemImage').on('change', function(){
+  $('.selectCategory').on('click', function(){
+    console.log("----------");
+    $('#mainCategoriesMenu').show();
+  });
 
+  $('input#itemImage').on('change', function(){
     $('.imageSrc').hide();
 
     var imageSrc = $(this).val();
-    console.log(imageSrc);
     if(imageSrc){
       $('.imageSrc').attr('src', '/image/' + imageSrc + '.jpg');
       $('.imageSrc').show();

@@ -1,9 +1,29 @@
 'use strict';
 
 var Item = require('../model/item');
+var Category = require('../model/category');
+var _ = require('lodash');
 
 var FormatUtil = require('../util/formatUtil');
 var NAME_LENGTH = 16;
+
+function getSubCategories(categories, mainCategories) {
+
+  _.forEach(categories, function (category) {
+
+    if (category.parent) {
+
+      _.forEach(mainCategories, function (mainCategory) {
+
+        if (category.parent.name === mainCategory.name) {
+          mainCategory.subCategories.push(category);
+        }
+      });
+    }
+  });
+
+  return mainCategories;
+}
 
 var getItemsManagementPage = function (req, res) {
 
@@ -64,9 +84,25 @@ var updateItemById = function(req, res){
 
 var addNewItemPage = function(req, res){
 
-  res.render('addNewItemPage', {
-    status: 200
-  });
+  Category.find()
+    .populate('parent')
+    .exec(function (err, categories) {
+      var mainCategories = _.filter(categories, function (category) {
+
+        category.subCategories = [];
+        return category.parent === null;
+      });
+
+      mainCategories = getSubCategories(categories, mainCategories);
+      console.log(mainCategories[0].subCategories);
+
+      res.render('addNewItemPage', {
+        status: 200,
+        data: {
+          mainCategories: mainCategories
+        }
+      });
+    });
 };
 
 module.exports = {
