@@ -25,8 +25,8 @@ describe('session', function () {
 
       resMock.send = function (object) {
         expect(object.state).to.equal(200);
-        expect(object.data).to.equal('Jacob KANG');
-        expect(object.message).to.equal('登陆成功！');
+        expect(object.data.name).to.equal('Jacob KANG');
+        expect(object.message).to.equal('用户登陆成功！');
 
         done();
       };

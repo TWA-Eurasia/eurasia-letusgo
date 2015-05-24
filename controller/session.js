@@ -16,7 +16,7 @@ var login = function(req, res) {
 
   User.findOne({name: username}, function (err, user) {
 
-    if(user.name === 'letusgoAdmin'){
+    if(user && user.name === 'letusgoAdmin'){
       return res.send({state: 200, data: {name: user.name, role: 'admin'}, message: ADMIN_LOGIN_SUCCESS});
     }
 
