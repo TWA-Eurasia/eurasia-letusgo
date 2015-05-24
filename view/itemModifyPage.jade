@@ -1,0 +1,41 @@
+extends managementLayout
+
+block script
+  script.
+    System.import('js/itemModify');
+
+block title
+  title 商品信息修改页面
+
+block content
+  .ui.grid(class="ui grid")
+    .eight.wide.centered.column
+      .ui.negative.message#emptyError(style='display: none')
+        i.close.icon
+        .header 请输入修改信息
+      .ui.negative.message#inputError(style='display: none')
+        i.close.icon
+        .header 请输入正确的信息格式
+      .ui.form.red.segment
+        .ui.grid
+          .eight.wide.centered.column
+            label 商品名称:
+              div.ui.input.error
+                input#itemName(placeholder='请输入商品名称', type='text', value='#{data.name}')
+          .eight.wide.centered.column
+          .eight.wide.centered.column
+            label 商品单位:
+              div.ui.input.error
+                input#itemUnit(placeholder='请输入商品单位', type='text', value='#{data.unit}')
+          .eight.wide.centered.column
+          .eight.wide.centered.column
+            label 商品单价:
+              div.ui.input.error
+                input#itemPrice(placeholder='请输入商品单价', type='text', value='#{data.price}')
+          .eight.wide.centered.column
+          .eight.wide.centered.column
+            label 商品库存:
+              div.ui.input.error
+                input#itemInventory(placeholder='请输入商品库存', type='text', value='#{data.inventory}')
+          .three.wide.centered.column
+            a.ui.green.submit.button.save(id="#{data._id}") 保存

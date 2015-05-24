@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width")
+    link(rel="stylesheet" type="text/css" href="/jspm_packages/github/ziyiking/Semantic-UI@master/dist/semantic.css")
+    link(rel="stylesheet" type="text/css" href="/style/layout.css")
+    script(src = "/jspm_packages/system.js")
+    script(src = "/config.js")
+    block css
+    block script
+    block title
+      title 首页
+  body
+    .container
+      .ui.grid.topBar
+        .one.wide.column &nbsp;
+        .one.wide.column
+          a(href='/')
+            img.ui.fluid.image.itemImg(src="/image/smalllogo.png" style="height:25px")
+        .six.wide.column
+          span Hi，Admin!
+          span &nbsp;欢迎来到 Let Us Go 商城
+        .two.wide.column
+          a(href="/admin/itemsManagement") 商品管理
+        .two.wide.column
+          a(href="/admin/usersManagement") 用户管理
+      .ui.success.floating.message.hidden#login-tips
+        p#login-success
+      .ui.error.floating.message.hidden#logout-tips
+        p#logout-success
+      block content
+      .ui.divider.horizontal 关于我们
+      footer
+        .ui.grid
+          .sixteen.wide.column
+          .seven.wide.column.group
+            h4 LetUsgo 团队
+            p TWA 学院
+            p LetUsGo 计划组
+          .two.wide.column
+          .seven.wide.column
+            h4 联系我们
+            p 地址：陕西省西安市雁塔区欧亚路一号
+            p 邮编：710077
+          .sixteen.wide.column.copyright
+            p copyright@letusgo All Rights Reserved 版权所有LETUSGO商城
+            p © 2015 LetUsGo, Inc.

@@ -1,0 +1,55 @@
+extends managementLayout
+
+block css
+  link(rel="styleSheet" type="text/css" href="/style/cart.css")
+block script
+  script.
+    System.import('js/itemsManagement');
+block title
+  title 商品管理列表
+
+block content
+  .ui.grid.centered
+    .sixteen.wide.column
+    .sixteen.wide.column
+      h1.ui.header.centered
+        .content
+          i.icon.cart
+          .content 商品管理列表
+    .thirteen.wide.column
+      a.ui.green.button(href="/admin/itemsManagement/addItem") + 添 加 新 商 品
+    .fourteen.wide.column
+      table.ui.large.table
+        thead.center
+          th.three.wide 名称
+          th.two.wide 单位
+          th.two.wide 数量
+          th.two.wide 价格
+          th.two.wide 图片
+          th.two.wide 修改
+          th.two.wide 删除
+        tbody.center
+          tr
+            td.ui.teal.message.delete-message.hidden(colspan='7') 删除成功
+
+          - each item in data
+            tr(data-id="#{item._id}")
+              td.itemName(data-content="#{item.name}") #{item.shortName}
+              td #{item.unit}
+              td #{item.inventory}
+              td #{item.price}
+              td
+                img.ui.fluid.image.size(src="/" + "#{item.image}")
+              td(id="#{item._id}")
+                .ui.red.button.delete_item 删除
+              td
+                a.ui.green.button.modify_item(href="/admin/itemsManagement/modifyItem/#{item._id}")  修改
+
+        .ui.first.coupled.small.modal.transition.delete-modal
+          .content
+            .description
+              p 您确认要删除吗？
+          .actions
+            .primary.ui.button.no 取消
+            a.ui.positive.right.labeled.icon.button.yes#yes 删除
+              i.checkmark.icon
