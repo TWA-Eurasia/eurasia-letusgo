@@ -113,7 +113,7 @@ $(function(){
 
     $.post('/api/item', {name: name.trimLeft(), unit: unit.trimLeft(), price: price.trimLeft()})
       .success(function () {
-        $(location).attr('href', '/shopManagement')
+        $(location).attr('href', '/admin/itemsManagement')
       });
   }
 });

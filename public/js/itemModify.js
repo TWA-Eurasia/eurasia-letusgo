@@ -69,13 +69,13 @@ $(function(){
 
     $.ajax({
 
-      url: '/itemsManagement/' + id,
+      url: '/admin/itemsManagement/' + id,
       type: 'POST',
       data: {name: name, unit: unit, price: price, inventory: inventory},
 
       success: function (data) {
         if (200 == data.status) {
-          $(location).attr('href', '/itemsManagement')
+          $(location).attr('href', '/admin/itemsManagement')
         }
       }
     });
