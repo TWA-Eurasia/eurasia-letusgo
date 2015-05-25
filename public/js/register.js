@@ -2,7 +2,6 @@
 
 var $ = require('jquery');
 var moment = require('moment');
-var md5 = require('MD5');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var PASSWORD_MESSAGES = {
@@ -275,7 +274,7 @@ $(function () {
       $.post('api/user',
         {
           name: userName,
-          password: md5(password),
+          password: password,
           address: address,
           phoneNumber: phoneNumber,
           createDate: createDate,
