@@ -205,33 +205,24 @@ var getInventory = function (req, res) {
 };
 
 var removePaidCartItems = function(req, res){
-  console.log("=======");
 
-  var paidCartItems = req.body.cartItems;
+  var paidCartItemId = req.body.cartItemId;
   var cartId = req.session.currentCartId;
 
   Cart.findById(cartId).exec()
     .then(function(cart){
-
-      var cartItems = cart.cartItems;
-
-      paidCartItems.forEach(function(paidCartItem){
-        _.remove(cartItems, function(cartItem){
-
-          return paidCartItem._id == cartItem._id;
-        });
+      _.remove(cart.cartItems, function(cartItem){
+        return cartItem == paidCartItemId;
       });
 
-      cart.cartItems = cartItems;
+      return cart.cartItems;
 
-      return cart;
     })
-    .then(function(cart){
-      cart.save();
-    })
-    .then(function(){
-      res.send({
-        status: 200
+    .then(function(cartItems){
+
+      Cart.update({_id: cartId}, {$set: {cartItems: cartItems}}, function () {
+
+        res.sendStatus(200);
       });
     });
 

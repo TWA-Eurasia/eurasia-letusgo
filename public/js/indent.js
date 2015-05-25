@@ -16,13 +16,13 @@ function updateInventory(inventory, number, item) {
   });
 }
 
-function removePaidCartItems(cartItems){
+function removePaidCartItems(cartItem){
 
   $.ajax({
-    url: '/cart/removePaidCartItems',
+    url: '/cart',
     type: 'POST',
-    data: {cartItems: cartItems}
-  })
+    data: {cartItemId: cartItem._id}
+  });
 }
 
 function showShortage(shortedCartItemName) {
@@ -50,7 +50,6 @@ $(document).ready(function () {
 
   $('#isPaid').on('click', function () {
 
-    //var total = $(this).data('total');
     var cartItems = $(this).data('cart');
 
     $.get('/api/item', {cartItems: cartItems}, function (items) {
@@ -65,13 +64,14 @@ $(document).ready(function () {
             if (number < inventory) {
 
               $(location).attr('href', '/success');
+
               updateInventory(inventory, number, item);
+              removePaidCartItems(cartItem);
             }
           }
         });
       });
 
-      removePaidCartItems(cartItems);
     });
   });
 
