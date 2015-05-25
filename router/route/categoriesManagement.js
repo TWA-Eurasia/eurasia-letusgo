@@ -1,3 +1,10 @@
-/**
- * Created by zhzhang on 5/25/15.
- */
+'use strict';
+
+var express = require('express');
+var router = express.Router();
+
+var categoriesManagementController = require('../../controller/categoriesManagement');
+
+router.get('/', categoriesManagementController.getCategoriesManagementInfo);
+
+module.exports = router;

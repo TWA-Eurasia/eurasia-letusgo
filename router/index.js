@@ -11,7 +11,6 @@ module.exports = function (app) {
   app.use('/verification',require('./route/verification'));
   app.use('/retrievePassword',require('./route/retrievePassword'));
 
-  app.use('/admin/itemsManagement', require('./route/itemsManagement'));
 
   app.use('/api/item', require('./route/item'));
   app.use('/api/user', require('./route/user'));
@@ -19,4 +18,6 @@ module.exports = function (app) {
   app.use('/api/sessions', require('./route/session'));
 
   app.use('/admin', require('./route/admin'));
+  app.use('/admin/itemsManagement', require('./route/itemsManagement'));
+  app.use('/admin/categoriesManagement', require('./route/categoriesManagement'));
 };
