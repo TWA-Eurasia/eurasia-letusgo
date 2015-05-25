@@ -1,0 +1,59 @@
+extends adminLayout
+
+block css
+  link(rel="styleSheet" type="text/css" href="/style/cart.css")
+
+//block script
+//  script.
+//    System.import('js/usersManagement');
+//
+block title
+  title 用户管理列表
+
+block users-management
+  a.ui.link.item.active(href="/admin/usersManagement") 用户管理
+
+block content
+  .ui.grid.centered
+    .sixteen.wide.column
+      h1.ui.header.centered
+        .content
+          i.icon.browser
+          .content 用户管理列表
+    //.thirteen.wide.column
+    //  a.ui.green.button(href="/admin/itemsManagement/addItem") + 添 加 新 商 品
+    .fourteen.wide.column
+      table.ui.large.table
+        thead.center
+          th.two.wide 用户名
+          th.two.wide 密码
+          th.two.wide 地址
+          th.two.wide 邮箱
+          th.two.wide 电话
+          th.two.wide 注册时间
+          th.two.wide 修改
+          th.two.wide 删除
+        tbody.center
+          tr
+            td.ui.teal.message.delete-message.hidden(colspan='7') 删除成功
+            - each user in data
+              tr(data-id="#{user._id}")
+                td.userName(data-content="#{user.name}") #{user.name}
+                td #{user.password}
+                td #{user.address}
+                td #{user.email}
+                td #{user.phoneNumber}
+                td #{user.createDate}
+                td(id="#{user._id}")
+                  .ui.red.button.delete_item 删除
+                td
+                  a.ui.green.button.modify_item(href="/admin/usersManagement/modifyUser/#{user._id}")  修改
+
+        .ui.first.coupled.small.modal.transition.delete-modal
+          .content
+            .description
+              p 您确认要删除吗？
+          .actions
+            .primary.ui.button.no 取消
+            a.ui.positive.right.labeled.icon.button.yes#yes 删除
+              i.checkmark.icon

@@ -12,6 +12,8 @@ module.exports = function (app) {
   app.use('/retrievePassword',require('./route/retrievePassword'));
 
   app.use('/admin/itemsManagement', require('./route/itemsManagement'));
+  app.use('/admin/usersManagement', require('./route/usersManagement'));
+
 
   app.use('/api/item', require('./route/item'));
   app.use('/api/user', require('./route/user'));
