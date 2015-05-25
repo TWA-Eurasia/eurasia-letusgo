@@ -3,7 +3,7 @@ extends adminLayout
 block title
   title 分类管理列表
 block categories-management
-  a.ui.link.item.active(href="/admin/categoriesManagement") 商品管理
+  a.ui.link.item.active(href="/admin/categoriesManagement") 分类管理
 block content
   .ui.grid.centered
     .sixteen.wide.column
@@ -11,10 +11,35 @@ block content
         .content
           i.icon.browser
           .content 分类管理列表
-  .ui.grid.content
-    .one.wide.column &nbsp;
-    .three.wide.column
-      .ui.secondary.vertical.menu
-        .ui.dropdown.item#categoryTitle 商品服务一级分类
-          - each mainCategory in mainCategories
-            .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.shortName}
+    .twelve.wide.column
+      a.ui.green.button(href="/admin/categoriesManagement/addCategory") + 添 加 新 分 类
+  .ui.grid.centered
+    .two.wide.column
+      .ui.fluid.vertical.steps
+        .step
+          .content
+            .title 商品服务分类
+        .step
+          .content
+            a.title.can-click-step 一级分类
+        .step
+          .content
+            a.title.can-click-step 二级分类
+    .ten.wide.column
+      table.ui.table
+        thead
+          tr
+            th
+              span 类名
+            th
+              span 操作
+            th
+        - each mainCategory in mainCategories
+          tbody
+            tr(ng-repeat="appraise in vm.day_appraises")
+              td
+                span #{mainCategory.shortName}
+              td
+                button.negative 修改
+              td
+                button.positive 删除
