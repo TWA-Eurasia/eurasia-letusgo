@@ -11,8 +11,6 @@ block content
         .content
           i.icon.browser
           .content 分类管理列表
-    .twelve.wide.column
-      a.ui.green.button(href="/admin/categoriesManagement/addCategory") + 添 加 新 分 类
   .ui.grid.centered
     .two.wide.column
       .ui.fluid.vertical.steps
@@ -25,7 +23,8 @@ block content
         .step
           .content
             a.title.can-click-step 二级分类
-    .ten.wide.column
+    .one.wide.column &nbsp;
+    .eight.wide.column
       table.ui.table
         thead
           tr
@@ -34,12 +33,12 @@ block content
             th
               span 操作
             th
+              a.ui.teal.button(href="/admin/categoriesManagement/addCategory") + 添 加 新 分 类
         - each mainCategory in mainCategories
           tbody
             tr(ng-repeat="appraise in vm.day_appraises")
               td
                 span #{mainCategory.shortName}
               td
-                button.negative 修改
-              td
-                button.positive 删除
+                .ui.positive.reset.button#modify-button 修改
+                .ui.negative.submit.button#delete-button 删除
