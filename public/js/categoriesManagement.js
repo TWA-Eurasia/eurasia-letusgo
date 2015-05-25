@@ -46,36 +46,4 @@ $(function(){
     $('#main-category-list').hide();
     $('#sub-category-list').show();
   });
-
-  $('.delete_item').on('click', function () {
-
-    deleteCartItem = this;
-
-    $('.delete-modal')
-      .modal('show');
-  });
-
-  $('.yes').on('click', function () {
-
-    var deleteId = deleteCartItem.closest('td').id;
-
-    $.ajax({
-      url: '/itemsManagement/' + deleteId,
-      type: 'DELETE',
-
-      success: function (data) {
-
-        $('.delete-modal').modal('hide');
-        $('.delete-message').show();
-
-        $(deleteCartItem.closest('tr').remove());
-
-        window.setTimeout(function () {
-
-          $('.delete-message').hide();
-        }, 1000);
-      }
-    });
-  });
-
 });

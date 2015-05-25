@@ -5,11 +5,9 @@ var Category = require('../model/category');
 var getCategoryByName = function(req, res, next) {
 
   var name = req.params.name;
-  console.log(name);
   Category.find({name: name})
     .exec()
     .then(function(category) {
-      console.log(category);
       if(category) {
         res.send({state: 200, data: true, message: '此类名已存在'});
       } else {
@@ -32,6 +30,7 @@ var createNewCategory = function(req, res, next) {
       next(err);
     });
 };
+
 module.exports = {
   getCategoryByName: getCategoryByName,
   createNewCategory: createNewCategory
