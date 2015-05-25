@@ -4,10 +4,14 @@ var $ = require('jquery');
 
 $(function(){
 
-  $('.selectCategory').on('click', function(){
-    console.log("----------");
-    $('#mainCategoriesMenu').show();
-  });
+  //$('.selectCategory').on('click', function(){
+  //  $('.firstMenu').show();
+  //});
+  //
+  //$('.firstMenu').on('click', function(){
+  //  var id = $('.firstMenu').data('id');
+  //  $('.secondMenu').show();
+  //});
 
   $('input#itemImage').on('change', function(){
     $('.imageSrc').hide();

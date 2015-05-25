@@ -1,5 +1,8 @@
 extends adminLayout
 
+block css
+  link(rel="styleSheet" type="text/css" href="/style/addNewItem.css")
+
 block script
   script.
     System.import('js/addNewItem');
@@ -25,20 +28,18 @@ block content
             label 商品名称:
               .ui.input.error
                 input#itemName(placeholder='商品名称', type='text', style="border: grey 1px solid")
-
           .eight.wide.centered.column
           .eight.wide.centered.column
-            label 商品分类:
-              .ui.secondary.vertical.menu(style="border: grey 1px solid")
-                .ui.dropdown.item#categoryTitle 请选择商品分类
-                  i.dropdown.icon
-                .menu.ui.transition
-                  - each mainCategory in data.mainCategories
-                    .ui.dropdown.item.firstMenu #{mainCategory.name}
-                      i.dropdown.icon
-                    .ui.menu.transition
-                       - each subCategory in mainCategory.subCategories
+            label 选择商品分类:
+              .ui.secondary.vertical.menu
+                .ui.dropdown.item.error#categoryTitle(style="border: grey 1px solid") 商品服务分类
+                - each mainCategory in data.mainCategories
+                  .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
+                    i.dropdown.icon
+                    .menu
+                      - each subCategory in mainCategory.subCategories
                         a.item.secondMenu #{subCategory.name}
+
           .eight.wide.centered.column
           .eight.wide.centered.column
             label 商品单位:
@@ -66,3 +67,16 @@ block content
             a.ui.blue.submit.button#cancel(href="/admin/itemsManagement   ") 关闭
           .three.wide.column
             a.ui.green.submit.button#save 保存
+
+
+//
+//<div class="ui vertical menu">
+//  <div class="ui dropdown item"> 爱酷学习网
+//    <i class="dropdown icon"></i>
+//    <div class="menu">
+//      <a class="item">我的视频教程</a>
+//      <a class="item">全部视频教程</a>
+//      <a class="item">主页</a>
+//    </div>
+//  </div>
+//</div>
