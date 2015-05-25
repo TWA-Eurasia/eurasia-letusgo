@@ -64,3 +64,6 @@
 #sub-category-list {
   display: none;
 }
+.pagination#sub-category-pagination {
+  padding-left: 300px;
+}
