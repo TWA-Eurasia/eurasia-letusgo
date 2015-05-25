@@ -104,11 +104,25 @@ var addNewItemPage = function(req, res){
     });
 };
 
+var createNewItem = function(req, res){
+
+  Item.create({
+    name: req.body.name,
+    unit: req.body.unit,
+    image: req.body.image,
+    description: req.body.description,
+    category: req.body.category,
+    price: req.body.price,
+    inventory: req.body.inventory
+  });
+};
+
 module.exports = {
 
   getItemsManagementPage: getItemsManagementPage,
   getItemById: getItemById,
   removeItemById: removeItemById,
   updateItemById: updateItemById,
-  addNewItemPage: addNewItemPage
+  addNewItemPage: addNewItemPage,
+  createNewItem: createNewItem
 };

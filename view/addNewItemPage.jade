@@ -40,7 +40,7 @@ block content
                         i.dropdown.icon
                         .menu.second
                           - each subCategory in mainCategory.subCategories
-                            a.item.secondMenu #{subCategory.name}
+                            a.item.secondMenu(data-id="#{subCategory._id}",  data-name="#{subCategory.name}") #{subCategory.name}
           .eight.wide.centered.column
           .eight.wide.centered.column
             label 商品单位:

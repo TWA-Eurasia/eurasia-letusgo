@@ -4,14 +4,15 @@ var $ = require('jquery');
 
 $(function(){
 
-  //$('.selectCategory').on('click', function(){
-  //  $('.firstMenu').show();
-  //});
-  //
-  //$('.firstMenu').on('click', function(){
-  //  var id = $('.firstMenu').data('id');
-  //  $('.secondMenu').show();
-  //});
+  var subCategoryId;
+
+  $('.secondMenu').on('click', function(){
+
+    subCategoryId = $(this).data('id');
+
+    var subCategoryName = $(this).data('name');
+    $('#categoryTitle').text(subCategoryName);
+  });
 
   $('input#itemImage').on('change', function(){
     $('.imageSrc').hide();
@@ -32,10 +33,11 @@ $(function(){
     var price = $('input#itemPrice').val();
     var name = $('input#itemName').val();
     var inventory = $('input#itemInventory').val();
+    var imageSrc = $('input#itemImage').val;
 
-    if(infoIsVerfied(name, unit, price, inventory)){
+    if(infoIsVerfied(name, unit, price, inventory, imageSrc)){
 
-      saveNewItem(name, unit, price);
+      saveNewItem(name, unit, price, inventory, imageSrc);
     }
   });
 
@@ -52,9 +54,9 @@ $(function(){
     $('#inputError').hide();
   }
 
-  function infoIsVerfied(name, unit, price, inventory) {
+  function infoIsVerfied(name, unit, price, inventory, imageSrc) {
 
-    if (!inputsIsIntergrated(name, unit, price, inventory)) {
+    if (!inputsIsIntegrated(name, unit, price, inventory, imageSrc)) {
 
       $('#emptyError').show();
       return false;
@@ -70,7 +72,7 @@ $(function(){
     }
   }
 
-  function inputsIsIntergrated(name, unit, price, inventory) {
+  function inputsIsIntegrated(name, unit, price, inventory, imageSrc) {
 
     if (!name) {
 
@@ -89,7 +91,13 @@ $(function(){
 
       $('#itemInventory').css('border', "red 1px solid");
     }
-    return name && unit && price && inventory;
+
+    if (!imageSrc) {
+
+      $('#itemInventory').css('border', "red 1px solid");
+    }
+
+    return name && unit && price && inventory && imageSrc;
   }
 
   function inputsIsRight(name, unit, price, inventory) {
@@ -128,11 +136,29 @@ $(function(){
     return reg.exec(price);
   }
 
-  function saveNewItem(name, unit, price) {
+  function saveNewItem(name, unit, price, inventory, imageSrc) {
 
-    $.post('/api/item', {name: name.trimLeft(), unit: unit.trimLeft(), price: price.trimLeft()})
-      .success(function () {
+    $.ajax({
+      url: '/admin/itemsManagement',
+      type: 'PUT',
+      data: {
+        name: name.trimLeft(),
+        unit: unit.trimLeft(),
+        category: subCategoryId.trimLeft(),
+        price: price.trimLeft(),
+        inventory: inventory.trimLeft(),
+        image: '/image/' + imageSrc.trimLeft() + '.jpg'
+      },
+
+      success: function () {
         $(location).attr('href', '/admin/itemsManagement')
-      });
+      }
+    });
   }
+    //
+    //$.post('', {name: name.trimLeft(), unit: unit.trimLeft(), price: price.trimLeft()})
+    //  .success(function () {
+    //    $(location).attr('href', '/admin/itemsManagement')
+    //  });
+    //
 });
