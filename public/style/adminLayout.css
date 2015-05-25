@@ -32,7 +32,11 @@
   margin-left: 5px;
   padding: 5px;
 }
-
+.twelve.wide.column.welcome-admin-message {
+  font-size: 40px;
+  height: 325px;
+  line-height: 200px;
+}
 .ui.divider.horizontal {
   color: black;
 }

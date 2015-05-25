@@ -1,3 +1,20 @@
-//
-   Created by zhzhang on 5/25/15.
+extends adminLayout
 
+block title
+  title 分类管理列表
+block categories-management
+  a.ui.link.item.active(href="/admin/categoriesManagement") 商品管理
+block content
+  .ui.grid.centered
+    .sixteen.wide.column
+      h1.ui.header.centered
+        .content
+          i.icon.browser
+          .content 分类管理列表
+  .ui.grid.content
+    .one.wide.column &nbsp;
+    .three.wide.column
+      .ui.secondary.vertical.menu
+        .ui.dropdown.item#categoryTitle 商品服务一级分类
+          - each mainCategory in mainCategories
+            .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.shortName}
