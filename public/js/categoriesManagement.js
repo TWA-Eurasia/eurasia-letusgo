@@ -17,8 +17,7 @@ $(function(){
       visiblePageCount: visiblePageCount,
       onPageChange: function (n) {
 
-        var path = '/admin/categoriesManagement/';
-        location.href = path + n;
+        location.href = '/admin/categoriesManagement' + n;
       }
     });
   }
