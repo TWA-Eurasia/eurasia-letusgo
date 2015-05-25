@@ -5,7 +5,7 @@ var Category = require('../model/category');
 var FormatUtil = require('../util/formatUtil');
 var NAME_LENGTH = 16;
 
-var getCategoriesManagementInfo = function (req, res) {
+var getCategoriesManagementInfo = function (req, res, next) {
 
   Category.find({})
     .populate('parent')
@@ -25,10 +25,18 @@ var getCategoriesManagementInfo = function (req, res) {
       res.render('categoriesManagement', {
         mainCategories: mainCategories
       });
+    })
+    .onReject(function(err) {
+      next(err);
     });
 };
 
+var addNewCategoryInfo = function(req, res){
+
+  res.render('addNewCategoryPage');
+};
 module.exports = {
 
-  getCategoriesManagementInfo: getCategoriesManagementInfo
+  getCategoriesManagementInfo: getCategoriesManagementInfo,
+  addNewCategoryInfo: addNewCategoryInfo
 };

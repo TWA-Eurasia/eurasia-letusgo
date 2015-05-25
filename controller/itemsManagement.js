@@ -30,8 +30,8 @@ var getItemById = function(req, res){
     res.render('itemModifyPage', {
       status: 200,
       data: item
-    })
-  })
+    });
+  });
 };
 
 var removeItemById = function(req, res){
@@ -40,7 +40,7 @@ var removeItemById = function(req, res){
   Item.remove({_id: id}, function(){
     res.send({
       status: 200
-    })
+    });
   });
 };
 
@@ -59,7 +59,7 @@ var updateItemById = function(req, res){
   }, function(){
 
     res.send({status: 200});
-  })
+  });
 };
 
 var addNewItemPage = function(req, res){
