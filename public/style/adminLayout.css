@@ -49,3 +49,18 @@
   text-align: center;
 }
 
+.category-title {
+  color: #000;
+}
+
+.category-grid>.sixteen.wide.column{
+  padding: 0px;
+}
+
+.ui.grid.category-grid#sub-category-list{
+  margin: 0;
+}
+
+#sub-category-list {
+  display: none;
+}

@@ -22,8 +22,13 @@ var getCategoriesManagementInfo = function (req, res, next) {
         return category.parent === null;
       });
 
+      var subCategories = _.filter(categories, function(category) {
+        return category.parent !== null;
+      });
+
       res.render('categoriesManagement', {
-        mainCategories: mainCategories
+        mainCategories: mainCategories,
+        subCategories: subCategories
       });
     })
     .onReject(function(err) {

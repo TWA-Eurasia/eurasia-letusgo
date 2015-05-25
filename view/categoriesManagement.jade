@@ -1,5 +1,8 @@
 extends adminLayout
 
+block script
+  script.
+    System.import('js/categoriesManagement');
 block title
   title 分类管理列表
 block categories-management
@@ -17,28 +20,53 @@ block content
         .step
           .content
             .title 商品服务分类
-        .step
+        .step.active#main-category-step
           .content
-            a.title.can-click-step 一级分类
-        .step
+            a.title.category-title 一级分类
+        .step#sub-category-step
           .content
-            a.title.can-click-step 二级分类
+            a.title.category-title 二级分类
     .one.wide.column &nbsp;
     .eight.wide.column
-      table.ui.table
-        thead
-          tr
-            th
-              span 类名
-            th
-              span 操作
-            th
-              a.ui.teal.button(href="/admin/categoriesManagement/addCategory") + 添 加 新 分 类
-        - each mainCategory in mainCategories
-          tbody
-            tr(ng-repeat="appraise in vm.day_appraises")
-              td
-                span #{mainCategory.shortName}
-              td
-                .ui.positive.reset.button#modify-button 修改
-                .ui.negative.submit.button#delete-button 删除
+      .ui.grid.category-grid#main-category-list
+        .sixteen.wide.column
+          table.ui.table
+            thead
+              tr
+                th
+                  span 类名
+                th
+                  span 操作
+                th
+                  a.ui.teal.button(href="/admin/categoriesManagement/addMainCategory") + 添 加 新 分 类
+            - each mainCategory in mainCategories
+              tbody
+                tr
+                  td
+                    spantd.category-name(data-content="#{mainCategory.name}") #{mainCategory.shortName}
+                  td
+                    .ui.positive.reset.button#modify-button 修改
+                    .ui.negative.submit.button#delete-button 删除
+      .ui.grid.category-grid#sub-category-list
+        .sixteen.wide.column
+          table.ui.table
+            thead
+              tr
+                th
+                  span 类名
+                th
+                  span 所属主分类
+                th
+                  span 操作
+                th
+                  a.ui.teal.button(href="/admin/categoriesManagement/addSubCategory") + 添 加 新 分 类
+            - each subCategory in subCategories
+              tbody
+                tr
+                  td
+                    spantd.category-name(data-content="#{subCategory.name}") #{subCategory.shortName}
+                  td
+                    span #{subCategory.parent.name}
+                  td
+                    .ui.positive.reset.button#modify-button 修改
+                    .ui.negative.submit.button#delete-button 删除
