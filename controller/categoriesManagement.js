@@ -57,12 +57,19 @@ var getCategoriesManagementInfo = function (req, res, next) {
     });
 };
 
-var addNewCategoryInfo = function(req, res){
+var addNewMainCategoryInfo = function(req, res) {
 
-  res.render('addNewCategoryPage');
+  res.render('addNewMainCategoryPage');
 };
+
+var addNewSubCategoryInfo = function(req, res) {
+
+  res.render('addNewMainCategoryPage');
+};
+
 module.exports = {
 
   getCategoriesManagementInfo: getCategoriesManagementInfo,
-  addNewCategoryInfo: addNewCategoryInfo
+  addNewMainCategoryInfo: addNewMainCategoryInfo,
+  addNewSubCategoryInfo: addNewSubCategoryInfo
 };
