@@ -113,8 +113,13 @@ var createNewItem = function(req, res){
     description: req.body.description,
     category: req.body.category,
     price: req.body.price,
-    inventory: req.body.inventory
+    inventory: req.body.inventory,
+    isRecommend: true
   });
+
+  res.send({
+    status: 200
+  })
 };
 
 module.exports = {

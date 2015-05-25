@@ -29,7 +29,6 @@ block content
               .ui.input.error
                 input#itemName(placeholder='商品名称', type='text', style="border: grey 1px solid")
           .eight.wide.centered.column
-          .eight.wide.centered.column
             label 选择商品分类:
               .ui.secondary.vertical.menu
                 .ui.dropdown.item.title#categoryTitle(style="border: grey 1px solid") 商品服务分类
@@ -42,21 +41,21 @@ block content
                           - each subCategory in mainCategory.subCategories
                             a.item.secondMenu(data-id="#{subCategory._id}",  data-name="#{subCategory.name}") #{subCategory.name}
           .eight.wide.centered.column
-          .eight.wide.centered.column
             label 商品单位:
               .ui.input.error
                 input#itemUnit(placeholder='商品单位', type='text', style="border: grey 1px solid")
-          .eight.wide.centered.column
           .eight.wide.centered.column
             label 商品单价:
               div.ui.input.error
                 input#itemPrice(placeholder='请输入商品单价', type='text', style="border: grey 1px solid")
           .eight.wide.centered.column
-          .eight.wide.centered.column
             label 商品库存:
               div.ui.input.error
                 input#itemInventory(placeholder='请输入商品库存', type='text', style="border: grey 1px solid")
           .eight.wide.centered.column
+            label 商品描述:
+              textarea#itemDescription(placeholder='请输入对商品的描述', type='text', style="border: grey 1px solid")
+
           .eight.wide.centered.column
             label 商品图片:
               .ui.input.error

@@ -33,11 +33,13 @@ $(function(){
     var price = $('input#itemPrice').val();
     var name = $('input#itemName').val();
     var inventory = $('input#itemInventory').val();
-    var imageSrc = $('input#itemImage').val;
+    var imageSrc = $('input#itemImage').val();
+    var description = $('textarea#itemDescription').val();
 
-    if(infoIsVerfied(name, unit, price, inventory, imageSrc)){
 
-      saveNewItem(name, unit, price, inventory, imageSrc);
+    if(infoIsVerified(name, unit, price, inventory, imageSrc, description)){
+
+      saveNewItem(name, unit, price, inventory, imageSrc, description);
     }
   });
 
@@ -54,9 +56,9 @@ $(function(){
     $('#inputError').hide();
   }
 
-  function infoIsVerfied(name, unit, price, inventory, imageSrc) {
+  function infoIsVerified(name, unit, price, inventory, imageSrc, description) {
 
-    if (!inputsIsIntegrated(name, unit, price, inventory, imageSrc)) {
+    if (!inputsIsIntegrated(name, unit, price, inventory, imageSrc, description)) {
 
       $('#emptyError').show();
       return false;
@@ -72,7 +74,7 @@ $(function(){
     }
   }
 
-  function inputsIsIntegrated(name, unit, price, inventory, imageSrc) {
+  function inputsIsIntegrated(name, unit, price, inventory, imageSrc, description) {
 
     if (!name) {
 
@@ -97,7 +99,11 @@ $(function(){
       $('#itemInventory').css('border', "red 1px solid");
     }
 
-    return name && unit && price && inventory && imageSrc;
+    if (!description) {
+
+      $('#itemInventory').css('border', "red 1px solid");
+    }
+    return name && unit && price && inventory && imageSrc && description;
   }
 
   function inputsIsRight(name, unit, price, inventory) {
@@ -136,7 +142,7 @@ $(function(){
     return reg.exec(price);
   }
 
-  function saveNewItem(name, unit, price, inventory, imageSrc) {
+  function saveNewItem(name, unit, price, inventory, imageSrc, description) {
 
     $.ajax({
       url: '/admin/itemsManagement',
@@ -147,7 +153,8 @@ $(function(){
         category: subCategoryId.trimLeft(),
         price: price.trimLeft(),
         inventory: inventory.trimLeft(),
-        image: '/image/' + imageSrc.trimLeft() + '.jpg'
+        image: 'image/' + imageSrc.trimLeft() + '.jpg',
+        description: description
       },
 
       success: function () {
