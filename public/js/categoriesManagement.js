@@ -1,11 +1,27 @@
 'use strict';
 
-var $ = require('jquery');
+var $ = require('./jquery.pagination');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 var deleteCartItem;
 
 $(function(){
+
+  if (application.index.pageCount > 1) {
+
+    var visiblePageCount = 7;
+    $('.pagination').pagination({
+
+      pageCount: application.index.pageCount,
+      currentPage: application.index.currentPage,
+      visiblePageCount: visiblePageCount,
+      onPageChange: function (n) {
+
+        var path = '/admin/categoriesManagement/';
+        location.href = path + n;
+      }
+    });
+  }
 
   $('.category-name').popup({
     content: $(this).prop('data-content')
