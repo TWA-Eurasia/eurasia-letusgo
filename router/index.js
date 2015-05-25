@@ -13,6 +13,7 @@ module.exports = function (app) {
 
 
   app.use('/api/item', require('./route/item'));
+  app.use('/api/category', require('./route/category'));
   app.use('/api/user', require('./route/user'));
   app.use('/api/indent', require('./route/indent'));
   app.use('/api/sessions', require('./route/session'));
