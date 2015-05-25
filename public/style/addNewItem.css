@@ -1,0 +1,8 @@
+
+.ui.dropdown.item.firstMenu:hover .menu.second {
+  display: block;
+}
+
+.ui.dropdown.item.title:hover .menu.first {
+  display: block;
+}

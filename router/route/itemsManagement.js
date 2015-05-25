@@ -10,5 +10,6 @@ router.get('/modifyItem/:id', itemManagementController.getItemById);
 router.delete('/:id', itemManagementController.removeItemById);
 router.post('/:id', itemManagementController.updateItemById);
 router.get('/addItem', itemManagementController.addNewItemPage);
+router.put('/', itemManagementController.createNewItem);
 
 module.exports = router;

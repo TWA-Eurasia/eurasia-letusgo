@@ -24,7 +24,7 @@ $(function(){
     var deleteId = deleteCartItem.closest('td').id;
 
     $.ajax({
-      url: '/itemsManagement/' + deleteId,
+      url: '/admin/itemsManagement/' + deleteId,
       type: 'DELETE',
 
       success: function (data) {
