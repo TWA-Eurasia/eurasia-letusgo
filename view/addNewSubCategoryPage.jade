@@ -1,3 +1,32 @@
-//
-   Created by zhzhang on 5/26/15.
-
+extends adminLayout
+block script
+  script.
+    System.import('js/addNewCategory');
+block title
+  title 添加新分类
+block categories-management
+  a.ui.link.item.active(href="/admin/categoriesManagement") 分类管理
+block content
+  .ui.grid(class="ui grid")
+    .eight.wide.centered.column
+      .ui.negative.message#main-category-empty-error(style='display: none')
+        i.close.icon
+        .header 请输入完整信息
+      .ui.negative.message#main-category-input-error(style='display: none')
+        i.close.icon
+        .header 请输入正确的信息格式
+      .ui.negative.message#main-category-input-existed-error(style='display: none')
+        i.close.icon
+        .header 该类名已存在，请重新输入
+      .ui.form.red.segment
+        .ui.grid
+          .eight.wide.centered.column
+            label 类名:
+              .ui.input.error
+                input#main-category-name(placeholder='类名', type='text', style="border: grey 1px solid")
+          .eight.wide.centered.column
+          .five.wide.column
+          .three.wide.column
+            a.ui.blue.submit.button#main-category-cancel(href="/admin/categoriesManagement") 关闭
+          .three.wide.column
+            a.ui.green.submit.button#main-category-save 保存

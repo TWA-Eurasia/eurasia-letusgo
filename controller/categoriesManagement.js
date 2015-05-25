@@ -88,7 +88,7 @@ var addNewMainCategoryInfo = function(req, res) {
 
 var addNewSubCategoryInfo = function(req, res) {
 
-  res.render('addNewMainCategoryPage');
+  res.render('addNewSubCategoryPage');
 };
 
 module.exports = {
