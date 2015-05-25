@@ -32,14 +32,15 @@ block content
           .eight.wide.centered.column
             label 选择商品分类:
               .ui.secondary.vertical.menu
-                .ui.dropdown.item.error#categoryTitle(style="border: grey 1px solid") 商品服务分类
-                - each mainCategory in data.mainCategories
-                  .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
-                    i.dropdown.icon
-                    .menu
-                      - each subCategory in mainCategory.subCategories
-                        a.item.secondMenu #{subCategory.name}
-
+                .ui.dropdown.item.title#categoryTitle(style="border: grey 1px solid") 商品服务分类
+                  i.dropdown.icon
+                  .menu.first
+                    - each mainCategory in data.mainCategories
+                      .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
+                        i.dropdown.icon
+                        .menu.second
+                          - each subCategory in mainCategory.subCategories
+                            a.item.secondMenu #{subCategory.name}
           .eight.wide.centered.column
           .eight.wide.centered.column
             label 商品单位:
@@ -67,16 +68,3 @@ block content
             a.ui.blue.submit.button#cancel(href="/admin/itemsManagement   ") 关闭
           .three.wide.column
             a.ui.green.submit.button#save 保存
-
-
-//
-//<div class="ui vertical menu">
-//  <div class="ui dropdown item"> 爱酷学习网
-//    <i class="dropdown icon"></i>
-//    <div class="menu">
-//      <a class="item">我的视频教程</a>
-//      <a class="item">全部视频教程</a>
-//      <a class="item">主页</a>
-//    </div>
-//  </div>
-//</div>
