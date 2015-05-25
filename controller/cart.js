@@ -28,10 +28,11 @@ function findCartById(cartId, callback) {
 
 var getCart = function (req, res) {
   var userId = req.session.currentUserId;
-
   Cart.findOne({user: userId})
     .exec()
     .then(function (cart) {
+      req.session.currentCartId = cart._id;
+
       return cart.id;
     })
     .then(function (cartId) {
@@ -203,11 +204,45 @@ var getInventory = function (req, res) {
   });
 };
 
+var removePaidCartItems = function(req, res){
+  console.log("=======");
+
+  var paidCartItems = req.body.cartItems;
+  var cartId = req.session.currentCartId;
+
+  Cart.findById(cartId).exec()
+    .then(function(cart){
+
+      var cartItems = cart.cartItems;
+
+      paidCartItems.forEach(function(paidCartItem){
+        _.remove(cartItems, function(cartItem){
+
+          return paidCartItem._id == cartItem._id;
+        });
+      });
+
+      cart.cartItems = cartItems;
+
+      return cart;
+    })
+    .then(function(cart){
+      cart.save();
+    })
+    .then(function(){
+      res.send({
+        status: 200
+      });
+    });
+
+};
+
 module.exports = {
   getCart: getCart,
   addToCart: addToCart,
   changeCartItem: changeCartItem,
   removeCartItem: removeCartItem,
   getAmount: getAmount,
-  getInventory: getInventory
+  getInventory: getInventory,
+  removePaidCartItems: removePaidCartItems
 };

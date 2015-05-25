@@ -16,6 +16,15 @@ function updateInventory(inventory, number, item) {
   });
 }
 
+function removePaidCartItems(cartItems){
+
+  $.ajax({
+    url: '/cart/removePaidCartItems',
+    type: 'POST',
+    data: {cartItems: cartItems}
+  })
+}
+
 function showShortage(shortedCartItemName) {
 
   $('#modalTips').text(shortedCartItemName + MESSAGE);
@@ -61,6 +70,8 @@ $(document).ready(function () {
           }
         });
       });
+
+      removePaidCartItems(cartItems);
     });
   });
 
