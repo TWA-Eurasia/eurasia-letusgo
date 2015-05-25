@@ -16,6 +16,15 @@ function updateInventory(inventory, number, item) {
   });
 }
 
+function removePaidCartItems(cartItem){
+
+  $.ajax({
+    url: '/cart',
+    type: 'POST',
+    data: {cartItemId: cartItem._id}
+  });
+}
+
 function showShortage(shortedCartItemName) {
 
   $('#modalTips').text(shortedCartItemName + MESSAGE);
@@ -41,7 +50,6 @@ $(document).ready(function () {
 
   $('#isPaid').on('click', function () {
 
-    //var total = $(this).data('total');
     var cartItems = $(this).data('cart');
 
     $.get('/api/item', {cartItems: cartItems}, function (items) {
@@ -56,11 +64,14 @@ $(document).ready(function () {
             if (number < inventory) {
 
               $(location).attr('href', '/success');
+
               updateInventory(inventory, number, item);
+              removePaidCartItems(cartItem);
             }
           }
         });
       });
+
     });
   });
 
