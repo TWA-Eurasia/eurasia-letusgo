@@ -7,7 +7,7 @@ var categoriesManagementController = require('../../controller/categoriesManagem
 
 router.get('/', categoriesManagementController.getCategoriesManagementInfo);
 router.get('/index/:pageNumber', categoriesManagementController.getSubCategoriesByPageNumber);
-router.get('/addMainCategory', categoriesManagementController.addNewMainCategoryInfo);
+router.get('/addCategory', categoriesManagementController.addNewMainCategoryInfo);
 router.get('/addSubCategory', categoriesManagementController.addNewSubCategoryInfo);
 
 module.exports = router;
