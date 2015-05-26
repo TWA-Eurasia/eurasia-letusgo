@@ -7,8 +7,11 @@
   display: none;
 }
 
-.ui.dropdown.item.menuTitle:hover .menu.firstMenu {
+.ui.dropdown.item.menuTitle.category#categoryTitle:hover .menu.firstMenu {
   display: block;
 }
 
+.ui.dropdown.item#categoryTitle {
+  background-color: #ffffff;
 
+}
