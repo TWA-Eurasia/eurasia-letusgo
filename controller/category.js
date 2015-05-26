@@ -77,34 +77,20 @@ var canDeleteCategory = function(req, res, next) {
     });
 };
 
-var deleteCategoryById = function(req, res, next) {
-  var id = req.params.id;
-  Category.findById(id)
-    .populate('parent')
-    .exec()
-    .then(function(category) {
+var deleteCategoryById = function(req, res) {
 
-      if(category.parent === null) {
-        Category.find({parent: id}).exec(function(err, categories) {
-           if(categories.length > 0) {
-             res.send({state: 200, data: true, message: '此分类下有子分类'});
-           } else {
-             res.send({state: 200, data: false, message: '此分类下无商品'});
-           }
-        });
-      } else {
-        Item.find({category: id}).exec(function(err, items) {
-          if(items.length > 0) {
-            res.send({state: 200, data: true, message: '此分类下有商品'});
-          } else {
-            res.send({state: 200, data: false, message: '此分类无商品'});
-          }
-        });
-      }
-    })
-    .onReject(function(err) {
-      next(err);
+  var id = req.params.id;
+  console.log(id);
+  Item.remove({category: id}, function(){
+
+    Category.remove({parent: id}, function() {
+
+      Category.remove({_id: id}, function() {
+
+        res.send({state: 200, data: {}, message: '删除成功'});
+      });
     });
+  });
 };
 
 module.exports = {

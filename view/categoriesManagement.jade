@@ -52,7 +52,7 @@ block content
                     spantd.category-name(data-content="#{mainCategory.name}") #{mainCategory.shortName}
                   td
                     a.ui.positive.reset.button.modify-button(href="/admin/categoriesManagement/modifyCategory/#{mainCategory._id}") 修改
-                    .ui.negative.submit.button.delete-button(data-id="#{mainCategory._id}") 删除
+                    .ui.negative.submit.button.delete-button(id="#{mainCategory._id}" data-id="#{mainCategory._id}") 删除
       .ui.grid.category-grid#sub-category-list
         .sixteen.wide.column
           table.ui.table
@@ -74,5 +74,13 @@ block content
                     span #{subCategory.parent.name}
                   td
                     a.ui.positive.reset.button.modify-button(href="/admin/categoriesManagement/modifyCategory/#{subCategory._id}") 修改
-                    .ui.negative.submit.button.delete-button(data-id="#{subCategory._id}") 删除
-           .pagination#sub-category-pagination
+                    .ui.negative.submit.button.delete-button(id="#{subCategory._id}" data-id="#{subCategory._id}") 删除
+          .pagination#sub-category-pagination
+          .ui.first.coupled.small.modal.transition.delete-modal
+            .content
+              .description
+                p 此分类下有商品，您确认要删除吗？
+            .actions
+              a.primary.ui.button.no(href="/admin/categoriesManagement") 取消
+              a.ui.positive.right.labeled.icon.button.yes#yes 删除
+                i.checkmark.icon

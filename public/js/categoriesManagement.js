@@ -3,6 +3,7 @@
 var $ = require('./jquery.pagination');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
+var id;
 $(function(){
 
   if (application.index.pageCount > 1) {
@@ -45,14 +46,39 @@ $(function(){
   });
 
   $('.delete-button').on('click', function() {
-    var id = $('.delete-button').data('id');
+
+    var $this = this;
+    id = $('.delete-button').data('id');
     $.ajax({
       url: '/api/category/' + id,
       type: 'POST',
       success: function(resp) {
-        console.log(resp.data);
         if(resp.data) {
-          //modal
+          $('.delete-modal').modal('show');
+        } else {
+          $.ajax({
+            url: '/api/category/' + id,
+            type: 'DELETE',
+            success: function(resp) {
+              if(resp.data) {
+                $this.closest('tr').remove();
+              }
+            }
+          });
+        }
+      }
+    });
+  });
+
+  $('#yes').on('click', function() {
+
+    $.ajax({
+      url: '/api/category/' + id,
+      type: 'DELETE',
+      success: function(resp) {
+        if(resp.data) {
+          $('.delete-modal').modal('hide');
+          location.href = '/admin/categoriesManagement';
         }
       }
     });
