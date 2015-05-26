@@ -81,20 +81,35 @@ var getSubCategoriesByPageNumber = function(res, req, next) {
     });
 };
 
-var addNewMainCategoryInfo = function(req, res) {
+var addCategoryInfo = function(req, res, next) {
 
-  res.render('addNewMainCategoryPage');
-};
+  Category.find({})
+    .populate('parent')
+    .exec()
+    .then(function(categories){
 
-var addNewSubCategoryInfo = function(req, res) {
+      categories.forEach(function(categories){
 
-  res.render('addNewSubCategoryPage');
+        categories.shortName = FormatUtil.parseString(categories.name, NAME_LENGTH);
+      });
+
+      var mainCategories = _.filter(categories, function (category) {
+
+        return category.parent === null;
+      });
+
+      res.render('addNewCategoryPage', {mainCategories: mainCategories});
+
+    })
+    .onReject(function(err) {
+      next(err);
+    });
+
 };
 
 module.exports = {
 
   getCategoriesManagementInfo: getCategoriesManagementInfo,
   getSubCategoriesByPageNumber: getSubCategoriesByPageNumber,
-  addNewMainCategoryInfo: addNewMainCategoryInfo,
-  addNewSubCategoryInfo: addNewSubCategoryInfo
+  addCategoryInfo: addCategoryInfo
 };
