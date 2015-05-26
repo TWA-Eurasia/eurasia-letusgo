@@ -2,7 +2,6 @@
 
 var User = require('../model/user');
 
-
 var getUsersManagementPage = function(req, res){
   User.find()
     .then(function(users){
@@ -14,7 +13,18 @@ var getUsersManagementPage = function(req, res){
     })
 };
 
+var removeUserById = function(req, res){
+  var id = req.params.id;
+
+  User.remove({_id: id}, function(){
+    res.send({
+      status: 200
+    });
+  });
+};
+
 module.exports = {
 
-  getUsersManagementPage: getUsersManagementPage
+  getUsersManagementPage: getUsersManagementPage,
+  removeUserById: removeUserById
 };
