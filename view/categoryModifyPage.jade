@@ -1,7 +1,7 @@
 extends adminLayout
 block script
   script.
-    System.import('js/addNewCategory');
+    System.import('js/categoryModify');
 block title
   title 添加新分类
 block categories-management
@@ -20,12 +20,12 @@ block content
           .eight.wide.centered.column
             label 类名:
               .ui.input.error
-                input#category-name(placeholder='类名', value="#{category.name}" type='text', style="border: grey 1px solid")
+                input#category-name(placeholder='类名',data-id="#{category._id}" value="#{category.name}" type='text', style="border: grey 1px solid")
           .eight.wide.centered.column
           .eight.wide.centered.column
             label 所属主类名:
             select.ui.dropdown#parent-category-selector
-              option(value="#category.parent._id") #{category.parent.name}
+              option(value="#{category.parent._id}") #{category.parent.name}
                 - each mainCategory in mainCategories
                   option.main-category(data-id="#{mainCategory._id}" value="#{mainCategory._id}") #{mainCategory.name}
           .eight.wide.centered.column

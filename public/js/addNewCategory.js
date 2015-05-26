@@ -14,7 +14,6 @@ $(function(){
     $.get('/api/category/' + name)
       .success(function(resp) {
 
-        console.log(resp.data);
         callback(resp.data);
       });
   }

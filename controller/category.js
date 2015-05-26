@@ -31,7 +31,23 @@ var createNewCategory = function(req, res, next) {
     });
 };
 
+var updateCategoryById = function(req, res) {
+
+  var id = req.params.id;
+  Category.update({_id: id}, {
+    $set: {
+
+      name: req.body.name,
+      parent: req.body.parent
+    }
+  }, function(){
+
+    res.send({state: 200, data: {}, message: '修改成功'});
+  });
+};
+
 module.exports = {
   getCategoryByName: getCategoryByName,
-  createNewCategory: createNewCategory
+  createNewCategory: createNewCategory,
+  updateCategoryById: updateCategoryById
 };
