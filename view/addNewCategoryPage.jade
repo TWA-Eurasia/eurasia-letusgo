@@ -9,13 +9,13 @@ block categories-management
 block content
   .ui.grid(class="ui grid")
     .eight.wide.centered.column
-      .ui.negative.message#main-category-empty-error(style='display: none')
+      .ui.negative.message#empty-error(style='display: none')
         i.close.icon
         .header 请输入完整信息
-      .ui.negative.message#main-category-input-error(style='display: none')
+      .ui.negative.message#input-error(style='display: none')
         i.close.icon
         .header 请输入正确的信息格式
-      .ui.negative.message#main-category-input-existed-error(style='display: none')
+      .ui.negative.message#input-existed-error(style='display: none')
         i.close.icon
         .header 该类名已存在，请重新输入
       .ui.form.red.segment
@@ -23,10 +23,17 @@ block content
           .eight.wide.centered.column
             label 类名:
               .ui.input.error
-                input#main-category-name(placeholder='类名', type='text', style="border: grey 1px solid")
+                input#category-name(placeholder='类名', type='text', style="border: grey 1px solid")
+          .eight.wide.centered.column
+          .eight.wide.centered.column
+            label 所属主类名:
+            select.ui.dropdown#parent-category-selector
+              option(value="") 主分类
+                - each mainCategory in mainCategories
+                  option.main-category(data-id="#{mainCategory._id}" value="#{mainCategory._id}") #{mainCategory.name}
           .eight.wide.centered.column
           .five.wide.column
           .three.wide.column
-            a.ui.blue.submit.button#main-category-cancel(href="/admin/categoriesManagement") 关闭
+            a.ui.blue.submit.button#cancel(href="/admin/categoriesManagement") 关闭
           .three.wide.column
-            a.ui.green.submit.button#main-category-save 保存
+            a.ui.green.submit.button#save 保存
