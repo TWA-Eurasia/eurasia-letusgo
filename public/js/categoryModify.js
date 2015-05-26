@@ -59,7 +59,7 @@ $(function(){
       $('#empty-error').show();
       $('#input-existed-error').hide();
       result = false;
-    } 
+    }
 
     if(result) {
       updateCategory(categoryId, categoryName, parentCategoryId);

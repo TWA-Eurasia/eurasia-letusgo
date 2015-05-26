@@ -52,7 +52,7 @@ block content
                     spantd.category-name(data-content="#{mainCategory.name}") #{mainCategory.shortName}
                   td
                     a.ui.positive.reset.button.modify-button(href="/admin/categoriesManagement/modifyCategory/#{mainCategory._id}") 修改
-                    .ui.negative.submit.button.delete-button 删除
+                    .ui.negative.submit.button.delete-button(data-id="#{mainCategory._id}") 删除
       .ui.grid.category-grid#sub-category-list
         .sixteen.wide.column
           table.ui.table
@@ -74,5 +74,5 @@ block content
                     span #{subCategory.parent.name}
                   td
                     a.ui.positive.reset.button.modify-button(href="/admin/categoriesManagement/modifyCategory/#{subCategory._id}") 修改
-                    .ui.negative.submit.button.delete-button 删除
+                    .ui.negative.submit.button.delete-button(data-id="#{subCategory._id}") 删除
            .pagination#sub-category-pagination

@@ -1,6 +1,7 @@
 'use strict';
 
 var Category = require('../model/category');
+var Item = require('../model/item');
 
 var getCategoryByName = function(req, res, next) {
 
@@ -46,8 +47,70 @@ var updateCategoryById = function(req, res) {
   });
 };
 
+var canDeleteCategory = function(req, res, next) {
+  var id = req.params.id;
+  Category.findById(id)
+    .populate('parent')
+    .exec()
+    .then(function(category) {
+
+      if(category.parent === null) {
+        Category.find({parent: id}).exec(function(err, categories) {
+          if(categories.length > 0) {
+            res.send({state: 200, data: true, message: '此分类下有子分类'});
+          } else {
+            res.send({state: 200, data: false, message: '此分类下无商品'});
+          }
+        });
+      } else {
+        Item.find({category: id}).exec(function(err, items) {
+          if(items.length > 0) {
+            res.send({state: 200, data: true, message: '此分类下有商品'});
+          } else {
+            res.send({state: 200, data: false, message: '此分类无商品'});
+          }
+        });
+      }
+    })
+    .onReject(function(err) {
+      next(err);
+    });
+};
+
+var deleteCategoryById = function(req, res, next) {
+  var id = req.params.id;
+  Category.findById(id)
+    .populate('parent')
+    .exec()
+    .then(function(category) {
+
+      if(category.parent === null) {
+        Category.find({parent: id}).exec(function(err, categories) {
+           if(categories.length > 0) {
+             res.send({state: 200, data: true, message: '此分类下有子分类'});
+           } else {
+             res.send({state: 200, data: false, message: '此分类下无商品'});
+           }
+        });
+      } else {
+        Item.find({category: id}).exec(function(err, items) {
+          if(items.length > 0) {
+            res.send({state: 200, data: true, message: '此分类下有商品'});
+          } else {
+            res.send({state: 200, data: false, message: '此分类无商品'});
+          }
+        });
+      }
+    })
+    .onReject(function(err) {
+      next(err);
+    });
+};
+
 module.exports = {
   getCategoryByName: getCategoryByName,
   createNewCategory: createNewCategory,
-  updateCategoryById: updateCategoryById
+  updateCategoryById: updateCategoryById,
+  canDeleteCategory: canDeleteCategory,
+  deleteCategoryById: deleteCategoryById
 };

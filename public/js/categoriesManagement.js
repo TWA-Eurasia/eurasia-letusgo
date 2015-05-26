@@ -43,4 +43,18 @@ $(function(){
     $('#main-category-list').hide();
     $('#sub-category-list').show();
   });
+
+  $('.delete-button').on('click', function() {
+    var id = $('.delete-button').data('id');
+    $.ajax({
+      url: '/api/category/' + id,
+      type: 'POST',
+      success: function(resp) {
+        console.log(resp.data);
+        if(resp.data) {
+          //modal
+        }
+      }
+    });
+  });
 });
