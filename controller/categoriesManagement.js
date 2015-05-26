@@ -6,6 +6,7 @@ var FormatUtil = require('../util/formatUtil');
 var NAME_LENGTH = 16;
 var PAGE_SIZE = 10;
 
+
 var getCategoriesManagementInfo = function (req, res, next) {
 
   Category.find({})
