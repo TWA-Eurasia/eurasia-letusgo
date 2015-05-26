@@ -42,4 +42,7 @@ $(function(){
     });
   });
 
+  $('.no').on('click', function(){
+    $('.delete-modal').modal('hide');
+  });
 });
