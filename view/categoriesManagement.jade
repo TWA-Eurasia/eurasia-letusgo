@@ -19,6 +19,8 @@ block content
         .content
           i.icon.browser
           .content 分类管理列表
+    .thirteen.wide.column
+      a.ui.green.button(href="/admin/categoriesManagement/addCategory") + 添 加 新 分 类
   .ui.grid.centered
     .two.wide.column
       .ui.fluid.vertical.steps
@@ -43,7 +45,6 @@ block content
                 th
                   span 操作
                 th
-                  a.ui.teal.button(href="/admin/categoriesManagement/addMainCategory") + 添 加 新 分 类
             - each mainCategory in mainCategories
               tbody
                 tr
@@ -64,7 +65,6 @@ block content
                 th
                   span 操作
                 th
-                  a.ui.teal.button(href="/admin/categoriesManagement/addSubCategory") + 添 加 新 分 类
             - each subCategory in subCategories
               tbody
                 tr
