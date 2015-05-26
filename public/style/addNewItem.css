@@ -1,8 +1,14 @@
 
-.ui.dropdown.item.firstMenu:hover .menu.second {
+.ui.dropdown.item.firstMenuList:hover .menu.secondMenu.list {
   display: block;
 }
 
-.ui.dropdown.item.title:hover .menu.first {
+.ui.dropdown.item.menuTitle:hover .menu.secondMenu {
+  display: none;
+}
+
+.ui.dropdown.item.menuTitle:hover .menu.firstMenu {
   display: block;
 }
+
+

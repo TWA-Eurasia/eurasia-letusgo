@@ -31,13 +31,13 @@ block content
           .eight.wide.centered.column
             label 选择商品分类:
               .ui.secondary.vertical.menu
-                .ui.dropdown.item.title#categoryTitle(style="border: grey 1px solid") 商品服务分类
+                .ui.dropdown.item.menuTitle#categoryTitle(style="border: grey 1px solid") 商品服务分类
                   i.dropdown.icon
-                  .menu.first
+                  .menu.firstMenu
                     - each mainCategory in data.mainCategories
-                      .ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
+                      .ui.dropdown.item.firstMenuList(data-id="#{mainCategory.id}") #{mainCategory.name}
                         i.dropdown.icon
-                        .menu.second
+                        .menu.secondMenu.list
                           - each subCategory in mainCategory.subCategories
                             a.item.secondMenu(data-id="#{subCategory._id}",  data-name="#{subCategory.name}") #{subCategory.name}
           .eight.wide.centered.column
