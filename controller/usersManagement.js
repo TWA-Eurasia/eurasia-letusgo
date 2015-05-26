@@ -35,9 +35,30 @@ var getUserById = function (req,res){
   });
 };
 
+var updateUser = function(req, res){
+
+  var id = req.params.id;
+
+  User.update({_id: id}, {
+    $set: {
+
+      name: req.body.name,
+      password: req.body.password,
+      address: req.body.address,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      active: req.body.active
+    }
+  }, function(){
+
+    res.send({status: 200});
+  });
+};
+
 module.exports = {
 
   getUsersManagementPage: getUsersManagementPage,
   removeUserById: removeUserById,
-  getUserById: getUserById
+  getUserById: getUserById,
+  updateUser: updateUser
 };
