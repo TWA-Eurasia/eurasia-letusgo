@@ -80,7 +80,6 @@ var canDeleteCategory = function(req, res, next) {
 var deleteCategoryById = function(req, res) {
 
   var id = req.params.id;
-  console.log(id);
   Item.remove({category: id}, function(){
 
     Category.remove({parent: id}, function() {
