@@ -23,8 +23,21 @@ var removeUserById = function(req, res){
   });
 };
 
+var getUserById = function (req,res){
+
+  var id = req.params.id;
+
+  User.findById(id, function(err, user){
+    res.render('userModifyPage', {
+      status: 200,
+      data: user
+    });
+  });
+};
+
 module.exports = {
 
   getUsersManagementPage: getUsersManagementPage,
-  removeUserById: removeUserById
+  removeUserById: removeUserById,
+  getUserById: getUserById
 };
