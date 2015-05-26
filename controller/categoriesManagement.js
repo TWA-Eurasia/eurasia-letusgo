@@ -127,6 +127,12 @@ var getCategoryById = function(req, res, next) {
         return category._id.toString() === currentId;
       });
 
+      if(currentCategory.parent === null) {
+        currentCategory.parent = {
+          _id: '55196b3e0042a1db62203a0a',
+          name: '此为一级分类'
+        };
+      }
       res.render('categoryModifyPage', {
         category: currentCategory,
         mainCategories: mainCategories

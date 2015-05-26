@@ -25,7 +25,7 @@ block content
           .eight.wide.centered.column
             label 所属主类名:
             select.ui.dropdown#parent-category-selector
-              option(value="") 主分类
+              option(value="#category.parent._id") #{category.parent.name}
                 - each mainCategory in mainCategories
                   option.main-category(data-id="#{mainCategory._id}" value="#{mainCategory._id}") #{mainCategory.name}
           .eight.wide.centered.column
