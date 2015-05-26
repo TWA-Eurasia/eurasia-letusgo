@@ -8,7 +8,7 @@ var getCategoryByName = function(req, res, next) {
   Category.find({name: name})
     .exec()
     .then(function(category) {
-      if(category) {
+      if(category.length > 0) {
         res.send({state: 200, data: true, message: '此类名已存在'});
       } else {
         res.send({state: 404, data: false, message: '此类名不存在'});

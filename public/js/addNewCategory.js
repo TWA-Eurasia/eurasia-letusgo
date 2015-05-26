@@ -7,7 +7,6 @@ $(function(){
   function initErrorBox() {
 
     $('#empty-error').hide();
-    $('#input-error').hide();
     $('#input-existed-error').hide();
   }
 
@@ -15,6 +14,7 @@ $(function(){
     $.get('/api/category/' + name)
       .success(function(resp) {
 
+        console.log(resp.data);
         callback(resp.data);
       });
   }
@@ -72,7 +72,7 @@ $(function(){
     }
 
     if(result) {
-      //saveNewMainCategory(mainCategoryName, parentCategoryId);
+      saveNewMainCategory(mainCategoryName, parentCategoryId);
     }
   });
 
