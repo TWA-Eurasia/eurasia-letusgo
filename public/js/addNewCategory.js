@@ -6,9 +6,9 @@ $(function(){
 
   function initErrorBox() {
 
-    $('#main-category-empty-error').hide();
-    $('#main-category-input-error').hide();
-    $('#main-category-input-existed-error').hide();
+    $('#empty-error').hide();
+    $('#input-error').hide();
+    $('#input-existed-error').hide();
   }
 
   function verifyCategoryIsExisted(name, callback) {
@@ -30,48 +30,49 @@ $(function(){
       });
   }
 
-  var $mainCategoryName = $('#main-category-name');
+  var $mainCategoryName = $('#category-name');
   $mainCategoryName.on('change', function() {
 
     verifyCategoryIsExisted($mainCategoryName.val().trim(), function(isExisted) {
       if(isExisted) {
 
-        $('#main-category-empty-error').hide();
-        $('#main-category-input-existed-error').show();
+        $('#empty-error').hide();
+        $('#input-existed-error').show();
       } else {
-        $('#main-category-empty-error').hide();
-        $('#main-category-input-existed-error').hide();
+        $('#empty-error').hide();
+        $('#input-existed-error').hide();
       }
     });
   });
 
-  $('#main-category-save').on('click', function () {
+  $('#save').on('click', function () {
 
     initErrorBox();
 
     var result = true;
     var mainCategoryName = $mainCategoryName.val().trim();
+    var parentCategoryId = $('#parent-category-selector').val() || '55196b3e0042a1db62203a0a';
     if(mainCategoryName.length === 0) {
-      $('#main-category-empty-error').show();
-      $('#main-category-input-existed-error').hide();
+      $('#empty-error').show();
+      $('#input-existed-error').hide();
       result = false;
     } else {
       verifyCategoryIsExisted($mainCategoryName.val().trim(), function(isExisted) {
         if(isExisted) {
 
-          $('#main-category-empty-error').hide();
-          $('#main-category-input-existed-error').show();
+          $('#empty-error').hide();
+          $('#input-existed-error').show();
           result = false;
         } else {
-          $('#main-category-empty-error').hide();
-          $('#main-category-input-existed-error').hide();
+          $('#empty-error').hide();
+          $('#input-existed-error').hide();
           result = true;
         }
       });
     }
 
     if(result) {
-      saveNewMainCategory(mainCategoryName, '55196b3e0042a1db62203a0a');
+      //saveNewMainCategory(mainCategoryName, parentCategoryId);
     }
   });
 
