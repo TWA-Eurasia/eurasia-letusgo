@@ -108,7 +108,6 @@ var addCategoryInfo = function(req, res, next) {
 
 var getCategoryById = function(req, res, next) {
   var currentId = req.params.id;
-
   Category.find({})
     .populate('parent')
     .exec()
@@ -124,13 +123,13 @@ var getCategoryById = function(req, res, next) {
         return category.parent === null;
       });
 
-      var currentCategory = _.filter(categories, function(category) {
-        return category._id === currentId;
+      var currentCategory = _.find(categories, function(category) {
+        return category._id.toString() === currentId;
       });
 
-      res.render('categoriesManagement', {
-        mainCategories: mainCategories,
-        category: currentCategory
+      res.render('categoryModifyPage', {
+        category: currentCategory,
+        mainCategories: mainCategories
       });
     })
     .onReject(function(err) {
