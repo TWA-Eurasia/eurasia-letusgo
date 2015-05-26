@@ -3,8 +3,6 @@
 var $ = require('./jquery.pagination');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-var deleteCartItem;
-
 $(function(){
 
   if (application.index.pageCount > 1) {
