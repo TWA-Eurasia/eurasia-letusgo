@@ -13,9 +13,9 @@ var getCategoriesManagementInfo = function (req, res, next) {
     .exec()
     .then(function(categories){
 
-      categories.forEach(function(categories){
+      categories.forEach(function(category){
 
-        categories.shortName = FormatUtil.parseString(categories.name, NAME_LENGTH);
+        category.shortName = FormatUtil.parseString(category.name, NAME_LENGTH);
       });
 
       var mainCategories = _.filter(categories, function (category) {
@@ -52,9 +52,9 @@ var getSubCategoriesByPageNumber = function(res, req, next) {
     .exec()
     .then(function(categories){
 
-      categories.forEach(function(categories){
+      categories.forEach(function(category){
 
-        categories.shortName = FormatUtil.parseString(categories.name, NAME_LENGTH);
+        category.shortName = FormatUtil.parseString(category.name, NAME_LENGTH);
       });
 
       var mainCategories = _.filter(categories, function (category) {
@@ -88,9 +88,9 @@ var addCategoryInfo = function(req, res, next) {
     .exec()
     .then(function(categories){
 
-      categories.forEach(function(categories){
+      categories.forEach(function(category){
 
-        categories.shortName = FormatUtil.parseString(categories.name, NAME_LENGTH);
+        category.shortName = FormatUtil.parseString(category.name, NAME_LENGTH);
       });
 
       var mainCategories = _.filter(categories, function (category) {
@@ -106,9 +106,42 @@ var addCategoryInfo = function(req, res, next) {
     });
 };
 
+var getCategoryById = function(req, res, next) {
+  var currentId = req.params.id;
+
+  Category.find({})
+    .populate('parent')
+    .exec()
+    .then(function(categories){
+
+      categories.forEach(function(category){
+
+        category.shortName = FormatUtil.parseString(category.name, NAME_LENGTH);
+      });
+
+      var mainCategories = _.filter(categories, function (category) {
+
+        return category.parent === null;
+      });
+
+      var currentCategory = _.filter(categories, function(category) {
+        return category._id === currentId;
+      });
+
+      res.render('categoriesManagement', {
+        mainCategories: mainCategories,
+        category: currentCategory
+      });
+    })
+    .onReject(function(err) {
+      next(err);
+    });
+};
+
 module.exports = {
 
   getCategoriesManagementInfo: getCategoriesManagementInfo,
   getSubCategoriesByPageNumber: getSubCategoriesByPageNumber,
-  addCategoryInfo: addCategoryInfo
+  addCategoryInfo: addCategoryInfo,
+  getCategoryById: getCategoryById
 };

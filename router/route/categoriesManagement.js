@@ -8,5 +8,6 @@ var categoriesManagementController = require('../../controller/categoriesManagem
 router.get('/', categoriesManagementController.getCategoriesManagementInfo);
 router.get('/index/:pageNumber', categoriesManagementController.getSubCategoriesByPageNumber);
 router.get('/addCategory', categoriesManagementController.addCategoryInfo);
+router.get('/modifyCategory/:id', categoriesManagementController.getCategoryById);
 
 module.exports = router;
