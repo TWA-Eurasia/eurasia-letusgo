@@ -11,7 +11,7 @@ block content
     .eight.wide.centered.column
       .ui.negative.message#emptyError(style='display: none')
         i.close.icon
-        .header 请输入修改信息
+        .header 请输入完整的必填信息
       .ui.negative.message#inputError(style='display: none')
         i.close.icon
         .header 请输入正确的信息格式
@@ -20,26 +20,26 @@ block content
           .eight.wide.centered.column
             label 用户名:
               div.ui.input.error
-                input#itemName(placeholder='请输入商品名称', type='text', value='#{data.name}')
+                input#userName(placeholder='请输入用户名称', type='text', value='#{data.name}')
           .eight.wide.centered.column
             label 密码:
               div.ui.input.error
-                input#itemUnit(placeholder='请输入密码', type='text', value='#{data.password}')
+                input#userPassword(placeholder='请输入密码', type='text', value='#{data.password}')
           .eight.wide.centered.column
             label 地址:
               div.ui.input.error
-                input#itemPrice(placeholder='请输入地址', type='text', value='#{data.address}')
+                input#userAddress(placeholder='请输入地址', type='text', value='#{data.address}')
           .eight.wide.centered.column
             label 邮箱:
               div.ui.input.error
-                input#itemInventory(placeholder='请输入邮箱', type='text', value='#{data.email}')
+                input#userEmail(placeholder='请输入邮箱', type='text', value='#{data.email}')
           .eight.wide.centered.column
               label 电话:
                 div.ui.input.error
-                  input#itemInventory(placeholder='请输入电话', type='text', value='#{data.phoneNumber}')
+                  input#userPhoneNumber(placeholder='请输入电话', type='text', value='#{data.phoneNumber}')
           .eight.wide.centered.column
             label 邮箱是否激活(true OR false):
               div.ui.input.error
-                input#itemInventory(placeholder='请输入邮箱是否激活', type='text', value='#{data.active}')
+                input#userActiveMessage(placeholder='请输入邮箱是否激活', type='text', value='#{data.active}')
           .three.wide.centered.column
             a.ui.green.submit.button.save(id="#{data._id}") 保存
