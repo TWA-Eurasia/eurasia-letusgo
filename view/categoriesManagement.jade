@@ -19,8 +19,10 @@ block content
         .content
           i.icon.browser
           .content 分类管理列表
+    .thirteen.wide.column
+      a.ui.green.button(href="/admin/categoriesManagement/addCategory") + 添 加 新 分 类
   .ui.grid.centered
-    .two.wide.column
+    .three.wide.column
       .ui.fluid.vertical.steps
         .step
           .content
@@ -32,7 +34,7 @@ block content
           .content
             a.title.category-title 二级分类
     .one.wide.column &nbsp;
-    .eight.wide.column
+    .nine.wide.column
       .ui.grid.category-grid#main-category-list
         .sixteen.wide.column
           table.ui.table
@@ -43,15 +45,14 @@ block content
                 th
                   span 操作
                 th
-                  a.ui.teal.button(href="/admin/categoriesManagement/addMainCategory") + 添 加 新 分 类
             - each mainCategory in mainCategories
               tbody
                 tr
                   td
                     spantd.category-name(data-content="#{mainCategory.name}") #{mainCategory.shortName}
                   td
-                    .ui.positive.reset.button#modify-button 修改
-                    .ui.negative.submit.button#delete-button 删除
+                    a.ui.positive.reset.button.modify-button(href="/admin/categoriesManagement/modifyCategory/#{mainCategory._id}") 修改
+                    .ui.negative.submit.button.delete-button(id="#{mainCategory._id}" data-id="#{mainCategory._id}") 删除
       .ui.grid.category-grid#sub-category-list
         .sixteen.wide.column
           table.ui.table
@@ -64,7 +65,6 @@ block content
                 th
                   span 操作
                 th
-                  a.ui.teal.button(href="/admin/categoriesManagement/addSubCategory") + 添 加 新 分 类
             - each subCategory in subCategories
               tbody
                 tr
@@ -73,6 +73,14 @@ block content
                   td
                     span #{subCategory.parent.name}
                   td
-                    .ui.positive.reset.button#modify-button 修改
-                    .ui.negative.submit.button#delete-button 删除
-           .pagination#sub-category-pagination
+                    a.ui.positive.reset.button.modify-button(href="/admin/categoriesManagement/modifyCategory/#{subCategory._id}") 修改
+                    .ui.negative.submit.button.delete-button(id="#{subCategory._id}" data-id="#{subCategory._id}") 删除
+          .pagination#sub-category-pagination
+          .ui.first.coupled.small.modal.transition.delete-modal
+            .content
+              .description
+                p 此分类下有商品，您确认要删除吗？
+            .actions
+              a.primary.ui.button.no(href="/admin/categoriesManagement") 取消
+              a.ui.positive.right.labeled.icon.button.yes#yes 删除
+                i.checkmark.icon

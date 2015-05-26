@@ -3,8 +3,7 @@
 var $ = require('./jquery.pagination');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-var deleteCartItem;
-
+var id;
 $(function(){
 
   if (application.index.pageCount > 1) {
@@ -17,8 +16,7 @@ $(function(){
       visiblePageCount: visiblePageCount,
       onPageChange: function (n) {
 
-        var path = '/admin/categoriesManagement/';
-        location.href = path + n;
+        location.href = '/admin/categoriesManagement/index/' + n;
       }
     });
   }
@@ -47,35 +45,42 @@ $(function(){
     $('#sub-category-list').show();
   });
 
-  $('.delete_item').on('click', function () {
+  $('.delete-button').on('click', function() {
 
-    deleteCartItem = this;
-
-    $('.delete-modal')
-      .modal('show');
-  });
-
-  $('.yes').on('click', function () {
-
-    var deleteId = deleteCartItem.closest('td').id;
-
+    var $this = this;
+    id = $('.delete-button').data('id');
     $.ajax({
-      url: '/itemsManagement/' + deleteId,
-      type: 'DELETE',
-
-      success: function (data) {
-
-        $('.delete-modal').modal('hide');
-        $('.delete-message').show();
-
-        $(deleteCartItem.closest('tr').remove());
-
-        window.setTimeout(function () {
-
-          $('.delete-message').hide();
-        }, 1000);
+      url: '/api/category/' + id,
+      type: 'POST',
+      success: function(resp) {
+        if(resp.data) {
+          $('.delete-modal').modal('show');
+        } else {
+          $.ajax({
+            url: '/api/category/' + id,
+            type: 'DELETE',
+            success: function(resp) {
+              if(resp.data) {
+                $this.closest('tr').remove();
+              }
+            }
+          });
+        }
       }
     });
   });
 
+  $('#yes').on('click', function() {
+
+    $.ajax({
+      url: '/api/category/' + id,
+      type: 'DELETE',
+      success: function(resp) {
+        if(resp.data) {
+          $('.delete-modal').modal('hide');
+          location.href = '/admin/categoriesManagement';
+        }
+      }
+    });
+  });
 });
