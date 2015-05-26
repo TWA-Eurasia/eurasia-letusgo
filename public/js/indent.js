@@ -41,7 +41,6 @@ $(document).ready(function () {
 
   $('#isPaid').on('click', function () {
 
-    //var total = $(this).data('total');
     var cartItems = $(this).data('cart');
 
     $.get('/api/item', {cartItems: cartItems}, function (items) {
