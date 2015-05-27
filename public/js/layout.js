@@ -105,6 +105,8 @@ $(function () {
         if(data.message) {
           $('#logout-success').html(LOGOUT_SUCCESS).show();
           $('#logout-tips').show().fadeOut(2000);
+
+          $(location).attr('href', '/');
         }
       }
     });

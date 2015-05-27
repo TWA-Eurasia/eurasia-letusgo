@@ -1,0 +1,16 @@
+
+.ui.dropdown.item.firstMenuList:hover .menu.secondMenu.list {
+  display: block;
+}
+
+.ui.dropdown.item.menuTitle:hover .menu.secondMenu {
+  display: none;
+}
+
+.ui.dropdown.item.menuTitle.category#categoryTitle:hover .menu.firstMenu {
+  display: block;
+}
+
+.ui.dropdown.item#categoryTitle {
+  background-color: #ffffff;
+}

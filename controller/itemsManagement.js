@@ -1,9 +1,29 @@
 'use strict';
 
 var Item = require('../model/item');
+var Category = require('../model/category');
+var _ = require('lodash');
 
 var FormatUtil = require('../util/formatUtil');
 var NAME_LENGTH = 16;
+
+function getSubCategories(categories, mainCategories) {
+
+  _.forEach(categories, function (category) {
+
+    if (category.parent) {
+
+      _.forEach(mainCategories, function (mainCategory) {
+
+        if (category.parent.name === mainCategory.name) {
+          mainCategory.subCategories.push(category);
+        }
+      });
+    }
+  });
+
+  return mainCategories;
+}
 
 var getItemsManagementPage = function (req, res) {
 
@@ -66,8 +86,41 @@ var updateItemById = function(req, res){
 
 var addNewItemPage = function(req, res){
 
-  res.render('addNewItemPage', {
-    currentAdminName: req.session.currentAdminName,
+  Category.find()
+    .populate('parent')
+    .exec(function (err, categories) {
+      var mainCategories = _.filter(categories, function (category) {
+
+        category.subCategories = [];
+        return category.parent === null;
+      });
+
+      mainCategories = getSubCategories(categories, mainCategories);
+
+      res.render('addNewItemPage', {
+        currentAdminName: req.session.currentAdminName,
+        status: 200,
+        data: {
+          mainCategories: mainCategories
+        }
+      });
+    });
+};
+
+var createNewItem = function(req, res){
+
+  Item.create({
+    name: req.body.name,
+    unit: req.body.unit,
+    image: req.body.image,
+    description: req.body.description,
+    category: req.body.category,
+    price: req.body.price,
+    inventory: req.body.inventory,
+    isRecommend: true
+  });
+
+  res.send({
     status: 200
   });
 };
@@ -78,5 +131,6 @@ module.exports = {
   getItemById: getItemById,
   removeItemById: removeItemById,
   updateItemById: updateItemById,
-  addNewItemPage: addNewItemPage
+  addNewItemPage: addNewItemPage,
+  createNewItem: createNewItem
 };

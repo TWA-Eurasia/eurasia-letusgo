@@ -3,17 +3,12 @@
 var $ = require('jquery');
 require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
-var deleteCartItem;
-
 $(function(){
 
-  $('.itemName').popup({
-    content: $(this).prop('data-content')
-  });
+  var deleteUser;
+  $('.delete_user').on('click', function () {
 
-  $('.delete_item').on('click', function () {
-
-    deleteCartItem = this;
+    deleteUser = this;
 
     $('.delete-modal')
       .modal('show');
@@ -21,10 +16,10 @@ $(function(){
 
   $('.yes').on('click', function () {
 
-    var deleteId = deleteCartItem.closest('td').id;
+    var deleteId = deleteUser.closest('td').id;
 
     $.ajax({
-      url: '/admin/itemsManagement/' + deleteId,
+      url: '/admin/usersManagement/' + deleteId,
       type: 'DELETE',
 
       success: function (data) {
@@ -32,7 +27,7 @@ $(function(){
         $('.delete-modal').modal('hide');
         $('.delete-message').show();
 
-        $(deleteCartItem.closest('tr').remove());
+        $(deleteUser.closest('tr').remove());
 
         window.setTimeout(function () {
 
