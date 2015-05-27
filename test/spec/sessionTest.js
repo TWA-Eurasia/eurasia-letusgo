@@ -14,6 +14,10 @@ describe('session', function () {
 
     it('should return admin login success', function(done) {
 
+      session = {
+        currentAdminName: ''
+      }
+      reqMock.session = session;
       reqMock.body = {
         username: 'letusgoAdmin',
         password: '123456789'
