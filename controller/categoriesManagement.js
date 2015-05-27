@@ -31,6 +31,7 @@ var getCategoriesManagementInfo = function (req, res, next) {
       var pageCount = Math.ceil(subCategories.length / 10);
 
       res.render('categoriesManagement', {
+        currentAdminName: req.session.currentAdminName,
         mainCategories: mainCategories,
         pageCount: pageCount,
         subCategories: newSubCategories,
@@ -70,6 +71,7 @@ var getSubCategoriesByPageNumber = function(res, req, next) {
       var pageCount = Math.ceil(subCategories.length / 10);
 
       res.render('categoriesManagement', {
+        currentAdminName: req.session.currentAdminName,
         mainCategories: mainCategories,
         pageCount: pageCount,
         subCategories: newSubCategories,
@@ -98,7 +100,7 @@ var addCategoryInfo = function(req, res, next) {
         return category.parent === null;
       });
 
-      res.render('addNewCategoryPage', {mainCategories: mainCategories});
+      res.render('addNewCategoryPage', {currentAdminName: req.session.currentAdminName, mainCategories: mainCategories});
 
     })
     .onReject(function(err) {
@@ -134,6 +136,7 @@ var getCategoryById = function(req, res, next) {
         };
       }
       res.render('categoryModifyPage', {
+        currentAdminName: req.session.currentAdminName,
         category: currentCategory,
         mainCategories: mainCategories
       });

@@ -16,6 +16,7 @@ var getItemsManagementPage = function (req, res) {
       });
 
       res.render('itemsManagement', {
+        currentAdminName: req.session.currentAdminName,
         status: 200,
         data: items
       });
@@ -28,6 +29,7 @@ var getItemById = function(req, res){
 
   Item.findById(id, function(err, item){
     res.render('itemModifyPage', {
+      currentAdminName: req.session.currentAdminName,
       status: 200,
       data: item
     });
@@ -65,6 +67,7 @@ var updateItemById = function(req, res){
 var addNewItemPage = function(req, res){
 
   res.render('addNewItemPage', {
+    currentAdminName: req.session.currentAdminName,
     status: 200
   });
 };

@@ -16,7 +16,7 @@ describe('session', function () {
 
       session = {
         currentAdminName: ''
-      }
+      };
       reqMock.session = session;
       reqMock.body = {
         username: 'letusgoAdmin',
