@@ -6,21 +6,6 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 var id;
 $(function(){
 
-  if (application.index.pageCount > 1) {
-
-    var visiblePageCount = 7;
-    $('.pagination').pagination({
-
-      pageCount: application.index.pageCount,
-      currentPage: application.index.currentPage,
-      visiblePageCount: visiblePageCount,
-      onPageChange: function (n) {
-
-        location.href = '/admin/categoriesManagement/index/' + n;
-      }
-    });
-  }
-
   $('.category-name').popup({
     content: $(this).prop('data-content')
   });

@@ -1,11 +1,6 @@
 extends adminLayout
 
 block script
-  script(type="text/javascript").
-    var application = application || {};
-    application.index = application.index || {};
-    application.index.pageCount = #{pageCount};
-    application.index.currentPage = #{currentPage};
   script.
     System.import('js/categoriesManagement');
 block title
@@ -75,7 +70,6 @@ block content
                   td
                     a.ui.positive.reset.button.modify-button(href="/admin/categoriesManagement/modifyCategory/#{subCategory._id}") 修改
                     .ui.negative.submit.button.delete-button(id="#{subCategory._id}" data-id="#{subCategory._id}") 删除
-          .pagination#sub-category-pagination
           .ui.first.coupled.small.modal.transition.delete-modal
             .content
               .description
