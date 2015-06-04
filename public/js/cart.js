@@ -183,7 +183,7 @@ $(function () {
     var deleteId = deleteCartItem.closest('td').id;
 
     $.ajax({
-      url: 'cart/' + deleteId,
+      url: '/cart/' + deleteId,
       type: 'DELETE',
 
       success: function (data) {
@@ -202,6 +202,10 @@ $(function () {
         countCartAmount();
       }
     });
+  });
+
+  $('.no').on('click', function(){
+    $('.delete-modal').modal('hide');
   });
 
   $('.itemName').popup({
