@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('../model/user');
+var md5 = require('MD5');
 
 var USER_LOGIN_SUCCESS = '用户登陆成功!';
 var ADMIN_LOGIN_SUCCESS = '管理员登陆成功!';
@@ -11,7 +12,7 @@ var LOGOUT_SUCCESS = '退出成功!';
 var login = function(req, res) {
 
   var username = req.body.username;
-  var password = req.body.password;
+  var password = md5(req.body.password);
   var session = req.session;
 
   User.findOne({name: username}, function (err, user) {
