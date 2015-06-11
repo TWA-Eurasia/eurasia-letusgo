@@ -57,7 +57,6 @@ var createUser = function(req, res, next) {
   req.body.password = md5(req.body.password);
   var currentUser = req.body;
 
-  console.log(currentUser);
   User.create(currentUser)
     .then(function(user) {
 
