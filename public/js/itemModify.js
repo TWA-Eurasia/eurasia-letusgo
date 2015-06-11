@@ -75,7 +75,7 @@ $(function(){
 
       success: function (data) {
         if (200 == data.status) {
-          $(location).attr('href', '/admin/itemsManagement')
+          $(location).attr('href', '/admin/itemsManagement');
         }
       }
     });

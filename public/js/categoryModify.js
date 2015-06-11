@@ -25,8 +25,8 @@ $(function(){
       url: '/api/category/' + id,
       type: 'PUT',
       data: {name: name, parent: parent},
-      success: function(resp) {
-        console.log(resp);
+      success: function() {
+        $(location).attr('href', '/admin/categoriesManagement');
       }
     });
   }
