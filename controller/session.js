@@ -16,6 +16,8 @@ var login = function(req, res) {
   var session = req.session;
 
   User.findOne({name: username}, function (err, user) {
+console.log(user);
+    console.log(password+"=========");
 
     if(user && user.name === 'letusgoAdmin'){
       session.currentAdminName = user.name;
