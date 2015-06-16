@@ -1,5 +1,6 @@
 'use strict';
 
+var md5 = require('MD5');
 var User = require('../model/user');
 
 var getUsersManagementPage = function(req, res){
@@ -43,7 +44,7 @@ var updateUser = function(req, res){
     $set: {
 
       name: req.body.name,
-      password: req.body.password,
+      password: md5(req.body.password),
       address: req.body.address,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
