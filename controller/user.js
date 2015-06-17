@@ -2,6 +2,7 @@
 
 var User = require('../model/user');
 var sendMail = require('../util/email');
+var md5 = require('MD5');
 
 var USER_EXISTED = '当前用户名已被注册';
 var USER_NOT_EXISTED = '用户名可用';
@@ -53,6 +54,7 @@ var getUserById = function(req, res, next) {
 
 var createUser = function(req, res, next) {
 
+  req.body.password = md5(req.body.password);
   var currentUser = req.body;
 
   User.create(currentUser)

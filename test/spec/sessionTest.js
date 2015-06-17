@@ -1,4 +1,5 @@
 'use strict';
+//var md5 = require('MD5');
 
 describe('session', function () {
   var session = {};
@@ -20,7 +21,7 @@ describe('session', function () {
       reqMock.session = session;
       reqMock.body = {
         username: 'letusgoAdmin',
-        password: '123456789'
+        password: '123456'
       };
 
       resMock.send = function (object) {
@@ -43,7 +44,6 @@ describe('session', function () {
         username: 'Jacob KANG',
         password: '123456789'
       };
-
       resMock.send = function (object) {
         expect(object.state).to.equal(200);
         expect(object.data.name).to.equal('Jacob KANG');

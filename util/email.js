@@ -33,5 +33,5 @@ var sendMail = function(data){
 };
 
 module.exports = {
-  sendMail: sendMail,
+  sendMail: sendMail
 };
