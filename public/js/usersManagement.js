@@ -5,6 +5,14 @@ require('github/ziyiking/Semantic-UI@master/dist/semantic');
 
 $(function(){
 
+  $('img')
+    .error(function () {
+      $(this).attr('src', '/image/missing1.png');
+    })
+    .attr('src', function () {
+      return $(this).data('src');
+    });
+
   var deleteUser;
   $('.delete_user').on('click', function () {
 

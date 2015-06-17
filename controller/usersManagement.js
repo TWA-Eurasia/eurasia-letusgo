@@ -7,6 +7,7 @@ var getUsersManagementPage = function(req, res){
     .then(function(users){
 
       res.render('usersManagement', {
+        currentAdminName: req.session.currentAdminName,
         status: 200,
         data: users
       });
@@ -29,6 +30,7 @@ var getUserById = function (req,res){
 
   User.findById(id, function(err, user){
     res.render('userModifyPage', {
+      currentAdminName: req.session.currentAdminName,
       status: 200,
       data: user
     });

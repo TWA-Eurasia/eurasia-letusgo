@@ -27,6 +27,9 @@ i.checkmark.icon {
   width: 65%;
 }
 
+.field.login {
+  padding-left: 0;
+}
 #user-name-message,
 #password-message,
 #repeat-password-message,
