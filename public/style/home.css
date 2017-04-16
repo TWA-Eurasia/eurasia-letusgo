@@ -1,0 +1,56 @@
+body{
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+}
+
+ul,li{
+  margin: 0;
+  padding: 0;
+}
+
+.pagination ul {
+  -webkit-user-select: none;
+}
+
+.pagination li{
+  display: inline-block;
+  padding: 0.5em 0;
+  background: #2EA69C;
+  color: #FFF;
+  cursor: default;
+  border-radius: 3px;
+  margin: 0 3px;
+  width: 2em;
+  text-align: center;
+}
+
+.pagination li:first-child,
+.pagination li:last-child {
+  width: auto;
+  padding: 0.5em 0.8em;
+}
+
+.pagination li.current {
+  background: teal;
+
+}
+
+.pagination li.current:hover{
+  background: teal;
+}
+
+.pagination li:hover {
+  background: teal;
+}
+
+.pagination li.ellipsis,
+.pagination li.ellipsis:hover{
+  background: none;
+  padding: 0;
+  width: 1.2em;
+}
+
+.pagination li.ellipsis::after{
+  content: "...";
+  color: #000;
+}

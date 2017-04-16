@@ -1,0 +1,67 @@
+extends ./navBar.jade
+block title
+  title 商品详情页
+block css
+  script(src="/jspm_packages/system.js")
+  script(src="/config.js")
+
+  script.
+    System.import('js/itemDetails')
+
+block content
+  .ui.centered.segment
+    .ui.grid.centered
+      .sixteen.wide.column
+        .ui.large.breadcrumb
+          a.section#parent #{itemDetails.category.parent.name}
+          i.right.chevron.icon.ider
+          a.section#child #{itemDetails.item.category.name}
+          i.right.chevron.icon.ider
+          .active.section #{itemDetails.item.name}
+
+      .ui.grid.nine.wide.column.centered
+        .nine.wide.column
+          - var imageUrl = itemDetails.item.image
+          img.ui.vertical.big.bordered.centered.image(src = imageUrl)
+
+        .seven.wide.column
+          h2.ui.floated.header.orange.backge #{itemDetails.item.name}
+          table.ui.definition.table
+            tbody
+              tr
+                td.five.wide.column 单价
+                td#itemPrice #{itemDetails.item.price}
+              tr
+                td 单位
+                td #{itemDetails.item.unit}
+
+              - var length = itemDetails.details.length
+              - var isDisplay = (length == 0) ? 'none' : ''
+              - var attributes = {'style': 'display: ' + isDisplay}
+                tr&attributes(attributes)
+                  td 规格
+                  td
+                    select.ui.dropdown#specification
+                      - each detail in itemDetails.details
+                        -var price = detail.price
+                        -var itemId = detail.specification
+                        option(id = itemId, data-price = price) #{detail.specification}
+              tr
+                td 数量
+                td
+                  i.minus.square.icon
+                  input(type="text" value=1 id="numberInput" style="text-align:center; width:20%")
+                  i.add.square.icon
+                  .ui.negative.message#inputError(style = 'display: none') 您所填写的数量超过库存!
+              tr
+                td 库存
+                td#leftNumber #{itemDetails.item.inventory}
+          button.ui.primary.button
+            i.cart.in.icon
+            span 添加到购物车
+            i.right.chevron.icon
+      .ui.grid.centered
+        .nine.wide.column
+          .ui.message
+            .header 商品详情：
+            p #{itemDetails.item.description}

@@ -3,10 +3,15 @@ var path = require('path');
 
 var app = express();
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 app.set('views', path.join(__dirname, 'view'));
 app.set('view engine', 'jade');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 //connect to database
 mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
     if (err) {
@@ -20,10 +25,12 @@ mongoose.connect('mongodb://localhost/eurasiaLetusgo', function (err) {
 if (app.get('env') === 'development') {
 
     app.use(express.static(path.join(__dirname, './public')));
-    app.use(express.static(path.join(__dirname, './bower_components')));
     app.use(express.static(path.join(__dirname, './.tmp')));
+    app.use(express.static(path.join(__dirname, './')));
+    app.use(express.static(path.join(__dirname, './jspm_packages')));
 
-    // development error handler
+
+  // development error handler
     // will print stacktrace
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);

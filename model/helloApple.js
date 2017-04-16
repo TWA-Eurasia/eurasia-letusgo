@@ -1,8 +1,8 @@
 'use strict';
 
-var sayHello = function(){
+var sayHello = function () {
 
-    return 'hello apple!';
+  return 'hello apple!';
 };
 
 module.exports = sayHello;

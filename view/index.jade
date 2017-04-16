@@ -1,0 +1,59 @@
+doctype html
+html
+  head
+    - var name = '来此购网上购物商城'
+    title= name
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width")
+    link(rel="stylesheet" type="text/css" href="/github/Semantic-Org/Semantic-UI@1.11.5/dist/semantic.css")
+    link(rel="stylesheet" type="text/css" href="/style/homepage.css")
+    link(rel="styleSheet" type="text/css" href="/style/home.css")
+    script(type="text/javascript").
+      var application = application || {};
+      application.index = application.index ||{};
+      application.index.pageCount = #{pageCount};
+      application.index.currentPage = #{currentPage};
+    script(src="/jspm_packages/system.js")
+    script(src="/config.js")
+    script.
+      System.import('js/index');
+  body#home
+    header
+      div.topmenu
+        ul.menu
+          li
+            em.
+              Hi，欢迎来到Let Us Go商城
+            a.topbutton(href="#") 请登录
+            a.topbutton(href="#") 免费注册
+          li
+            a.topbutton.right(href="#") 我的Let Us Go
+    div.container
+      div.searchcontainer
+        div.mylogo
+          img(src= "/image/logo.png")
+        div.search
+          div.ui.fluid.action.input
+            input.topsearch(type="text" placeholder="Search...")
+            button.ui.icon.button
+              i.search.icon
+      div.ui.grid
+        div.four.wide.column
+          div.ui.secondary.vertical.menu
+            div.ui.dropdown.item#categoryTitle 商品服务分类
+            - each mainCategory in mainCategories
+              div.ui.dropdown.item.firstMenu(data-id="#{mainCategory.id}") #{mainCategory.name}
+                i.dropdown.icon
+                div.menu
+                  - each subCategory in mainCategory.subCategories
+                    a.item.secondMenu(data-id='#{subCategory._id}') #{subCategory.name}
+        div.twelve.wide.column
+          div.ui.four.column.grid(style="padding-left: 0;padding-right: 20px;")
+            - each item in items
+              div.column
+                div.ui.segment
+                  img.ui.fluid.image(id="#{item._id}" src="/#{item.image}")
+                div.info
+                  div.name #{item.name}
+                  p.price #{item.price}元
+          div.pagination(style="padding-left: 500px;padding-top: 30px;")
